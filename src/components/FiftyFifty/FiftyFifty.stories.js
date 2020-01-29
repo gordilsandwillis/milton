@@ -34,7 +34,7 @@ stories.add(`Default`, () => (
 		headline={text('Headline', 'The Best Website in the World')}
 		headlineSize={ optionsKnob('Headline Size', headlineSizeOptions, 'h3', { display: 'select' }) }
 		text={mockCopy.contentfulRichTextShort}
-  	image={{ image: mock.PlaceholderSq }}
+  	image={{ image: mock.PlaceholderSq.fluid.src }}
   	imagePosition={ optionsKnob('Image Position', imgPositionOptions, 'left', { display: 'radio' }) }
   />
 )).add(`With Additions`, () => (
@@ -44,7 +44,7 @@ stories.add(`Default`, () => (
 		headline={text('Headline', 'The Best Website in the World')}
 		headlineSize={ optionsKnob('Headline Size', headlineSizeOptions, 'h3', { display: 'select' }) }
 		text={mockCopy.contentfulRichTextShort}
-  	image={{ image: mock.PlaceholderSq }}
+  	image={{ image: mock.PlaceholderSq.fluid.src }}
   	imagePosition={ optionsKnob('Image Position', imgPositionOptions, 'left', { display: 'radio' }) }
   	additions={<div style={{ marginTop: '2em' }}>
   		<ul>

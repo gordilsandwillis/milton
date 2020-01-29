@@ -13,11 +13,11 @@ const responsiveStyles = util.responsiveStyles
 export default `
   ${ fonts.MaterialIconsFont }
   ${ fonts.MaterialIconsFont }
-  ${ fonts.TradeGothicFont }
-  ${ fonts.PortraitFont }
-  ${ fonts.PortraitItalicFont }
-  ${ fonts.PortraitBoldFont }
-  ${ fonts.PortraitBoldItalicFont }
+  ${ fonts.DomaineSansFont }
+  ${ fonts.DomaineSansMediumFont }
+  ${ fonts.DomaineSansBoldFont }
+  ${ fonts.DomaineSansLightFont }
+  ${ fonts.DomaineNarrowFont }
 
   * {
     box-sizing: border-box;
@@ -138,8 +138,8 @@ export default `
     ${ responsiveStyles('margin-top', 20, 12, 10, 4) }
     ${ responsiveStyles('margin-bottom', 4, 4, 2, 4) }
     ${ typography.bodySmall }
-    font-style: italic;
-    letter-spacing: 0.03em;
+    font-weight: 600;
+    color: ${ colors.lightTextColor };
   }
 
   hr {

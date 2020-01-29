@@ -47,9 +47,9 @@ stories.add(`Image`, () => (
 		hAlignment={ optionsKnob('H-Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		vAlignment={ optionsKnob('V-Alignment', vAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		image={{
-			large: mock.Placeholder169,
-			medium: mock.Placeholder32,
-			small: mock.Placeholder34
+			large: mock.Placeholder169.fluid.src,
+			medium: mock.Placeholder32.fluid.src,
+			small: mock.Placeholder34.fluid.src
 		}}
 		fullHeight={ boolean('Full Height', true) }
 		showArrow={ boolean('showArrow', true) }

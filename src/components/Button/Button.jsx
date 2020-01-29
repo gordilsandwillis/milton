@@ -72,7 +72,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	border: none;
 	height: ${ buttonSizes.medium };
 	padding-top: 0;
-	padding-bottom: 0px; // offset text if necessary
+	padding-bottom: 2px; // offset text if necessary
 	padding-left: calc(${ buttonSizes.medium } * .4);
 	padding-right: calc(${ buttonSizes.medium } * .4);
 	cursor: pointer;

@@ -8,12 +8,12 @@ stories.add(`Two Up Images`, () => (
   <TwoUpImages
   	images={[
   		{
-	  		image: mock.Placeholder34,
+	  		image: mock.Placeholder34.fluid.src,
 	  		caption: 'Caption',
 	  		id: 'img1'
   		},
   		{
-	  		image: mock.Placeholder43,
+	  		image: mock.Placeholder43.fluid.src,
 	  		caption: 'Caption',
 	  		id: 'img2'
   		}

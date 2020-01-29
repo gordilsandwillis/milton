@@ -19,7 +19,7 @@ export const alert = red
 export const notify = yellow
 export const success = green
 export const textColor = starryNight
-export const lightTextColor = rgba(textColor, 0.4)
+export const lightTextColor = rgba(textColor, 0.5)
 export const lightGrey = '#E9E7DE'
 export const hrColor = rgba(textColor, 0.1)
 

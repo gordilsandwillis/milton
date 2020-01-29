@@ -1,20 +1,20 @@
 import MaterialIconsWoff from '../assets/fonts/icons/material-icons-regular.woff'
 import MaterialIconsWoff2 from '../assets/fonts/icons/material-icons-regular.woff2'
 
-import TradeGothicWoff from '../assets/fonts/trade-gothic/trade-gothic-bold-extended.woff'
-import TradeGothicWoff2 from '../assets/fonts/trade-gothic/trade-gothic-bold-extended.woff2'
+import DomaineSansWoff from '../assets/fonts/domaine/DomaineSansText-Regular.woff'
+import DomaineSansWoff2 from '../assets/fonts/domaine/DomaineSansText-Regular.woff2'
 
-import PortraitWoff from '../assets/fonts/portrait/portrait-text-web-regular.woff'
-import PortraitWoff2 from '../assets/fonts/portrait/portrait-text-web-regular.woff2'
+import DomaineSansMediumWoff from '../assets/fonts/domaine/DomaineSansText-Medium.woff'
+import DomaineSansMediumWoff2 from '../assets/fonts/domaine/DomaineSansText-Medium.woff2'
 
-import PortraitBoldWoff from '../assets/fonts/portrait/portrait-web-bold.woff'
-import PortraitBoldWoff2 from '../assets/fonts/portrait/portrait-web-bold.woff2'
+import DomaineSansBoldWoff from '../assets/fonts/domaine/DomaineSansText-Bold.woff'
+import DomaineSansBoldWoff2 from '../assets/fonts/domaine/DomaineSansText-Bold.woff2'
 
-import PortraitItalicWoff from '../assets/fonts/portrait/portrait-text-web-regular-italic.woff'
-import PortraitItalicWoff2 from '../assets/fonts/portrait/portrait-text-web-regular-italic.woff2'
+import DomaineSansLightWoff from '../assets/fonts/domaine/DomaineSansText-Light.woff'
+import DomaineSansLightWoff2 from '../assets/fonts/domaine/DomaineSansText-Light.woff2'
 
-import PortraitBoldItalicWoff from '../assets/fonts/portrait/portrait-bold-italic.woff'
-import PortraitBoldItalicWoff2 from '../assets/fonts/portrait/portrait-bold-italic.woff2'
+import DomaineDisplayNarrowRegularWoff from '../assets/fonts/domaine/DomaineDisplayNarrow-Regular.woff'
+import DomaineDisplayNarrowRegularWoff2 from '../assets/fonts/domaine/DomaineDisplayNarrow-Regular.woff2'
 
 export const fontFace = (fontName, woff, woff2, fontWeight = 'normal', fontStyle = 'normal') => `
 	@font-face {
@@ -28,17 +28,11 @@ export const fontFace = (fontName, woff, woff2, fontWeight = 'normal', fontStyle
 export const MaterialIcons = 'Material Icons'
 export const MaterialIconsFont = fontFace(MaterialIcons, MaterialIconsWoff, MaterialIconsWoff2)
 
-export const TradeGothic = 'Trade Gothic'
-export const TradeGothicFont = fontFace(TradeGothic, TradeGothicWoff, TradeGothicWoff2)
+export const DomaineSans = 'Domaine Sans'
+export const DomaineSansFont = fontFace(DomaineSans, DomaineSansWoff, DomaineSansWoff2)
+export const DomaineSansMediumFont = fontFace(DomaineSans, DomaineSansMediumWoff, DomaineSansMediumWoff2, 600)
+export const DomaineSansBoldFont = fontFace(DomaineSans, DomaineSansBoldWoff, DomaineSansBoldWoff2, 700)
+export const DomaineSansLightFont = fontFace(DomaineSans, DomaineSansLightWoff, DomaineSansLightWoff2, 300)
 
-export const Portrait = 'Portrait'
-export const PortraitFont = fontFace(Portrait, PortraitWoff, PortraitWoff2)
-
-export const PortraitItalic = 'Portrait'
-export const PortraitItalicFont = fontFace(PortraitItalic, PortraitItalicWoff, PortraitItalicWoff2, 'normal', 'italic')
-
-export const PortraitBold = 'Portrait'
-export const PortraitBoldFont = fontFace(PortraitBold, PortraitBoldWoff, PortraitBoldWoff2, 'bold')
-
-export const PortraitBoldItalic = 'Portrait'
-export const PortraitBoldItalicFont = fontFace(PortraitBoldItalic, PortraitBoldItalicWoff, PortraitBoldItalicWoff2, 'bold', 'italic')
+export const DomaineNarrow = 'Domaine Narrow'
+export const DomaineNarrowFont = fontFace(DomaineNarrow, DomaineDisplayNarrowRegularWoff, DomaineDisplayNarrowRegularWoff2)

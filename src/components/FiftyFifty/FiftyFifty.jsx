@@ -19,14 +19,15 @@ const FiftyFifty = ({
 	image,
 	video,
 	buttons,
-	additions
+	additions,
+	alignment
 }) => {
 
 	let gridSetup = {
 		small: '1 [12] 1',
 		medium: '1 [6] 1 [5] 1',
-		large: '2 [11] 2 [11] 2',
-		extraLarge: '3 [10] 2 [10] 3',
+		large: '1 [6] 1 [5] 1',
+		extraLarge: '1 [6] 1 [5] 1',
 		imagePosition: 'ltr',
 		textGrid: '[1]'
 	}
@@ -35,8 +36,8 @@ const FiftyFifty = ({
 		gridSetup = {
 			small: '1 [12] 1',
 			medium: '1 [6] 1 [5] 1',
-			large: '2 [11] 2 [11] 2',
-			extraLarge: '3 [10] 2 [10] 3',
+			large: '1 [6] 1 [5] 1',
+			extraLarge: '1 [6] 1 [5] 1',
 			imagePosition: 'rtl',
 			textGrid: '[1]'
 		}
@@ -102,6 +103,7 @@ const FiftyFifty = ({
 						specialList
 						headline={headline}
 						headlineSize={headlineSize}
+						alignment={alignment}
 						text={text}
 						eyebrow={eyebrow}
 						buttons={buttons}
@@ -117,7 +119,8 @@ const FiftyFifty = ({
 FiftyFifty.defaultProps = {
 	imagePosition: 'left',
 	additions: false,
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	alignment: 'left'
 }
 
 export default FiftyFifty

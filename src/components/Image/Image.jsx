@@ -1,56 +1,52 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Img from 'gatsby-image/withIEPolyfill'
 import { mq } from 'src/styles'
 
-const StyledImage = styled(Img)`
-	${ ({ fluid }) => `
-		> div {
-			${ fluid && fluid[1] && `
-				${ mq.largeAndBelow } {
-					padding-bottom: ${ 100.0 / fluid[1].aspectRatio }% !important;
-				}
-			` }
-			${ fluid && fluid[2] && `
-				${ mq.mediumAndBelow } {
-					padding-bottom: ${ 100.0 / fluid[2].aspectRatio }% !important;
-				}
-			` }
-		}
-	` }
+const StyledImage = styled.div`
+	
 `
 
 const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	if (small || medium || large || image) {
 		let source = null
 		if (image) {
-			source = image.fluid
+			source = [
+				{
+					src: image,
+					media: `(min-width: 1px)`,
+				}
+			]
 		} else {
 			source = [
 				{
-					...large.fluid,
+					src: large,
 					media: `(min-width: ${ mq.largeBreakpoint + 1 }px)`,
 				},
 				{
-					...medium.fluid,
+					src: medium,
 					media: `(min-width: ${ mq.mediumBreakpoint + 1 }px)`,
 				},
 				{
-					...small.fluid,
+					src: small,
 					media: `(min-width: 1px)`,
 				}
 			]
 		}
 		return (
-			<StyledImage
-				className={className}
-				fluid={source}
-				placeholderStyle={{ display: 'none' }}
-				durationFadeIn={1000}
-				// objectFit="cover"
-				// objectPosition="50% 50%"
-			>
-				<div style={{ boxShadow: '-14px 16px 5px 5px green' }}/>
+			<StyledImage className={className}>
+	      <picture>
+	      	{source.map((image, index) => (
+						<source
+							srcset={image.src}
+							media={image.media}
+						/>
+					))}
+	        <img
+	        	sizes="auto"
+	          src={source[0].src}
+	          alt=""
+	        />
+	      </picture>
 			</StyledImage>
 		)
 	} else {
@@ -60,7 +56,7 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 
 const Image = ({ useMultipleImages, small, medium, large, image, className }) => (
 	<ResponsiveImage
-		image={!useMultipleImages && image}
+		image={image}
 		small={small}
 		medium={medium}
 		large={large}

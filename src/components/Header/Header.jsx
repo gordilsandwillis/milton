@@ -15,37 +15,15 @@ import { colors, typography, animations, mq, util } from 'src/styles'
 const NavLinkStyle = (scrolled, active) => `
 	display: block;
 	position: relative;
-	${ typography.h6 }
 	${ util.responsiveStyles('margin-right', 60, 40, 32, 20) }
-	padding: 10px 0;
-	&:after {
-		position: absolute;
-		content: '';
-		display: block;
-		height: 2px;
-		background: ${ colors.yellow };
-		left: 0;
-		right: 0;
-		bottom: 5px;
-		transform: translate3d(0, 8px, 0);
-		opacity: 0;
-		transition: opacity ${ animations.mediumSpeed } ease-in-out, transform ${ animations.mediumSpeed } ease-in-out, background ${ animations.mediumSpeed } ease-in-out;
-	}
-	&:hover {
+	${ !scrolled && `
 		&:after {
-			transform: none;
-			opacity: 1;
+			background: currentcolor;
 		}
-	}
+	` }
 	${ active && `
-		&:hover {
-			&:after {
-				background: ${ colors.yellow };
-			}
-		}
 		&:after {
 			transform: none;
-			opacity: 1;
 		}
 	` }
 `
@@ -86,16 +64,15 @@ const Wrapper = styled.header`
 const HeaderContainer = styled.div`
 	position: relative;
 	z-index: 2;
-	transition: padding ${ animations.mediumSpeed } ease-in-out, box-shadow ${ animations.mediumSpeed } ease-in-out;
+	transition: padding ${ animations.mediumSpeed } ease-in-out;
 	${ ({ scrolled }) => scrolled ? `
 		padding-top: 18px;
 		padding-bottom: 14px;
-		${ util.responsiveStyles('padding-top', 25, 18, 18, 15) }
-		${ util.responsiveStyles('padding-bottom', 25, 18, 18, 15) }
-		box-shadow: 0 -10px 40px ${ rgba(colors.textColor, 0.15) }
+		${ util.responsiveStyles('padding-top', 30, 30, 24, 15) }
+		${ util.responsiveStyles('padding-bottom', 30, 30, 24, 15) }
 	` : `
-		${ util.responsiveStyles('padding-top', 50, 40, 30, 10) }
-		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 10) }
+		${ util.responsiveStyles('padding-top', 50, 40, 30, 15) }
+		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 15) }
 	` };
 `
 
@@ -107,16 +84,17 @@ const LogoCol = styled.div`
 	a {
 		display: inline-block;
 		vertical-align: top;
+		max-width: 100%;
 	}
 	svg {
-		${ util.responsiveStyles('width', 180, 190, 170, 160) }
+		max-width: 100%;
 		height: auto;
 		display: inline-block;
 		vertical-align: top;
 		transition: color ${ animations.mediumSpeed } ease-in-out, width ${ animations.mediumSpeed } ease-in-out;
 		${ ({ scrolled, hasAtf }) => scrolled ? `
 			color: ${ colors.textColor };
-			${ util.responsiveStyles('width', 180, 190, 170, 160) }
+			width: 160px;
 		` : `
 			${ !hasAtf ? `
 				color: ${ colors.textColor };
@@ -153,19 +131,6 @@ const NavLinks = styled.div`
 			border: 2px solid red;
 		}
 	` }
-`
-
-const MenuIcon = styled.div`
-	display: none;
-	padding: 5px 10px;
-	margin-left: -10px;
-	cursor: pointer;
-	span {
-		display: block;
-	}
-	${ mq.mediumAndBelow } {
-		display: inline-block;
-	}
 `
 
 const HeaderPlaceholder = styled.div`
@@ -235,19 +200,15 @@ class Header extends Component {
 				<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
 					<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
 						<HeaderContent
-							small="1 [5] [2] [5] 1"
-							medium="1 [5] [2] [5] 1"
-							large="1 [9] [8] [9] 1"
+							small="1 [4] [4] [4] 1"
+							medium="1 [9] [8] [9] 1"
 							vAlign="center"
 						>
 							<div>
-								<MenuIcon onClick={() => this.toggleDrawer(headerNavigation[0].id)}>
-									<MaterialIcon size="36px">menu</MaterialIcon>
-								</MenuIcon>
-								<NavLinks mediumHide>
-									{headerNavigation && headerNavigation.map(({ id, displayTitle }, index) => (
-										<NavTrigger key={index + '_' + id + 'header'} scrolled={scrolled} hasAtf={hasAtf} onClick={() => this.toggleDrawer(id)}>{displayTitle}</NavTrigger>
-									))}
+								<NavLinks>
+									<NavLink linkStyle="capsLink" setTheme="textColor" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
+										<ResponsiveComponent small="Shop" medium="Collections"/>
+									</NavLink>
 								</NavLinks>
 							</div>
 							<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
@@ -256,30 +217,25 @@ class Header extends Component {
 								</Link>
 							</LogoCol>
 							<div>
-								<NavLinks alignment="right">
-									{headerLinks && headerLinks.map(({ to, label, id }, index) => (
-										<NavLink key={index + '_' + id + 'nested-header'} scrolled={scrolled} hasAtf={hasAtf} to={to} active={pathname === to}>{label}</NavLink>
-									))}
-									{/*}
-									{headerButtons && headerButtons.map(({ to, label, id, theme, alternateLabelSmall, alternateLabelMedium }, index) => (
-										<Button key={id + index} size="small" setTheme={theme}>
-											<ResponsiveComponent
-												small={alternateLabelSmall || label}
-												medium={alternateLabelMedium || label}
-												large={label}
-											/>
-										</Button>
-									))}
-									*/}
-								</NavLinks>
+									<ResponsiveComponent
+										small={
+											<NavLinks linkStyle="capsLink" setTheme="textColor" alignment="right">
+												<NavLink scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
+											</NavLinks>
+										}
+										medium={
+											<NavLinks alignment="right">
+												<NavLink linkStyle="capsLink" setTheme="textColor" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
+												<NavLink linkStyle="capsLink" setTheme="textColor" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
+											</NavLinks>
+										}
+									/>
 							</div>
 						</HeaderContent>
 					</HeaderContainer>
 				</Wrapper>
 
-				{/*<ConditionalRender condition={!hasAtf}>
-					<HeaderPlaceholder />
-				</ConditionalRender>*/}
+				{!hasAtf && <HeaderPlaceholder />}
 
 			</Fragment>
 		)
@@ -287,7 +243,7 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-	hasAtf: true
+	hasAtf: false
 }
 
 export default Header

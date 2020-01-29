@@ -60,7 +60,7 @@ storiesOf(`Styleguide`, module)
 
 			<h4>Text Link</h4>
 
-			<a href="http://gordilsandwillis.com">Text Link</a>
+			<p><a href="http://gordilsandwillis.com">Text Link</a></p>
 
 			<hr />
 

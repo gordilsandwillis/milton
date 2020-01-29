@@ -8,6 +8,9 @@ import Footer from 'src/components/Footer'
 import './reset.css'
 
 import Home from 'src/containers/Home';
+import Collections from 'src/containers/Collections';
+import About from 'src/containers/About';
+import Contact from 'src/containers/Contact';
 
 const PageWrapper = styled.div`
   min-height: 100%;
@@ -26,15 +29,17 @@ const Routes = ({ match }) => (
     <Global
       styles={css`${ globalStyles }`}
     />
-    <Router>
-      <PageWrapper>
-        <Header hasAtf={false}/>
-        <PageContent>
+    <PageWrapper>
+      <PageContent>
+        <Router>
           <Route exact path="/" render={(props) => (<Home  {...props} />)} />
-        </PageContent>
-        <Footer/>
-      </PageWrapper>
-    </Router>
+          <Route exact path="/collections" render={(props) => (<Collections  {...props} />)} />
+          <Route exact path="/about" render={(props) => (<About  {...props} />)} />
+          <Route exact path="/contact" render={(props) => (<Contact  {...props} />)} />
+        </Router>
+      </PageContent>
+      <Footer/>
+    </PageWrapper>
   </Fragment>
 );
 

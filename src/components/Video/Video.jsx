@@ -40,6 +40,12 @@ const CoverImageWrap = styled.div`
 	position: relative;
 `
 
+const CoverImage = styled(Image)`
+	img {
+		width: 100%;
+	}
+`
+
 const PlayButton = styled(Button)`
 	cursor: pointer;
 	position: absolute;
@@ -161,7 +167,7 @@ class Video extends Component {
 			<Wrapper hasCoverImage={coverImage} cover={cover}>
 				{coverImage && (
 					<CoverImageWrap onClick={this.openVideo}>
-						<Image image={coverImage}/>
+						<CoverImage image={coverImage}/>
 						<PlayButton>
 							<Button shape="circle">
 								<MdPlayArrow size="36" onClick={this.openVideo} />

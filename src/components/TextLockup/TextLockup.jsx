@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
-import { typography, colors, mq } from 'src/styles'
 import BalanceText from 'react-balance-text'
+import { typography, colors, mq, util } from 'src/styles'
 
 const Wrapper = styled.div`
 	display: inline-block;
@@ -28,7 +27,7 @@ const Wrapper = styled.div`
 const TextContainer = styled(ScrollEntrance)`
 	text-align: ${ ({ alignment }) => alignment };
 	width: 100%;
-	max-width: 44rem;
+	${ util.responsiveStyles('max-width', 1200, 900, 750, 600) }
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;
 		margin-right: auto;
@@ -53,7 +52,7 @@ const Headline = styled.h3`
 		${ headlineSize === 'h1' || headlineSize === 'h2' ? `
 			max-width: 16em;
 		` : `
-			max-width: 26em;
+			max-width: 20em;
 		` }
 	` }
 	${ ({ alignment }) => alignment === 'center' && `
@@ -71,7 +70,6 @@ const Headline = styled.h3`
 
 const Text = styled.div`
 	p {
-		${ typography.bodyMedium }
 		max-width: 32em;
 		margin-bottom: 0;
 		margin-top: 4em;
@@ -81,7 +79,7 @@ const Text = styled.div`
 		${ ({ alignment }) => alignment === 'center' && `
 			margin-left: auto;
 			margin-right: auto;
-			max-width: 38em;
+			max-width: 32em;
 		` }
 		${ ({ alignment }) => alignment === 'right' && `
 			margin-left: auto;
@@ -135,11 +133,13 @@ const TextLockup = ({
 					</ConditionalRender>
 
 					<ConditionalRender condition={headline}>
-						<Headline headlineSize={headlineSize} as={headlineElement} alignment={alignment}>
-							{headlineSize === 'h1' || headlineSize === 'h2' || headlineSize === 'h3' ? (
-								headline
-							) : headline}
-						</Headline>
+						<BalanceText>
+							<Headline headlineSize={headlineSize} as={headlineElement} alignment={alignment}>
+								{headlineSize === 'h1' || headlineSize === 'h2' || headlineSize === 'h3' ? (
+									headline
+								) : headline}
+							</Headline>
+						</BalanceText>
 					</ConditionalRender>
 
 					{text && text.json && /* ConditionalRender was not working for this */
@@ -177,6 +177,7 @@ const TextLockup = ({
 											setTheme={button.theme}
 											external={button.external || false}
 											target={button.target || ''}
+											linkStyle={button.style}
 										>
 											{button.label}
 										</Link>

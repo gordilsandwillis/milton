@@ -7,7 +7,7 @@ import { boolean } from '@storybook/addon-knobs'
 const stories = storiesOf(`Blocks/Wide Media`, module)
 stories.add(`Default`, () => (
 	<WideMedia
-		image={{ image: mock.Placeholder169 }}
+		image={{ image: mock.Placeholder169.fluid.src }}
 		caption="caption"
 		fullWidth={ boolean('Full Width', false) }
 	/>
@@ -24,7 +24,7 @@ stories.add(`Default`, () => (
 	/>
 )).add(`Video Width Cover`, () => (
 	<WideMedia
-		image={{ image: mock.Placeholder169 }}
+		image={{ image: mock.Placeholder169.fluid.src }}
 		fullWidth={ boolean('Full Width', false) }
 		video={{ file: { url: 'https://www.youtube.com/watch?v=_wUIexMVG9k' } }}
 	/>

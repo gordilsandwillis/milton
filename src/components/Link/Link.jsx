@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { colors, animations } from 'src/styles'
+import { colors, animations, typography } from 'src/styles'
 import { MdArrowForward } from 'react-icons/md'
 
 import { Link as RouterLink } from 'react-router-dom'
@@ -9,20 +9,20 @@ const LinkStyles = (linkStyle, setTheme) => `
 	font-size: inherit;
 	text-decoration: none;
 	cursor: pointer;
-	${ linkStyle === 'textLink' || linkStyle === 'arrowLink' ? `
+	${ linkStyle === 'textLink' || linkStyle === 'arrowLink' || linkStyle === 'capsLink' ? `
 		position: relative;
 		&:after {
 			content: '';
 			display: block;
 			position: absolute;
-			top: 100%;
+			top: calc(100% + 2px);
 			left: 0;
 			width: 100%;
 			height: 2px;
 			background: ${ colors[setTheme] };
 			transform: scaleX(0);
 			transform-origin: right center;
-			transition: transform ${ animations.mediumSpeed } ease-in-out;
+			transition: transform ${ animations.mediumSpeed } ease-in-out, background ${ animations.mediumSpeed } ease-in-out;
 		}
 		&:hover {
 			&:after {
@@ -31,6 +31,9 @@ const LinkStyles = (linkStyle, setTheme) => `
 			}
 		}
 	` : `` }
+	${ linkStyle === 'capsLink' && `
+		${ typography.h6 }
+	` }
 `
 
 const StyledLinkElement = styled.a`
@@ -54,7 +57,7 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, style, setTheme } = this.props
+		const { to, external, target, children, className, linkStyle, setTheme } = this.props
 
 		if (external) {
 			return (
@@ -62,11 +65,11 @@ class Link extends Component {
 					className={className}
 					href={to}
 					target={target}
-					linkStyle={style}
+					linkStyle={linkStyle}
 					setTheme={setTheme}
 				>
 					{children}
-					{style === 'arrowLink' && (
+					{linkStyle === 'arrowLink' && (
 						<ArrowIcon size={18}/>
 					)}
 				</StyledLinkElement>
@@ -76,11 +79,11 @@ class Link extends Component {
 				<StyledLink
 					className={className}
 					to={to}
-					linkStyle={style}
+					linkStyle={linkStyle}
 					setTheme={setTheme}
 				>
 					{children}
-					{style === 'arrowLink' && (
+					{linkStyle === 'arrowLink' && (
 						<ArrowIcon size={18}/>
 					)}
 				</StyledLink>
@@ -93,8 +96,8 @@ Link.defaultProps = {
 	to: '#',
 	external: false,
 	target: '',
-	style: 'textLink',
-	setTheme: 'alert'
+	linkStyle: 'none',
+	setTheme: 'currentcolor'
 }
 
 export default Link

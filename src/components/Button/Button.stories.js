@@ -23,16 +23,16 @@ storiesOf(`Styleguide`, module)
 		<div style={{ padding: '5%' }}>
 			<h4>Default Button</h4>
 			<SpaceOut>
-				<Button>Button</Button>
-				<Button to="/">Button Link</Button>
+				<Button external>Button</Button>
+				<Button external to="/">Button Link</Button>
 			</SpaceOut>
 			<hr/>
 			<h4>Button States</h4>
 			<SpaceOut>
-				<Button loading={true} icon="close" iconPosition="left">loading</Button>
-				<Button error>Error</Button>
-				<Button success>Success</Button>
-				<Button disabled>disabled</Button>
+				<Button external loading={true} icon="close" iconPosition="left">loading</Button>
+				<Button external error>Error</Button>
+				<Button external success>Success</Button>
+				<Button external disabled>disabled</Button>
 			</SpaceOut>
 			<hr/>
 			<h4>Button Sizes & Themes</h4>
@@ -40,35 +40,35 @@ storiesOf(`Styleguide`, module)
 				<p>The <code>size</code> props can be <code>tiny</code>, <code>small</code>, <code>medium</code>, or <code>large</code> and the <code>setTheme</code> prop take the name of any color variable as a string (ie: 'mainColor')</p>
 			</Notes>
 			<SpaceOut>
-				<Button size="tiny">Tiny</Button>
-				<Button setTheme="textColor" size="small">Small</Button>
-				<Button to="/">Default</Button>
-				<Button setTheme="green" size="large">Large</Button>
+				<Button external size="tiny">Tiny</Button>
+				<Button external setTheme="textColor" size="small">Small</Button>
+				<Button external to="/">Default</Button>
+				<Button external setTheme="green" size="large">Large</Button>
 			</SpaceOut>
 			<SpaceOut>
-				<Button to="/" shape="square" size="tiny" icon={<TestIcon size={18}/>}/>
-				<Button to="/" shape="square" size="small" icon={<TestIcon size={18}/>}/>
-				<Button to="/" shape="square" icon={<TestIcon size={18}/>}/>
-				<Button to="/" shape="square" size="large" icon={<TestIcon size={18}/>}/>
+				<Button external to="/" shape="square" size="tiny" icon={<TestIcon size={18}/>}/>
+				<Button external to="/" shape="square" size="small" icon={<TestIcon size={18}/>}/>
+				<Button external to="/" shape="square" icon={<TestIcon size={18}/>}/>
+				<Button external to="/" shape="square" size="large" icon={<TestIcon size={18}/>}/>
 			</SpaceOut>
 			<SpaceOut>
-				<Button to="/" shape="circle" size="tiny" icon="check"/>
-				<Button to="/" shape="circle" size="small" icon="check"/>
-				<Button to="/" shape="circle" icon="check"/>
-				<Button to="/" shape="circle" size="large" icon="check"/>
+				<Button external to="/" shape="circle" size="tiny" icon="check"/>
+				<Button external to="/" shape="circle" size="small" icon="check"/>
+				<Button external to="/" shape="circle" icon="check"/>
+				<Button external to="/" shape="circle" size="large" icon="check"/>
 			</SpaceOut>
 			<hr/>
 			<h4>Button Shapes</h4>
 			<SpaceOut>
-				<Button to="/" shape="circle" icon="check"/>
-				<Button to="/" shape="square" icon={<TestIcon size={18}/>}/>
+				<Button external to="/" shape="circle" icon="check"/>
+				<Button external to="/" shape="square" icon={<TestIcon size={18}/>}/>
 			</SpaceOut>
 			<hr/>
 			<h4>Links</h4>
 			<SpaceOut>
-				<Link to="/">Internal Link</Link>
-				<Link to="/" shape="square">Square Button</Link>
-				<Link to="http://gdubs.nyc/" external>External Link</Link>
+				<Link linkStyle="textLink" external to="/">Internal Link</Link>
+				<Link linkStyle="textLink" external to="/" shape="square">Square Button</Link>
+				<Link linkStyle="textLink" external to="http://gdubs.nyc/" external>External Link</Link>
 			</SpaceOut>
 		</div>
 	))

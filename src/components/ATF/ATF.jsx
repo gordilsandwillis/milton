@@ -12,13 +12,16 @@ import withSizes from 'react-sizes'
 import { colors, typography, animations } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
-import { MdPlayArrow, MdArrowDownward } from 'react-icons/md'
+import { MdPlayArrow } from 'react-icons/md'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
 	${ ({ media }) => media && `
 		background: ${ colors.black };
 		color: ${ colors.bgColor };
+	` }
+	${ ({ fullHeight, showArrow }) => fullHeight && showArrow && `
+		margin-bottom: -28px;
 	` }
 `
 
@@ -42,7 +45,7 @@ const AlignmentContainer = styled.div`
 		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
 		padding-top: 105px;
 		padding-bottom: 95px;
-	` };
+	` }
 `
 
 const Content = styled.div`
@@ -70,31 +73,45 @@ const Block = styled.div`
 
 const BgImage = styled(Image)`
 	height: 100%;
+	width: 100%;
+	position: relative;
+	img {
+		object-fit: cover;
+		object-position: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
 `
 
-const ATFDownArrow = styled.div`
+const ATFLeadDown = styled.div`
+	color: ${ ({ color }) => colors[color] };
 	position: absolute;
 	z-index: 3;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	padding-bottom: 60px;
+	height: 60px;
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: center;
+	display: flex;
+	border-bottom: 20px solid currentColor;
 `
 
-const DownArrow = styled.div`
-	animation: ${ animations.bounceMinor } 2s infinite;
-	text-align: ${ ({ alignment }) => alignment };
-	line-height: 1;
-	svg {
-		display: inline-block;
-		vertical-align: top;
-		* {
-			fill: currentColor;
-		}
-	}
+const LeadDownPiece = styled.div`
+	width: 100%;
+	height: 100%;
+	background: currentColor;
+	${ ({ side }) => side === 'right' ? `
+		border-radius: 60px 0 0 0;
+		margin-left: -1px;
+	` : `
+		border-radius: 0 60px 0 0;
+		margin-right: -1px;
+	` }
 `
 
 const Overlay = styled.div`
@@ -108,6 +125,17 @@ const Overlay = styled.div`
 	max-height: 300px;
 	min-height: 100px;
 	z-index: 3;
+`
+
+const ImageOverlay = styled.div`
+	background: #000;
+	opacity: ${ ({ overlay }) => overlay };
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
 `
 
 const VideoContainer = styled.div`
@@ -202,7 +230,10 @@ class ATF extends Component {
 			eyebrow,
 			showArrow,
 			index,
-			theme
+			theme,
+			nextTheme,
+			prevTheme,
+			overlay
 		} = this.props
 
 		const {
@@ -225,7 +256,7 @@ class ATF extends Component {
 		const verticalAligment = vAlignOptions[vAlignment]
 
 		return (
-			<Wrapper setTheme={theme} media={image || video}>
+			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow}>
 				<Block background winHeight={winHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>
@@ -247,7 +278,8 @@ class ATF extends Component {
 							large={image.large}
 						/>
 					) : false}
-					{index === 0 && video && image ? <Overlay /> : false}
+					{index === 0 && (video || image) ? <Overlay /> : false}
+					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
 				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
 					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>
@@ -275,17 +307,10 @@ class ATF extends Component {
 				</Block>
 
 				<ConditionalRender condition={fullHeight && showArrow}>
-					<ATFDownArrow>
-						<Grid
-							small="1 [12] 1"
-							medium="1 [12] 1"
-							large={hAlignmentGrid[hAlignment]}
-						>
-						<DownArrow alignment={textAlignment}>
-								<MdArrowDownward size={36} />
-							</DownArrow>
-						</Grid>
-					</ATFDownArrow>
+					<ATFLeadDown color={nextTheme}>
+						<LeadDownPiece />
+						<LeadDownPiece side="right"/>
+					</ATFLeadDown>
 				</ConditionalRender>
 
 			</Wrapper>
@@ -299,7 +324,10 @@ ATF.defaultProps = {
 	vAlignment: 'center',
 	showArrow: true,
 	headlineSize: 'h1',
-	theme: 'black'
+	theme: 'black',
+	prevTheme: false,
+	nextTheme: false,
+	overlay: false
 }
 
 const sizesToProps = ({ width, height }) => ({

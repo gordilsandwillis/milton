@@ -11,7 +11,7 @@ import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter
 
 // import { Helmet } from "react-helmet";
 
-class Home extends Component {
+class Collections extends Component {
 
 	render() {
 		return (
@@ -35,18 +35,8 @@ class Home extends Component {
 			    <meta name="twitter:image" content={shareImage} />
 		    </Helmet>*/}
 				<div>
-					<Header hasAtf={true} />
-					<ATF index={0} fullHeight="true" image={{ image: PlaceholderAtfImage }} nextTheme="bgColor" overlay=".2" />
-					<CalloutText
-						prevTheme={false}
-						nextTheme="bgColor"
-						theme="bgColor"
-						alignment="center"
-						headline="Finely woven textiles inspired by the history and vibrance of fine art."
-						headlineSize="h3"
-						buttons={[{ style: 'capsLink', label: 'Learn More', to: '/about' }]}
-						icon={<LogoMark/>}
-					/>
+					<Header/>
+					
 					<FiftyFifty
 						prevTheme="bgColor"
 						nextTheme="bgColor"
@@ -61,7 +51,7 @@ class Home extends Component {
 					/>
 					<FiftyFifty
 						prevTheme="bgColor"
-						nextTheme={false}
+						nextTheme="white"
 						theme="bgColor"
 						eyebrow="Collection"
 						headline="Matisse"
@@ -72,11 +62,20 @@ class Home extends Component {
 						image={{ image: ThumbnailMatisse }}
 						imagePosition="right"
 					/>
-					<ATF image={{ image: PlaceholderNewsletterImage }} />
+					<CalloutText
+						prevTheme="bgColor"
+						nextTheme={false}
+						theme="white"
+						alignment="center"
+						headline="Finely woven textiles inspired by the history and vibrance of fine art."
+						headlineSize="h3"
+						buttons={[{ style: 'capsLink', label: 'Learn More', to: '/about' }]}
+						icon={<LogoMark/>}
+					/>
 				</div>
 			</Fragment>
 		);
 	}
 }
 
-export default Home;
+export default Collections;
