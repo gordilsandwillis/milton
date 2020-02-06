@@ -36,7 +36,18 @@ class Home extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header hasAtf={true} />
-					<ATF index={0} fullHeight="true" image={{ image: PlaceholderAtfImage }} nextTheme="bgColor" overlay=".2" />
+					<ATF
+						index={0}
+						fullHeight="true"
+						image={{
+							fluid: {
+								aspectRatio: 2,
+								src: PlaceholderAtfImage
+							}
+						}}
+						nextTheme="bgColor"
+						overlay=".2"
+					/>
 					<CalloutText
 						prevTheme={false}
 						nextTheme="bgColor"
@@ -44,7 +55,7 @@ class Home extends Component {
 						alignment="center"
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
 						headlineSize="h3"
-						buttons={[{ style: 'capsLink', label: 'Learn More', to: '/about' }]}
+						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
 						icon={<LogoMark/>}
 					/>
 					<FiftyFifty
@@ -56,8 +67,13 @@ class Home extends Component {
 						headlineSize="h2"
 						alignment="center"
 						text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse."
-						buttons={[{ style: 'button', label: 'Explore Collection', to: '/collections/reni' }]}
-						image={{ image: ThumbnailReni }}
+						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/reni' }]}
+						image={{
+							fluid: {
+								aspectRatio: 1.158,
+								src: ThumbnailReni
+							}
+						}}
 					/>
 					<FiftyFifty
 						prevTheme="bgColor"
@@ -68,11 +84,23 @@ class Home extends Component {
 						headlineSize="h2"
 						alignment="center"
 						text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse."
-						buttons={[{ style: 'button', label: 'Explore Collection', to: '/collections/reni' }]}
-						image={{ image: ThumbnailMatisse }}
+						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/reni' }]}
+						image={{
+							fluid: {
+								aspectRatio: 1.158,
+								src: ThumbnailMatisse
+							}
+						}}
 						imagePosition="right"
 					/>
-					<ATF image={{ image: PlaceholderNewsletterImage }} />
+					<ATF
+						image={{
+							fluid: {
+								aspectRatio: 2,
+								src: PlaceholderNewsletterImage
+							}
+						}}
+					/>
 				</div>
 			</Fragment>
 		);

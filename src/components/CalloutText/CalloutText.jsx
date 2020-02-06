@@ -3,10 +3,9 @@ import styled from '@emotion/styled'
 import Section from 'src/components/Section'
 import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
-import { util } from 'src/styles'
 
 const ContentWrapper = styled.div`
-	padding-bottom: 40px;
+	padding-bottom: 10px;
 `
 
 const CalloutText = ({

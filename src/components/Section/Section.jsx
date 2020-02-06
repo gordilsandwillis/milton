@@ -1,35 +1,39 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import ThemeSelector from 'src/components/ThemeSelector'
-import Button from 'src/components/Button'
-import ConditionalRender from 'src/components/ConditionalRender'
 import { util } from 'src/styles'
 
 const SectionWrapper = styled(ThemeSelector)`
 	position: relative;
 	z-index: ${ ({ zIndex }) => zIndex };
 	${ ({ padded, prevTheme, nextTheme, setTheme }) => padded !== false && `
-		${ setTheme === prevTheme ? `
-			${ util.responsiveStyles('padding-top', 135, 85, 70, 50) }
-		` : `
-			${ util.responsiveStyles('padding-top', 270, 170, 140, 100) }
+		${ padded !== 'bottom' && `
+			${ setTheme === prevTheme ? `
+				${ util.responsiveStyles('padding-top', 120, 75, 65, 50) }
+			` : `
+				${ util.responsiveStyles('padding-top', 240, 150, 130, 100) }
+			` }
 		` }
-		${ setTheme === nextTheme ? `
-			${ util.responsiveStyles('padding-bottom', 135, 85, 70, 50) }
-		` : `
-			${ util.responsiveStyles('padding-bottom', 270, 170, 140, 100) }
+		${ padded !== 'top' && `
+			${ setTheme === nextTheme ? `
+				${ util.responsiveStyles('padding-bottom', 120, 75, 65, 50) }
+			` : `
+				${ util.responsiveStyles('padding-bottom', 240, 150, 130, 100) }
+			` }
 		` }
 	` }
 `
 
-const Section = ({ children, setTheme, prevTheme, nextTheme, zIndex, buttons, sectionid }) => {
-
-	let buttonColors = {
-		textColor: 'bgColor',
-		black: 'bgColor',
-		mainColor: 'bgColor',
-		bgColor: 'default'
-	}
+const Section = ({
+	children,
+	setTheme,
+	prevTheme,
+	nextTheme,
+	zIndex,
+	buttons,
+	sectionid,
+	padded
+}) => {
 
 	return (
 		<SectionWrapper
@@ -37,6 +41,7 @@ const Section = ({ children, setTheme, prevTheme, nextTheme, zIndex, buttons, se
 			prevTheme={prevTheme}
 			nextTheme={nextTheme}
 			zIndex={zIndex}
+			padded={padded}
 		>
 			{children}
 		</SectionWrapper>

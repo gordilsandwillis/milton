@@ -66,9 +66,9 @@ storiesOf(`Styleguide`, module)
 			<hr/>
 			<h4>Links</h4>
 			<SpaceOut>
-				<Link linkStyle="textLink" external to="/">Internal Link</Link>
-				<Link linkStyle="textLink" external to="/" shape="square">Square Button</Link>
-				<Link linkStyle="textLink" external to="http://gdubs.nyc/" external>External Link</Link>
+				<Link linkType="textLink" external to="/">Internal Link</Link>
+				<Link linkType="textLink" external to="/" shape="square">Square Button</Link>
+				<Link linkType="textLink" external to="http://gdubs.nyc/" external>External Link</Link>
 			</SpaceOut>
 		</div>
 	))

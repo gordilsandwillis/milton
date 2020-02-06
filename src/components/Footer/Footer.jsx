@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { lighten } from 'polished'
-
-import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
-import Logo, { LogoMark } from 'src/components/Logo'
-import MailchimpSignup from 'src/components/MailchimpSignup'
+import { LogoMark } from 'src/components/Logo'
 import ThemeSelector from 'src/components/ThemeSelector'
-import ConditionalRender from 'src/components/ConditionalRender'
-import ContentfulRichText from 'src/components/ContentfulRichText'
+import Link from 'src/components/Link'
 
-import { globals, typography, colors, animations, mq, util } from 'src/styles'
+import { typography, util } from 'src/styles'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
@@ -30,7 +25,7 @@ const FooterItem = styled.div`
 		margin: 0;
 		display: inline-block;
 		vertical-align: top;
-		padding: .25em 0;
+		margin: .25em 0;
 	}
 `
 
@@ -45,9 +40,9 @@ class Footer extends Component {
 				<Grid small="1 [12] 1">
 					<div>
 						<FooterLogoIcon />
-						<FooterItem><a href="/mailto:info@miltontextiles.com">info@miltontextiles.com</a></FooterItem>
+						<FooterItem><Link linkType="capsLink" external={true} to="mailto:info@miltontextiles.com">info@miltontextiles.com</Link></FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
-						<FooterItem><a target="_blank" href="https://gordilsandwillis.com/">Site By</a></FooterItem>
+						<FooterItem><Link linkType="capsLink" external={true} to="https://gordilsandwillis.com/">Site By</Link></FooterItem>
 					</div>
 				</Grid>
 			</Wrapper>

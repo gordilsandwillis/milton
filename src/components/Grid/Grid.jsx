@@ -4,8 +4,8 @@ import _ from 'lodash'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
-import gridSettings, { margin, gutter } from 'src/styles/gridSettings'
-import { mq, colors, globals } from 'src/styles'
+import gridSettings from 'src/styles/gridSettings'
+import { mq, colors } from 'src/styles'
 
 import withSizes from 'react-sizes'
 
@@ -20,33 +20,23 @@ const numberOfCols = gridSettings => {
 
 // is it wrapped with brackets?
 const isColumnDef = d => (
-	// /\[[\s]*[\d]+[\s]*\]/g.test(d)
-	// Add "m" and "g" characters to test
-	/\[[\s]*[\dmg/,/]+[\s]*\]/g.test(d)
+	/\[[\s]*[\d]+[\s]*\]/g.test(d)
 )
 
 // get the integer value the def
 const parseSize = d => {
 	const match = /([\d]+)/g.exec(d)
 	const val = _.get(match, 1)
+
 	return val ? parseInt(val, 10) : null
 }
 
 // parse a single grid item definition (eg. '1', '[3], etc.)
 const parseGridItemDef = d => {
-	let size = parseSize(d)
-	let isVariableColumn = false
-	if (d === '[m]' || d === 'm') {
-		let size = margin,
-		isVariableColumn = true
-	} else if (d === '[g]' || d === 'g') {
-		let size = gutter,
-		isVariableColumn = true
-	}
+	const size = parseSize(d)
 	return size !== null ? ({
 		isColumn: isColumnDef(d),
 		size,
-		isVariableColumn
 	}) : null
 }
 
@@ -57,6 +47,7 @@ const parseGridDef = gridDef => {
 		.replace(/\[[\s]+/g, '[') // remove whitespace inside opening bracket
 		.replace(/[\s]+\]/g, ']') // remove whitespace inside closing bracket
 		.split(' ')
+
 	return _.map(defs, parseGridItemDef).filter(_.identity)
 }
 
@@ -82,26 +73,21 @@ const gridDefToCss = gridDef => {
 	let colCount = 1
 
 	const numColumns = _.filter(gridData, ({ isColumn }) => isColumn).length
-	console.log(gridData)
 
-	const columnCssDefinitions = _.map(gridData, ({ isColumn, size, isVariableColumn }) => {
+	const columnCssDefinitions = _.map(gridData, ({ isColumn, size }) => {
 		let result = null
 		if (isColumn) {
 			// use nth-child to define the children styles so the children
 			// don't have to
 			result = `
 				& > :nth-of-type(${ numColumns }n + ${ colCount }) {
-					grid-column: ${ colStart } / span ${ isVariableColumn ? 1 : size };
+					grid-column: ${ colStart } / span ${ size };
 				}
 			`
 			colCount++
 		}
 
-		if (isVariableColumn) {
-			colStart ++
-		} else {
-			colStart += size
-		}
+		colStart += size
 		return result
 	}).filter(_.identity) // remove any nulls
 
@@ -109,21 +95,8 @@ const gridDefToCss = gridDef => {
 		(acc, { size }) => (acc + size),
 		0
 	)
-
-	// repeat(${ gridWidth }, minmax(0, 1fr))
-	let width = ''
-
-	gridData.forEach((col) => {
-		if(col.isVariableColumn) {
-			width += col.size + ' '
-		} else {
-			width += 'repeat(' + col.size + ', minmax(0, 1fr)) '
-		}
-	})
-
 	return `
-		// grid-template-columns: repeat(${ gridWidth }, minmax(0, 1fr));
-		grid-template-columns: ${ width };
+		grid-template-columns: repeat(${ gridWidth }, minmax(0, 1fr));
 		${ columnCssDefinitions.join(' ') }
 	`
 }
@@ -157,6 +130,14 @@ const StyledGrid = styled.div`
 		}
 	` }
 
+	${ ({ larger, colGap, rowGap }) => larger && `
+		${ mq.extraLargeAndUp } {
+			${ gridDefToCss(larger) }
+			column-gap: ${ gridGapToCss(colGap, 2) };
+			row-gap: ${ gridGapToCss(rowGap, 2) };
+		}
+	` }
+
 	${ ({ extraLarge, colGap, rowGap }) => extraLarge && `
 		${ mq.extraExtraLargeAndUp } {
 			${ gridDefToCss(extraLarge) }
@@ -164,6 +145,8 @@ const StyledGrid = styled.div`
 			row-gap: ${ gridGapToCss(rowGap, 2) };
 		}
 	` }
+
+	
 
 	${ props => props.showOverlay && `
 		position: relative;
@@ -192,12 +175,13 @@ const GridOverlay = styled(StyledGrid)`
 
 class Grid extends Component {
 	render () {
-		const { small, medium, large, extraLarge, colGap, rowGap, showOverlay, children, vAlign, gridDirection, winWidth, className } = this.props
+		const { small, medium, large, larger, extraLarge, colGap, rowGap, showOverlay, children, vAlign, gridDirection, winWidth, className } = this.props
 
 		if (showOverlay) {
 			const OverlayColumnsSmall = small ? _.range(numberOfCols(small)).map(() => { return '[1]' }).join(' ') : false
 			const OverlayColumnsMedium = medium ? _.range(numberOfCols(medium)).map(() => { return '[1]' }).join(' ') : false
 			const OverlayColumnsLarge = large ? _.range(numberOfCols(large)).map(() => { return '[1]' }).join(' ') : false
+			const OverlayColumnsLarger = larger ? _.range(numberOfCols(larger)).map(() => { return '[1]' }).join(' ') : false
 			const OverlayColumnsExtraLarge = extraLarge ? _.range(numberOfCols(extraLarge)).map(() => { return '[1]' }).join(' ') : false
 
 			return (
@@ -207,6 +191,7 @@ class Grid extends Component {
 						small={small}
 						medium={medium}
 						large={large}
+						larger={larger}
 						extraLarge={extraLarge}
 						colGap={colGap}
 						rowGap={rowGap}
@@ -219,13 +204,15 @@ class Grid extends Component {
 						small={OverlayColumnsSmall}
 						medium={OverlayColumnsMedium}
 						large={OverlayColumnsLarge}
+						larger={OverlayColumnsLarger}
 						extraLarge={OverlayColumnsExtraLarge}
 						colGap={colGap}
 						rowGap={rowGap}
 					>
 						{small && winWidth < mq.mediumBreakpoint ? _.range(numberOfCols(small)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
 						{medium && winWidth > mq.mediumBreakpoint && winWidth < mq.largeBreakpoint ? _.range(numberOfCols(medium)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
-						{large && winWidth > mq.largeBreakpoint && winWidth < mq.extraExtraLargeBreakpoint ? _.range(numberOfCols(large)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
+						{large && winWidth > mq.largeBreakpoint && winWidth < mq.largerBreakpoint ? _.range(numberOfCols(large)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
+						{larger && winWidth > mq.extraLargeBreakpoint && winWidth < mq.extraExtraLargeBreakpoint ? _.range(numberOfCols(large)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
 						{extraLarge && winWidth > mq.extraExtraLargeBreakpoint ? _.range(numberOfCols(extraLarge)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
 					</GridOverlay>
 				</div>
@@ -238,6 +225,7 @@ class Grid extends Component {
 				small={small}
 				medium={medium}
 				large={large}
+				larger={larger}
 				extraLarge={extraLarge}
 				colGap={colGap}
 				rowGap={rowGap}
@@ -255,6 +243,7 @@ Grid.propTypes = {
 	medium: PropTypes.string,
 	large: PropTypes.string,
 	extraLarge: PropTypes.string,
+	larger: PropTypes.string,
 	showOverlay: PropTypes.bool,
 }
 

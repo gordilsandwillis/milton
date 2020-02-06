@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
-import Image from 'src/components/Image'
+import Image from 'src/components/GatsbyImage'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import Button from 'src/components/Button'
 import ConditionalRender from 'src/components/ConditionalRender'
-import ContentfulRichText from 'src/components/ContentfulRichText'
 import TextLockup from 'src/components/TextLockup'
 import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
 import { colors, typography, animations } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
-import { MdPlayArrow } from 'react-icons/md'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
@@ -23,14 +20,6 @@ const Wrapper = styled(ThemeSelector)`
 	${ ({ fullHeight, showArrow }) => fullHeight && showArrow && `
 		margin-bottom: -28px;
 	` }
-`
-
-const Eyebrow = styled.h6`
-	margin-bottom: 1.75em;
-`
-
-const Headline = styled.h1`
-	${ ({ headlineSize }) => typography[headlineSize] }
 `
 
 const AlignmentContainer = styled.div`
@@ -93,7 +82,7 @@ const ATFLeadDown = styled.div`
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 60px;
+	height: 44px;
 	display: flex;
 	align-items: stretch;
 	justify-content: center;
@@ -106,10 +95,10 @@ const LeadDownPiece = styled.div`
 	height: 100%;
 	background: currentColor;
 	${ ({ side }) => side === 'right' ? `
-		border-radius: 60px 0 0 0;
+		border-radius: 44px 0 0 0;
 		margin-left: -1px;
 	` : `
-		border-radius: 0 60px 0 0;
+		border-radius: 0 44px 0 0;
 		margin-right: -1px;
 	` }
 `
@@ -168,25 +157,6 @@ const VideoStyled = styled(Video)`
 	}
 `
 
-const Divider = styled.div`
-	display: block;
-	margin: 1.25em 0;
-	${ ({ position }) => position === 'lower' && `margin-top: .75em;` }
-	* {
-		fill: currentColor;
-	}
-`
-
-const PlayButton = styled.div`
-	margin: 30px;
-	cursor: pointer;
-	border: none;
-	background-color: none;
-	padding: none;
-	margin: none;
-	${ typography.h6 }
-	transition: opacity ${ animations.mediumSpeed } ease-in-out;
-`
 class ATF extends Component {
 	constructor (props) {
 		super(props)
@@ -210,6 +180,7 @@ class ATF extends Component {
 			})
 		} catch {}
 	}
+
 	render () {
 		const {
 			headline,
@@ -226,13 +197,11 @@ class ATF extends Component {
 			fullHeight,
 			buttons,
 			winHeight,
-			winWidth,
 			eyebrow,
 			showArrow,
 			index,
 			theme,
 			nextTheme,
-			prevTheme,
 			overlay
 		} = this.props
 
@@ -272,10 +241,10 @@ class ATF extends Component {
 					</ConditionalRender>
 					{!video && image || small ? (
 						<BgImage
-							image={image.image}
-							small={image.small}
-							medium={image.medium}
-							large={image.large}
+							image={image}
+							small={small}
+							medium={medium}
+							large={large}
 						/>
 					) : false}
 					{index === 0 && (video || image) ? <Overlay /> : false}

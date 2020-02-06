@@ -2,28 +2,34 @@ import React, { Component, Fragment } from 'react';
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
-import FiftyFifty from 'src/components/FiftyFifty'
-import { LogoMark } from 'src/components/Logo'
+import Grid from 'src/components/Grid'
+import Section from 'src/components/Section'
+import Image from 'src/components/GatsbyImage'
 import ThumbnailReni from 'src/assets/images/collection-reni.png'
 import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
 import PlaceholderAtfImage from 'src/assets/images/placeholder-atf.jpg'
 import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import ProductThumb from 'src/components/ProductThumb'
 
 // import { Helmet } from "react-helmet";
 
-const Thumbnails = {
-	Reni: ThumbnailReni,
-	Matisse: ThumbnailMatisse,
-}
-
-class Collections extends Component {
+class Collection extends Component {
 	state = {
 		collections: this.props.shopifyContext.shopifyCollections
 	}
 
 	render() {
 		const { collections } = this.state
+
+		const collectionHandle = [this.props.match.params.id]
+
+		let filteredCollections = collections.filter( i => collectionHandle.includes( i.handle ) )
+		let collection = filteredCollections[0]
+
+		console.log(collection)
+
+		const hasAtf = collection.image && collection.image.src
 
 		return (
 			<Fragment>
@@ -46,34 +52,58 @@ class Collections extends Component {
 			    <meta name="twitter:image" content={shareImage} />
 		    </Helmet>*/}
 				<div>
-					<Header/>
-
-					{collections && collections.map((collection, index) => {
-						if (collection.products.length > 0) {
-							return (
-								<FiftyFifty
-									key={collection.id}
-									prevTheme="bgColor"
-									nextTheme="white"
-									theme="bgColor"
-									eyebrow="Collection"
-									headline={collection.title}
-									headlineSize="h2"
-									alignment="center"
-									text={collection.description}
-									buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/' + collection.handle }]}
-									image={{
-										fluid: {
-											aspectRatio: 1.158,
-											src: Thumbnails[collection.title]
-										}
-									}}
-									imagePosition={index % 2 ? 'left' : 'right'}
-								/>
-							)
-						}
-					})}
-
+					<Header hasAtf={hasAtf}/>
+					
+					{hasAtf ? (
+						<ATF
+							index={0}
+							headline={collection.title}
+							headlineSize="h2"
+							text={collection.description}
+							overlay={.3}
+							image={{
+								fluid: {
+									src: collection.image.src
+								}
+							}}
+						/>
+					) : (
+						<CalloutText
+							prevTheme="bgColor"
+							nextTheme="bgColor"
+							theme="bgColor"
+							alignment="center"
+							headline={collection.title}
+							text={collection.description}
+							headlineSize="h2"
+						/>
+					)}
+					
+					<Section
+						prevTheme="bgColor"
+						setTheme="bgColor"
+						nextTheme="white"
+						padded={hasAtf ? true : 'bottom'}
+					>
+						<Grid
+							small="1 [12] 1"
+						>
+							<Grid
+								small="[1] [1]"
+								medium="[1] [1] [1]"
+								large="[1] [1] [1] [1]"
+								larger="[1] [1] [1] [1] [1]"
+								colGap={['3.6vw', '24px', '30px']}
+								rowGap={['50px', '70px', '80px']}
+							>
+								{collection.products.map((product, index) => (
+									product.variants.map((variant, index) => (
+										<ProductThumb product={variant} pattern={product.title} />
+									))
+								))}
+							</Grid>
+						</Grid>
+					</Section>
 					<CalloutText
 						prevTheme="bgColor"
 						nextTheme={false}
@@ -82,7 +112,6 @@ class Collections extends Component {
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
 						headlineSize="h3"
 						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
-						icon={<LogoMark/>}
 					/>
 				</div>
 			</Fragment>
@@ -90,4 +119,4 @@ class Collections extends Component {
 	}
 }
 
-export default withShopifyContext(Collections);
+export default withShopifyContext(Collection);

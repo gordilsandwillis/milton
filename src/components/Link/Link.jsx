@@ -5,20 +5,22 @@ import { MdArrowForward } from 'react-icons/md'
 
 import { Link as RouterLink } from 'react-router-dom'
 
-const LinkStyles = (linkStyle, setTheme) => `
+const LinkStyles = (linkType, setTheme) => `
 	font-size: inherit;
 	text-decoration: none;
 	cursor: pointer;
-	${ linkStyle === 'textLink' || linkStyle === 'arrowLink' || linkStyle === 'capsLink' ? `
+	${ linkType === 'textLink' || linkType === 'arrowLink' || linkType === 'capsLink' ? `
 		position: relative;
+		display: inline-block;
+		line-height: 1.3em;
 		&:after {
 			content: '';
 			display: block;
 			position: absolute;
-			top: calc(100% + 2px);
+			top: 100%;
 			left: 0;
-			width: 100%;
-			height: 2px;
+			width: calc(100% - 2px);
+			height: 1px;
 			background: ${ colors[setTheme] };
 			transform: scaleX(0);
 			transform-origin: right center;
@@ -31,20 +33,20 @@ const LinkStyles = (linkStyle, setTheme) => `
 			}
 		}
 	` : `` }
-	${ linkStyle === 'capsLink' && `
+	${ linkType === 'capsLink' && `
 		${ typography.h6 }
 	` }
 `
 
 const StyledLinkElement = styled.a`
-	${ ({ linkStyle, setTheme }) => `
-		${ LinkStyles(linkStyle, setTheme) }
+	${ ({ linkType, setTheme }) => `
+		${ LinkStyles(linkType, setTheme) }
 	` }
 `
 
 const StyledLink = styled(RouterLink)`
-	${ ({ linkStyle, setTheme }) => `
-		${ LinkStyles(linkStyle, setTheme) }
+	${ ({ linkType, setTheme }) => `
+		${ LinkStyles(linkType, setTheme) }
 	` }
 `
 
@@ -57,19 +59,20 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, linkStyle, setTheme } = this.props
+		const { to, external, target, children, className, linkType, setTheme } = this.props
 
 		if (external) {
 			return (
 				<StyledLinkElement
 					className={className}
 					href={to}
-					target={target}
-					linkStyle={linkStyle}
+					linkType={linkType}
 					setTheme={setTheme}
+					target="_blank"
+					rel="noopener noreferrer"
 				>
 					{children}
-					{linkStyle === 'arrowLink' && (
+					{linkType === 'arrowLink' && (
 						<ArrowIcon size={18}/>
 					)}
 				</StyledLinkElement>
@@ -79,11 +82,11 @@ class Link extends Component {
 				<StyledLink
 					className={className}
 					to={to}
-					linkStyle={linkStyle}
+					linkType={linkType}
 					setTheme={setTheme}
 				>
 					{children}
-					{linkStyle === 'arrowLink' && (
+					{linkType === 'arrowLink' && (
 						<ArrowIcon size={18}/>
 					)}
 				</StyledLink>
@@ -96,7 +99,7 @@ Link.defaultProps = {
 	to: '#',
 	external: false,
 	target: '',
-	linkStyle: 'none',
+	linkType: 'none',
 	setTheme: 'currentcolor'
 }
 

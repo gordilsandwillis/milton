@@ -1,4 +1,3 @@
-import * as mq from './mediaQueries'
 import { rgba } from 'polished'
 import * as colors from './colors'
 import { responsiveStyles } from './util'
@@ -19,15 +18,15 @@ export const bodyLarge = `
 `
 export const bodyMedium = `
 	${ responsiveStyles('font-size', 20, 18, 17, 16) }
-	line-height: 1.6em;
+	line-height: 1.75em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
 	font-weight: normal;
 `
 export const body = `
-	${ responsiveStyles('font-size', 18, 16, 15, 14) }
-	line-height: 1.6em;
+	${ responsiveStyles('font-size', 16, 15, 14, 14) }
+	line-height: 1.75em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
@@ -35,7 +34,7 @@ export const body = `
 `
 export const bodySmall = `
 	${ responsiveStyles('font-size', 16, 14, 14, 14) }
-	line-height: 1.6em;
+	line-height: 1.75em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
@@ -87,7 +86,7 @@ export const h5 = `
 	text-transform: none;
 `
 export const h6 = `
-	${ responsiveStyles('font-size', 15, 14, 13, 13) }
+	${ responsiveStyles('font-size', 13, 12, 11, 10) }
 	font-family: ${ primaryFont };
 	font-weight: 600;
 	line-height: 1.6em;
@@ -106,7 +105,12 @@ export const eyebrow = `
 
 export const buttonStyle = `
 	${ h6 }
-	${ responsiveStyles('font-size', 15, 13, 13, 13) }
+	line-height: 1em;
+`
+
+export const smallCaps = `
+	${ h6 }
+	${ responsiveStyles('font-size', 12, 11, 10, 10) }
 	line-height: 1em;
 `
 

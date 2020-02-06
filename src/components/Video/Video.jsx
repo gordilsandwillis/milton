@@ -1,15 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { Transition } from 'react-transition-group'
-import { colors, typography, animations, mq } from 'src/styles'
+import { animations } from 'src/styles'
 import ReactPlayer from 'react-player'
 
 import { MdPlayArrow } from 'react-icons/md'
 
-import MaterialIcon from 'src/components/MaterialIcon'
-import Section from 'src/components/Section'
 import Image from 'src/components/Image'
-import ScrollEntrance from 'src/components/ScrollEntrance'
 import Button from 'src/components/Button'
 
 const Wrapper = styled.div`
@@ -23,17 +20,6 @@ const Wrapper = styled.div`
 	${ ({ cover }) => cover && `
 		height: 100%;
 	` }
-`
-
-const Eyebrow = styled.h5`
-	color: ${ colors.bgColor };
-	margin: 0 0 8px;
-`
-
-const BlockTitle = styled.h5`
-	margin: 0;
-	font-weight: 400;
-	color: ${ colors.bgColor };
 `
 
 const CoverImageWrap = styled.div`

@@ -1,14 +1,11 @@
 import React, { Component, Fragment } from 'react'
+import { withRouter } from 'react-router-dom';
 import styled from '@emotion/styled'
-import { rgba } from 'polished'
 import Link from 'src/components/Link'
 import Logo from 'src/components/Logo'
-// import Button from 'src/components/Button'
 import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
-// import ConditionalRender from 'src/components/ConditionalRender'
-import MaterialIcon from 'src/components/MaterialIcon'
-import { colors, typography, animations, mq, util } from 'src/styles'
+import { colors, animations, mq, util } from 'src/styles'
 
 // const Logo = styled.div``
 
@@ -16,11 +13,6 @@ const NavLinkStyle = (scrolled, active) => `
 	display: block;
 	position: relative;
 	${ util.responsiveStyles('margin-right', 60, 40, 32, 20) }
-	${ !scrolled && `
-		&:after {
-			background: currentcolor;
-		}
-	` }
 	${ active && `
 		&:after {
 			transform: none;
@@ -29,10 +21,6 @@ const NavLinkStyle = (scrolled, active) => `
 `
 
 const NavLink = styled(Link)`
-	${ props => NavLinkStyle(props.scrolled, props.active) }
-`
-
-const NavTrigger = styled.a`
 	${ props => NavLinkStyle(props.scrolled, props.active) }
 `
 
@@ -68,11 +56,11 @@ const HeaderContainer = styled.div`
 	${ ({ scrolled }) => scrolled ? `
 		padding-top: 18px;
 		padding-bottom: 14px;
-		${ util.responsiveStyles('padding-top', 30, 30, 24, 15) }
-		${ util.responsiveStyles('padding-bottom', 30, 30, 24, 15) }
+		${ util.responsiveStyles('padding-top', 20, 20, 18, 18) }
+		${ util.responsiveStyles('padding-bottom', 20, 20, 18, 18) }
 	` : `
-		${ util.responsiveStyles('padding-top', 50, 40, 30, 15) }
-		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 15) }
+		${ util.responsiveStyles('padding-top', 50, 40, 30, 30) }
+		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 30) }
 	` };
 `
 
@@ -141,9 +129,7 @@ const HeaderPlaceholder = styled.div`
 
 class Header extends Component {
 	state = {
-		scrolled: false,
-		navList: false,
-		drawerOpen: false
+		scrolled: false
 	}
 
 	componentDidMount () {
@@ -153,17 +139,6 @@ class Header extends Component {
 
 	componentWillUnmount () {
 		window.removeEventListener('scroll', this.handleScroll)
-	}
-
-	toggleDrawer = id => {
-		this.setState({ navList: id, drawerOpen: id })
-	}
-
-	closeDrawer = () => {
-		this.setState({ drawerOpen: false })
-		setTimeout(() => {
-			this.toggleDrawer(false)
-		}, 600) // timeout needs to match the navigation drawer exit speed
 	}
 
 	handleScroll = event => {
@@ -183,12 +158,9 @@ class Header extends Component {
 		const {
 			location,
 			hasAtf,
-			headerNavigation,
-			headerDrawerBottomLinks,
-			headerLinks,
 			headerButtons
 		} = this.props
-		const { scrolled, navList, drawerOpen } = this.state
+		const { scrolled, drawerOpen } = this.state
 
 		let pathname = '/'
 		if (location) {
@@ -206,7 +178,7 @@ class Header extends Component {
 						>
 							<div>
 								<NavLinks>
-									<NavLink linkStyle="capsLink" setTheme="textColor" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
+									<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
 										<ResponsiveComponent small="Shop" medium="Collections"/>
 									</NavLink>
 								</NavLinks>
@@ -219,14 +191,14 @@ class Header extends Component {
 							<div>
 									<ResponsiveComponent
 										small={
-											<NavLinks linkStyle="capsLink" setTheme="textColor" alignment="right">
-												<NavLink scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
+											<NavLinks linkType="capsLink" alignment="right">
+												<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
 											</NavLinks>
 										}
 										medium={
 											<NavLinks alignment="right">
-												<NavLink linkStyle="capsLink" setTheme="textColor" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
-												<NavLink linkStyle="capsLink" setTheme="textColor" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
+												<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
+												<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
 											</NavLinks>
 										}
 									/>
@@ -246,4 +218,4 @@ Header.defaultProps = {
 	hasAtf: false
 }
 
-export default Header
+export default withRouter(Header)

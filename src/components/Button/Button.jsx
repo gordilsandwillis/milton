@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { lighten, rgba } from 'polished'
 
@@ -11,8 +11,8 @@ import Link from 'src/components/Link'
 const buttonSizes = {
 	tiny: '36px',
 	small: '48px',
-	medium: '60px',
-	large: '72px',
+	medium: '50px',
+	large: '60px',
 }
 
 const getState = (loading, error, success, disabled) => {
@@ -72,7 +72,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	border: none;
 	height: ${ buttonSizes.medium };
 	padding-top: 0;
-	padding-bottom: 2px; // offset text if necessary
+	padding-bottom: 4px; // offset text if necessary
 	padding-left: calc(${ buttonSizes.medium } * .4);
 	padding-right: calc(${ buttonSizes.medium } * .4);
 	cursor: pointer;

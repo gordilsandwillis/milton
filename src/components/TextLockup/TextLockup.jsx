@@ -6,7 +6,7 @@ import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 import BalanceText from 'react-balance-text'
-import { typography, colors, mq, util } from 'src/styles'
+import { typography, mq, util } from 'src/styles'
 
 const Wrapper = styled.div`
 	display: inline-block;
@@ -42,7 +42,7 @@ const TextContainer = styled(ScrollEntrance)`
 `
 
 const Eyebrow = styled.h6`
-	margin-bottom: 1.2em;
+	margin-bottom: .8em;
 	${ typography.eyebrow }
 `
 
@@ -125,8 +125,8 @@ const TextLockup = ({
 		<Wrapper className={className} alignment={alignment}>
 			<div>
 				<TextContainer alignment={alignment}>
-					<ConditionalRender condition={icon && icon.svgContent}>
-						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1em' }} dangerouslySetInnerHTML={{ __html: icon && icon.svgContent }}/>
+					<ConditionalRender condition={icon}>
+						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1.5em' }}>{icon}</div>
 					</ConditionalRender>
 					<ConditionalRender condition={eyebrow}>
 						<Eyebrow>{eyebrow}</Eyebrow>
@@ -157,7 +157,7 @@ const TextLockup = ({
 					{buttons && (
 						<ButtonActions buttons={buttons} alignment={alignment}>
 							{buttons.map((button, index) => {
-								if (button.style === 'button') {
+								if (button.linkType === 'button') {
 									return (
 										<Button
 											key={'button-' + index}
@@ -177,7 +177,7 @@ const TextLockup = ({
 											setTheme={button.theme}
 											external={button.external || false}
 											target={button.target || ''}
-											linkStyle={button.style}
+											linkType={button.linkType}
 										>
 											{button.label}
 										</Link>

@@ -2,7 +2,7 @@ import React from 'react'
 import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
 import ConditionalRender from 'src/components/ConditionalRender'
-import Image from 'src/components/Image'
+import Image from 'src/components/GatsbyImage'
 import Video from 'src/components/Video'
 import TextLockup from 'src/components/TextLockup'
 import ScrollEntrance from 'src/components/ScrollEntrance'
@@ -80,10 +80,7 @@ const FiftyFifty = ({
 					<ConditionalRender condition={image && !video}>
 						<div>
 							<Image
-								image={image.image}
-								small={image.small}
-								medium={image.medium}
-								large={image.large}
+								image={image}
 								alt={(image && image.description) || (image && image.title)}
 							/>
 						</div>
@@ -99,7 +96,6 @@ const FiftyFifty = ({
 					medium="[1]"
 				>
 					<TextLockup
-						alignment="left"
 						specialList
 						headline={headline}
 						headlineSize={headlineSize}

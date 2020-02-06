@@ -280,7 +280,6 @@ class Input extends Component {
 					theme={theme}
 					shape={shape}
 					size={size}
-					theme={theme}
 					onFocus={() => this.setFocus(true)}
 					onBlur={() => this.setFocus(false)} // needs work
 					value={value}
