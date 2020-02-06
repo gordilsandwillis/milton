@@ -8,7 +8,7 @@ import ThumbnailReni from 'src/assets/images/collection-reni.png'
 import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
 import PlaceholderAtfImage from 'src/assets/images/placeholder-atf.jpg'
 import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
-
+import CollectionSections from 'src/components/CollectionSections'
 // import { Helmet } from "react-helmet";
 
 class Home extends Component {
@@ -58,41 +58,7 @@ class Home extends Component {
 						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
 						icon={<LogoMark/>}
 					/>
-					<FiftyFifty
-						prevTheme="bgColor"
-						nextTheme="bgColor"
-						theme="bgColor"
-						eyebrow="Collection"
-						headline="Reni"
-						headlineSize="h2"
-						alignment="center"
-						text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse."
-						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/reni' }]}
-						image={{
-							fluid: {
-								aspectRatio: 1.158,
-								src: ThumbnailReni
-							}
-						}}
-					/>
-					<FiftyFifty
-						prevTheme="bgColor"
-						nextTheme={false}
-						theme="bgColor"
-						eyebrow="Collection"
-						headline="Matisse"
-						headlineSize="h2"
-						alignment="center"
-						text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse."
-						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/reni' }]}
-						image={{
-							fluid: {
-								aspectRatio: 1.158,
-								src: ThumbnailMatisse
-							}
-						}}
-						imagePosition="right"
-					/>
+					<CollectionSections/>
 					<ATF
 						image={{
 							fluid: {
