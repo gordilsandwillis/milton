@@ -105,6 +105,8 @@ class PageTransition extends React.PureComponent {
   handleEntered = (node, isAppearing) => {
     setTimeout(() => {
       this.setState({ overlay: false })
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     }, hang)
   }
 

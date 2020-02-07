@@ -7,7 +7,7 @@ import ConditionalRender from 'src/components/ConditionalRender'
 import TextLockup from 'src/components/TextLockup'
 import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
-import { colors, typography, animations } from 'src/styles'
+import { colors, animations } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
 
@@ -186,6 +186,7 @@ class ATF extends Component {
 			headline,
 			headlineSize,
 			text,
+			textSize,
 			image,
 			small,
 			medium,
@@ -267,6 +268,7 @@ class ATF extends Component {
 										headlineElement="h1"
 										headline={headline}
 										text={text}
+										textSize={textSize}
 										buttons={buttons}
 									/>
 								</ScrollEntrance>
@@ -293,6 +295,7 @@ ATF.defaultProps = {
 	vAlignment: 'center',
 	showArrow: true,
 	headlineSize: 'h1',
+	textSize: 'body',
 	theme: 'black',
 	prevTheme: false,
 	nextTheme: false,

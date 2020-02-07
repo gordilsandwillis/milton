@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import Link from 'src/components/Link'
 import { typography, colors } from 'src/styles'
 import Image from 'src/components/GatsbyImage'
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
 	cursor: pointer;
+	display: block;
 `
 
 const ProductTitle = styled.p`
@@ -27,7 +29,7 @@ const ProductThumb = ({ product, pattern, className }) => {
 	}
 
 	return (
-	  <Wrapper className={className}>
+	  <Wrapper className={className} to={'/product/' + pattern.handle + '?color=' + product.id}>
 			<ThumbnailImage
 				image={{
 					fluid: {
@@ -37,7 +39,7 @@ const ProductThumb = ({ product, pattern, className }) => {
 				}} 
 				alt={product.title}
 			/>
-			<ProductPattern>{pattern}</ProductPattern>
+			<ProductPattern>{pattern.title}</ProductPattern>
 			<ProductTitle>{product.title}</ProductTitle>
 		</Wrapper>
 	)

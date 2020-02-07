@@ -10,6 +10,7 @@ import Collections from 'src/containers/Collections';
 import Collection from 'src/containers/Collection';
 import About from 'src/containers/About';
 import Contact from 'src/containers/Contact';
+import Product from 'src/containers/Product';
 
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
@@ -20,12 +21,64 @@ const Wrapper = styled.div`
 `
 
 class PageContent extends Component {
-  componentDidMount () {
+  componentWillMount () {
+    let productList = false
+
     const client = this.props.shopifyContext.shopifyClient
-    client.collection.fetchAllWithProducts().then((collections) => {
-      this.props.shopifyContext.updateState('shopifyCollections', collections)
+    // client.collection.fetchAllWithProducts().then((collections) => {
+    //   this.props.shopifyContext.updateState('shopifyCollections', collections)
+    // });
+
+    // Build products query
+    const productsQuery = client.graphQLClient.query((root) => {
+      root.addConnection('products', {args: {first: 50}}, (product) => {
+        product.add('id')
+        product.add('tags')
+        product.add('description')
+        product.add('descriptionHtml')
+        product.add('handle')
+        product.add('productType')
+        product.add('title')
+        product.addConnection('images', {args: {first: 10}}, (image) => {
+          image.add('id')
+          image.add('src')
+        });
+        product.addConnection('collections', {args: {first: 10}}, (collection) => {
+          collection.add('id')
+          collection.add('title')
+        });
+      });
+    });
+
+    // Build collections query
+    const collectionsQuery = client.graphQLClient.query((root) => {
+      root.addConnection('collections', {args: {first: 50}}, (collection) => {
+        collection.add('id')
+        collection.add('description')
+        collection.add('handle')
+        collection.add('title')
+        collection.addConnection('products', {args: {first: 10}}, (product) => {
+          product.add('id')
+          product.add('title')
+          product.add('tags')
+          product.add('handle')
+          product.add('productType')
+        });
+      });
+    });
+     
+    // Set Products
+    client.graphQLClient.send(productsQuery).then(({data, model}) => {
+      this.props.shopifyContext.updateState('shopifyProducts', data.products.edges)
+    });
+
+    // Set Collections
+    client.graphQLClient.send(collectionsQuery).then(({data, model}) => {
+      console.log(data.collections.edges)
+      this.props.shopifyContext.updateState('shopifyCollections', data.collections.edges)
     });
   }
+
   render () {
     if (!this.props.shopifyContext.shopifyCollections) {
       return false
@@ -39,6 +92,7 @@ class PageContent extends Component {
             <Route exact path="/" render={(props) => (<Home {...props} />)} />
             <Route exact path="/collections" render={(props) => (<Collections {...props} />)} />
             <Route exact path="/collections/:id" component={(props) => (<Collection {...props} />)} />
+            <Route exact path="/product/:id" component={(props) => (<Product {...props} />)} />
             <Route exact path="/about" render={(props) => (<About {...props} />)} />
             <Route exact path="/contact" render={(props) => (<Contact {...props} />)} />
           </Switch>

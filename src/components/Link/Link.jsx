@@ -5,11 +5,11 @@ import { MdArrowForward } from 'react-icons/md'
 
 import { Link as RouterLink } from 'react-router-dom'
 
-const LinkStyles = (linkType, setTheme) => `
+const LinkStyles = (type, setTheme) => `
 	font-size: inherit;
 	text-decoration: none;
 	cursor: pointer;
-	${ linkType === 'textLink' || linkType === 'arrowLink' || linkType === 'capsLink' ? `
+	${ type === 'textLink' || type === 'arrowLink' || type === 'capsLink' ? `
 		position: relative;
 		display: inline-block;
 		line-height: 1.3em;
@@ -33,20 +33,20 @@ const LinkStyles = (linkType, setTheme) => `
 			}
 		}
 	` : `` }
-	${ linkType === 'capsLink' && `
+	${ type === 'capsLink' && `
 		${ typography.h6 }
 	` }
 `
 
 const StyledLinkElement = styled.a`
-	${ ({ linkType, setTheme }) => `
-		${ LinkStyles(linkType, setTheme) }
+	${ ({ type, setTheme }) => `
+		${ LinkStyles(type, setTheme) }
 	` }
 `
 
 const StyledLink = styled(RouterLink)`
-	${ ({ linkType, setTheme }) => `
-		${ LinkStyles(linkType, setTheme) }
+	${ ({ type, setTheme }) => `
+		${ LinkStyles(type, setTheme) }
 	` }
 `
 
@@ -59,20 +59,20 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, linkType, setTheme } = this.props
+		const { to, external, target, children, className, type, setTheme } = this.props
 
 		if (external) {
 			return (
 				<StyledLinkElement
 					className={className}
 					href={to}
-					linkType={linkType}
+					type={type}
 					setTheme={setTheme}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					{children}
-					{linkType === 'arrowLink' && (
+					{type === 'arrowLink' && (
 						<ArrowIcon size={18}/>
 					)}
 				</StyledLinkElement>
@@ -82,11 +82,11 @@ class Link extends Component {
 				<StyledLink
 					className={className}
 					to={to}
-					linkType={linkType}
+					type={type}
 					setTheme={setTheme}
 				>
 					{children}
-					{linkType === 'arrowLink' && (
+					{type === 'arrowLink' && (
 						<ArrowIcon size={18}/>
 					)}
 				</StyledLink>
@@ -99,7 +99,7 @@ Link.defaultProps = {
 	to: '#',
 	external: false,
 	target: '',
-	linkType: 'none',
+	type: 'none',
 	setTheme: 'currentcolor'
 }
 

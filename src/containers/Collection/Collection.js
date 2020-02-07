@@ -22,10 +22,11 @@ class Collection extends Component {
 	render() {
 		const { collections } = this.state
 
-		const collectionHandle = [this.props.match.params.id]
+		const collectionHandle = this.props.match.params.id
 
-		let filteredCollections = collections.filter( i => collectionHandle.includes( i.handle ) )
-		let collection = filteredCollections[0]
+		let filteredCollections = collections.filter( i => collectionHandle.includes( i.node.handle ) )
+		let collection = filteredCollections[0].node
+		let collectionProducts = filteredCollections[0].node.products.edges
 
 		console.log(collection)
 
@@ -96,11 +97,18 @@ class Collection extends Component {
 								colGap={['3.6vw', '24px', '30px']}
 								rowGap={['50px', '70px', '80px']}
 							>
-								{collection.products.map((product, index) => (
-									product.variants.map((variant, index) => (
-										<ProductThumb product={variant} pattern={product.title} />
-									))
-								))}
+								{collectionProducts.map((product, index) => {
+									product = product.node
+									return (
+										<div>
+											<h4>{product.title}</h4>
+											{/*product.variants.map((variant, index) => (
+												<ProductThumb product={variant} pattern={product} />
+											))*/}
+										</div>
+									)
+								}
+								)}
 							</Grid>
 						</Grid>
 					</Section>

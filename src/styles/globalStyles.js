@@ -191,8 +191,8 @@ export default `
   }
 
   ::selection {
-    background: ${ rgba(colors.mainColor, 0.9) };
-    color: ${ colors.bgColor };
+    background: ${ rgba(colors.lightGrey, 0.9) };
+    color: ${ colors.textColor };
   }
   
   ${ slick }

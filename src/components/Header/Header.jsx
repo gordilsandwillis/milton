@@ -39,6 +39,7 @@ const Wrapper = styled.header`
 	${ ({ scrolled, hasAtf }) => scrolled ? `
 		background: ${ colors.white };
 		color: ${ colors.textColor };
+		box-shadow: 0 2px 0px ${ colors.bgColor };
 	` : `
 		background: transparent;
 		${ !hasAtf ? `
@@ -158,7 +159,8 @@ class Header extends Component {
 		const {
 			location,
 			hasAtf,
-			headerButtons
+			headerButtons,
+			placeholder
 		} = this.props
 		const { scrolled, drawerOpen } = this.state
 
@@ -178,7 +180,7 @@ class Header extends Component {
 						>
 							<div>
 								<NavLinks>
-									<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
+									<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
 										<ResponsiveComponent small="Shop" medium="Collections"/>
 									</NavLink>
 								</NavLinks>
@@ -191,14 +193,14 @@ class Header extends Component {
 							<div>
 									<ResponsiveComponent
 										small={
-											<NavLinks linkType="capsLink" alignment="right">
-												<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
+											<NavLinks type="capsLink" alignment="right">
+												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
 											</NavLinks>
 										}
 										medium={
 											<NavLinks alignment="right">
-												<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
-												<NavLink linkType="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
+												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
+												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
 											</NavLinks>
 										}
 									/>
@@ -207,7 +209,7 @@ class Header extends Component {
 					</HeaderContainer>
 				</Wrapper>
 
-				{!hasAtf && <HeaderPlaceholder />}
+				{!hasAtf && placeholder && <HeaderPlaceholder />}
 
 			</Fragment>
 		)
@@ -215,7 +217,8 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-	hasAtf: false
+	hasAtf: false,
+	placeholder: true
 }
 
 export default withRouter(Header)

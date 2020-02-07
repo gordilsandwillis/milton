@@ -73,6 +73,7 @@ const Text = styled.div`
 		max-width: 32em;
 		margin-bottom: 0;
 		margin-top: 4em;
+		${ ({ textSize }) => typography[textSize] }
 		&:first-of-type {
 			margin-top: 0;
 		}
@@ -114,6 +115,7 @@ const TextLockup = ({
 		headline,
 		headlineSize,
 		text,
+		textSize,
 		buttons,
 		className,
 		icon,
@@ -143,11 +145,11 @@ const TextLockup = ({
 					</ConditionalRender>
 
 					{text && text.json && /* ConditionalRender was not working for this */
-						<Text alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
+						<Text textSize={textSize} alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
 					}
 
 					{typeof text === 'string' &&
-						<Text alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
+						<Text textSize={textSize} alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
 					}
 
 					<ConditionalRender condition={additions}>
@@ -177,7 +179,7 @@ const TextLockup = ({
 											setTheme={button.theme}
 											external={button.external || false}
 											target={button.target || ''}
-											linkType={button.linkType}
+											type={button.linkType}
 										>
 											{button.label}
 										</Link>
@@ -194,7 +196,8 @@ const TextLockup = ({
 
 TextLockup.defaultProps = {
 	alignment: 'center',
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	textSize: 'body'
 }
 
 export default TextLockup

@@ -25,7 +25,7 @@ export const bodyMedium = `
 	font-weight: normal;
 `
 export const body = `
-	${ responsiveStyles('font-size', 16, 15, 14, 14) }
+	${ responsiveStyles('font-size', 18, 15, 14, 14) }
 	line-height: 1.75em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
@@ -86,7 +86,7 @@ export const h5 = `
 	text-transform: none;
 `
 export const h6 = `
-	${ responsiveStyles('font-size', 13, 12, 11, 10) }
+	${ responsiveStyles('font-size', 14, 12, 11, 10) }
 	font-family: ${ primaryFont };
 	font-weight: 600;
 	line-height: 1.6em;
