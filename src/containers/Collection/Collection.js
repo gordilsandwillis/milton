@@ -24,11 +24,11 @@ class Collection extends Component {
 
 		const collectionHandle = this.props.match.params.id
 
-		let filteredCollections = collections.filter( i => collectionHandle.includes( i.node.handle ) )
-		let collection = filteredCollections[0].node
-		let collectionProducts = filteredCollections[0].node.products.edges
+		let filteredCollections = collections.filter( i => collectionHandle.includes( i.handle ) )
+		let collection = filteredCollections[0]
+		let collectionProducts = collection.products
 
-		console.log(collection)
+		console.log(collectionProducts)
 
 		const hasAtf = collection.image && collection.image.src
 
@@ -89,27 +89,26 @@ class Collection extends Component {
 						<Grid
 							small="1 [12] 1"
 						>
-							<Grid
-								small="[1] [1]"
-								medium="[1] [1] [1]"
-								large="[1] [1] [1] [1]"
-								larger="[1] [1] [1] [1] [1]"
-								colGap={['3.6vw', '24px', '30px']}
-								rowGap={['50px', '70px', '80px']}
-							>
-								{collectionProducts.map((product, index) => {
-									product = product.node
-									return (
-										<div>
-											<h4>{product.title}</h4>
-											{/*product.variants.map((variant, index) => (
-												<ProductThumb product={variant} pattern={product} />
-											))*/}
-										</div>
-									)
-								}
-								)}
-							</Grid>
+							<div>
+								<Grid
+									small="[1] [1]"
+									medium="[1] [1] [1]"
+									large="[1] [1] [1] [1]"
+									larger="[1] [1] [1] [1] [1]"
+									colGap={['3.6vw', '24px', '30px']}
+									rowGap={['50px', '70px', '80px']}
+								>
+									{collectionProducts.map((product, index) => {
+										product = product
+										return (
+											product.variants.map((variant, index) => (
+												<ProductThumb product={product} />
+											))
+										)
+									}
+									)}
+								</Grid>
+							</div>
 						</Grid>
 					</Section>
 					<CalloutText

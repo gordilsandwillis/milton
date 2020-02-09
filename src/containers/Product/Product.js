@@ -39,12 +39,10 @@ class Product extends Component {
 
 		const productHandle = this.props.match.params.id
 
+		console.log(products)
+
 		let filteredProducts = products.filter( i => productHandle.includes( i.handle ) )
 		let product = filteredProducts[0]
-
-		console.log(product)
-		let productVarient = product.variants.filter( i => this.props.history.location.search.includes( i.id ) )[0]
-		console.log(productVarient)
 
 		return (
 			<Fragment>
@@ -75,7 +73,7 @@ class Product extends Component {
 									image={{
 										fluid: {
 											aspectRatio: 1,
-											src: productVarient.image.src
+											src: product.image.src
 										}
 									}} 
 									alt={product.title}
@@ -85,8 +83,8 @@ class Product extends Component {
 						<TextArea>
 							<Grid small="1 [12] 1" large="1 [4] 1">
 								<div>
-									<h6>{product.title}</h6>
-									<h2>{productVarient.title}</h2>
+									<h6>{product.variants[0].title}</h6>
+									<h2>{product.title}</h2>
 									<div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
 									<Button>Inquire</Button>
 								</div>

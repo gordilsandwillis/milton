@@ -23,23 +23,23 @@ const ThumbnailImage = styled(Image)`
 	background: ${ colors.lightGrey };
 `
 
-const ProductThumb = ({ product, pattern, className }) => {
-	if (!product.image) {
+const ProductThumb = ({ product, className }) => {
+	if (!product.images) {
 		return false
 	}
 
 	return (
-	  <Wrapper className={className} to={'/product/' + pattern.handle + '?color=' + product.id}>
+	  <Wrapper className={className} to={'/product/' + product.handle + '?color=' + product.id}>
 			<ThumbnailImage
 				image={{
 					fluid: {
 						aspectRatio: 1,
-						src: product.image.src
+						src: product.images[0].src
 					}
 				}} 
 				alt={product.title}
 			/>
-			<ProductPattern>{pattern.title}</ProductPattern>
+			<ProductPattern>{product.variants[0].title}</ProductPattern>
 			<ProductTitle>{product.title}</ProductTitle>
 		</Wrapper>
 	)
