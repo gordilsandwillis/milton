@@ -33,9 +33,9 @@ const LinkStyles = (type, setTheme) => `
 			}
 		}
 	` : `` }
-	${ type === 'capsLink' && `
+	${ type === 'capsLink' ? `
 		${ typography.h6 }
-	` }
+	` : `` }
 `
 
 const StyledLinkElement = styled.a`

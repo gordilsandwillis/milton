@@ -3,9 +3,11 @@ import styled from '@emotion/styled'
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
+import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
 import Section from 'src/components/Section'
 import Button from 'src/components/Button'
+import Link from 'src/components/Link'
 import Image from 'src/components/GatsbyImage'
 import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
@@ -29,20 +31,51 @@ const ProductImage = styled(Image)`
 	background: ${ colors.bgColor };
 `
 
+const VariantLink = styled(Link)`
+	width: 100px;
+	${ util.responsiveStyles('width', 80, 60, 60, 50) }
+	display: block;
+	background: ${ colors.lightGrey };
+`
+
+const VariantLinks = styled.div`
+	display: flex;
+	a {
+		margin-left: 12px;
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+`
+
 class Product extends Component {
 	state = {
 		products: this.props.shopifyContext.shopifyProducts
 	}
 
 	render() {
-		const { products } = this.state
+		// const { products } = this.props.shopifyContext.shopifyProducts
 
-		const productHandle = this.props.match.params.id
+		// if (!products) {
+		// 	return false
+		// }
 
-		console.log(products)
+		const productHandle = this.props.match.params.product
+		const variantId = this.props.match.params.variant
 
-		let filteredProducts = products.filter( i => productHandle.includes( i.handle ) )
-		let product = filteredProducts[0]
+		let filteredProducts = false
+		let currentProduct = false
+		let currentVariant = false
+		let variantImages = []
+
+		if (this.props.shopifyContext.shopifyProducts) {
+			let products = this.props.shopifyContext.shopifyProducts
+			currentProduct = products.filter( i => productHandle.includes( i.handle ) )[0]
+			currentVariant = currentProduct.variants.filter( i => variantId.includes( i.id ) )[0]
+			variantImages = currentProduct.images.filter( i => currentVariant.title.includes( i.altText ) )
+		} else {
+			return false
+		}
 
 		return (
 			<Fragment>
@@ -68,30 +101,87 @@ class Product extends Component {
 					<Header placeholder={false}/>
 					<Grid small="[1]" large="[6] [6]" vAlign="center">
 						<ImgArea>
-							<Grid small="1 [12] 1" large="1 [4] 1">
-								<ProductImage
-									image={{
-										fluid: {
-											aspectRatio: 1,
-											src: product.image.src
-										}
-									}} 
-									alt={product.title}
-								/>
-							</Grid>
+							{variantImages.map((image, index) => {
+								return (
+									<Grid small="1 [12] 1" large="1 [4] 1" key={currentVariant.id + '-image-' + index}>
+										<ProductImage
+											image={{
+												fluid: {
+													aspectRatio: 1,
+													src: image.src
+												}
+											}} 
+											alt={currentProduct.title | currentVariant.title}
+										/>
+									</Grid>
+								)
+							})}
 						</ImgArea>
 						<TextArea>
 							<Grid small="1 [12] 1" large="1 [4] 1">
 								<div>
-									<h6>{product.variants[0].title}</h6>
-									<h2>{product.title}</h2>
-									<div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
-									<Button>Inquire</Button>
+									<TextLockup
+										eyebrow={currentProduct.title}
+										headline={currentVariant.title}
+										headlineSize="h2"
+										text={currentProduct.descriptionHtml}
+										alignment="left"
+										additions={<div style={{ marginTop: '25px' }}>
+											<Button>Inquire</Button>
+											{currentProduct.variants.length > 1 && (
+												<VariantLinks>
+													{currentProduct.variants.map((variant, index) => {
+														if (variant.id !== currentVariant.id)
+														return (
+															<VariantLink to={'/product/' + currentProduct.handle + '/' + variant.id} key={variant.id}>
+																<Image
+																	image={{
+																		fluid: {
+																			aspectRatio: 1,
+																			src: variant.image.src
+																		}
+																	}} 
+																	alt={currentProduct.title | variant.title}
+																/>
+															</VariantLink>
+														)
+													})}
+												</VariantLinks>
+											)}
+										</div>}
+									/>
 								</div>
 							</Grid>
 						</TextArea>
 					</Grid>
 				</div>
+
+				<Section setTheme="bgColor" nextTheme="bgColor">
+					<Grid small="1 [12] 1">
+						<h4 style={{ textAlign: 'center' }}><span style={{ textTransform: 'lowercase', fontStyle: 'italic' }}>more</span> Reni</h4>
+					</Grid>
+				</Section>
+				<Section prevTheme="bgColor" setTheme="bgColor">
+					<Grid
+						small="1 [6] [6] 1"
+						medium="1 [3] [3] [3] [3] 1"
+						colGap={['3.6vw', '24px', '30px']}
+						rowGap={['50px', '70px', '80px']}
+					>
+						<div>
+							<ProductThumb product={currentProduct} variant={currentVariant}/>
+						</div>
+						<div>
+							<ProductThumb product={currentProduct} variant={currentVariant}/>
+						</div>
+						<div>
+							<ProductThumb product={currentProduct} variant={currentVariant}/>
+						</div>
+						<div>
+							<ProductThumb product={currentProduct} variant={currentVariant}/>
+						</div>
+					</Grid>
+				</Section>
 			</Fragment>
 		);
 	}

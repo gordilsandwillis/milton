@@ -30,7 +30,7 @@ const Wrapper = styled.header`
 	left: 0;
 	right: 0;
 	z-index: 4;
-	transition: background ${ animations.mediumSpeed } ease-in-out;
+	transition: background ${ animations.mediumSpeed } ease-in-out, box-shadow ${ animations.mediumSpeed } ease-in-out;
 	svg {
 		* {
 			fill: currentcolor;

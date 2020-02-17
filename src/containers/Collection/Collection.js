@@ -99,10 +99,10 @@ class Collection extends Component {
 									rowGap={['50px', '70px', '80px']}
 								>
 									{collectionProducts.map((product, index) => {
-										product = product
+										console.log(product)
 										return (
 											product.variants.map((variant, index) => (
-												<ProductThumb product={product} />
+												<ProductThumb product={product} variant={variant} />
 											))
 										)
 									}

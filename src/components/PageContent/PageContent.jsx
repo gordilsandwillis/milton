@@ -72,7 +72,6 @@ class PageContent extends Component {
     // Set products
     client.product.fetchAll().then((products) => {
       this.props.shopifyContext.updateState('shopifyProducts', products)
-      console.log(products)
     });
      
   }
@@ -90,7 +89,7 @@ class PageContent extends Component {
             <Route exact path="/" render={(props) => (<Home {...props} />)} />
             <Route exact path="/collections" render={(props) => (<Collections {...props} />)} />
             <Route exact path="/collections/:id" component={(props) => (<Collection {...props} />)} />
-            <Route exact path="/product/:id" component={(props) => (<Product {...props} />)} />
+            <Route exact path="/product/:product/:variant" component={(props) => (<Product {...props} />)} />
             <Route exact path="/about" render={(props) => (<About {...props} />)} />
             <Route exact path="/contact" render={(props) => (<Contact {...props} />)} />
           </Switch>

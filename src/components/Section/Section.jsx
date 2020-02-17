@@ -9,16 +9,16 @@ const SectionWrapper = styled(ThemeSelector)`
 	${ ({ padded, prevTheme, nextTheme, setTheme }) => padded !== false && `
 		${ padded !== 'bottom' && `
 			${ setTheme === prevTheme ? `
-				${ util.responsiveStyles('padding-top', 120, 75, 65, 50) }
+				${ util.responsiveStyles('padding-top', 90, 75, 65, 50) }
 			` : `
-				${ util.responsiveStyles('padding-top', 240, 150, 130, 100) }
+				${ util.responsiveStyles('padding-top', 180, 150, 130, 100) }
 			` }
 		` }
 		${ padded !== 'top' && `
 			${ setTheme === nextTheme ? `
-				${ util.responsiveStyles('padding-bottom', 120, 75, 65, 50) }
+				${ util.responsiveStyles('padding-bottom', 90, 75, 65, 50) }
 			` : `
-				${ util.responsiveStyles('padding-bottom', 240, 150, 130, 100) }
+				${ util.responsiveStyles('padding-bottom', 180, 150, 130, 100) }
 			` }
 		` }
 	` }
