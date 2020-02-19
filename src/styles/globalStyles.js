@@ -18,6 +18,7 @@ export default `
   ${ fonts.DomaineSansBoldFont }
   ${ fonts.DomaineSansLightFont }
   ${ fonts.DomaineNarrowFont }
+  ${ fonts.DomaineSansItalicFont }
 
   * {
     box-sizing: border-box;

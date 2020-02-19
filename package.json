@@ -29,6 +29,7 @@
     "react-scripts": "3.3.0",
     "react-scroll-percentage": "^4.2.0",
     "react-sizes": "^2.0.0",
+    "react-slick": "^0.25.2",
     "react-svg-loader": "^3.0.3",
     "shopify-buy": "^2.9.0"
   },

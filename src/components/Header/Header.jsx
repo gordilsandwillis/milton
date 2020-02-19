@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom';
+import { rgba } from 'polished'
 import styled from '@emotion/styled'
 import Link from 'src/components/Link'
 import Logo from 'src/components/Logo'
@@ -39,7 +40,7 @@ const Wrapper = styled.header`
 	${ ({ scrolled, hasAtf }) => scrolled ? `
 		background: ${ colors.white };
 		color: ${ colors.textColor };
-		box-shadow: 0 2px 0px ${ colors.bgColor };
+		box-shadow: 0 2px 0px ${ rgba(colors.lightGrey, .5) };
 	` : `
 		background: transparent;
 		${ !hasAtf ? `
@@ -76,15 +77,15 @@ const LogoCol = styled.div`
 		max-width: 100%;
 	}
 	svg {
-		max-width: 100%;
 		height: auto;
 		display: inline-block;
 		vertical-align: top;
-		transition: color ${ animations.mediumSpeed } ease-in-out, width ${ animations.mediumSpeed } ease-in-out;
+		transition: color ${ animations.mediumSpeed } ease-in-out, max-width ${ animations.mediumSpeed } ease-in-out;
 		${ ({ scrolled, hasAtf }) => scrolled ? `
 			color: ${ colors.textColor };
-			width: 160px;
+			${ util.responsiveStyles('max-width', 160, 140, 120, 100) }
 		` : `
+			${ util.responsiveStyles('max-width', 230, 190, 150, 130) }
 			${ !hasAtf ? `
 				color: ${ colors.textColor };
 			` : `
@@ -174,7 +175,7 @@ class Header extends Component {
 				<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
 					<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
 						<HeaderContent
-							small="1 [4] [4] [4] 1"
+							small="1 [3] [6] [3] 1"
 							medium="1 [9] [8] [9] 1"
 							vAlign="center"
 						>

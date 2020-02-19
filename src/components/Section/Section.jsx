@@ -6,21 +6,21 @@ import { util } from 'src/styles'
 const SectionWrapper = styled(ThemeSelector)`
 	position: relative;
 	z-index: ${ ({ zIndex }) => zIndex };
-	${ ({ padded, prevTheme, nextTheme, setTheme }) => padded !== false && `
-		${ padded !== 'bottom' && `
+	${ ({ spacing, prevTheme, nextTheme, setTheme }) => spacing !== 'noPadding' && `
+		${ spacing === 'paddedTop' || spacing === 'padded' ? `
 			${ setTheme === prevTheme ? `
-				${ util.responsiveStyles('padding-top', 90, 75, 65, 50) }
+				${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
 			` : `
-				${ util.responsiveStyles('padding-top', 180, 150, 130, 100) }
+				${ util.responsiveStyles('padding-top', 182, 102, 66, 52) }
 			` }
-		` }
-		${ padded !== 'top' && `
+		` : `` }
+		${ spacing === 'paddedBottom' || spacing === 'padded' ? `
 			${ setTheme === nextTheme ? `
-				${ util.responsiveStyles('padding-bottom', 90, 75, 65, 50) }
+				${ util.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
 			` : `
-				${ util.responsiveStyles('padding-bottom', 180, 150, 130, 100) }
+				${ util.responsiveStyles('padding-bottom', 182, 102, 66, 52) }
 			` }
-		` }
+		` : `` }
 	` }
 `
 
@@ -32,7 +32,7 @@ const Section = ({
 	zIndex,
 	buttons,
 	sectionid,
-	padded
+	spacing
 }) => {
 
 	return (
@@ -41,7 +41,7 @@ const Section = ({
 			prevTheme={prevTheme}
 			nextTheme={nextTheme}
 			zIndex={zIndex}
-			padded={padded}
+			spacing={spacing}
 		>
 			{children}
 		</SectionWrapper>
@@ -52,7 +52,8 @@ Section.defaultProps = {
 	setTheme: 'bgColor',
 	prevTheme: false,
 	nextTheme: false,
-	zIndex: 1
+	zIndex: 1,
+	spacing: 'padded'
 }
 
 export default Section

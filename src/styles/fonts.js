@@ -7,6 +7,9 @@ import DomaineSansWoff2 from '../assets/fonts/domaine/DomaineSansText-Regular.wo
 import DomaineSansMediumWoff from '../assets/fonts/domaine/DomaineSansText-Medium.woff'
 import DomaineSansMediumWoff2 from '../assets/fonts/domaine/DomaineSansText-Medium.woff2'
 
+import DomaineSansItalicWoff from '../assets/fonts/domaine/DomaineSans-Italic.woff'
+import DomaineSansItalicWoff2 from '../assets/fonts/domaine/DomaineSans-Italic.woff2'
+
 import DomaineSansBoldWoff from '../assets/fonts/domaine/DomaineSansText-Bold.woff'
 import DomaineSansBoldWoff2 from '../assets/fonts/domaine/DomaineSansText-Bold.woff2'
 
@@ -31,6 +34,7 @@ export const MaterialIconsFont = fontFace(MaterialIcons, MaterialIconsWoff, Mate
 export const DomaineSans = 'Domaine Sans'
 export const DomaineSansFont = fontFace(DomaineSans, DomaineSansWoff, DomaineSansWoff2)
 export const DomaineSansMediumFont = fontFace(DomaineSans, DomaineSansMediumWoff, DomaineSansMediumWoff2, 600)
+export const DomaineSansItalicFont = fontFace(DomaineSans, DomaineSansItalicWoff, DomaineSansItalicWoff2, 'normal', 'italic')
 export const DomaineSansBoldFont = fontFace(DomaineSans, DomaineSansBoldWoff, DomaineSansBoldWoff2, 700)
 export const DomaineSansLightFont = fontFace(DomaineSans, DomaineSansLightWoff, DomaineSansLightWoff2, 300)
 

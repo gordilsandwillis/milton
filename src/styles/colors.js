@@ -6,7 +6,7 @@ export const white = '#fff'
 // Site Specific Colors
 export const yellow = '#EBCF55'
 export const red = '#E15D54'
-export const green = '#00C771'
+export const green = '#646C43'
 export const offWhite = '#F4F3EE'
 export const starryNight = '#100B08'
 

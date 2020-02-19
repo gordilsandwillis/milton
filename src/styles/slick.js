@@ -71,6 +71,7 @@ export const slick = `
       outline: none;
       > * {
         outline: none;
+        vertical-align: top;
       }
     }
     img {

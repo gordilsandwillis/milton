@@ -56,18 +56,24 @@ class Collection extends Component {
 					<Header hasAtf={hasAtf}/>
 					
 					{hasAtf ? (
-						<ATF
-							index={0}
-							headline={collection.title}
-							headlineSize="h2"
-							text={collection.description}
-							overlay={.3}
-							image={{
-								fluid: {
-									src: collection.image.src
-								}
-							}}
-						/>
+						<div>
+							<ATF
+								index={0}
+								image={{
+									fluid: {
+										src: collection.image.src
+									}
+								}}
+							/>
+							<CalloutText
+								nextTheme="bgColor"
+								theme="bgColor"
+								alignment="center"
+								headline={collection.title}
+								text={collection.description}
+								headlineSize="h2"
+							/>
+						</div>
 					) : (
 						<CalloutText
 							prevTheme="bgColor"
@@ -99,7 +105,6 @@ class Collection extends Component {
 									rowGap={['50px', '70px', '80px']}
 								>
 									{collectionProducts.map((product, index) => {
-										console.log(product)
 										return (
 											product.variants.map((variant, index) => (
 												<ProductThumb product={product} variant={variant} />

@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 	display: inline-block;
 	display: block;
 	vertical-align: top;
+	text-align: ${ ({ alignment }) => alignment };
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;
 		margin-right: auto;
@@ -25,7 +26,7 @@ const Wrapper = styled.div`
 	}
 `
 const TextContainer = styled(ScrollEntrance)`
-	text-align: ${ ({ alignment }) => alignment };
+	text-align: inherit;
 	width: 100%;
 	${ util.responsiveStyles('max-width', 1200, 900, 750, 600) }
 	${ ({ alignment }) => alignment === 'center' && `
@@ -90,7 +91,7 @@ const Text = styled.div`
 
 const ButtonActions = styled.div`
 	margin-top: 30px;
-	text-align: ${ ({ alignment }) => alignment };
+	text-align: inherit;
 	a, button {
 		margin-bottom: 20px;
 		${ ({ buttons }) => buttons.length > 1 && `

@@ -293,7 +293,7 @@ ATF.defaultProps = {
 	textAlignment: 'center',
 	hAlignment: 'center',
 	vAlignment: 'center',
-	showArrow: true,
+	showArrow: false,
 	headlineSize: 'h1',
 	textSize: 'body',
 	theme: 'black',

@@ -36,7 +36,7 @@ const FooterLogoIcon = styled(LogoMark)`
 class Footer extends Component {
 	render () {
 		return (
-			<Wrapper setTheme="red">
+			<Wrapper setTheme="green">
 				<Grid small="1 [12] 1">
 					<div>
 						<FooterLogoIcon />

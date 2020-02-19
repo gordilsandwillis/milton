@@ -25,9 +25,9 @@ const ThumbnailImage = styled(Image)`
 `
 
 const ProductThumb = ({ product, variant, className }) => {
-	if (!product.images) {
-		return false
-	}
+	// if (!product.images) {
+	// 	return false
+	// }
 
 	return (
 	  <Wrapper className={className} to={'/product/' + product.handle + '/' + variant.id}>

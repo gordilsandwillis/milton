@@ -49,7 +49,8 @@ const CalloutText = ({
 }
 
 CalloutText.defaultProps = {
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	alignment: 'center'
 }
 
 export default CalloutText

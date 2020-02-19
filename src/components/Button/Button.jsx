@@ -98,15 +98,15 @@ const ButtonStyles = (state, shape, size, theme) => (`
 		padding-left: calc(${ buttonSizes[size] } * .4);
 		padding-right: calc(${ buttonSizes[size] } * .4);
 		height: ${ buttonSizes[size] };
-		min-width: calc(${ buttonSizes[size] } * 2);
+		min-width: calc(${ buttonSizes[size] } * 2.5);
 	` : `
-		min-width: calc(${ buttonSizes.medium } * 2);
+		min-width: calc(${ buttonSizes.medium } * 2.5);
 	` }
 
 	${ setButtonTheme(theme) }
 	${ state === 'disabled' ? `${ DisabledButtonStyles() }` : `` }
 
-	${ shape && `
+	${ shape ? `
 		${ shape.includes('circle') || shape.includes('square') ? `
 			padding-top: 0;
 			padding-bottom: 0;
@@ -120,7 +120,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 				min-width: ${ buttonSizes.medium };
 			` }
 		` : `` }
-	` }
+	` : `` }
 
 	${ shape && shape.includes('circle') ? `border-radius: 50%;` : `` }
 
@@ -131,6 +131,7 @@ const ButtonContent = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+	width: 100%;
 	svg {
 		* {
 			fill: currentcolor;
