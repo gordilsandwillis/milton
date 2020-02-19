@@ -11,7 +11,7 @@ import PlaceholderAtfImage from 'src/assets/images/placeholder-atf.jpg'
 import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import ProductThumb from 'src/components/ProductThumb'
-
+import Furnishings from 'src/components/Furnishings';
 // import { Helmet } from "react-helmet";
 
 class Collection extends Component {
@@ -27,8 +27,6 @@ class Collection extends Component {
 		let filteredCollections = collections.filter( i => collectionHandle.includes( i.handle ) )
 		let collection = filteredCollections[0]
 		let collectionProducts = collection.products
-
-		console.log(collectionProducts)
 
 		const hasAtf = collection.image && collection.image.src
 
@@ -54,7 +52,7 @@ class Collection extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header hasAtf={hasAtf}/>
-					
+
 					{hasAtf ? (
 						<div>
 							<ATF
@@ -85,7 +83,7 @@ class Collection extends Component {
 							headlineSize="h2"
 						/>
 					)}
-					
+
 					<Section
 						prevTheme="bgColor"
 						setTheme="bgColor"
@@ -126,6 +124,7 @@ class Collection extends Component {
 						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
 					/>
 				</div>
+				<Furnishings />
 			</Fragment>
 		);
 	}
