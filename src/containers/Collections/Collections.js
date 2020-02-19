@@ -3,7 +3,7 @@ import Header from 'src/components/Header'
 import CalloutText from 'src/components/CalloutText'
 import { LogoMark } from 'src/components/Logo'
 import CollectionSections from 'src/components/CollectionSections'
-
+import Furnishings from 'src/components/Furnishings'
 // import { Helmet } from "react-helmet";
 
 class Collections extends Component {
@@ -31,6 +31,7 @@ class Collections extends Component {
 				<div>
 					<Header/>
 					<CollectionSections/>
+					<Furnishings />
 					<CalloutText
 						prevTheme="bgColor"
 						nextTheme={false}

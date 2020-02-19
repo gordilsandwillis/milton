@@ -1,16 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import Header from 'src/components/Header'
-import ATF from 'src/components/ATF'
-import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
-import { LogoMark } from 'src/components/Logo'
 import ThumbnailReni from 'src/assets/images/collection-reni.png'
 import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
-import PlaceholderAtfImage from 'src/assets/images/placeholder-atf.jpg'
-import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
-
-// import { Helmet } from "react-helmet";
 
 const Thumbnails = {
 	Reni: ThumbnailReni,
