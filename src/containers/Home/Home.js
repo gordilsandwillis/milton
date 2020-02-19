@@ -9,14 +9,14 @@ import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
 import PlaceholderAtfImage from 'src/assets/images/Ethridge-2002100165.jpg'
 import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
 import CollectionSections from 'src/components/CollectionSections'
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 
 class Home extends Component {
 
 	render() {
 		return (
 			<Fragment>
-				<Helmet>
+				{/*<Helmet>
 	        <meta charSet="utf-8" />
 	        <title>{PageTitle + ' | ' + Tagline}</title>
 	        <meta property="og:locale" content="en_US" />
@@ -33,7 +33,7 @@ class Home extends Component {
 			    <meta name="twitter:description" content={PageDescription} />
 			    <meta name="twitter:title" content={PageTitle + ' | ' + Tagline} />
 			    <meta name="twitter:image" content={shareImage} />
-		    </Helmet>
+		    </Helmet>*/}
 				<div>
 					<Header hasAtf={true} />
 					<ATF
