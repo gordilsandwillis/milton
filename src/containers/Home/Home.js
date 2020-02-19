@@ -9,7 +9,7 @@ import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
 import PlaceholderAtfImage from 'src/assets/images/Ethridge-2002100165.jpg'
 import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
 import CollectionSections from 'src/components/CollectionSections'
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 
 class Home extends Component {
 
