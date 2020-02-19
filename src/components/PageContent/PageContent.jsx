@@ -36,28 +36,26 @@ class PageContent extends Component {
         product.add('description')
         product.add('descriptionHtml')
         product.add('vendor')
-        // product.add('images')
         product.addConnection('images', {args: {first: 10}}, (image) => {
           image.add('id')
-          // image.add('src')
-          // image.add('altText')
+          image.add('src')
+          image.add('altText')
         })
         product.addConnection('variants', {args: {first: 10}}, (variant) => {
           variant.add('id')
           variant.add('title')
-          // variant.add('image')
           variant.addConnection('metafields', {args: {first: 10}}, (metafield) => {
-            metafield.add('key')
-            metafield.add('value')
+            metafield.add('namespace')
           })
         })
       });
     });
 
     client.graphQLClient.send(productsQuery).then(({model, data}) => {
-      console.log(model.products);
-      // this.props.shopifyContext.updateState('shopifyProducts', model.products)
+      // Magic Eye Admiral White has metafeilds filled out
+      console.log(model.products[6].variants[1]);
     });
+    // End products query
     
     // Set collections
     client.collection.fetchAllWithProducts().then((collections) => {
@@ -67,7 +65,6 @@ class PageContent extends Component {
     // Set products
     client.product.fetchAll().then((products) => {
       this.props.shopifyContext.updateState('shopifyProducts', products)
-      console.log(products)
     });
      
   }
