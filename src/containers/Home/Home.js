@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
+// import { Helmet } from "react-helmet";
+
+import { LogoMark } from 'src/components/Logo'
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
-import { LogoMark } from 'src/components/Logo'
-import PlaceholderAtfImage from 'src/assets/images/Ethridge-2002100165.jpg'
-import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
 import CollectionSections from 'src/components/CollectionSections'
-// import { Helmet } from "react-helmet";
+import Newsletter from 'src/components/Newsletter'
+
+import PlaceholderAtfImage from 'src/assets/images/Ethridge-2002100165.jpg'
 
 class Home extends Component {
 
@@ -39,7 +41,9 @@ class Home extends Component {
 						image={{
 							fluid: {
 								aspectRatio: 2,
-								src: PlaceholderAtfImage
+								src: PlaceholderAtfImage,
+								srcSet:'',
+								sizes: ''
 							}
 						}}
 						nextTheme="bgColor"
@@ -56,14 +60,7 @@ class Home extends Component {
 						icon={<LogoMark/>}
 					/>
 					<CollectionSections/>
-					<ATF
-						image={{
-							fluid: {
-								aspectRatio: 2,
-								src: PlaceholderNewsletterImage
-							}
-						}}
-					/>
+					<Newsletter/>
 				</div>
 			</Fragment>
 		);

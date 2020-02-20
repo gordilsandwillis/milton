@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from 'react';
+// import { Helmet } from "react-helmet";
 
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
+import Newsletter from 'src/components/Newsletter'
 
-import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
+import PlaceholderAboutImage from 'src/assets/images/Ethridge-2002100163.jpg'
+import PlaceholderDesignerImage from 'src/assets/images/about-designer.png'
+import PlaceholderEthosImage from 'src/assets/images/about-ethos.png'
 
-// import { Helmet } from "react-helmet";
-
-const designerText = `
+const loremIpsum = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse.
 `
@@ -51,7 +53,9 @@ class About extends Component {
 						image={{
 							fluid: {
 								aspectRatio: 2,
-								src: PlaceholderNewsletterImage
+								src: PlaceholderAboutImage,
+								srcSet: '',
+								sizes: ''
 							}
 						}}
 					/>
@@ -64,10 +68,55 @@ class About extends Component {
 						headline="Vera Neykov"
 						headlineSize="h3"
 						alignment="left"
-						text={designerText}
-						image={null}
+						text={loremIpsum}
+						image={{
+							fluid: {
+								aspectRatio: 619/786,
+								src: PlaceholderDesignerImage,
+								srcSet: '',
+								sizes: ''
+							}
+						}}
 						imagePosition="left"
 					/>
+					<FiftyFifty
+						key="ethos"
+						prevTheme="bgColor"
+						nextTheme="white"
+						theme="bgColor"
+						eyebrow="Ethos"
+						headline="Whenever creating a new pattern we always look to the great artists of the past."
+						headlineSize="h3"
+						alignment="left"
+						image={{
+							fluid: {
+								aspectRatio: 1,
+								src: PlaceholderEthosImage,
+								srcSet: '',
+								sizes: ''
+							}
+						}}
+						text={loremIpsum}
+						imagePosition="hangRight"
+					/>
+					<CalloutText
+						prevTheme={false}
+						nextTheme="bgColor"
+						theme="white"
+						alignment="center"
+						eyebrow="Get In Touch"
+						headline="Contact us for inquiries or collaborations."
+						headlineSize="h3"
+						buttons={[
+							{
+								linkType: 'button',
+								label: 'Contact',
+								to: '#',
+								size: 'large'
+							}
+						]}
+					/>
+					<Newsletter />
 				</div>
 			</Fragment>
 		);

@@ -1,34 +1,36 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Global, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import globalStyles from 'src/styles/globalStyles'
 import PageContent from 'src/components/PageContent'
 import ShopifyProvider from 'src/contexts/ShopifyContext'
-
+import ModalProvider from 'src/contexts/ModalContext'
 import './reset.css'
 
 const PageWrapper = styled.div`
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
 `
 
 const Routes = ({ match, location }) => {
-  return (
-    <ShopifyProvider>
-      <Fragment>
-        <Global
-          styles={css`${ globalStyles }`}
-        />
-        <PageWrapper>
-          <Router>
-            <PageContent/>
-          </Router>
-        </PageWrapper>
-      </Fragment>
-    </ShopifyProvider>
-  )
+	return (
+		<ShopifyProvider>
+			<ModalProvider>
+				<Fragment>
+					<Global
+						styles={css`${ globalStyles }`}
+					/>
+					<PageWrapper>
+						<Router>
+							<PageContent/>
+						</Router>
+					</PageWrapper>
+				</Fragment>
+			</ModalProvider>
+		</ShopifyProvider>
+	)
 }
 
 export default Routes;

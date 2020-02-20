@@ -39,14 +39,14 @@ const LinkStyles = (type, setTheme) => `
 `
 
 const StyledLinkElement = styled.a`
-	${ ({ type, setTheme }) => `
-		${ LinkStyles(type, setTheme) }
+	${ ({ type, theme }) => `
+		${ LinkStyles(type, theme) }
 	` }
 `
 
 const StyledLink = styled(RouterLink)`
-	${ ({ type, setTheme }) => `
-		${ LinkStyles(type, setTheme) }
+	${ ({ type, theme }) => `
+		${ LinkStyles(type, theme) }
 	` }
 `
 
@@ -59,7 +59,7 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, type, setTheme } = this.props
+		const { to, external, target = '_blank', children, className, type, setTheme } = this.props
 
 		if (external) {
 			return (
@@ -67,8 +67,8 @@ class Link extends Component {
 					className={className}
 					href={to}
 					type={type}
-					setTheme={setTheme}
-					target="_blank"
+					theme={setTheme}
+					target={target}
 					rel="noopener noreferrer"
 				>
 					{children}
@@ -83,7 +83,7 @@ class Link extends Component {
 					className={className}
 					to={to}
 					type={type}
-					setTheme={setTheme}
+					theme={setTheme}
 				>
 					{children}
 					{type === 'arrowLink' && (

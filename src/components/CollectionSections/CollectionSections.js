@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import FiftyFifty from 'src/components/FiftyFifty'
 import ThumbnailReni from 'src/assets/images/collection-reni.png'
 import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
@@ -38,13 +38,17 @@ class CollectionSections extends Component {
 						image={{
 							fluid: {
 								aspectRatio: 1.158,
-								src: Thumbnails[collection.title]
+								src: Thumbnails[collection.title],
+								srcSet:'',
+								sizes: ''
+
 							}
 						}}
 						imagePosition={index % 2 ? 'left' : 'right'}
 					/>
 				)
 			}
+			return null;
 		})
 
 	}

@@ -203,12 +203,9 @@ class ATF extends Component {
 			index,
 			theme,
 			nextTheme,
-			overlay
+			overlay,
+			children
 		} = this.props
-
-		const {
-			videoFailed
-		} = this.state
 
 		const vAlignOptions = {
 			bottom: 'flex-end',
@@ -240,7 +237,7 @@ class ATF extends Component {
 							/>
 						</VideoContainer>
 					</ConditionalRender>
-					{!video && image || small ? (
+					{(!video && image) || small ? (
 						<BgImage
 							image={image}
 							small={small}
@@ -271,6 +268,9 @@ class ATF extends Component {
 										textSize={textSize}
 										buttons={buttons}
 									/>
+									<ConditionalRender condition={children}>
+										{children || ''}
+									</ConditionalRender>
 								</ScrollEntrance>
 							</Grid>
 						</Content>

@@ -1,5 +1,4 @@
 import * as typography from './typography'
-import * as mediaQueries from './mediaQueries'
 import * as colors from './colors'
 import * as animations from './animations'
 import * as util from './util'
@@ -195,7 +194,7 @@ export default `
     background: ${ rgba(colors.lightGrey, 0.9) };
     color: ${ colors.textColor };
   }
-  
+
   ${ slick }
 
 `

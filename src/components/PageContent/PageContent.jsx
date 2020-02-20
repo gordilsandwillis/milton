@@ -1,18 +1,21 @@
-import React, { Fragment, Component } from 'react'
+import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { Route, Switch, withRouter } from 'react-router-dom';
-import PageTransition from 'src/components/PageTransition'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
-import Footer from 'src/components/Footer'
-
-import Home from 'src/containers/Home';
-import Collections from 'src/containers/Collections';
-import Collection from 'src/containers/Collection';
-import About from 'src/containers/About';
-import Contact from 'src/containers/Contact';
-import Product from 'src/containers/Product';
-
+import { shopifyClient as client, collectionsQuery, productsQuery } from 'src/services/shopify'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
+
+
+import Home from 'src/containers/Home'
+import Collections from 'src/containers/Collections'
+import Collection from 'src/containers/Collection'
+import About from 'src/containers/About'
+import Contact from 'src/containers/Contact'
+import Product from 'src/containers/Product'
+
+import PageTransition from 'src/components/PageTransition'
+import Footer from 'src/components/Footer'
+import InquireModal from 'src/components/InquireModal'
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -21,52 +24,27 @@ const Wrapper = styled.div`
 `
 
 class PageContent extends Component {
-  componentWillMount () {
-    let productList = false
+  componentDidMount () {
 
-    const client = this.props.shopifyContext.shopifyClient
-
-    // Build products query
-    const productsQuery = client.graphQLClient.query((root) => {
-      root.addConnection('products', {args: {first: 50}}, (product) => {
-        product.add('id')
-        product.add('title')
-        product.add('handle')
-        product.add('productType')
-        product.add('description')
-        product.add('descriptionHtml')
-        product.add('vendor')
-        product.addConnection('images', {args: {first: 10}}, (image) => {
-          image.add('id')
-          image.add('src')
-          image.add('altText')
-        })
-        product.addConnection('variants', {args: {first: 10}}, (variant) => {
-          variant.add('id')
-          variant.add('title')
-          variant.addConnection('metafields', {args: {first: 10}}, (metafield) => {
-            metafield.add('namespace')
-          })
-        })
-      });
-    });
-
-    client.graphQLClient.send(productsQuery).then(({model, data}) => {
-      // Magic Eye Admiral White has metafeilds filled out
-      console.log(model.products[6].variants[1]);
-    });
-    // End products query
-    
     // Set collections
-    client.collection.fetchAllWithProducts().then((collections) => {
-      this.props.shopifyContext.updateState('shopifyCollections', collections)
+    client.graphQLClient.send(collectionsQuery).then(({model, data}) => {
+      this.props.shopifyContext.updateState('shopifyCollections', model.collections)
     });
-    
+
     // Set products
-    client.product.fetchAll().then((products) => {
-      this.props.shopifyContext.updateState('shopifyProducts', products)
+    client.graphQLClient.send(productsQuery).then(({model, data}) => {
+      this.props.shopifyContext.updateState('shopifyProducts', model.products)
     });
-     
+
+    // Old queries for testing
+    // client.collection.fetchAllWithProducts().then((collections) => {
+    //   console.log('collections:',collections)
+    // });
+
+    // client.product.fetchAll().then((products) => {
+    //   console.log('products:', products)
+    // });
+
   }
 
   render () {
@@ -87,6 +65,7 @@ class PageContent extends Component {
             <Route exact path="/contact" render={(props) => (<Contact {...props} />)} />
           </Switch>
           <Footer/>
+          <InquireModal/>
         </PageTransition>
       </Wrapper>
     )

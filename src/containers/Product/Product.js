@@ -1,21 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import styled from '@emotion/styled'
+
+import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import { withModalContext } from 'src/contexts/ModalContext'
+
 import Header from 'src/components/Header'
-import ATF from 'src/components/ATF'
-import CalloutText from 'src/components/CalloutText'
 import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
 import Section from 'src/components/Section'
-import Button from 'src/components/Button'
-import Link from 'src/components/Link'
 import Image from 'src/components/GatsbyImage'
-import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import ProductThumb from 'src/components/ProductThumb'
-import { colors, util, mq, animations } from 'src/styles'
 import Slideshow from 'src/components/Slideshow'
-import Collapse from 'src/components/Collapse'
+import Button from 'src/components/Button'
+import ProductSpecifications from 'src/components/ProductSpecifications'
 
+import { colors, util, mq } from 'src/styles'
 // import { Helmet } from "react-helmet";
 
 const ImgArea = styled.div`
@@ -39,54 +38,6 @@ const ProductImage = styled(Image)`
 	background: ${ colors.bgColor };
 	img {
 		object-fit: contain;
-	}
-`
-
-const VariantLink = styled(Link)`
-	width: 100px;
-	${ util.responsiveStyles('width', 60, 50, 40, 40) }
-	display: block;
-	background: ${ colors.lightGrey };
-	position: relative;
-	cursor: pointer;
-	&:after {
-		content: '';
-		display: block;
-		position: absolute;
-		top: -4px;
-		left: -4px;
-		right: -4px;
-		bottom: -4px;
-		border: 1px solid ${ colors.textColor };
-		opacity: 0;
-		transition: opacity ${ animations.mediumSpeed } ease-in-out;
-	}
-	&:hover {
-		&:after {
-			${ ({ active }) => !active ? `
-				opacity: .3;
-			` : `` }
-		}
-	}
-	${ ({ active }) => active ? `
-		pointer-events: none;
-		&:after {
-			opacity: 1;
-		}
-	` : `` }
-`
-
-const VariantLinks = styled.div`
-	display: flex;
-	margin-top: 30px;
-	a {
-		margin-left: 20px;
-		&:first-child {
-			margin-left: 0;
-		}
-	}
-	${ mq.largeAndBelow } {
-		justify-content: center;
 	}
 `
 
@@ -147,72 +98,59 @@ class Product extends Component {
 		moreProducts: []
 	}
 
+	handleInquireClick = (event) => {
+		console.log(this.props)
+		const { currentProduct, currentVariant, currentCollection } = this.state
+		const { modalContext } = this.props
+		modalContext.toggleModal({currentProduct, currentVariant, currentCollection})
+	}
+
 	componentDidMount () {
-		const productHandle = this.props.match.params.product
-		const variantId = this.props.match.params.variant
+		const { match, shopifyContext } = this.props
+		const { shopifyProducts: products, shopifyCollections: collections } = shopifyContext
 
-		let currentProduct = false
-		let currentVariant = false
-		let currentCollection = false
-		let variantImages = []
-		let collectionProducts = []
-
-		if (this.props.shopifyContext.shopifyProducts) {
-			let products = this.props.shopifyContext.shopifyProducts
-			let collections = this.props.shopifyContext.shopifyCollections
-			currentProduct = products.filter( i => productHandle.includes( i.handle ) )[0]
-			currentVariant = currentProduct.variants.filter( i => variantId.includes( i.id ) )[0]
-			variantImages = currentProduct.images.filter( i => currentVariant.title.includes( i.altText ) )
-			
-			console.log(currentProduct)
-
-			collections.forEach(collection => {
-				// console.log(collection)
-				collection.products.forEach(product => {
-					if (currentProduct.id.includes( product.id )) {
-						currentCollection = collection
-					}
-				})
-			})
-
-			// Get other products in collection
-			currentCollection.products.forEach(product => {
-				product.variants.forEach(variant => {
-					variant.product = product
-					collectionProducts.push(variant)
-				})
-			})
-
-			const moreProducts = collectionProducts.sort(function (a, b) { return 0.5 - Math.random() }).slice(0, 4)
-
-			this.setState({
-				loading: false,
-				currentProduct: currentProduct,
-				currentVariant: currentVariant,
-				currentCollection: currentCollection,
-				variantImages: variantImages,
-				moreProducts: moreProducts
-			})
+		if (!products || !collections) {
+			return null;
 		}
 
+		const productHandle = match.params.product
+		const variantId = match.params.variant
+
+		const currentProduct = products.find(product => product.handle === productHandle)
+		const currentVariant = currentProduct.variants.find(variant => variant.id === variantId)
+		const currentCollection = collections.find( (({ products }) => products.some( product => product.id === currentProduct.id)))
+		const variantImages = currentProduct.images.filter( i => currentVariant.title.includes( i.altText ) )
+		const collectionProducts = currentCollection.products.filter( product => product.id !== currentProduct.id )
+		const moreProducts = collectionProducts.sort(function (a, b) { return 0.5 - Math.random() }).slice(0, 4)
+
+		const productSpecifications = currentProduct.metafields.filter( ({namespace}) => namespace === 'specifications')
+
+
+		this.setState({
+			loading: false,
+			currentProduct,
+			currentVariant,
+			currentCollection,
+			variantImages,
+			moreProducts,
+			productSpecifications
+		})
 	}
 
 	render() {
 		const {
 			loading,
-			filteredProducts,
 			currentProduct,
 			currentVariant,
 			currentCollection,
 			variantImages,
-			moreProducts
+			moreProducts,
+			productSpecifications
 		} = this.state
 
 		if (loading) {
 			return false
 		}
-
-		console.log(currentProduct)
 
 		return (
 			<Fragment>
@@ -241,14 +179,20 @@ class Product extends Component {
 							<ProductSlideshow fade={true}>
 								{variantImages.map((image, index) => {
 									return (
-										<Grid small="1 [12] 1" medium="2 [10] 2" key={currentVariant.id + '-image-' + index}>
+										<Grid
+											small="1 [12] 1"
+											medium="2 [10] 2"
+											key={currentVariant.id + '-image-' + index}
+										>
 											<ProductImage
 												image={{
 													fluid: {
 														aspectRatio: 1,
-														src: image.src
+														src: image.src,
+														srcSet: '',
+														sizes: ''
 													}
-												}} 
+												}}
 												alt={currentProduct.title | currentVariant.title}
 											/>
 										</Grid>
@@ -266,34 +210,21 @@ class Product extends Component {
 										text={currentProduct.descriptionHtml}
 										textSize="body"
 										alignment="left"
-										additions={<div style={{ marginTop: '25px' }}>
-											<Collapse title="Specifications">Text</Collapse>
-											<Button size="large">Inquire</Button>
-											{currentProduct.variants.length > 1 && (
-												<VariantLinks>
-													{currentProduct.variants.map((variant, index) => {
-														let active = false
-														if (variant.id === currentVariant.id) {
-															active = true
-														}
-														return (
-															<VariantLink to={'/product/' + currentProduct.handle + '/' + variant.id} key={variant.id} active={active}>
-																<Image
-																	image={{
-																		fluid: {
-																			aspectRatio: 1,
-																			src: variant.image.src
-																		}
-																	}} 
-																	alt={currentProduct.title | variant.title}
-																/>
-															</VariantLink>
-														)
-													})}
-												</VariantLinks>
-											)}
-										</div>}
-									/>
+									>
+										<ProductSpecifications
+											keys={['width', 'care', 'content', 'performance']}
+											specifications={productSpecifications}
+											variants={currentProduct.variants}
+											currentProduct={currentProduct}
+											currentVariant={currentVariant}
+										/>
+										<Button
+											onClick={this.handleInquireClick}
+											size="large"
+										>
+										Inquire
+										</Button>
+									</ProductInfo>
 								</div>
 							</Grid>
 						</TextArea>
@@ -308,15 +239,33 @@ class Product extends Component {
 				<Section prevTheme="lightGrey" setTheme="lightGrey">
 					<Grid
 						small="1 [6] [6] 1"
-						medium="1 [3] [3] [3] [3] 1"
+						medium="2 [3] [3] [3] 2"
 						colGap={['3.6vw', '24px', '30px']}
 						rowGap={['50px', '70px', '80px']}
 					>
-						{moreProducts.map((variant) => (
-							<div>
-								<ProductThumb product={variant.product} variant={variant}/>
+						{moreProducts.map((product) => (
+							<div key={product.id}>
+								<ProductThumb product={product} variant={product.variants[0]}/>
 							</div>
 						))}
+					</Grid>
+				</Section>
+				<Section prevTheme="lightGrey" setTheme="lightGrey">
+					<Grid small="2 [10] 2" medium="3 [8] 3" large="1 [12] 1">
+						<TextLockup
+							buttons={[
+								{
+									linkType: 'button',
+									label: `${currentCollection.title} Collection`,
+									to: `/collections/${currentCollection.handle}`
+								},
+								{
+									linkType: 'button',
+									label: 'All Collections',
+									to: '/collections'
+								}
+							]}
+						/>
 					</Grid>
 				</Section>
 			</Fragment>
@@ -324,4 +273,4 @@ class Product extends Component {
 	}
 }
 
-export default withShopifyContext(Product);
+export default withShopifyContext(withModalContext(Product));

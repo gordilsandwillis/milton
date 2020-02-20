@@ -160,10 +160,9 @@ class Header extends Component {
 		const {
 			location,
 			hasAtf,
-			headerButtons,
 			placeholder
 		} = this.props
-		const { scrolled, drawerOpen } = this.state
+		const { scrolled } = this.state
 
 		let pathname = '/'
 		if (location) {
@@ -187,7 +186,7 @@ class Header extends Component {
 								</NavLinks>
 							</div>
 							<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
-								<Link to="/" style="none">
+								<Link to="/">
 									<Logo />
 								</Link>
 							</LogoCol>

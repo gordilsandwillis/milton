@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Header from 'src/components/Header'
-import ATF from 'src/components/ATF'
-import CalloutText from 'src/components/CalloutText'
-import FiftyFifty from 'src/components/FiftyFifty'
+// import ATF from 'src/components/ATF'
+// import CalloutText from 'src/components/CalloutText'
+// import FiftyFifty from 'src/components/FiftyFifty'
 
 // import { Helmet } from "react-helmet";
 
@@ -31,6 +31,7 @@ class Contact extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header hasAtf={false}/>
+
 					<h1>Contact Milton</h1>
 				</div>
 			</Fragment>

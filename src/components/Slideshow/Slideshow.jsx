@@ -3,20 +3,18 @@ import styled from '@emotion/styled'
 import Slider from 'react-slick'
 import { rgba, darken } from 'polished'
 
-import Section from 'src/components/Section'
-import Image from 'src/components/GatsbyImage'
 import Button from 'src/components/Button'
 
-import { colors, mediaQueries as mq, animations, util } from 'src/styles'
+import { colors, mediaQueries as mq, animations } from 'src/styles'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 
-const StyledSlider = styled(Slider)`
-* {transition: height ${ animations.mediumSpeed } ease-in-out;}
-	.slick-slide > div {
-		display: flex;
-		justify-content: center;
-	}
-`
+// const StyledSlider = styled(Slider)`
+// * {transition: height ${ animations.mediumSpeed } ease-in-out;}
+// 	.slick-slide > div {
+// 		display: flex;
+// 		justify-content: center;
+// 	}
+// `
 
 const SlideshowWrapper = styled.div`
 	max-width: 100%;
@@ -98,13 +96,6 @@ class Slideshow extends Component {
 
 	render () {
 		const {
-			headline,
-			text,
-			theme,
-			prevTheme,
-			nextTheme,
-			eyebrow,
-			buttons,
 			children,
 			className,
 			fade = false
@@ -133,7 +124,7 @@ class Slideshow extends Component {
 					{children.length > 1 ? (
 						<Slider ref={c => (this.slideshow = c)} {...slideshowSettings}>
 							{children && children.map((item, index) => (
-								<Slide>{item}</Slide>
+								<Slide key={index}>{item}</Slide>
 							))}
 						</Slider>
 					) : (

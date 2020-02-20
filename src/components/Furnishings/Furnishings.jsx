@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled'
 
-import Section from 'src/components/Section'
-import Grid from 'src/components/Grid'
+// import Section from 'src/components/Section'
+// import Grid from 'src/components/Grid'
 
 const Todo = styled.div`
 	background: pink;
@@ -12,7 +12,11 @@ const Todo = styled.div`
 
 const Furnishings = (props) => {
   return (
-    <Todo><h1>Furnishings</h1></Todo>
+    <Todo>
+
+    	<h1>Furnishings</h1>
+
+    </Todo>
   )
 }
 

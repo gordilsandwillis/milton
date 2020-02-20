@@ -111,18 +111,21 @@ class PageTransition extends React.PureComponent {
   }
 
   static getDerivedStateFromProps (nextProps, prevState) {
-    if (nextProps.location.pathname !== prevState.pathname) { // Use If you want NO transition on page load
+    const { location } = nextProps
+    if (location.pathname !== prevState.pathname) { // Use If you want NO transition on page load
     // if (nextProps.location.pathname !== prevState.pathname || !prevState.pathname) { // Use If you want to transition on page load
+      const productRouteChange = prevState.pathname ? (prevState.pathname && prevState.pathname.includes('product')) && (location.pathname && location.pathname.includes('product')) : true
+
       return {
-        overlay: prevState.pathname, // prevState.pathname If you want NO transition on page load
-        pathname: nextProps.location.pathname,
+        overlay: prevState.pathname !== null && !productRouteChange, // prevState.pathname If you want NO transition on page load
+        pathname: location.pathname,
         overlayColor: transitionColors[Math.floor(Math.random() * transitionColors.length)]
       }
     } else {
       return null
     }
   }
-  
+
   render () {
     const { children, location } = this.props
     const { overlay } = this.state

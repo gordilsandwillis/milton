@@ -21,15 +21,15 @@ const EnteranceWrap = styled.div`
 		${ ({ delay }) => delay > 0 && `
 			transition-delay: ${ transitionDelay * (delay) }s;
 		` }
-		
+
 		${ ({ items, delay }) => Array.isArray(items) ? `
 			${ items.map((item, index) => `
-				&:nth-child(${ index }) {
+				&:nth-child(${ index }) /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */ {
 					transition-delay: ${ transitionDelay * (index + delay) }s;
 				}
 			`) }
 		` : `` }
-	
+
 	}
 `
 

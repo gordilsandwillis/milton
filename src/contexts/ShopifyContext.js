@@ -1,13 +1,8 @@
 import React from 'react'
-// import Client from 'shopify-buy'
-import Client from 'shopify-buy/index.unoptimized.umd';
 
-const shopifyClient = Client.buildClient({
-  storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-  domain: 'milton-textiles.myshopify.com'
-});
+import { shopifyClient } from 'src/services/shopify'
 
-export const ShopifyContext = React.createContext(shopifyClient)
+export const ShopifyContext = React.createContext({ shopifyClient })
 
 class ShopifyProvider extends React.Component {
 	state = {
@@ -34,9 +29,5 @@ export const withShopifyContext = (Component) => {
 		<ShopifyContext.Consumer>{(context) => (<Component {...props} shopifyContext={context}/>)}</ShopifyContext.Consumer>
 	)
 }
-
-
-// (
-// )
 
 export default ShopifyProvider

@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from 'react';
+// import { Helmet } from "react-helmet";
+
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
 import Grid from 'src/components/Grid'
 import Section from 'src/components/Section'
-import Image from 'src/components/GatsbyImage'
-import ThumbnailReni from 'src/assets/images/collection-reni.png'
-import ThumbnailMatisse from 'src/assets/images/collection-matisse.png'
-import PlaceholderAtfImage from 'src/assets/images/placeholder-atf.jpg'
-import PlaceholderNewsletterImage from 'src/assets/images/placeholder-newsletter.jpg'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import ProductThumb from 'src/components/ProductThumb'
 import Furnishings from 'src/components/Furnishings';
-// import { Helmet } from "react-helmet";
+
+import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
+
 
 class Collection extends Component {
 	state = {
@@ -21,13 +20,12 @@ class Collection extends Component {
 
 	render() {
 		const { collections } = this.state
-
 		const collectionHandle = this.props.match.params.id
-
-		let filteredCollections = collections.filter( i => collectionHandle.includes( i.handle ) )
-		let collection = filteredCollections[0]
-		let collectionProducts = collection.products
-
+		const collection = collections.find(({handle}) => handle === collectionHandle)
+		const collectionIndex = collections.findIndex(({handle}) => handle === collectionHandle)
+		const nextIndex = (collectionIndex + 1) % collections.length
+		const nextCollection = collections[nextIndex]
+		const collectionProducts = collection.products
 		const hasAtf = collection.image && collection.image.src
 
 		return (
@@ -50,7 +48,7 @@ class Collection extends Component {
 			    <meta name="twitter:title" content={PageTitle + ' | ' + Tagline} />
 			    <meta name="twitter:image" content={shareImage} />
 		    </Helmet>*/}
-				<div>
+
 					<Header hasAtf={hasAtf}/>
 
 					{hasAtf ? (
@@ -59,7 +57,10 @@ class Collection extends Component {
 								index={0}
 								image={{
 									fluid: {
-										src: collection.image.src
+										aspectRatio: 2,
+										src: collection.image.src,
+										srcSet: '',
+										sizes: ''
 									}
 								}}
 							/>
@@ -102,29 +103,36 @@ class Collection extends Component {
 									colGap={['3.6vw', '24px', '30px']}
 									rowGap={['50px', '70px', '80px']}
 								>
-									{collectionProducts.map((product, index) => {
-										return (
-											product.variants.map((variant, index) => (
-												<ProductThumb product={product} variant={variant} />
-											))
-										)
-									}
-									)}
+									{collectionProducts.map((product, index) => (
+										product.variants.map((variant, index) => (
+											<ProductThumb key={variant.id} product={product} variant={variant} />
+										))
+									))}
 								</Grid>
 							</div>
 						</Grid>
 					</Section>
-					<CalloutText
-						prevTheme="bgColor"
-						nextTheme={false}
-						theme="white"
-						alignment="center"
-						headline="Finely woven textiles inspired by the history and vibrance of fine art."
-						headlineSize="h3"
-						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
-					/>
-				</div>
+
 				<Furnishings />
+				<ATF
+					eyebrow="Next Collection"
+					headline={nextCollection.title}
+					headlineSize="h3"
+					text={nextCollection.description}
+					image={{
+						fluid: {
+							aspectRatio: 2,
+							src: nextCollection.image.src,
+							srcSet: '',
+							sizes: ''
+						}
+					}}
+					buttons={[{
+						linkType: 'button',
+						label: 'Explore Collection',
+						to: `/collections/${nextCollection.handle}`
+					}]}
+				/>
 			</Fragment>
 		);
 	}

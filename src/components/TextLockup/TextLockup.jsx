@@ -102,14 +102,6 @@ const ButtonActions = styled.div`
 	}
 `
 
-const StyledButton = styled(Button)`
-	margin-bottom: 18px;
-	min-width: 172px;
-	svg {
-		display: none;
-	}
-`
-
 const TextLockup = ({
 		theme,
 		eyebrow,
@@ -122,7 +114,7 @@ const TextLockup = ({
 		icon,
 		alignment,
 		headlineElement,
-		additions
+		children
 	}) => {
 	return (
 		<Wrapper className={className} alignment={alignment}>
@@ -153,8 +145,8 @@ const TextLockup = ({
 						<Text textSize={textSize} alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
 					}
 
-					<ConditionalRender condition={additions}>
-						{additions}
+					<ConditionalRender condition={children}>
+						{children || ''}
 					</ConditionalRender>
 
 					{buttons && (
@@ -168,6 +160,7 @@ const TextLockup = ({
 											setTheme={button.theme}
 											external={button.external || false}
 											target={button.target || ''}
+											size={button.size}
 										>
 											{button.label}
 										</Button>

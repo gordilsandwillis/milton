@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Logomark from 'src/assets/images/logo.svg'
 import { mq } from 'src/styles'
 
 const StyledLogo = styled.div`
