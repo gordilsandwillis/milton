@@ -6,9 +6,8 @@ import Link from 'src/components/Link'
 import Logo from 'src/components/Logo'
 import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
+import ScrollListener from 'src/components/ScrollListener'
 import { colors, animations, mq, util } from 'src/styles'
-
-// const Logo = styled.div``
 
 const NavLinkStyle = (scrolled, active) => `
 	display: block;
@@ -40,7 +39,7 @@ const Wrapper = styled.header`
 	${ ({ scrolled, hasAtf }) => scrolled ? `
 		background: ${ colors.white };
 		color: ${ colors.textColor };
-		box-shadow: 0 2px 0px ${ rgba(colors.lightGrey, .5) };
+		box-shadow: 0 2px 0px ${ rgba(colors.textColor, .03) };
 	` : `
 		background: transparent;
 		${ !hasAtf ? `
@@ -56,13 +55,27 @@ const HeaderContainer = styled.div`
 	z-index: 2;
 	transition: padding ${ animations.mediumSpeed } ease-in-out;
 	${ ({ scrolled }) => scrolled ? `
-		padding-top: 18px;
-		padding-bottom: 14px;
-		${ util.responsiveStyles('padding-top', 20, 20, 18, 18) }
-		${ util.responsiveStyles('padding-bottom', 20, 20, 18, 18) }
+		padding: 20px 0;
+		${ mq.extraLargeAndBelow } {
+			padding: 20px 0;
+		}
+		${ mq.largerAndBelow } {
+			padding: 18px 0;
+		}
+		${ mq.mediumAndBelow } {
+			padding: 18px 0;
+		}
 	` : `
-		${ util.responsiveStyles('padding-top', 50, 40, 30, 30) }
-		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 30) }
+		padding: 50px 0;
+		${ mq.extraLargeAndBelow } {
+			padding: 40px 0;
+		}
+		${ mq.largerAndBelow } {
+			padding: 30px 0;
+		}
+		${ mq.mediumAndBelow } {
+			padding: 30px 0;
+		}
 	` };
 `
 
@@ -78,14 +91,33 @@ const LogoCol = styled.div`
 	}
 	svg {
 		height: auto;
-		display: inline-block;
 		vertical-align: top;
+		display: ${ ({ homepage }) => homepage ? `none` : `inline-block` };
 		transition: color ${ animations.mediumSpeed } ease-in-out, max-width ${ animations.mediumSpeed } ease-in-out;
-		${ ({ scrolled, hasAtf }) => scrolled ? `
+		${ ({ scrolled, hasAtf, homepage }) => scrolled ? `
 			color: ${ colors.textColor };
-			${ util.responsiveStyles('max-width', 160, 140, 120, 100) }
+			max-width: 160px;
+			${ mq.extraLargeAndBelow } {
+				max-width: 140px;
+			}
+			${ mq.largerAndBelow } {
+				max-width: 120px;
+			}
+			${ mq.mediumAndBelow } {
+				max-width: 100px;
+			}
 		` : `
-			${ util.responsiveStyles('max-width', 230, 190, 150, 130) }
+			max-width: 230px;
+			${ mq.extraLargeAndBelow } {
+				max-width: 190px;
+			}
+			${ mq.largerAndBelow } {
+				max-width: 150px;
+			}
+			${ mq.mediumAndBelow } {
+				max-width: 130px;
+			}
+			
 			${ !hasAtf ? `
 				color: ${ colors.textColor };
 			` : `
@@ -131,38 +163,15 @@ const HeaderPlaceholder = styled.div`
 
 class Header extends Component {
 	state = {
-		scrolled: false
+		collapsed: false
 	}
-
-	componentDidMount () {
-		this.handleScroll()
-		window.addEventListener('scroll', this.handleScroll)
-	}
-
-	componentWillUnmount () {
-		window.removeEventListener('scroll', this.handleScroll)
-	}
-
-	handleScroll = event => {
-		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-		if (scrollTop > 10) {
-			if (!this.state.scrolled) {
-				this.setState({ scrolled: true })
-			}
-		} else {
-			if (this.state.scrolled) {
-				this.setState({ scrolled: false })
-			}
-		}
-	}
-
 	render () {
 		const {
 			location,
 			hasAtf,
-			placeholder
+			placeholder,
+			homepage
 		} = this.props
-		const { scrolled } = this.state
 
 		let pathname = '/'
 		if (location) {
@@ -171,43 +180,53 @@ class Header extends Component {
 
 		return (
 			<Fragment>
-				<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
-					<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
-						<HeaderContent
-							small="1 [3] [6] [3] 1"
-							medium="1 [9] [8] [9] 1"
-							vAlign="center"
-						>
-							<div>
-								<NavLinks>
-									<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
-										<ResponsiveComponent small="Shop" medium="Collections"/>
-									</NavLink>
-								</NavLinks>
-							</div>
-							<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
-								<Link to="/">
-									<Logo />
-								</Link>
-							</LogoCol>
-							<div>
-									<ResponsiveComponent
-										small={
-											<NavLinks type="capsLink" alignment="right">
-												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
+				<ScrollListener.Consumer>
+		      {({ scrolledToTop, scrollY, pageHeight }) => {
+		      	let scrolled = !scrolledToTop
+		      	if (homepage) {
+		      		scrolled = !scrolledToTop && scrollY >= pageHeight - 200
+		      	}
+		      	return (
+							<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
+								<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
+									<HeaderContent
+										small="1 [3] [6] [3] 1"
+										medium="1 [9] [8] [9] 1"
+										vAlign="center"
+									>
+										<div>
+											<NavLinks>
+												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/collections" active={pathname === '/collections'}>
+													<ResponsiveComponent small="Shop" medium="Collections"/>
+												</NavLink>
 											</NavLinks>
-										}
-										medium={
-											<NavLinks alignment="right">
-												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
-												<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
-											</NavLinks>
-										}
-									/>
-							</div>
-						</HeaderContent>
-					</HeaderContainer>
-				</Wrapper>
+										</div>
+										<LogoCol scrolled={scrolled} hasAtf={hasAtf} homepage={homepage}>
+											<Link to="/">
+												<Logo />
+											</Link>
+										</LogoCol>
+										<div>
+												<ResponsiveComponent
+													small={
+														<NavLinks type="capsLink" alignment="right">
+															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
+														</NavLinks>
+													}
+													medium={
+														<NavLinks alignment="right">
+															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
+															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
+														</NavLinks>
+													}
+												/>
+										</div>
+									</HeaderContent>
+								</HeaderContainer>
+							</Wrapper>
+						)
+					}}
+      	</ScrollListener.Consumer>
 
 				{!hasAtf && placeholder && <HeaderPlaceholder />}
 

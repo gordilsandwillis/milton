@@ -28,11 +28,13 @@ class PageContent extends Component {
 
     // Set collections
     client.graphQLClient.send(collectionsQuery).then(({model, data}) => {
+      console.log('collections:', model.collections)
       this.props.shopifyContext.updateState('shopifyCollections', model.collections)
     });
 
     // Set products
     client.graphQLClient.send(productsQuery).then(({model, data}) => {
+      // console.log('products:', model.products)
       this.props.shopifyContext.updateState('shopifyProducts', model.products)
     });
 

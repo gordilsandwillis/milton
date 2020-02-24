@@ -20,7 +20,8 @@ const FiftyFifty = ({
 	video,
 	buttons,
 	additions,
-	alignment
+	alignment,
+	imageContent
 }) => {
 
 	let gridSetup = {
@@ -77,7 +78,7 @@ const FiftyFifty = ({
 				vAlign="center"
 			>	
 				<ScrollEntrance>
-					<ConditionalRender condition={image && !video}>
+					<ConditionalRender condition={image && !video && !imageContent}>
 						<div>
 							<Image
 								image={image}
@@ -85,9 +86,14 @@ const FiftyFifty = ({
 							/>
 						</div>
 					</ConditionalRender>
-					<ConditionalRender condition={video}>
+					<ConditionalRender condition={video && !imageContent}>
 						<div>
 							<Video url={video && video.file.url} playing={true} loop={true}/>
+						</div>
+					</ConditionalRender>
+					<ConditionalRender condition={imageContent}>
+						<div>
+							{imageContent}
 						</div>
 					</ConditionalRender>
 				</ScrollEntrance>

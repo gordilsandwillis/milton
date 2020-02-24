@@ -25,15 +25,14 @@ const Wrapper = styled(ThemeSelector)`
 const AlignmentContainer = styled.div`
 	display: flex;
 	align-items: ${ ({ vAlignment }) => vAlignment };
-	min-height: ${ ({ fullHeight, winHeight }) => fullHeight ? winHeight + 'px' : '70vh' };
 	${ ({ fullHeight, winHeight, showArrow }) => fullHeight ? `
-		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
-		padding-top: 105px;
+		min-height: ${ winHeight + 'px' };
+		padding-top: 7vw;
 		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
 	` : `
-		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
-		padding-top: 105px;
-		padding-bottom: 95px;
+		min-height: 56.25vw; // 16:9 Ratio
+		padding-top: 7vw;
+		padding-bottom: 7vw;
 	` }
 `
 
@@ -125,6 +124,7 @@ const ImageOverlay = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: 2;
+	display: none;
 `
 
 const VideoContainer = styled.div`
@@ -204,7 +204,8 @@ class ATF extends Component {
 			theme,
 			nextTheme,
 			overlay,
-			children
+			children,
+			additions
 		} = this.props
 
 		const vAlignOptions = {
@@ -245,7 +246,7 @@ class ATF extends Component {
 							large={large}
 						/>
 					) : false}
-					{index === 0 && (video || image) ? <Overlay /> : false}
+					{index === 0 && overlay && (video || image) ? <Overlay /> : false}
 					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
 				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
@@ -268,9 +269,7 @@ class ATF extends Component {
 										textSize={textSize}
 										buttons={buttons}
 									/>
-									<ConditionalRender condition={children}>
-										{children || ''}
-									</ConditionalRender>
+									{children && children}
 								</ScrollEntrance>
 							</Grid>
 						</Content>
@@ -283,6 +282,8 @@ class ATF extends Component {
 						<LeadDownPiece side="right"/>
 					</ATFLeadDown>
 				</ConditionalRender>
+
+				{additions}
 
 			</Wrapper>
 		)

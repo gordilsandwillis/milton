@@ -26,16 +26,16 @@ export const CollectionFragment = (collection) => {
 	collection.add('title')
   collection.add('image', ImageFrament)
   collection.addConnection('products', {args: {first: 50}}, ProductFragment)
+  // collection.addConnection('metafields', {args: {first: 5, namespace: 'collection_metafield'}}, MetafieldFragment)
 }
 
 export const ProductVariantFragment = (variant) => {
-    variant.add('id')
-    variant.add('title')
-    variant.add('sku')
-    variant.add('availableForSale')
-    variant.add('image', ImageFrament)
-
-  }
+  variant.add('id')
+  variant.add('title')
+  variant.add('sku')
+  variant.add('availableForSale')
+  variant.add('image', ImageFrament)
+}
 
 export const ProductFragment = (product) => {
   product.add('id')

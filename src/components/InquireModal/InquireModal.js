@@ -65,6 +65,17 @@ class InquireModal extends Component {
         closeTimeoutMS={300}
       >
         <InnerWrapper>
+          <h3>Fields</h3>
+          <ul>
+            <li>Product - Locked</li>
+            <li>Collection - Locked</li>
+            <li>SKU - Locked</li>
+            <li>Name</li>
+            <li>Company</li>
+            <li>Email</li>
+            <li>Phone</li>
+          </ul>
+          <hr/>
         <p>Product: {currentCollection && currentCollection.handle}</p>
         <p>Collection: {currentProduct && currentProduct.handle}</p>
         <p>Varient: {currentVariant && currentVariant.id}</p>
