@@ -10,6 +10,7 @@ const StyledLogo = styled.div`
 	svg {
 		width: 100%;
 		height: auto;
+		vertical-align: top;
 	}
 	* {
 		fill: currentcolor;
@@ -27,6 +28,7 @@ const StyledLogoMark = styled.div`
 	svg {
 		width: 100%;
 		height: auto;
+		vertical-align: top;
 	}
 	* {
 		fill: currentcolor;

@@ -22,6 +22,13 @@ const StackedImageWrap = styled(Parallax)`
 	// transition: transform 5s cubic-bezier(.06,.83,.1,1);
 `
 
+const speeds = [
+	-10,
+	10,
+	5,
+	-5
+]
+
 class StackedImages extends Component {
 	// constructor(props) {
  //    super(props);
@@ -62,6 +69,7 @@ class StackedImages extends Component {
 						images={images}
 						posYStart={5 * (index + 1)}
 						posYEnd={-5 * (index + 1)}
+						speed={speeds[index]}
 						scrollUnit="%">
 						<Image image={image} />
 					</StackedImageWrap>

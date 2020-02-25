@@ -134,8 +134,6 @@ class ScrollListener extends React.Component {
 
     const { children } = this.props
 
-    console.log(pageWidth)
-
     return (
       <Provider
         value={{

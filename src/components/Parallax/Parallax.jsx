@@ -9,7 +9,6 @@ const parallaxOffset = (num, outMin, outMax) => {
 		return 0
 	} else {
 		return offset
-		console.log(offset)
 	}
 }
 
@@ -21,15 +20,18 @@ const ParallaxStyle = styled.div`
 	// 							rotate(${ parallaxOffset(props.scroll, props.rotateStart, props.rotateEnd) }deg)
 	// 							scale(${ parallaxOffset(props.scroll, props.scaleStart, props.scaleEnd) })` : `` };
 	${ props => !props.disabled ? `
-		transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0)` : `` };
+		// transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0);
+		transform: 	translate3d(0, ${ props.speed * props.scroll }%, 0);
+	` : `` };
 
 `
 
-const Parallax = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd }) => {
+const Parallax = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd, speed }) => {
 	const [ref, percentage] = useScrollPercentage({ threshold: 0 })
 	return (
 		<ParallaxStyle
 			ref={ref}
+			speed={speed}
 			scroll={percentage.toPrecision(3)}
 			className={className}
 			posYStart={posYStart}
