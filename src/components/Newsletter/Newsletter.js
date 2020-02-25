@@ -4,7 +4,7 @@ import ATF from 'src/components/ATF'
 import Input from 'src/components/Input'
 import Grid from 'src/components/Grid'
 
-import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
+import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100158.jpg'
 
 const Newsletter = () => (
 	<ATF
@@ -25,13 +25,13 @@ const Newsletter = () => (
 			medium="2 [6] 2"
 			large="4 [6] 4"
 		>
-		<Input
-			size="large"
-			placeholder="Enter Email"
-			icon="arrow_right"
-			iconPosition="right"
-			//theme="transparent"
-		/>
+			<Input
+				size="large"
+				placeholder="Enter Email"
+				icon="arrow_forward"
+				iconPosition="right"
+				theme="transparent"
+			/>
 		</Grid>
 	</ATF>
 )

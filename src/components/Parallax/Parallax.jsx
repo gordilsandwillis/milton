@@ -9,16 +9,20 @@ const parallaxOffset = (num, outMin, outMax) => {
 		return 0
 	} else {
 		return offset
+		console.log(offset)
 	}
 }
 
 const ParallaxStyle = styled.div`
 	display: inline-block;
 	vertical-align: top;
+	// ${ props => !props.disabled ? `
+	// 	transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0)
+	// 							rotate(${ parallaxOffset(props.scroll, props.rotateStart, props.rotateEnd) }deg)
+	// 							scale(${ parallaxOffset(props.scroll, props.scaleStart, props.scaleEnd) })` : `` };
 	${ props => !props.disabled ? `
-		transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0)
-								rotate(${ parallaxOffset(props.scroll, props.rotateStart, props.rotateEnd) }deg)
-								scale(${ parallaxOffset(props.scroll, props.scaleStart, props.scaleEnd) })` : `` };
+		transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0)` : `` };
+
 `
 
 const Parallax = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd }) => {

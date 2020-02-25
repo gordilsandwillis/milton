@@ -154,6 +154,7 @@ const InputIcon = styled.div`
 	justify-content: center;
 	top: 0;
 	pointer-events: none;
+	overflow: hidden;
 	${ ({ emojiIcon }) => emojiIcon && `
 		padding-top: .3em;
 		font-size: 18px;

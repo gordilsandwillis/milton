@@ -11,7 +11,6 @@ const responsiveStyles = util.responsiveStyles
 // All global styles
 export default `
   ${ fonts.MaterialIconsFont }
-  ${ fonts.MaterialIconsFont }
   ${ fonts.DomaineSansFont }
   ${ fonts.DomaineSansMediumFont }
   ${ fonts.DomaineSansBoldFont }

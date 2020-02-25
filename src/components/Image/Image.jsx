@@ -37,7 +37,7 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	      <picture>
 	      	{source.map((image, index) => (
 						<source
-							srcset={image.src}
+							srcSet={image.src}
 							media={image.media}
 						/>
 					))}

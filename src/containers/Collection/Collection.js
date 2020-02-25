@@ -10,7 +10,8 @@ import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import ProductThumb from 'src/components/ProductThumb'
 import Furnishings from 'src/components/Furnishings';
 
-import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
+// import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
+import NextCollectionImage from 'src/assets/images/Ethridge-2002100158.jpg'
 
 
 class Collection extends Component {
@@ -27,6 +28,9 @@ class Collection extends Component {
 		const nextCollection = collections[nextIndex]
 		const collectionProducts = collection.products
 		const hasAtf = collection.image && collection.image.src
+
+
+		console.log('nextCollection', nextCollection)
 
 		return (
 			<Fragment>
@@ -63,6 +67,7 @@ class Collection extends Component {
 										sizes: ''
 									}
 								}}
+								overlay={false}
 							/>
 							<CalloutText
 								nextTheme="bgColor"
@@ -122,7 +127,8 @@ class Collection extends Component {
 					image={{
 						fluid: {
 							aspectRatio: 2,
-							src: nextCollection.image.src,
+							// src: nextCollection.image.src,
+							src: NextCollectionImage,
 							srcSet: '',
 							sizes: ''
 						}

@@ -9,6 +9,7 @@ export const red = '#E15D54'
 export const green = '#646C43'
 export const offWhite = '#F4F3EE'
 export const starryNight = '#100B08'
+export const grey = '#C7C7BA'
 
 // Basic Colors
 export const transparent = 'transparent'
