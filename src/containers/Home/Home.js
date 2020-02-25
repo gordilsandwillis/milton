@@ -3,13 +3,13 @@ import styled from '@emotion/styled'
 // import { Helmet } from "react-helmet";
 
 import Logo, { LogoMark } from 'src/components/Logo'
+import LargeLogo from 'src/components/LargeLogo'
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
 import CollectionSections from 'src/components/CollectionSections'
 import Newsletter from 'src/components/Newsletter'
 import ScrollListener from 'src/components/ScrollListener'
-import withContext from 'src/components/ScrollListener'
 
 // import AtfImage from 'src/assets/images/Ethridge-2002100164.jpg'
 import AtfImage from 'src/assets/images/Ethridge-2002100114.jpg'
@@ -30,7 +30,7 @@ const numberMap = (num, outMin, outMax) => {
 	}
 }
 
-const LargeLogo = styled.div`
+const ScalingLogo = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -127,13 +127,14 @@ class Home extends Component {
 						overlay="0"
 						additions={<BottomOverlay/>}
 					/>
-					<ScrollListener.Consumer>
+					{/*<ScrollListener.Consumer>
 			      {({ scrolledToTop, scrollY, pageHeight, pageWidth }) => {
 			      	return (
-			      		<LargeLogo scrollY={scrollY} pageHeight={pageHeight} pageWidth={pageWidth}><Logo/></LargeLogo>
+			      		<ScalingLogo scrollY={scrollY} pageHeight={pageHeight} pageWidth={pageWidth}><Logo/></LargeLogo>
 							)
 						}}
-					</ScrollListener.Consumer>
+					</ScrollListener.Consumer>*/}
+					<LargeLogo/>
 					<CalloutText
 						prevTheme={false}
 						nextTheme="bgColor"
