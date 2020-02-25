@@ -1,20 +1,60 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
-import { lighten, rgba } from 'polished'
+import { lighten, darken, rgba } from 'polished'
 import { colors, typography, animations, util } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
+
+const isEmoji = string => {
+	var ranges = [
+		'(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c[\ude32-\ude3a]|[\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])' // U+1F680 to U+1F6FF
+	];
+	if (string.match(ranges.join('|'))) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 const inputVars = {
 	tiny: '36px',
 	small: '48px',
 	medium: '60px',
 	large: '72px',
-	borderWidth: '2px',
+	borderWidth: '1px',
 	backgroundColor: 'transparent',
-	borderRadius: '0px'
+	borderRadius: '0px',
+	hPadding: '1em'
 }
+
+const themes = {
+		lightGrey: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.lightGrey
+		},
+		white: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.white
+		},
+		bgColor: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.bgColor
+		},
+		transparent: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.transparent
+		},
+		textColor: {
+			color: colors.bgColor,
+			accent: colors.lightGreen,
+			background: colors.textColor
+		}
+	}
 
 const setInputTheme = theme => {
 	const inputColor = {
@@ -24,17 +64,18 @@ const setInputTheme = theme => {
 		darkBrown: colors.bgColor
 	}
 	return `
+		color: ${ themes[theme]['color'] };
 		input {
-			background: ${ colors[theme] };
+			background: ${ themes[theme]['background'] };
 			border-color: ${ colors[theme] };
-			caret-color: ${ colors.mainColor };
-			color: ${ inputColor[theme] };
+			caret-color: ${ themes[theme]['color'] };
+			color: ${ themes[theme]['color'] };
 			&:hover, &:active, &:focus {
-				background: ${ lighten(0.07, colors[theme]) };
-				border-color: ${ colors.mainColor };
+				background: ${ darken(0.05, themes[theme]['background']) };
+				border-color: ${ themes[theme]['accent'] };
 			}
 			::placeholder {
-				color: ${ rgba(colors.textColor, 0.4) };
+				color: ${ rgba(themes[theme]['color'], 0.5) };
 			}
 		}
 	`
@@ -59,7 +100,7 @@ const InputWrap = styled.div`
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	${ typography.body }
+	${ typography.bodySmall }
 	${ ({ theme }) => setInputTheme(theme) }
 `
 
@@ -86,7 +127,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
   line-height: inherit;
   text-align: left;
   box-shadow: none;
-  padding: 2px .75em 0;
+  padding: 2px ${ inputVars.hPadding } 0;
   ${ icon ? `
 		padding-${ iconPosition }: ${ inputVars.medium };
 		${ size === 'tiny' ? `
@@ -143,7 +184,8 @@ const StyledInput = styled.input`
 		icon,
 		iconPosition,
 		label,
-		theme
+		theme,
+		style,
 	}) => InputStyles(getState(loading, error, success, disabled), size, icon, iconPosition, theme, label) }
 `
 
@@ -193,7 +235,7 @@ const InputLabel = styled.label`
 	display: flex;
 	align-items: center;
 	pointer-events: none;
-	margin: 0 .75em;
+	margin: 0 ${ inputVars.hPadding };
 	color: ${ ({ error }) => error ? `${ colors.alert }` : `inherit` };
 	transition: transform ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
 	transform-origin: 0% 50%;
@@ -201,7 +243,7 @@ const InputLabel = styled.label`
 		transform: translate3d(0, -10px, 0) scale(.75);
 	` : `` }
 	${ props => props.focused ? `
-		color: ${ colors.mainColor };
+		// color: ${ colors.mainColor };
 	` : `` }
 	${ ({ icon, iconPosition, size }) => icon ? `
 		margin-${ iconPosition }: ${ inputVars.medium };
@@ -227,9 +269,10 @@ class Input extends Component {
 		hasValue: false
 	}
 
-	renderIcon = (icon, size, iconPosition, theme, emojiIcon) => {
+	renderIcon = (icon, size, iconPosition, theme) => {
 		let renderedIcon = false
-		if (emojiIcon) {
+		let isEmojiIcon = isEmoji(icon)
+		if (isEmojiIcon) {
 			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme} emojiIcon>{icon}</InputIcon>
 		} else if (typeof icon === 'string') {
 			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme}><MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon></InputIcon>
@@ -248,23 +291,24 @@ class Input extends Component {
 			value,
 			type,
 			icon,
-			emojiIcon,
 			iconPosition,
 			loading,
 			error,
 			success,
 			disabled,
 			onClick,
+			onChange,
 			theme,
 			className,
 			shape,
 			size,
 			placeholder,
 			label,
-			spellcheck
+			spellcheck,
+			name
 		} = this.props
 
-		const { focused } = this.state
+		const { focused, hasValue } = this.state
 
 		return (
 			<InputWrap className={className} theme={theme}>
@@ -283,8 +327,10 @@ class Input extends Component {
 					size={size}
 					onFocus={() => this.setFocus(true)}
 					onBlur={() => this.setFocus(false)} // needs work
+					onChange={onChange}
 					value={value}
 					label={label}
+					name={name}
 					spellCheck={spellcheck}
 				/>
 				<ConditionalRender condition={label}>
@@ -295,15 +341,17 @@ class Input extends Component {
 						error={error}
 						theme={theme}
 						value={value}
+						for={name}
 						focused={focused}
+						className={placeholder || value || focused ? 'focused' : 'unfocused' /* to select from styled component */}
 						placeholder={placeholder}
 					>
 						{label}
 					</InputLabel>
 				</ConditionalRender>
-				<ConditionalRender condition={icon}>
-					{this.renderIcon(icon, size, iconPosition, theme, emojiIcon)}
-				</ConditionalRender>
+				{icon && (
+					this.renderIcon(icon, size, iconPosition, theme)
+				)}
 			</InputWrap>
 		)
 	}
@@ -312,9 +360,9 @@ class Input extends Component {
 Input.defaultProps = {
 	type: 'text',
 	iconPosition: 'left',
-	theme: 'white',
-	emojiIcon: false,
-	spellcheck: false
+	theme: 'lightGrey',
+	spellcheck: false,
+	onChange: false
 }
 
 export default Input

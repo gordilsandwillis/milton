@@ -92,7 +92,8 @@ const LogoCol = styled.div`
 	svg {
 		height: auto;
 		vertical-align: top;
-		display: ${ ({ homepage }) => homepage ? `none` : `inline-block` };
+		display: inline-block;
+		${ ({ homepage }) => homepage ? `opacity: 0; pointer-events: none;` : `` }
 		transition: color ${ animations.mediumSpeed } ease-in-out, max-width ${ animations.mediumSpeed } ease-in-out;
 		${ ({ scrolled, hasAtf, homepage }) => scrolled ? `
 			color: ${ colors.textColor };

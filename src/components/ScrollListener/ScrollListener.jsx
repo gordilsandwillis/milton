@@ -79,7 +79,7 @@ class ScrollListener extends React.Component {
       newState.scrolledToTop = false
     }
 
-    newState.scrolledToBottom = newScrollY >= pageHeight - window.innerHeight * 1.2
+    // newState.scrolledToBottom = newScrollY >= pageHeight - window.innerHeight * 1.2
     newState.scrollY = newScrollY
 
     this.setState(newState)
@@ -133,7 +133,6 @@ class ScrollListener extends React.Component {
     } = this.state
 
     const { children } = this.props
-
     return (
       <Provider
         value={{

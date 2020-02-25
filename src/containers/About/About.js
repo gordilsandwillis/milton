@@ -43,7 +43,7 @@ class About extends Component {
 					<Header hasAtf={false}/>
 					<CalloutText
 						prevTheme={false}
-						nextTheme="bgColor"
+						nextTheme={false}
 						theme="bgColor"
 						alignment="center"
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
@@ -61,8 +61,8 @@ class About extends Component {
 					/>
 					<FiftyFifty
 						key="designer"
-						prevTheme="bgColor"
-						nextTheme="white"
+						prevTheme={false}
+						nextTheme="bgColor"
 						theme="bgColor"
 						eyebrow="Head Designer & Founder"
 						headline="Vera Neykov"

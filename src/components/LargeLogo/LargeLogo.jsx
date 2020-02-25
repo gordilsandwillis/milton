@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Logo from 'src/components/Logo'
-import { useScrollPercentage } from 'react-scroll-percentage'
+import { useScrollPercentage, ScrollPercentage } from 'react-scroll-percentage'
 import ScrollListener from 'src/components/ScrollListener'
 import withSizes from 'react-sizes'
+import { useInView } from 'react-intersection-observer'
 
-import { typography, util } from 'src/styles'
+import { typography, util, animations, colors } from 'src/styles'
 
 const numberMap = (num, outMin, outMax) => {
 	let offset = (num - 0) * (outMax - outMin) / (1 - 0) + outMin
@@ -32,21 +33,19 @@ const calculateScale = (scroll) => {
 }
 
 const Wrapper = styled.div`
-	position: absolute;
-	bottom: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 18px;
 	z-index: 5;
 	flex-grow: 0;
 	flex-shrink: 0;
 	width: 100%;
-	background: rgba(0, 0, 0, .5);
+	// background: rgba(0, 0, 0, .5);
 	text-align: center;
-	padding: 18px 0 2.2vw;
+	padding: 0 0 2.2vw;
 	will-change: transform;
-	// transform: scale(${ ({ scroll }) => scroll > .1 ? scroll : .1 });
-	transform: scale(${ ({ scroll }) => calculateScale(scroll) });
-	${ ({ scroll }) => scroll >= .95 ? `
-		transition: transform .3s ease-in-out;
-	` : `` }
+	transform-origin: center top;
+	transform: scale(${ ({ scroll, winWidth }) => scroll >= 140/(winWidth) ? scroll * .95 : 140/(winWidth) });
 `
 
 const StyledLogo = styled(Logo)`
@@ -54,26 +53,38 @@ const StyledLogo = styled(Logo)`
 	left: 0;
 	max-width: 100%;
 	width: 100%;
-	transform-origin: center bottom;
-	// transform: scale(${ ({ scroll }) => calculateScale(scroll) });
+	transform: translate3d(0, ${ ({ winWidth, winHeight, scroll }) => scroll >= 0 ? ((winHeight - (winWidth * 0.22)) * scroll) : 0 }px, 0);
 	svg {
 		display: block;
-		color: red;
+		transition: color ${ animations.mediumSpeed } ease-in-out;
+		color: ${ ({ scroll }) => scroll >= 0 ? colors.bgColor : colors.textColor };
 	}
 `
 
 const LargeLogo = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd, winWidth, winHeight }) => {
 	const [ref, percentage] = useScrollPercentage({ threshold: 1 })
-	// const { winWidth, winHeight } = this.props
-	console.log(percentage)
+	// const [ref, inView] = useInView({ triggerOnce: false })
+	console.log('render logo')
+
 	return (
-		<Wrapper
-			ref={ref}
-			winWidth={winWidth}
-			scroll={1 - percentage.toPrecision(3)}
-		>
-			<StyledLogo scroll={1 - percentage.toPrecision(3)} winHeight={winHeight} winWidth={winWidth}/>
-		</Wrapper>
+  	<ScrollListener.Consumer>
+  		{({ scrolledToTop, scrollY, pageHeight, pageWidth }) => {
+  			return (
+					<Wrapper
+						ref={ref}
+						winWidth={winWidth}
+						winHeight={winHeight}
+						scroll={1 - scrollY/(winHeight - 100)}
+					>
+						<StyledLogo
+							winWidth={winWidth}
+							winHeight={winHeight}
+							scroll={1 - scrollY/(winHeight - 200)}
+						/>
+					</Wrapper>
+				)
+			}}
+		</ScrollListener.Consumer>    
 	)
 }
 

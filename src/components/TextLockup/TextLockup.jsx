@@ -114,12 +114,13 @@ const TextLockup = ({
 		icon,
 		alignment,
 		headlineElement,
-		children
+		children,
+		transitionIn
 	}) => {
 	return (
 		<Wrapper className={className} alignment={alignment}>
 			<div>
-				<TextContainer alignment={alignment}>
+				<TextContainer alignment={alignment} transitionIn={transitionIn}>
 					<ConditionalRender condition={icon}>
 						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1.5em' }}>{icon}</div>
 					</ConditionalRender>
@@ -191,7 +192,8 @@ const TextLockup = ({
 TextLockup.defaultProps = {
 	alignment: 'center',
 	headlineSize: 'h3',
-	textSize: 'body'
+	textSize: 'body',
+	transitionIn: true
 }
 
 export default TextLockup

@@ -88,6 +88,10 @@ const ProductSlideshow = styled(Slideshow)`
 	}
 `
 
+const BottomButtons = styled(TextLockup)`
+	${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
+`
+
 class Product extends Component {
 	state = {
 		loading: true,
@@ -210,6 +214,7 @@ class Product extends Component {
 										text={currentProduct.descriptionHtml}
 										textSize="body"
 										alignment="left"
+										transitionIn={false}
 									>
 										<ProductSpecifications
 											keys={['width', 'care', 'content', 'performance']}
@@ -249,24 +254,20 @@ class Product extends Component {
 							</div>
 						))}
 					</Grid>
-				</Section>
-				<Section prevTheme="lightGrey" setTheme="lightGrey">
-					<Grid small="2 [10] 2" medium="3 [8] 3" large="1 [12] 1">
-						<TextLockup
-							buttons={[
-								{
-									linkType: 'button',
-									label: `${currentCollection.title} Collection`,
-									to: `/collections/${currentCollection.handle}`
-								},
-								{
-									linkType: 'button',
-									label: 'All Collections',
-									to: '/collections'
-								}
-							]}
-						/>
-					</Grid>
+					<BottomButtons
+						buttons={[
+							{
+								linkType: 'button',
+								label: `${currentCollection.title} Collection`,
+								to: `/collections/${currentCollection.handle}`
+							},
+							{
+								linkType: 'button',
+								label: 'All Collections',
+								to: '/collections'
+							}
+						]}
+					/>
 				</Section>
 			</Fragment>
 		);
