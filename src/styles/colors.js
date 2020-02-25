@@ -22,7 +22,7 @@ export const textColor = starryNight
 export const lightTextColor = rgba(textColor, 0.5)
 export const lightGrey = '#E9E7DE'
 export const hrColor = rgba(textColor, 0.1)
-
+export const modalOverlay = rgba(offWhite, 0.6)
 // Color Variations
 export const mainColorDarken = darken(0.07, mainColor)
 export const mainColorLighten = lighten(0.07, mainColor)
