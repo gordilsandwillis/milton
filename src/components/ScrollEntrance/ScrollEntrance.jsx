@@ -7,11 +7,11 @@ const transitionSpeed = '.65s'
 const transitionDelay = 0.075
 
 const EnteranceWrap = styled.div`
-	${ ({ transitionIn }) => transitionIn ? `
+	${ ({ transitionIn, 'data-in-view': inView, transform, items, delay }) => transitionIn ? `
 		> * {
 			transition: 	transform ${ transitionSpeed } ${ transitionTiming },
 										opacity ${ transitionSpeed } ${ transitionTiming };
-			${ ({ 'data-in-view': inView, transform }) => inView ? `
+			${ inView ? `
 				transform: none;
 				opacity: 1;
 			` : `
@@ -19,22 +19,19 @@ const EnteranceWrap = styled.div`
 				opacity: 0;
 			` }
 
-			${ ({ delay }) => delay > 0 && `
+			${ delay > 0 ? `
 				transition-delay: ${ transitionDelay * (delay) }s;
-			` }
-
-			${ ({ items, delay }) => Array.isArray(items) ? `
-				${ items.map((item, index) => `
-					&:nth-child(${ index }) /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */ {
-						transition-delay: ${ transitionDelay * (index + delay) }s;
-					}
-				`) }
 			` : `` }
 		}
+		${ Array.isArray(items) ? items.map((item, index) => `
+			> *:nth-of-type(${index}) {
+				transition-delay: ${ transitionDelay * (index + delay) }s;
+			}
+		`) : `` }
 	` : `` }
 `
 
-const ScrollEntrance = ({ children, className, transform, delay }) => {
+const ScrollEntrance = ({ children, className, transform, delay, transitionIn }) => {
 	const [ref, inView] = useInView({ triggerOnce: true })
 
 	if (!children) {
@@ -49,6 +46,7 @@ const ScrollEntrance = ({ children, className, transform, delay }) => {
 			transform={transform}
 			className={className}
 			items={children}
+			transitionIn={transitionIn}
 		>
 			{children}
 		</EnteranceWrap>

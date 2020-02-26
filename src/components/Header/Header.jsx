@@ -163,15 +163,13 @@ const HeaderPlaceholder = styled.div`
 `
 
 class Header extends Component {
-	state = {
-		collapsed: false
-	}
 	render () {
 		const {
 			location,
 			hasAtf,
 			placeholder,
-			homepage
+			homepage,
+			collapsed
 		} = this.props
 
 		let pathname = '/'
@@ -182,10 +180,10 @@ class Header extends Component {
 		return (
 			<Fragment>
 				<ScrollListener.Consumer>
-		      {({ scrolledToTop, scrollY, pageHeight }) => {
+		      {({ scrolledToTop, scrollY }) => {
 		      	let scrolled = !scrolledToTop
 		      	if (homepage) {
-		      		scrolled = !scrolledToTop && scrollY >= pageHeight - 200
+		      		scrolled = collapsed
 		      	}
 		      	return (
 							<Wrapper scrolled={scrolled} hasAtf={hasAtf}>

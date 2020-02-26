@@ -9,6 +9,10 @@ import { colors, typography, util } from 'src/styles'
 import Input from 'src/components/Input'
 import Button from 'src/components/Button'
 
+import { Transition } from 'react-transition-group'
+
+const timeout = 600
+
 Modal.setAppElement('#root')
 
 const CloseButton = styled(Button)`
@@ -22,6 +26,21 @@ const CloseButton = styled(Button)`
     color: ${ colors.textColor };
     opacity: 1;
   }
+`
+
+const ModalWrapper = styled.div`
+  transition: opacity ${ timeout }ms ease-in-out;
+  opacity: 0;
+  ${ ({ transitionStatus }) => transitionStatus === 'entering' && `
+    opacity: 0;
+  ` }
+  ${ ({ transitionStatus }) => transitionStatus === 'entered' && `
+    opacity: 1;
+  ` }
+  ${ ({ transitionStatus }) => transitionStatus === 'entering' ? `` : ``}
+  ${ ({ transitionStatus }) => transitionStatus === 'entered' ? `` : ``}
+  ${ ({ transitionStatus }) => transitionStatus === 'exiting' ? `` : ``}
+  ${ ({ transitionStatus }) => transitionStatus === 'exited' ? `` : ``}
 `
 
 const ModalHeader = styled.h4`
@@ -129,7 +148,8 @@ class InquireModal extends Component {
       name: '',
       company: '',
       email: '',
-      phone: ''
+      phone: '',
+      message: ''
     };
   }
 
@@ -158,7 +178,8 @@ class InquireModal extends Component {
             name: '',
             company: '',
             email: '',
-            phone: ''
+            phone: '',
+            message: ''
           })
           form.reset()
           this.props.modalContext.toggleModal()
@@ -175,15 +196,16 @@ class InquireModal extends Component {
   }
 
 	render() {
-    const { status, product, collection, sku, name, company, phone, email } = this.state
+    const { status, product, collection, sku, name, company, phone, email, message } = this.state
  		const { modalContext } = this.props
  		const { toggleModal, modalIsOpen, modalData } = modalContext
+    const { title, buttonLabel } = modalData
     const { currentProduct, currentVariant, currentCollection } = modalData
 
     console.log(status)
 
-    const valid = name && company && email && phone
-    let buttonText = 'Send Inquiry'
+    const valid = name && company && email && phone && message
+    let buttonText = buttonLabel
 
     if (status === 'SUCCESS') {
       buttonText = 'Thank you'
@@ -191,14 +213,16 @@ class InquireModal extends Component {
       buttonText = 'Oh No!'
     }
 
+    console.log('modalContext ', modalContext)
+
     return (
       <Modal
         style={customStyles}
         isOpen={modalIsOpen}
-        closeTimeoutMS={300}
+        closeTimeoutMS={500}
       >
         <InnerWrapper>
-          <ModalHeader>Inquire</ModalHeader>
+          <ModalHeader>{title || 'Inquire'}</ModalHeader>
           <form 
             onSubmit={this.submitForm}
             action="https://formspree.io/xwkbldwy"
@@ -274,7 +298,16 @@ class InquireModal extends Component {
               value={phone}
               id="phone"/>
 
-            <SubmitButton type="submit" disabled={!valid}>{buttonText}</SubmitButton>
+            <UnderlinedInput
+              onChange={this.handleInput}
+              size="small"
+              label="Message"
+              type="textarea"
+              name="message"
+              value={message}
+              id="message"/>
+
+            <SubmitButton type="submit" disabled={!valid}>{buttonText || 'Send Inquiry'}</SubmitButton>
 
             {status === 'ERROR' && (<ErrorMessage>Something went wrong. Please make sure all fields are filled out and try again.</ErrorMessage>)}
 

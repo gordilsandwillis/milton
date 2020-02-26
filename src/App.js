@@ -16,6 +16,8 @@ const PageWrapper = styled.div`
 	flex-direction: column;
 `
 
+const Context = React.createContext('scroll-context');
+
 const Routes = ({ match, location }) => {
 	return (
 		<ScrollListener>
@@ -31,9 +33,6 @@ const Routes = ({ match, location }) => {
 							</Router>
 						</PageWrapper>
 					</Fragment>
-					<ScrollProvider>
-						<div>k</div>
-					</ScrollProvider>
 				</ModalProvider>
 			</ShopifyProvider>
 		</ScrollListener>

@@ -8,6 +8,7 @@ import { typography, util } from 'src/styles'
 
 const Wrapper = styled.div`
 	position: relative;
+	padding: 30px 0;
 `
 
 const Images = styled.div`

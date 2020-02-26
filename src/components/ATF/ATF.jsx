@@ -13,13 +13,13 @@ import Video from 'src/components/Video'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
-	${ ({ media }) => media && `
+	${ ({ media }) => media ? `
 		background: ${ colors.black };
 		color: ${ colors.bgColor };
-	` }
-	${ ({ fullHeight, showArrow }) => fullHeight && showArrow && `
+	` : `` }
+	${ ({ fullHeight, showArrow }) => fullHeight && showArrow ? `
 		margin-bottom: -28px;
-	` }
+	` : `` }
 `
 
 const AlignmentContainer = styled.div`
@@ -46,17 +46,17 @@ const Block = styled.div`
 	width: 100%;
 	position: relative;
 
-	${ ({ background }) => background && `
+	${ ({ background }) => background ? `
 		position: absolute;
 		height: 100%;
 		overflow: hidden;
 		z-index: 1;
 		bottom: ${ ({ fullHeight }) => fullHeight ? `60px` : `0` };
-	` }
+	` : `` }
 
-	${ ({ content, fullHeight }) => content && `
+	${ ({ content, fullHeight }) => content ? `
 		z-index: 3;
-	` }
+	` : `` }
 `
 
 const BgImage = styled(Image)`
@@ -124,7 +124,6 @@ const ImageOverlay = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: 2;
-	display: none;
 `
 
 const VideoContainer = styled.div`
@@ -205,7 +204,8 @@ class ATF extends Component {
 			nextTheme,
 			overlay,
 			children,
-			additions
+			additions,
+			className
 		} = this.props
 
 		const vAlignOptions = {
@@ -224,7 +224,7 @@ class ATF extends Component {
 		const verticalAligment = vAlignOptions[vAlignment]
 
 		return (
-			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow}>
+			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow} className={className}>
 				<Block background winHeight={winHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>

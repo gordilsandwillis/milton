@@ -20,8 +20,8 @@ const isEmoji = string => {
 const inputVars = {
 	tiny: '36px',
 	small: '48px',
-	medium: '60px',
-	large: '72px',
+	medium: '50px',
+	large: '60px',
 	borderWidth: '1px',
 	backgroundColor: 'transparent',
 	borderRadius: '0px',
@@ -298,7 +298,7 @@ class Input extends Component {
 			disabled,
 			onClick,
 			onChange,
-			theme,
+			setTheme,
 			className,
 			shape,
 			size,
@@ -311,8 +311,9 @@ class Input extends Component {
 		const { focused, hasValue } = this.state
 
 		return (
-			<InputWrap className={className} theme={theme}>
+			<InputWrap className={className} theme={setTheme}>
 				<StyledInput
+					className="input"
 					type={type}
 					placeholder={placeholder}
 					icon={icon}
@@ -322,7 +323,7 @@ class Input extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={theme}
+					theme={setTheme}
 					shape={shape}
 					size={size}
 					onFocus={() => this.setFocus(true)}
@@ -339,9 +340,9 @@ class Input extends Component {
 						iconPosition={iconPosition}
 						size={size}
 						error={error}
-						theme={theme}
+						theme={setTheme}
 						value={value}
-						for={name}
+						htmlFor={name}
 						focused={focused}
 						className={placeholder || value || focused ? 'focused' : 'unfocused' /* to select from styled component */}
 						placeholder={placeholder}
@@ -350,7 +351,7 @@ class Input extends Component {
 					</InputLabel>
 				</ConditionalRender>
 				{icon && (
-					this.renderIcon(icon, size, iconPosition, theme)
+					this.renderIcon(icon, size, iconPosition, setTheme)
 				)}
 			</InputWrap>
 		)
@@ -360,9 +361,9 @@ class Input extends Component {
 Input.defaultProps = {
 	type: 'text',
 	iconPosition: 'left',
-	theme: 'lightGrey',
+	setTheme: 'lightGrey',
 	spellcheck: false,
-	onChange: false
+	onChange: () => {}
 }
 
 export default Input

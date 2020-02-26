@@ -26,6 +26,9 @@ const StyledImage = styled(Img)`
 			border-radius: 1.5vw;
 		` : ` ` }
 	` }
+	img {
+		transition: opacity 1s ease-in-out !important;
+	}
 `
 
 const ResponsiveImage = ({ image, small, medium, large, className, type }) => {

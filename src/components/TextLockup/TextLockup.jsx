@@ -162,6 +162,7 @@ const TextLockup = ({
 											external={button.external || false}
 											target={button.target || ''}
 											size={button.size}
+											onClick={button.onClick}
 										>
 											{button.label}
 										</Button>
@@ -175,6 +176,7 @@ const TextLockup = ({
 											external={button.external || false}
 											target={button.target || ''}
 											type={button.linkType}
+											onClick={button.onClick}
 										>
 											{button.label}
 										</Link>

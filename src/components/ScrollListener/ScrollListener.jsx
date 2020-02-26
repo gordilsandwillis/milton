@@ -64,29 +64,42 @@ class ScrollListener extends React.Component {
       return
     }
 
-    const newState = {}
-    if (this.state.scrolledUp !== scrolledUp) {
-      newState.scrolledUp = scrolledUp
-    }
+    // ie: For show/hide header
+    // if (this.state.scrolledUp !== scrolledUp) {
+    //   this.setState({scrolledUp: scrolledUp})
+    // }
 
     if (!this.state.hasScrolled && this.lastScrollY > 0) {
-      newState.hasScrolled = true
+      if (!this.state.hasScrolled) {
+        this.setState({hasScrolled: true})
+      }
     }
 
     if (newScrollY === 0 && !this.state.scrolledToTop) {
-      newState.scrolledToTop = true
+      if (!this.state.scrolledToTop) {
+        this.setState({scrolledToTop: true})
+      }
     } else {
-      newState.scrolledToTop = false
+      if (this.state.scrolledToTop) {
+        this.setState({scrolledToTop: false})
+      }
     }
 
-    // newState.scrolledToBottom = newScrollY >= pageHeight - window.innerHeight * 1.2
-    newState.scrollY = newScrollY
+    if (newScrollY >= document.body.clientHeight - window.innerHeight * 1.2) {
+      if (!this.state.scrolledToBottom) {
+        this.setState({scrolledToBottom: true})
+      }
+    } else {
+      if (this.state.scrolledToBottom) {
+        this.setState({scrolledToBottom: false})
+      }
+    }
 
-    this.setState(newState)
+    //this.setState({scrollY: newScrollY})
   }
 
-  // scrollHandler = _.throttle(this._scrollHandler, 100);
-  scrollHandler = this._scrollHandler;
+  scrollHandler = _.throttle(this._scrollHandler, 100);
+  // scrollHandler = this._scrollHandler;
 
   observe = () => {
     window.addEventListener('scroll', this.scrollHandler, passiveListener() ? { passive: true } : false)
@@ -125,10 +138,10 @@ class ScrollListener extends React.Component {
     const {
       scrolledToTop,
       scrolledToBottom,
-      scrollY,
       scrolledUp,
       hasScrolled,
       pageHeight,
+      scrollY,
       pageWidth
     } = this.state
 
@@ -138,8 +151,8 @@ class ScrollListener extends React.Component {
         value={{
           scrolledToTop,
           scrolledToBottom,
-          scrollY,
           scrolledUp,
+          scrollY,
           hasScrolled,
           pageHeight,
           pageWidth,

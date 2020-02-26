@@ -46,16 +46,6 @@ export default `
     background: ${ colors.bgColor };
     padding: 0;
     margin: 0;
-    height: 100%;
-  }
-
-   body, html {
-    #root {
-      height: 100%;
-      > div {
-        min-height: 100%;
-      }
-    }
   }
 
   b, strong {
@@ -195,5 +185,28 @@ export default `
   }
 
   ${ slick }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+    .ReactModal__Content {
+      transition: transform 500ms ease-in-out;
+      transform: translate3d(0, 5%, 0);
+    }
+  }
+
+  .ReactModal__Overlay--after-open{
+      opacity: 1;
+      .ReactModal__Content {
+        transform: none;
+      }
+  }
+
+  .ReactModal__Overlay--before-close{
+      opacity: 0;
+      .ReactModal__Content {
+        transform: translate3d(0, -5%, 0);
+      }
+  }
 
 `

@@ -13,7 +13,7 @@ const FormWrapper = styled.div`
 `
 
 // a basic form
-const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceholder }) => {
+const CustomForm = ({ status, message, onValidated, className, inputPlaceholder, size, buttonTheme, inputLabel }) => {
 	let email
 	const submit = () =>
 		email &&
@@ -41,17 +41,19 @@ const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceho
 
 	return (
 
-		<FormWrapper>
+		<FormWrapper className={className}>
 			<div style={{ flexGrow: 1, flexShrink: 0 }}>
 				<Input
-					size="small"
+					size={size}
 					ref={node => (email = node)}
 					type="email"
-					placeholder={inputPlaceholder || 'Email'}
+					label={inputLabel}
+					placeholder={inputPlaceholder}
+					name="email"
 				/>
 			</div>
 			<div style={{ flexGrow: 0, flexShrink: 0 }}>
-				<Button onClick={submit} shape="simple square" setTheme="mainColor" size="small">
+				<Button onClick={submit} shape="simple square" setTheme={buttonTheme} size={size}>
 					<div>
 						{renderIcon(status)}
 					</div>
@@ -70,9 +72,12 @@ class MailchimpSignup extends Component {
 					<CustomForm
 						status={status}
 						message={message}
+						size={this.props.size || 'small'}
 						onValidated={formData => subscribe(formData)}
-						inputClassName={this.props.inputClassName}
+						className={this.props.className}
+						buttonTheme={this.props.buttonTheme || 'mainColor'}
 						inputPlaceholder={this.props.placeholder}
+						inputLabel={this.props.label || 'Enter email'}
 					/>
 				)}
 			/>

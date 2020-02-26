@@ -40,6 +40,15 @@ const BottomOverlay = styled.div`
 `
 
 class Home extends Component {
+	state = {
+		collapseHeader: false
+	}
+
+	toggleHeaderCollapse = (collapsed) => {
+		if (this.state.collapseHeader !== collapsed) {
+			this.setState({ collapseHeader: collapsed })
+		}
+	}
 
 	render() {
 		return (
@@ -63,7 +72,7 @@ class Home extends Component {
 			    <meta name="twitter:image" content={shareImage} />
 		    </Helmet>*/}
 				<div>
-					<Header hasAtf={true} homepage={true} />
+					<Header hasAtf={true} homepage={true} collapsed={this.state.collapseHeader} />
 					<ATF
 						index={0}
 						fullHeight="true"
@@ -79,7 +88,7 @@ class Home extends Component {
 						overlay="0"
 						additions={<BottomOverlay/>}
 					/>
-					{/*<LargeLogo/>*/}
+					<LargeLogo toggleHeaderCollapse={this.toggleHeaderCollapse}/>
 					<CalloutText
 						prevTheme={false}
 						nextTheme="bgColor"
