@@ -5,6 +5,7 @@ import { useScrollPercentage, ScrollPercentage } from 'react-scroll-percentage'
 import ScrollListener from 'src/components/ScrollListener'
 import withSizes from 'react-sizes'
 import { useInView } from 'react-intersection-observer'
+import { withScrollContext } from 'src/contexts/ScrollContext'
 
 import { typography, util, animations, colors } from 'src/styles'
 
@@ -61,17 +62,36 @@ const StyledLogo = styled(Logo)`
 	}
 `
 
-const LargeLogo = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd, winWidth, winHeight }) => {
-	const [ref, percentage] = useScrollPercentage({ threshold: 1 })
+const Context = React.createContext('scroll-context');
+
+const LargeLogo = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd, winWidth, winHeight, scrollContext }) => {
+	// const [ref, percentage] = useScrollPercentage({ threshold: 1 })
 	// const [ref, inView] = useInView({ triggerOnce: false })
-	console.log('render logo')
+	// console.log('render logo')
+
+	console.log(scrollContext)
+
+	const scrollX = 'scrollX'
+	const scrollY = 'scrollY'
+	const isScrollingDown = 'isScrollingDown'
 
 	return (
-  	<ScrollListener.Consumer>
-  		{({ scrolledToTop, scrollY, pageHeight, pageWidth }) => {
-  			return (
+	    <div>
+	      <h1>Scroll it!</h1>
+        <p>
+        	scrollX: {scrollX}<br/>
+        	scrollY: {scrollY}<br/>
+        	isScrollingDown: {isScrollingDown ? 'yes' : 'no'}
+        </p>
+	    </div>
+	)
+
+	return (
+		<ScrollListener.Consumer>
+			{({ scrolledToTop, scrollY, pageHeight, pageWidth }) => {
+				return (
 					<Wrapper
-						ref={ref}
+						// ref={ref}
 						winWidth={winWidth}
 						winHeight={winHeight}
 						scroll={1 - scrollY/(winHeight - 100)}
@@ -93,4 +113,4 @@ const sizesToProps = ({ width, height }) => ({
 	winHeight: height
 })
 
-export default withSizes(sizesToProps)(LargeLogo)
+export default withScrollContext(withSizes(sizesToProps)(LargeLogo))

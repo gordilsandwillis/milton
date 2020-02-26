@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import Slider from 'react-slick'
 import { rgba, darken } from 'polished'
@@ -131,8 +131,12 @@ class Slideshow extends Component {
 						<Slide>{children}</Slide>
 					)}
 				</SlideshowWrapper>
-				<NextPrevButton shape="circle" className="prev-button" setTheme="bgColor" size="small" onClick={this.goToPrevSlide} position="left"><MdKeyboardArrowLeft size={32}/></NextPrevButton>
-				<NextPrevButton shape="circle" className="next-button" setTheme="bgColor" size="small" onClick={this.goToNextSlide} position="right"><MdKeyboardArrowRight size={32}/></NextPrevButton>
+				{children.length > 1 && (
+					<Fragment>
+						<NextPrevButton shape="circle" className="prev-button" setTheme="bgColor" size="small" onClick={this.goToPrevSlide} position="left"><MdKeyboardArrowLeft size={32}/></NextPrevButton>
+						<NextPrevButton shape="circle" className="next-button" setTheme="bgColor" size="small" onClick={this.goToNextSlide} position="right"><MdKeyboardArrowRight size={32}/></NextPrevButton>
+					</Fragment>
+				)}
 			</div>
 		)
 	}

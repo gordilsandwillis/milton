@@ -9,7 +9,6 @@ import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
 import CollectionSections from 'src/components/CollectionSections'
 import Newsletter from 'src/components/Newsletter'
-import ScrollListener from 'src/components/ScrollListener'
 
 // import AtfImage from 'src/assets/images/Ethridge-2002100164.jpg'
 import AtfImage from 'src/assets/images/Ethridge-2002100114.jpg'
@@ -29,53 +28,6 @@ const numberMap = (num, outMin, outMax) => {
 		console.log(offset)
 	}
 }
-
-const ScalingLogo = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding-bottom: calc(100vw / 28 - 1.5%);
-	max-width: 100%;
-	transform: none;
-	z-index: 2;
-	z-index: 99;
-	> div {
-		display: block;
-		margin: 0 auto;
-		transform-origin: center top;
-		${ ({ scrollY, pageHeight, pageWidth }) => `
-			padding: 18px 0 0;
-			max-width: 160px;
-			position: relative;
-			transform: scale(${ numberMap((1 - scrollY/(pageHeight - 200)), 1, (pageWidth * .95) / 160) });
-			top: ${ numberMap((1 - scrollY/(pageHeight - 200)), 0, pageHeight - (pageWidth * .34)) }px;
-			${ mq.extraLargeAndBelow } {
-				padding: 18px 0 0;
-				max-width: 140px;
-				transform: scale(${ numberMap((1 - scrollY/(pageHeight - 200)), 1, (pageWidth * .95) / 140) });
-				top: ${ numberMap((1 - scrollY/(pageHeight - 200)), 0, pageHeight - (pageWidth * .36)) }px;
-			}
-			${ mq.largerAndBelow } {
-				padding: 18px 0 0;
-				max-width: 120px;
-				transform: scale(${ numberMap((1 - scrollY/(pageHeight - 200)), 1, (pageWidth * .95) / 120) });
-				top: ${ numberMap((1 - scrollY/(pageHeight - 200)), 0, pageHeight - (pageWidth * .38)) }px;
-			}
-			${ mq.mediumAndBelow } {
-				padding: 18px 0 0;
-				max-width: 100px;
-				transform: scale(${ numberMap((1 - scrollY/(pageHeight - 200)), 1, (pageWidth * .87) / 100) });
-				top: ${ numberMap((1 - scrollY/(pageHeight - 200)), 0, pageHeight - (pageWidth * .42)) }px;
-			}
-			svg {
-				display: block;
-				transition: color ${ animations.mediumSpeed } ease-in-out;
-				color: ${ scrollY > (pageHeight - 200) ? `${ colors.textColor }` : `${ colors.bgColor }` };
-			}
-		` }
-	}
-`
 
 const BottomOverlay = styled.div`
 	position: absolute;
@@ -127,14 +79,7 @@ class Home extends Component {
 						overlay="0"
 						additions={<BottomOverlay/>}
 					/>
-					{/*<ScrollListener.Consumer>
-			      {({ scrolledToTop, scrollY, pageHeight, pageWidth }) => {
-			      	return (
-			      		<ScalingLogo scrollY={scrollY} pageHeight={pageHeight} pageWidth={pageWidth}><Logo/></LargeLogo>
-							)
-						}}
-					</ScrollListener.Consumer>*/}
-					<LargeLogo/>
+					{/*<LargeLogo/>*/}
 					<CalloutText
 						prevTheme={false}
 						nextTheme="bgColor"

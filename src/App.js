@@ -7,6 +7,7 @@ import PageContent from 'src/components/PageContent'
 import ScrollListener from 'src/components/ScrollListener'
 import ShopifyProvider from 'src/contexts/ShopifyContext'
 import ModalProvider from 'src/contexts/ModalContext'
+import ScrollProvider from 'src/contexts/ScrollContext'
 import './reset.css'
 
 const PageWrapper = styled.div`
@@ -30,6 +31,9 @@ const Routes = ({ match, location }) => {
 							</Router>
 						</PageWrapper>
 					</Fragment>
+					<ScrollProvider>
+						<div>k</div>
+					</ScrollProvider>
 				</ModalProvider>
 			</ShopifyProvider>
 		</ScrollListener>
