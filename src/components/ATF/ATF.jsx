@@ -7,7 +7,7 @@ import ConditionalRender from 'src/components/ConditionalRender'
 import TextLockup from 'src/components/TextLockup'
 import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
-import { colors, animations } from 'src/styles'
+import { colors, animations, mq } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
 
@@ -26,13 +26,16 @@ const AlignmentContainer = styled.div`
 	display: flex;
 	align-items: ${ ({ vAlignment }) => vAlignment };
 	${ ({ fullHeight, winHeight, showArrow }) => fullHeight ? `
-		min-height: ${ winHeight + 'px' };
+		min-height: ${ winHeight };
 		padding-top: 7vw;
 		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
 	` : `
 		min-height: 56.25vw; // 16:9 Ratio
 		padding-top: 7vw;
-		padding-bottom: 7vw;
+		padding-bottom: 8vw;
+		${ mq.mediumAndBelow } {
+			min-height: 100vw;
+		}
 	` }
 `
 
@@ -46,12 +49,11 @@ const Block = styled.div`
 	width: 100%;
 	position: relative;
 
-	${ ({ background }) => background ? `
+	${ ({ background, fullHeight }) => background ? `
 		position: absolute;
 		height: 100%;
 		overflow: hidden;
 		z-index: 1;
-		bottom: ${ ({ fullHeight }) => fullHeight ? `60px` : `0` };
 	` : `` }
 
 	${ ({ content, fullHeight }) => content ? `
@@ -160,9 +162,10 @@ class ATF extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			videoFailed: false
+			videoFailed: false,
 		}
 	}
+
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
 		if (md.os() === 'iOS' && prevProps.winHeight !== this.props.winHeight) {
@@ -208,6 +211,8 @@ class ATF extends Component {
 			className
 		} = this.props
 
+
+
 		const vAlignOptions = {
 			bottom: 'flex-end',
 			top: 'flex-start',
@@ -223,9 +228,16 @@ class ATF extends Component {
 
 		const verticalAligment = vAlignOptions[vAlignment]
 
+		const md = new MobileDetect(window.navigator.userAgent)
+
+		let windowHeight = '100vh'
+		if (md.os() === 'iOS') {
+			windowHeight = winHeight + 'px'
+		}
+
 		return (
 			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow} className={className}>
-				<Block background winHeight={winHeight} fullHeight={fullHeight}>
+				<Block background winHeight={windowHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>
 							<VideoStyled
@@ -249,8 +261,8 @@ class ATF extends Component {
 					{index === 0 && overlay && (video || image) ? <Overlay /> : false}
 					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
-				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
-					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>
+				<Block content="true" winHeight={windowHeight} fullHeight={fullHeight}>
+					<AlignmentContainer vAlignment={verticalAligment} winHeight={windowHeight} fullHeight={fullHeight} showArrow={showArrow}>
 						<Content hAlignment={hAlignment}>
 							<Grid
 								small="1 [12] 1"

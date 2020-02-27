@@ -46,8 +46,8 @@ const FiftyFifty = ({
 		gridSetup = {
 			small: '[13] 1',
 			medium: '[7] 1 [5] 1',
-			large: '[13] 2 [11] 2',
-			extraLarge: '[13] 2 [10] 3',
+			large: '[7] 1 [5] 1',
+			extraLarge: '[7] 1 [5] 1',
 			imagePosition: 'ltr',
 			textGrid: '[12] 1'
 		}
@@ -55,8 +55,8 @@ const FiftyFifty = ({
 		gridSetup = {
 			small: '[13] 1',
 			medium: '[7] 1 [5] 1',
-			large: '[13] 2 [11] 2',
-			extraLarge: '[13] 2 [10] 3',
+			large: '[7] 1 [5] 1',
+			extraLarge: '[7] 1 [5] 1',
 			imagePosition: 'rtl',
 			textGrid: '[12] 1'
 		}

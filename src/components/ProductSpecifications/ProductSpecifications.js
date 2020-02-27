@@ -9,8 +9,8 @@ import ConditionalRender from 'src/components/ConditionalRender'
 import { colors, animations, typography, mq, util } from 'src/styles'
 
 const InnerWrapper = styled.div`
-  ${ ({ index }) => index === 0 && `border-top: 1px solid ${ colors.hrColor };` }
-  border-bottom: 1px solid ${ colors.hrColor };
+  ${ ({ index }) => index === 0 ? `border-top: 1px solid ${ colors.hrColor };` : `` }
+  ${ ({ border }) => border !== false ? `border-bottom: 1px solid ${ colors.hrColor };` : `` }
   width: 100%;
   text-align: left;
   padding: 5px 0 8px;
@@ -64,7 +64,7 @@ const VariantLink = styled(Link)`
 
 const VariantLinks = styled.div`
 	display: flex;
-	margin: 10px 0 7px;
+	margin: 10px 0 0;
 	justify-content: flex-start;
 	a {
 		margin-left: 20px;
@@ -94,10 +94,10 @@ const ProductSpecifications = ({
 	currentProduct,
 	currentVariant
 }) => (
-	<div style={{ margin: '25px 0' }}>
+	<div style={sections && variants.length > 1 ? { margin: '28px 0 0 0' } : {}}>
 		{sections.map( (section, index) => (
-			<ConditionalRender key={section} condition={specifications.some(({key}) => key.toLowerCase() === section)}>
-				<InnerWrapper index={index}>
+			specifications.some(({key}) => key.toLowerCase() === section) && (
+				<InnerWrapper index={index} key={section}>
 					<Grid
 						small="[1] [1]"
 						medium="[1] [1]"
@@ -121,10 +121,10 @@ const ProductSpecifications = ({
 					</div>
 					</Grid>
 				</InnerWrapper>
-			</ConditionalRender>
+			)
 		))}
 		<ConditionalRender condition={variants.length > 1}>
-			<InnerWrapper>
+			<InnerWrapper border={false}>
 				<Grid
 					small="[1] [1]"
 					medium="[1] [1]"

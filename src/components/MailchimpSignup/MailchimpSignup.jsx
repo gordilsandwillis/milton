@@ -22,8 +22,6 @@ const CustomForm = ({ status, message, onValidated, className, inputPlaceholder,
 			EMAIL: email.value,
 		})
 
-	let buttonStatus = status
-
 	const renderIcon = buttonStatus => {
 		let icon = <MaterialIcon>arrow_forward</MaterialIcon>
 		if (buttonStatus === 'sending') {

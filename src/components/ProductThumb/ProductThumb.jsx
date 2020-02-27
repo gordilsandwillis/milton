@@ -24,23 +24,29 @@ const ThumbnailImage = styled(Image)`
 	background: ${ colors.lightGrey };
 `
 
-const ProductThumb = ({ product, variant, className }) => (
-	<Wrapper className={className} to={'/product/' + product.handle + '/' + variant.id}>
-		<ThumbnailImage
-			image={{
-				fluid: {
-					aspectRatio: 1,
-					src: variant.image.src,
-					srcSet:'',
-					sizes: ''
-				}
-			}}
-			alt={product.title}
-		/>
-		<ProductPattern>{product.title}</ProductPattern>
-		<ProductTitle>{variant.title}</ProductTitle>
-	</Wrapper>
-)
+const ProductThumb = ({ product, variant, className }) => {
+	if (!variant.image) {
+		return false
+	}
+
+	return (
+		<Wrapper className={className} to={'/product/' + product.handle + '/' + variant.id}>
+			<ThumbnailImage
+				image={{
+					fluid: {
+						aspectRatio: 1,
+						src: variant.image.src,
+						srcSet:'',
+						sizes: ''
+					}
+				}}
+				alt={product.title}
+			/>
+			<ProductPattern>{product.title}</ProductPattern>
+			<ProductTitle>{variant.title}</ProductTitle>
+		</Wrapper>
+	)
+}
 
 
 export default ProductThumb

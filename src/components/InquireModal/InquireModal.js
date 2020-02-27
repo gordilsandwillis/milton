@@ -9,10 +9,6 @@ import { colors, typography, util } from 'src/styles'
 import Input from 'src/components/Input'
 import Button from 'src/components/Button'
 
-import { Transition } from 'react-transition-group'
-
-const timeout = 600
-
 Modal.setAppElement('#root')
 
 const CloseButton = styled(Button)`
@@ -26,21 +22,6 @@ const CloseButton = styled(Button)`
     color: ${ colors.textColor };
     opacity: 1;
   }
-`
-
-const ModalWrapper = styled.div`
-  transition: opacity ${ timeout }ms ease-in-out;
-  opacity: 0;
-  ${ ({ transitionStatus }) => transitionStatus === 'entering' && `
-    opacity: 0;
-  ` }
-  ${ ({ transitionStatus }) => transitionStatus === 'entered' && `
-    opacity: 1;
-  ` }
-  ${ ({ transitionStatus }) => transitionStatus === 'entering' ? `` : ``}
-  ${ ({ transitionStatus }) => transitionStatus === 'entered' ? `` : ``}
-  ${ ({ transitionStatus }) => transitionStatus === 'exiting' ? `` : ``}
-  ${ ({ transitionStatus }) => transitionStatus === 'exited' ? `` : ``}
 `
 
 const ModalHeader = styled.h4`
@@ -198,11 +179,9 @@ class InquireModal extends Component {
 	render() {
     const { status, product, collection, sku, name, company, phone, email, message } = this.state
  		const { modalContext } = this.props
- 		const { toggleModal, modalIsOpen, modalData } = modalContext
+ 		const { toggleModal, modalIsOpen, closeModal, modalData } = modalContext
     const { title, buttonLabel } = modalData
     const { currentProduct, currentVariant, currentCollection } = modalData
-
-    console.log(status)
 
     const valid = name && company && email && phone && message
     let buttonText = buttonLabel
@@ -213,7 +192,7 @@ class InquireModal extends Component {
       buttonText = 'Oh No!'
     }
 
-    console.log('modalContext ', modalContext)
+    // console.log('modalContext ', modalContext)
 
     return (
       <Modal
@@ -313,7 +292,7 @@ class InquireModal extends Component {
 
           </form>
 
-        	<CloseButton onClick={toggleModal} shape="circle" setTheme="transparent"><MdClose size={24}/></CloseButton>
+        	<CloseButton onClick={closeModal} shape="circle" setTheme="transparent"><MdClose size={24}/></CloseButton>
         </InnerWrapper>
       </Modal>
 		);

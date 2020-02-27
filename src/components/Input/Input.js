@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
-import { lighten, darken, rgba } from 'polished'
+import { darken, rgba } from 'polished'
 import { colors, typography, animations, util } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
@@ -57,12 +57,6 @@ const themes = {
 	}
 
 const setInputTheme = theme => {
-	const inputColor = {
-		white: colors.textColor,
-		bgColor: colors.textColor,
-		brown: colors.bgColor,
-		darkBrown: colors.bgColor
-	}
 	return `
 		color: ${ themes[theme]['color'] };
 		input {
@@ -344,7 +338,7 @@ class Input extends Component {
 						value={value}
 						htmlFor={name}
 						focused={focused}
-						className={placeholder || value || focused ? 'focused' : 'unfocused' /* to select from styled component */}
+						className={placeholder || value || hasValue || focused ? 'focused' : 'unfocused' /* to select from styled component */}
 						placeholder={placeholder}
 					>
 						{label}

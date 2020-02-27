@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 // import { Helmet } from "react-helmet";
 
 import Logo, { LogoMark } from 'src/components/Logo'
-import LargeLogo from 'src/components/LargeLogo'
+import LargeLogo from 'src/components/LargeLogo2'
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
@@ -51,6 +51,7 @@ class Home extends Component {
 	}
 
 	render() {
+		console.log('home render')
 		return (
 			<Fragment>
 				{/*<Helmet>

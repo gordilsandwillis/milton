@@ -23,6 +23,10 @@ const ImgArea = styled.div`
 	height: 100%;
 `
 
+const InquireButton = styled(Button)`
+	${ util.responsiveStyles('margin-top', 32, 26, 24, 24) }
+`
+
 const TextArea = styled.div`
 	${ util.responsiveStyles('padding-top', 150, 135, 100, 60) }
 	${ util.responsiveStyles('padding-bottom', 150, 135, 100, 60) }
@@ -123,11 +127,15 @@ class Product extends Component {
 		const currentProduct = products.find(product => product.handle === productHandle)
 		const currentVariant = currentProduct.variants.find(variant => variant.id === variantId)
 		const currentCollection = collections.find( (({ products }) => products.some( product => product.id === currentProduct.id)))
-		const variantImages = currentProduct.images.filter( i => currentVariant.title.includes( i.altText ) )
+		let variantImages = currentProduct.images.filter( i => currentVariant.title.includes( i.altText ) )
 		const collectionProducts = currentCollection.products.filter( product => product.id !== currentProduct.id )
 		const moreProducts = collectionProducts.sort(function (a, b) { return 0.5 - Math.random() }).slice(0, 4)
 
 		const productSpecifications = currentProduct.metafields.filter( ({namespace}) => namespace === 'specifications')
+
+		if (!variantImages || variantImages.length === 0) {
+			variantImages = [currentVariant.image]
+		}
 
 
 		this.setState({
@@ -216,19 +224,21 @@ class Product extends Component {
 										alignment="left"
 										transitionIn={false}
 									>
-										<ProductSpecifications
-											keys={['width', 'care', 'content', 'performance']}
-											specifications={productSpecifications}
-											variants={currentProduct.variants}
-											currentProduct={currentProduct}
-											currentVariant={currentVariant}
-										/>
-										<Button
+										{productSpecifications ? (
+											<ProductSpecifications
+												keys={['width', 'care', 'content', 'performance']}
+												specifications={productSpecifications}
+												variants={currentProduct.variants}
+												currentProduct={currentProduct}
+												currentVariant={currentVariant}
+											/>
+										) : false}
+										<InquireButton
 											onClick={this.handleInquireClick}
 											size="large"
 										>
 										Inquire
-										</Button>
+										</InquireButton>
 									</ProductInfo>
 								</div>
 							</Grid>
@@ -244,7 +254,7 @@ class Product extends Component {
 				<Section prevTheme="lightGrey" setTheme="lightGrey">
 					<Grid
 						small="1 [6] [6] 1"
-						medium="2 [3] [3] [3] 2"
+						medium="1 [3] [3] [3] [3] 1"
 						colGap={['3.6vw', '24px', '30px']}
 						rowGap={['50px', '70px', '80px']}
 					>
@@ -254,20 +264,24 @@ class Product extends Component {
 							</div>
 						))}
 					</Grid>
-					<BottomButtons
-						buttons={[
-							{
-								linkType: 'button',
-								label: `${currentCollection.title} Collection`,
-								to: `/collections/${currentCollection.handle}`
-							},
-							{
-								linkType: 'button',
-								label: 'All Collections',
-								to: '/collections'
-							}
-						]}
-					/>
+					<Grid
+						small="1 [12] 1"
+					>
+						<BottomButtons
+							buttons={[
+								{
+									linkType: 'button',
+									label: `${currentCollection.title} Collection`,
+									to: `/collections/${currentCollection.handle}`
+								},
+								{
+									linkType: 'button',
+									label: 'All Collections',
+									to: '/collections'
+								}
+							]}
+						/>
+					</Grid>
 				</Section>
 			</Fragment>
 		);

@@ -18,6 +18,10 @@ class ModalProvider extends React.Component {
     this.setState((prevState) => ({ modalIsOpen: !prevState.modalIsOpen, modalData }))
   }
 
+  closeModal = (modalData = {}) => {
+    this.setState((prevState) => ({ modalIsOpen: false }))
+  }
+
   render() {
     const { children } = this.props
     return (
@@ -25,6 +29,7 @@ class ModalProvider extends React.Component {
         value={{
           ...this.state,
           toggleModal: this.toggleModal,
+          closeModal: this.closeModal,
         }}
       >
         {children}

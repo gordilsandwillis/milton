@@ -27,7 +27,7 @@ class PageContent extends Component {
 
     // Set collections
     client.graphQLClient.send(collectionsQuery).then(({model, data}) => {
-      console.log('collections:', model.collections)
+      // console.log('collections:', model.collections)
       this.props.shopifyContext.updateState('shopifyCollections', model.collections)
     });
 
@@ -49,7 +49,7 @@ class PageContent extends Component {
   }
 
   render () {
-    if (!this.props.shopifyContext.shopifyCollections) {
+    if (!this.props.shopifyContext.shopifyCollections || !this.props.shopifyContext.shopifyProducts) {
       return false
     }
 

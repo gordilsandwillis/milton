@@ -17,7 +17,6 @@ const numberMap = (num, outMin, outMax) => {
 		} else {
 			return outMin.toPrecision(6)
 		}
-		console.log(offset)
 	}
 }
 
@@ -40,6 +39,7 @@ const Wrapper = styled.div`
 	z-index: 5;
 	height: 0;
 	top: ${ 35 + 23 }px;
+	transform-style: preserve-3d;
 	${ mq.extraLargeAndBelow } {
 		height: 0;
 		top: ${ 31 + 22 }px;
@@ -67,20 +67,22 @@ const StyledLogo = styled(Logo)`
 	max-width: 100%;
 	width: 100%;
 	transform-origin: center bottom;
-	transform: scale(${ ({ scroll, winWidth }) => scroll * .95 >= 160/(winWidth) ? scroll * .95 : 160/(winWidth) }) translate3d(0, ${ ({ scroll }) => scroll > 0 ? -2.2 : 0 }vw, 0);
+	text-align: center;
+	transform: scale(${ ({ scroll, winWidth }) => scroll * .95 >= 160/(winWidth) ? scroll * .95 : 160/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -2.2 : 0 }vw);
 	${ mq.extraLargeAndBelow } {
-		transform: scale(${ ({ scroll, winWidth }) => scroll * .95 >= 140/(winWidth) ? scroll * .95 : 140/(winWidth) }) translate3d(0, ${ ({ scroll }) => scroll > 0 ? -2.2 : 0 }vw, 0);
+		transform: scale(${ ({ scroll, winWidth }) => scroll * .95 >= 140/(winWidth) ? scroll * .95 : 140/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -2.2 : 0 }vw);
 	}
 	${ mq.largerAndBelow } {
-		transform: scale(${ ({ scroll, winWidth }) => scroll * .9 >= 120/(winWidth) ? scroll * .9 : 120/(winWidth) }) translate3d(0, ${ ({ scroll }) => scroll > 0 ? -1 : 0 }vw, 0);
+		transform: scale(${ ({ scroll, winWidth }) => scroll * .9 >= 120/(winWidth) ? scroll * .9 : 120/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -1 : 0 }vw);
 		bottom: ${ ({ scroll }) => 4 * scroll }vw;
 	}
 	${ mq.mediumAndBelow } {
-		transform: scale(${ ({ scroll, winWidth }) => scroll * .87 >= 100/(winWidth) ? scroll * .87 : 100/(winWidth) }) translate3d(0, ${ ({ scroll }) => scroll > 0 ? -1.2 : 0 }vw, 0);
+		transform: scale(${ ({ scroll, winWidth }) => scroll * .87 >= 100/(winWidth) ? scroll * .87 : 100/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -1.2 : 0 }vw);
 		bottom: ${ ({ scroll }) => 7 * scroll }vw;
 	}
 	svg {
-		display: block;
+		display: inline-block;
+		vertical-align: top;
 		transition: color ${ animations.mediumSpeed } ease-in-out;
 		color: ${ ({ scroll }) => scroll >= .1 ? colors.bgColor : colors.textColor };
 	}
@@ -91,8 +93,7 @@ const Context = React.createContext('scroll-context');
 const LargeLogo = ({ className, winWidth, winHeight, toggleHeaderCollapse }) => {
 
 	return (
-		<ScrollPercentage onChange={ (percentage) => {
-			console.log(percentage)
+		<ScrollPercentage threshold={.5} onChange={ (percentage) => {
 			if (percentage > .9) {
 				toggleHeaderCollapse(true)
 			} else {
@@ -102,12 +103,12 @@ const LargeLogo = ({ className, winWidth, winHeight, toggleHeaderCollapse }) => 
 			{({ percentage, ref, entry }) => (
 				<Wrapper
 					ref={ref}
-					scroll={1 - percentage.toPrecision(3)}
+					// scroll={1 - percentage.toPrecision(3)}
 				>
 					<StyledLogo
 						winWidth={winWidth}
 						winHeight={winHeight}
-						scroll={1 - percentage.toPrecision(3)}
+						scroll={1 - percentage}
 					/>
 				</Wrapper>
 			)}

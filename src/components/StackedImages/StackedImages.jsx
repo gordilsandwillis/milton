@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Parallax from 'src/components/Parallax'
 import Image from 'src/components/Image'
-import tickl from 'tickl'
+import { ScrollPercentage } from 'react-scroll-percentage'
 
 import { typography, util } from 'src/styles'
 
@@ -15,12 +14,21 @@ const Images = styled.div`
 	transform-style: preserve-3d;
 `
 
-const StackedImageWrap = styled(Parallax)`
+const StackedImageWrap = styled.div`
 	position: ${ ({ index }) => index === 0 ? 'relative' : 'absolute' };
 	z-index: ${ ({ index, images }) => images.length - index };
 	top: 0;
 	left: 0;
 	// transition: transform 5s cubic-bezier(.06,.83,.1,1);
+	width: 100%;
+	img,
+	> div {
+		width: 100%;
+	}
+
+	${ props => !props.disabled ? `
+		transform: 	translate3d(0, ${ props.speed * props.scroll }%, 0);
+	` : `` };
 `
 
 const speeds = [
@@ -57,26 +65,27 @@ class StackedImages extends Component {
 		}
 
 		return (
-			<Wrapper>
-				<Images
-					options={{ max : 10, scale : 1, speed : 3000, reverse : true, reset : true }}
-					// ref={this.ticklWrap}
-				>
-				{images.map((image, index) => (
-					<StackedImageWrap
-						key={index}
-						// ref={layer => this.layer[index] = layer}
-						index={index}
-						images={images}
-						posYStart={5 * (index + 1)}
-						posYEnd={-5 * (index + 1)}
-						speed={speeds[index]}
-						scrollUnit="%">
-						<Image image={image} />
-					</StackedImageWrap>
-				))}
-				</Images>
-			</Wrapper>
+			<ScrollPercentage threshold={0}>
+				{({ percentage, ref, entry }) => (
+					<Wrapper ref={ref}>
+						<Images>
+						{images.map((image, index) => (
+							<StackedImageWrap
+								key={index}
+								scroll={percentage}
+								index={index}
+								images={images}
+								posYStart={5 * (index + 1)}
+								posYEnd={-5 * (index + 1)}
+								speed={speeds[index]}
+								scrollUnit="%">
+								<Image image={image} />
+							</StackedImageWrap>
+						))}
+						</Images>
+					</Wrapper>
+				)}
+			</ScrollPercentage>
 		)
 	}
 }
