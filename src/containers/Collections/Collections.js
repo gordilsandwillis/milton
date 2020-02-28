@@ -46,8 +46,8 @@ class Collections extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header/>
-					<CollectionSections/>
-					<Furnishings products={furnitureProducts} />
+					<CollectionSections furnitureProducts={furnitureProducts}/>
+					<Furnishings products={furnitureProducts} prevTheme="bgColor" />
 					<CalloutText
 						prevTheme="bgColor"
 						nextTheme={false}

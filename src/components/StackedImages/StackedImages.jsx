@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Image from 'src/components/Image'
+import Image from 'src/components/GatsbyImage'
 import { ScrollPercentage } from 'react-scroll-percentage'
 
 const Wrapper = styled.div`
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `
 
 const Images = styled.div`
-	transform-style: preserve-3d;
+	
 `
 
 const StackedImageWrap = styled.div`
@@ -17,7 +17,6 @@ const StackedImageWrap = styled.div`
 	z-index: ${ ({ index, images }) => images.length - index };
 	top: 0;
 	left: 0;
-	// transition: transform 5s cubic-bezier(.06,.83,.1,1);
 	width: 100%;
 	img,
 	> div {
@@ -25,15 +24,15 @@ const StackedImageWrap = styled.div`
 	}
 
 	${ props => !props.disabled ? `
-		transform: 	translate3d(0, ${ props.speed * props.scroll }%, 0);
+		transform: 	translate3d(0, ${ (props.speed / 2) - (props.speed * props.scroll) }%, 0);
 	` : `` };
 `
 
 const speeds = [
-	-10,
-	10,
-	5,
-	-5
+	-20,
+	15,
+	0,
+	10
 ]
 
 class StackedImages extends Component {
@@ -77,7 +76,14 @@ class StackedImages extends Component {
 								posYEnd={-5 * (index + 1)}
 								speed={speeds[index]}
 								scrollUnit="%">
-								<Image image={image} />
+								<Image image={{
+									fluid: {
+										aspectRatio: image.width/image.height,
+										src: image.src,
+										srcSet:'',
+										sizes: ''
+									}
+								}} />
 							</StackedImageWrap>
 						))}
 						</Images>

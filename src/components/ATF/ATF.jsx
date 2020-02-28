@@ -37,7 +37,9 @@ const AlignmentContainer = styled.div`
 			min-height: 100vw;
 		}
 		${ mq.extraLargeAndUp } {
-			min-height: 50vw; // 2:1 Ratio
+			max-height: 50vw; // 2:1 Ratio
+			height: 70vh;
+			min-height: 0;
 		}
 	` }
 `

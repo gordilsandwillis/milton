@@ -16,16 +16,16 @@ import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
 const Thumbnails = {
 	Reni: [
-		ThumbnailReni,
-		ThumbnailReni2,
-		ThumbnailReni3,
-		ThumbnailReni4
+		{ src: ThumbnailReni, width: 720, height: 619 },
+		{ src: ThumbnailReni2, width: 720, height: 619 },
+		{ src: ThumbnailReni3, width: 720, height: 619 },
+		{ src: ThumbnailReni4, width: 720, height: 619 }
 	],
 	Matisse: [
-		ThumbnailMatisse,
-		ThumbnailMatisse2,
-		ThumbnailMatisse3,
-		ThumbnailMatisse4
+		{ src: ThumbnailMatisse, width: 720, height: 619 },
+		{ src: ThumbnailMatisse2, width: 720, height: 619 },
+		{ src: ThumbnailMatisse3, width: 720, height: 619 },
+		{ src: ThumbnailMatisse4, width: 720, height: 619 }
 	]
 }
 
@@ -36,6 +36,7 @@ class CollectionSections extends Component {
 
 	render() {
 		const { collections } = this.state
+		const { furnitureProducts } = this.props
 
 		if (!collections) {
 			return false
@@ -47,7 +48,7 @@ class CollectionSections extends Component {
 					<FiftyFifty
 						key={collection.id}
 						prevTheme="bgColor"
-						nextTheme="white"
+						nextTheme={furnitureProducts ? "bgColor" : "white"}
 						theme="bgColor"
 						eyebrow="Collection"
 						headline={collection.title}
