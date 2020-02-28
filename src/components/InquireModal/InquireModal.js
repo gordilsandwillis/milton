@@ -6,8 +6,9 @@ import { rgba } from 'polished'
 import { withModalContext } from 'src/contexts/ModalContext'
 import { MdClose } from 'react-icons/md'
 import { colors, typography, util } from 'src/styles'
-import Input from 'src/components/Input'
+import UnderlinedInput from 'src/components/Input/UnderlinedInput'
 import Button from 'src/components/Button'
+import ContactForm from 'src/components/ContactForm'
 
 Modal.setAppElement('#root')
 
@@ -46,36 +47,6 @@ const SubmitButton = styled(Button)`
   ${ util.responsiveStyles('margin-top', 50, 45, 40, 20) }
 `
 
-const UnderlinedInput = styled(Input)`
-  display: ${ ({ hidden }) => hidden ? 'none' : 'block' };
-  margin-top: 10px;
-  input {
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    padding-left: 0;
-    padding-right: 0;
-    background: transparent;
-    border-color: ${ colors.hrColor };
-    padding-top: 18px;
-    &:hover,
-    &:focus {
-      background: transparent;
-      border-color: ${ colors.textColor };
-    }
-  }
-  label {
-    padding: 18px 0 0 0;
-    margin: 0;
-    left: 0;
-    ${ typography.h6 }
-    &.focused {
-      color: ${ colors.lightTextColor };
-      transform: translate3d(0, -16px, 0) scale(.75);
-    }
-  }
-`
-
 const customStyles = {
   background: 'red',
   content: {
@@ -88,7 +59,6 @@ const customStyles = {
     padding: 0,
     top: 'auto',
     left: 'auto',
-    border: 'none',
     borderRadius: '0',
     border: '14px solid white',
     marginTop: 'auto',
@@ -113,6 +83,7 @@ const InnerWrapper = styled.div`
   align-items: left;
   justify-content: flex-start;
   max-width: 640px;
+  text-align: center;
   ${ util.responsiveStyles('padding', 50, 45, 40, 20) }
 `;
 
@@ -163,8 +134,10 @@ class InquireModal extends Component {
             message: ''
           })
           form.reset()
-          this.props.modalContext.toggleModal()
         }, 1000)
+        setTimeout(() => {
+          this.props.modalContext.closeModal()
+        }, 500)
       } else {
         this.setState({ status: "ERROR" })
       }
@@ -177,20 +150,14 @@ class InquireModal extends Component {
   }
 
 	render() {
-    const { status, product, collection, sku, name, company, phone, email, message } = this.state
+    const { status, name, company, phone, email, message } = this.state
  		const { modalContext } = this.props
- 		const { toggleModal, modalIsOpen, closeModal, modalData } = modalContext
+ 		const { modalIsOpen, closeModal, modalData } = modalContext
     const { title, buttonLabel } = modalData
     const { currentProduct, currentVariant, currentCollection } = modalData
 
     const valid = name && company && email && phone && message
     let buttonText = buttonLabel
-
-    if (status === 'SUCCESS') {
-      buttonText = 'Thank you'
-    } else if (status === 'ERROR') {
-      buttonText = 'Oh No!'
-    }
 
     // console.log('modalContext ', modalContext)
 
@@ -202,95 +169,14 @@ class InquireModal extends Component {
       >
         <InnerWrapper>
           <ModalHeader>{title || 'Inquire'}</ModalHeader>
-          <form 
-            onSubmit={this.submitForm}
-            action="https://formspree.io/xwkbldwy"
-            method="POST"
-          >
 
-            <UnderlinedInput
-              hidden={true}
-              onChange={this.handleInput}
-              size="small"
-              label="Product"
-              type="text"
-              name="product"
-              id="product"
-              value={(currentVariant && currentProduct) && currentVariant.title + ' | ' + currentProduct.title}
-            />
-
-            <UnderlinedInput
-              hidden={true}
-              onChange={this.handleInput}
-              size="small"
-              label="Collection"
-              type="text"
-              name="collection"
-              id="collection"
-              value={currentCollection && currentCollection.title}
-            />
-
-            <UnderlinedInput
-              hidden={true}
-              onChange={this.handleInput}
-              size="small"
-              label="SKU"
-              type="text"
-              name="sku"
-              id="sku"
-              value={currentVariant && currentVariant.sku}
-            />
-
-            <UnderlinedInput
-              onChange={this.handleInput}
-              size="small"
-              label="Name"
-              type="text"
-              name="name"
-              value={name}
-              id="name"/>
-
-            <UnderlinedInput
-              onChange={this.handleInput}
-              size="small"
-              label="Company"
-              type="text"
-              name="company"
-              value={company}
-              id="company"/>
-
-            <UnderlinedInput
-              onChange={this.handleInput}
-              size="small"
-              label="Email"
-              type="text"
-              name="email"
-              value={email}
-              id="email"/>
- 
-            <UnderlinedInput
-              onChange={this.handleInput}
-              size="small"
-              label="Phone"
-              type="text"
-              name="phone"
-              value={phone}
-              id="phone"/>
-
-            <UnderlinedInput
-              onChange={this.handleInput}
-              size="small"
-              label="Message"
-              type="textarea"
-              name="message"
-              value={message}
-              id="message"/>
-
-            <SubmitButton type="submit" disabled={!valid}>{buttonText || 'Send Inquiry'}</SubmitButton>
-
-            {status === 'ERROR' && (<ErrorMessage>Something went wrong. Please make sure all fields are filled out and try again.</ErrorMessage>)}
-
-          </form>
+          <ContactForm
+            buttonLabel={buttonText}
+            currentVariant={currentVariant}
+            currentProduct={currentProduct}
+            currentCollection={currentCollection}
+            onSuccess={closeModal}
+          />
 
         	<CloseButton onClick={closeModal} shape="circle" setTheme="transparent"><MdClose size={24}/></CloseButton>
         </InnerWrapper>

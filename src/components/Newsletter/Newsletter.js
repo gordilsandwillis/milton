@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import ATF from 'src/components/ATF'
-import Input from 'src/components/Input'
-import Grid from 'src/components/Grid'
 import MailchimpSignup from 'src/components/MailchimpSignup'
 import { colors, util } from 'src/styles'
 
@@ -14,7 +12,7 @@ const NewsletterBlock = styled(ATF)`
 	}
 `
 
-const NewsletterInput = styled(MailchimpSignup)`
+const NewsletterForm = styled(MailchimpSignup)`
 	color: ${ colors.bgColor };
 	${ util.responsiveStyles('margin-top', 36, 30, 24, 24) }
 	position: relative;
@@ -57,7 +55,7 @@ const Newsletter = () => (
 			}
 		}}
 	>
-		<NewsletterInput
+		<NewsletterForm
 			size="large"
 			theme="transparent"
 			buttonTheme="transparent"

@@ -9,6 +9,7 @@ import Section from 'src/components/Section'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import ProductThumb from 'src/components/ProductThumb'
 import Furnishings from 'src/components/Furnishings'
+import Textiles from 'src/components/Textiles'
 import StackedImages from 'src/components/StackedImages'
 
 // import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
@@ -67,8 +68,8 @@ class Collection extends Component {
 		const collectionProducts = collection.products
 		const hasAtf = collection.image && collection.image.src
 
-		const textileProducts = collection.products.filter(({ productType }) => productType === 'Textiles')
-		const furnitureProducts = collection.products.filter(({ productType }) => productType === 'Furniture')
+		const textileProducts = collectionProducts.filter(({ productType }) => productType === 'Textiles')
+		const furnitureProducts = collectionProducts.filter(({ productType }) => productType === 'Furniture')
 
 		return (
 			<Fragment>
@@ -128,46 +129,22 @@ class Collection extends Component {
 					/>
 				)}
 
-				<Section
-					prevTheme="bgColor"
-					setTheme="bgColor"
-					nextTheme={false}
-					padded={hasAtf ? true : 'bottom'}
-				>
-					<Grid
-						small="1 [12] 1"
-					>
-						<div>
-							<Grid
-								small="[1] [1]"
-								medium="[1] [1] [1]"
-								large="[1] [1] [1] [1]"
-								larger="[1] [1] [1] [1] [1]"
-								colGap={['3.6vw', '24px', '30px']}
-								rowGap={['50px', '70px', '80px']}
-							>
-								{textileProducts.map((product, index) => (
-									product.variants.map((variant, index) => (
-										<ProductThumb key={variant.id} product={product} variant={variant} />
-									))
-								))}
-							</Grid>
-						</div>
-					</Grid>
-				</Section>
+				<Textiles products={textileProducts} hasAtf={hasAtf} />
 				
-				<Section>
-					<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
-						<div>
-							<StackedImages images={[
-								Images[collection.title].layer1,
-								Images[collection.title].layer2,
-								Images[collection.title].layer3,
-								Images[collection.title].layer4
-							]}/>
-						</div>
-					</Grid>
-				</Section>
+				{furnitureProducts && furnitureProducts.length > 0 && (
+					<Section>
+						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
+							<div>
+								<StackedImages images={[
+									Images[collection.title].layer1,
+									Images[collection.title].layer2,
+									Images[collection.title].layer3,
+									Images[collection.title].layer4
+								]}/>
+							</div>
+						</Grid>
+					</Section>
+				)}
 
 				<Furnishings products={furnitureProducts} />
 

@@ -14,7 +14,6 @@ class Collections extends Component {
 
 	componentDidMount () {
 		this.setState({ products: this.props.shopifyContext.shopifyProducts })
-		console.log(this.props.shopifyContext.shopifyProducts)
 	}
 
 	render() {

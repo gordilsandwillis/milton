@@ -3,8 +3,6 @@ import styled from '@emotion/styled'
 import Image from 'src/components/Image'
 import { ScrollPercentage } from 'react-scroll-percentage'
 
-import { typography, util } from 'src/styles'
-
 const Wrapper = styled.div`
 	position: relative;
 	padding: 30px 0;

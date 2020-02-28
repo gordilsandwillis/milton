@@ -110,7 +110,7 @@ class Product extends Component {
 		console.log(this.props)
 		const { currentProduct, currentVariant, currentCollection } = this.state
 		const { modalContext } = this.props
-		modalContext.toggleModal({currentProduct, currentVariant, currentCollection})
+		modalContext.toggleModal({currentProduct, currentVariant, currentCollection, buttonLabel: 'Send Inquiry'})
 	}
 
 	componentDidMount () {

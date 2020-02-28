@@ -18,9 +18,9 @@ const StyledImage = styled(Img)`
 			` }
 		}
 	` }
-	// img {
-	// 	transition: opacity 1s ease-in-out !important;
-	// }
+	img {
+		transition: opacity 1s ease-in-out !important;
+	}
 `
 
 const ResponsiveImage = ({ image, small, medium, large, className, type }) => {

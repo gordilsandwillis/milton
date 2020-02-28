@@ -2,9 +2,9 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { useInView } from 'react-intersection-observer'
 
-const transitionTiming = 'cubic-bezier(0.44, 0.24, 0.16, 1.00)'
+const transitionTiming = 'ease-in-out' //'cubic-bezier(0.44, 0.24, 0.16, 1.00)'
 const transitionSpeed = '.65s'
-const transitionDelay = 0.075
+const transitionDelay = 0.15
 
 const EnteranceWrap = styled.div`
 	${ ({ transitionIn, 'data-in-view': inView, transform, items, delay }) => transitionIn ? `

@@ -21,7 +21,8 @@ const FiftyFifty = ({
 	buttons,
 	additions,
 	alignment,
-	imageContent
+	imageContent,
+	children
 }) => {
 
 	let gridSetup = {
@@ -110,7 +111,7 @@ const FiftyFifty = ({
 						eyebrow={eyebrow}
 						buttons={buttons}
 						theme={theme}
-						additions={additions}
+						additions={children}
 					/>
 				</Grid>
 			</Grid>

@@ -6,7 +6,7 @@ import Link from 'src/components/Link'
 import Image from 'src/components/GatsbyImage'
 import ConditionalRender from 'src/components/ConditionalRender'
 
-import { colors, animations, typography, mq, util } from 'src/styles'
+import { colors, animations, typography, util } from 'src/styles'
 
 const InnerWrapper = styled.div`
   ${ ({ index }) => index === 0 ? `border-top: 1px solid ${ colors.hrColor };` : `` }

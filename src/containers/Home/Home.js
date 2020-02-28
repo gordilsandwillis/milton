@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 // import { Helmet } from "react-helmet";
 
-import Logo, { LogoMark } from 'src/components/Logo'
-import LargeLogo from 'src/components/LargeLogo2'
+import { LogoMark } from 'src/components/Logo'
+import LargeLogo from 'src/components/LargeLogo'
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
@@ -12,22 +12,6 @@ import Newsletter from 'src/components/Newsletter'
 
 // import AtfImage from 'src/assets/images/Ethridge-2002100164.jpg'
 import AtfImage from 'src/assets/images/Ethridge-2002100114.jpg'
-import { util, mq, colors, animations } from 'src/styles'
-
-const numberMap = (num, outMin, outMax) => {
-	// return (num - in_min) * (outMax - outMin) / (in_max - in_min) + outMin
-	let offset = (num - 0) * (outMax - outMin) / (1 - 0) + outMin
-	if (!offset) {
-		return 0
-	} else {
-		if (offset >= outMin) {
-			return offset.toPrecision(6)
-		} else {
-			return outMin.toPrecision(6)
-		}
-		console.log(offset)
-	}
-}
 
 const BottomOverlay = styled.div`
 	position: absolute;
@@ -36,18 +20,12 @@ const BottomOverlay = styled.div`
 	right: 0;
 	height: 30%;
 	z-index: 1;
-	background: linear-gradient(to top, rgba(0,0,0,.4) 0%, rgba(0,0,0,0) 100%);
+	background: linear-gradient(to top, rgba(0,0,0,.2) 0%, rgba(0,0,0,0) 100%);
 `
 
 class Home extends Component {
 	state = {
 		collapseHeader: false
-	}
-
-	toggleHeaderCollapse = (collapsed) => {
-		if (this.state.collapseHeader !== collapsed) {
-			this.setState({ collapseHeader: collapsed })
-		}
 	}
 
 	render() {
@@ -89,7 +67,7 @@ class Home extends Component {
 						overlay="0"
 						additions={<BottomOverlay/>}
 					/>
-					<LargeLogo toggleHeaderCollapse={this.toggleHeaderCollapse}/>
+					<LargeLogo />
 					<CalloutText
 						prevTheme={false}
 						nextTheme="bgColor"

@@ -115,7 +115,8 @@ const TextLockup = ({
 		alignment,
 		headlineElement,
 		children,
-		transitionIn
+		transitionIn,
+		additions
 	}) => {
 	return (
 		<Wrapper className={className} alignment={alignment}>
@@ -185,6 +186,7 @@ const TextLockup = ({
 							})}
 						</ButtonActions>
 					)}
+					{additions && additions}
 				</TextContainer>
 			</div>
 		</Wrapper>

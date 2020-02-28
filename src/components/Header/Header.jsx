@@ -8,6 +8,7 @@ import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ScrollListener from 'src/components/ScrollListener'
 import { colors, animations, mq, util } from 'src/styles'
+import { withHeaderContext } from 'src/contexts/HeaderContext'
 
 const NavLinkStyle = (scrolled, active) => `
 	display: block;
@@ -169,7 +170,7 @@ class Header extends Component {
 			hasAtf,
 			placeholder,
 			homepage,
-			collapsed
+			headerContext
 		} = this.props
 
 		let pathname = '/'
@@ -177,13 +178,14 @@ class Header extends Component {
 			pathname = location.pathname
 		}
 
+
 		return (
 			<Fragment>
 				<ScrollListener.Consumer>
-		      {({ scrolledToTop, scrollY }) => {
+		      {({ scrolledToTop }) => {
 		      	let scrolled = !scrolledToTop
 		      	if (homepage) {
-		      		scrolled = collapsed
+		      		scrolled = headerContext.collapsed
 		      	}
 		      	return (
 							<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
@@ -239,4 +241,4 @@ Header.defaultProps = {
 	placeholder: true
 }
 
-export default withRouter(Header)
+export default withHeaderContext(withRouter(Header))

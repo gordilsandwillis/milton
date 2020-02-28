@@ -7,6 +7,7 @@ import PageContent from 'src/components/PageContent'
 import ScrollListener from 'src/components/ScrollListener'
 import ShopifyProvider from 'src/contexts/ShopifyContext'
 import ModalProvider from 'src/contexts/ModalContext'
+import HeaderProvider from 'src/contexts/HeaderContext'
 import './reset.css'
 
 const PageWrapper = styled.div`
@@ -18,20 +19,22 @@ const PageWrapper = styled.div`
 const Routes = ({ match, location }) => {
 	return (
 		<ScrollListener>
-			<ShopifyProvider>
-				<ModalProvider>
-					<Fragment>
-						<Global
-							styles={css`${ globalStyles }`}
-						/>
-						<PageWrapper>
-							<Router>
-								<PageContent/>
-							</Router>
-						</PageWrapper>
-					</Fragment>
-				</ModalProvider>
-			</ShopifyProvider>
+			<HeaderProvider>
+				<ShopifyProvider>
+					<ModalProvider>
+						<Fragment>
+							<Global
+								styles={css`${ globalStyles }`}
+							/>
+							<PageWrapper>
+								<Router>
+									<PageContent/>
+								</Router>
+							</PageWrapper>
+						</Fragment>
+					</ModalProvider>
+				</ShopifyProvider>
+			</HeaderProvider>
 		</ScrollListener>
 	)
 }

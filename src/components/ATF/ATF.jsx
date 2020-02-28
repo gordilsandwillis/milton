@@ -36,6 +36,9 @@ const AlignmentContainer = styled.div`
 		${ mq.mediumAndBelow } {
 			min-height: 100vw;
 		}
+		${ mq.extraLargeAndUp } {
+			min-height: 50vw; // 2:1 Ratio
+		}
 	` }
 `
 
@@ -106,7 +109,7 @@ const LeadDownPiece = styled.div`
 
 const Overlay = styled.div`
 	background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-	opacity: .4;
+	opacity: .3;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -280,8 +283,8 @@ class ATF extends Component {
 										text={text}
 										textSize={textSize}
 										buttons={buttons}
+										additions={children && children}
 									/>
-									{children && children}
 								</ScrollEntrance>
 							</Grid>
 						</Content>

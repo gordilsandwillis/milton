@@ -1,10 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import LargeLogo from './LargeLogo'
+import ContactForm from './ContactForm'
 
 storiesOf(`Components`, module)
-	.add('LargeLogo', () => (
+	.add('ContactForm', () => (
 		<div>
-			<LargeLogo/>
+			<ContactForm/>
 		</div>
 	))

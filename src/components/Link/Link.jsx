@@ -59,7 +59,7 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target = '_blank', children, className, type, setTheme } = this.props
+		const { to, external, target, children, className, type, setTheme } = this.props
 
 		if (external) {
 			return (
@@ -100,7 +100,8 @@ Link.defaultProps = {
 	external: false,
 	target: '',
 	type: 'none',
-	setTheme: 'currentcolor'
+	setTheme: 'currentcolor',
+	target: '_blank'
 }
 
 export default Link

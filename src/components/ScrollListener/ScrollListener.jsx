@@ -6,11 +6,8 @@ import * as wndw from 'src/utils/wndw'
 const defaultValue = {
   scrolledToTop: true,
   scrolledToBottom: false,
-  pageHeight: 0,
-  pageWidth: 0,
   scrollY: 0,
   hasScrolled: false,
-  scrolledUp: false,
   doScroll: _.noop,
 }
 
@@ -23,24 +20,10 @@ class ScrollListener extends React.Component {
 
   componentDidMount () {
     this.observe()
-    this.resizeHandler()
-    window.addEventListener('resize', this.resizeHandler)
   }
 
   componentWillUnmount () {
     this.unobserve()
-    window.removeEventListener('resize', this.resizeHandler)
-  }
-
-  resizeHandler = () => {
-    const pageHeight = document.body.clientHeight
-    const pageWidth = document.body.clientWidth
-    if (this.state.pageHeight !== pageHeight) {
-      this.setState({ pageHeight: pageHeight })
-    }
-    if (this.state.pageWidth !== pageWidth) {
-      this.setState({ pageWidth: pageWidth })
-    }
   }
 
   _scrollHandler = () => {
@@ -49,8 +32,6 @@ class ScrollListener extends React.Component {
       wndw.scrollY()
     )
 
-    const { pageHeight } = this.state
-
     const delta = newScrollY - this.lastScrollY
     this.lastScrollY = newScrollY
 
@@ -58,16 +39,9 @@ class ScrollListener extends React.Component {
       return
     }
 
-    const scrolledUp = delta < 0
-
     if (delta === 0) {
       return
     }
-
-    // ie: For show/hide header
-    // if (this.state.scrolledUp !== scrolledUp) {
-    //   this.setState({scrolledUp: scrolledUp})
-    // }
 
     if (!this.state.hasScrolled && this.lastScrollY > 0) {
       if (!this.state.hasScrolled) {
@@ -138,11 +112,8 @@ class ScrollListener extends React.Component {
     const {
       scrolledToTop,
       scrolledToBottom,
-      scrolledUp,
       hasScrolled,
-      pageHeight,
       scrollY,
-      pageWidth
     } = this.state
 
     const { children } = this.props
@@ -151,11 +122,8 @@ class ScrollListener extends React.Component {
         value={{
           scrolledToTop,
           scrolledToBottom,
-          scrolledUp,
           scrollY,
           hasScrolled,
-          pageHeight,
-          pageWidth,
           doScroll: this.doScroll,
         }}
       >

@@ -1,124 +1,113 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import Logo from 'src/components/Logo'
-import { useScrollPercentage, ScrollPercentage } from 'react-scroll-percentage'
-import ScrollListener from 'src/components/ScrollListener'
+import { ScrollPercentage } from 'react-scroll-percentage'
 import withSizes from 'react-sizes'
+import { withHeaderContext } from 'src/contexts/HeaderContext'
+import { animations, colors, mq } from 'src/styles'
 
-import { typography, util, animations, colors, mq } from 'src/styles'
-
-const numberMap = (num, outMin, outMax) => {
-	let offset = (num - 0) * (outMax - outMin) / (1 - 0) + outMin
-	if (!offset) {
-		return 0
-	} else {
-		if (offset >= outMin) {
-			return offset.toPrecision(6)
-		} else {
-			return outMin.toPrecision(6)
-		}
-	}
-}
-
-const calculateScale = (scroll) => {
-	let scale = scroll
-	if (scroll <= .1) {
-		scale = .1
-	} else if (scroll >= .95) {
-		scale = .95
-	}
-	return scale
-}
+const Scroller = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 0;
+	z-index: 4;
+	pointer-events: none;
+`
 
 const Wrapper = styled.div`
 	pointer-events: none;
 	position: sticky;
-	// position: absolute;
 	bottom: 0;
-	top: 0px;
 	z-index: 5;
 	height: 0;
-	top: ${ 35 + 23 }px;
-	transform-style: preserve-3d;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	top: calc(${ 35 + 20 }px + 2.2vw);
+	// transform-style: preserve-3d;
 	${ mq.extraLargeAndBelow } {
-		height: 0;
-		top: ${ 31 + 22 }px;
+		top: calc(${ 31 + 20 }px + 2.6vw);
 	}
 	${ mq.largerAndBelow } {
-		height: 0;
-		top: ${ 26 + 20 }px;
+		top: calc(${ 26 + 18 }px + 3.2vw);
 	}
 	${ mq.mediumAndBelow } {
-		height: 0;
-		top: ${ 22 + 20 }px;
+		top: calc(${ 22 + 20 }px + 6vw);
 	}
-	flex-grow: 0;
-	flex-shrink: 0;
 	width: 100%;
-	background: rgba(0, 0, 0, .5);
 	text-align: center;
 	will-change: transform;
+	height: 0;
 `
 
 const StyledLogo = styled(Logo)`
-	position: absolute;
-	left: 0;
-	bottom: 0;
 	max-width: 100%;
 	width: 100%;
 	transform-origin: center bottom;
-	text-align: center;
-	transform: scale(${ ({ scroll, winWidth }) => scroll * .95 >= 160/(winWidth) ? scroll * .95 : 160/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -2.2 : 0 }vw);
+	width: 160px;
+	margin-bottom: 2.2vw;
 	${ mq.extraLargeAndBelow } {
-		transform: scale(${ ({ scroll, winWidth }) => scroll * .95 >= 140/(winWidth) ? scroll * .95 : 140/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -2.2 : 0 }vw);
+		width: 140px;
+		margin-bottom: 2.6vw;
 	}
 	${ mq.largerAndBelow } {
-		transform: scale(${ ({ scroll, winWidth }) => scroll * .9 >= 120/(winWidth) ? scroll * .9 : 120/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -1 : 0 }vw);
-		bottom: ${ ({ scroll }) => 4 * scroll }vw;
+		width: 120px;
+		margin-bottom: 3.2vw;
 	}
 	${ mq.mediumAndBelow } {
-		transform: scale(${ ({ scroll, winWidth }) => scroll * .87 >= 100/(winWidth) ? scroll * .87 : 100/(winWidth) }) translateY(${ ({ scroll }) => scroll > 0 ? -1.2 : 0 }vw);
-		bottom: ${ ({ scroll }) => 7 * scroll }vw;
+		width: 100px;
+		margin-bottom: 6vw;
 	}
 	svg {
 		display: inline-block;
 		vertical-align: top;
 		transition: color ${ animations.mediumSpeed } ease-in-out;
 		color: ${ ({ scroll }) => scroll >= .1 ? colors.bgColor : colors.textColor };
+		transform-origin: center bottom;
+		transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/160) * scroll >= 1 ? ((winWidth * .95)/160) * scroll : 1 });
+		${ mq.extraLargeAndBelow } {
+			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/140) * scroll >= 1 ? ((winWidth * .95)/140) * scroll : 1 });
+		}
+		${ mq.largerAndBelow } {
+			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/120) * scroll >= 1 ? ((winWidth * .95)/120) * scroll : 1 });
+		}
+		${ mq.mediumAndBelow } {
+			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .87)/100) * scroll >= 1 ? ((winWidth * .87)/100) * scroll : 1 });
+		}
 	}
 `
 
-const Context = React.createContext('scroll-context');
+const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
 
-const LargeLogo = ({ className, winWidth, winHeight, toggleHeaderCollapse }) => {
+	const toggleHeader = headerContext.toggleHeader
 
 	return (
-		<ScrollPercentage threshold={.5} onChange={ (percentage) => {
+		<ScrollPercentage threshold={1} onChange={ (percentage) => {
 			if (percentage > .9) {
-				toggleHeaderCollapse(true)
+				toggleHeader(true)
 			} else {
-				toggleHeaderCollapse(false)
+				toggleHeader(false)
 			}
 		} }>
 			{({ percentage, ref, entry }) => (
-				<Wrapper
-					ref={ref}
-					// scroll={1 - percentage.toPrecision(3)}
-				>
-					<StyledLogo
-						winWidth={winWidth}
-						winHeight={winHeight}
-						scroll={1 - percentage}
-					/>
-				</Wrapper>
+				<Fragment>
+					<Scroller ref={ref}/>
+					<Wrapper>
+						<StyledLogo
+							winWidth={winWidth}
+							scroll={1 - percentage}
+						/>
+					</Wrapper>
+				</Fragment>
 			)}
 		</ScrollPercentage>
 	)
 }
 
 const sizesToProps = ({ width, height }) => ({
-	winWidth: width,
-	winHeight: height
+	winWidth: width
 })
 
-export default withSizes(sizesToProps)(LargeLogo)
+export default withHeaderContext(withSizes(sizesToProps)(LargeLogo))
