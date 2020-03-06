@@ -46,7 +46,7 @@ export const ProductFragment = (product) => {
   product.add('descriptionHtml')
   product.add('vendor')
 
-  product.addConnection('images', {args: {first: 10}}, ImageFrament)
+  product.addConnection('images', {args: {first: 50}}, ImageFrament)
   product.addConnection('metafields', {args: {first: 10, namespace: 'specifications'}}, MetafieldFragment)
   product.addConnection('variants', {args: {first: 10}}, ProductVariantFragment)
 }

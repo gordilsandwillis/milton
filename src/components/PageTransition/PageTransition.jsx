@@ -112,8 +112,10 @@ class PageTransition extends React.PureComponent {
 
   static getDerivedStateFromProps (nextProps, prevState) {
     const { location } = nextProps
+    console.log(nextProps)
     if (location.pathname !== prevState.pathname) { // Use If you want NO transition on page load
-    // if (nextProps.location.pathname !== prevState.pathname || !prevState.pathname) { // Use If you want to transition on page load
+      // if (nextProps.location.pathname !== prevState.pathname || !prevState.pathname) { // Use If you want to transition on page load
+      // TODO: when going to another product, still transition the page
       const productRouteChange = prevState.pathname ? (prevState.pathname && prevState.pathname.includes('product')) && (location.pathname && location.pathname.includes('product')) : true
 
       return {

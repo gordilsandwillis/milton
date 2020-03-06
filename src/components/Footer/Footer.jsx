@@ -42,7 +42,7 @@ class Footer extends Component {
 						<FooterLogoIcon />
 						<FooterItem><Link linkType="capsLink" external={true} to="mailto:info@miltontextiles.com">info@miltontextiles.com</Link></FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
-						<FooterItem><Link linkType="capsLink" external={true} to="https://gordilsandwillis.com/">Site By</Link></FooterItem>
+						<FooterItem><Link linkType="capsLink" external={true} to="https://gordilsandwillis.com/">Site By G&W</Link></FooterItem>
 					</div>
 				</Grid>
 			</Wrapper>
