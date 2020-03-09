@@ -8,6 +8,7 @@ import ScrollListener from 'src/components/ScrollListener'
 import ShopifyProvider from 'src/contexts/ShopifyContext'
 import ModalProvider from 'src/contexts/ModalContext'
 import HeaderProvider from 'src/contexts/HeaderContext'
+import { ParallaxProvider } from 'react-scroll-parallax'
 import './reset.css'
 
 const PageWrapper = styled.div`
@@ -20,20 +21,22 @@ const Routes = ({ match, location }) => {
 	return (
 		<ScrollListener>
 			<HeaderProvider>
-				<ShopifyProvider>
-					<ModalProvider>
-						<Fragment>
-							<Global
-								styles={css`${ globalStyles }`}
-							/>
-							<PageWrapper>
-								<Router>
-									<PageContent/>
-								</Router>
-							</PageWrapper>
-						</Fragment>
-					</ModalProvider>
-				</ShopifyProvider>
+				<ParallaxProvider>
+					<ShopifyProvider>
+						<ModalProvider>
+							<Fragment>
+								<Global
+									styles={css`${ globalStyles }`}
+								/>
+								<PageWrapper>
+									<Router>
+										<PageContent/>
+									</Router>
+								</PageWrapper>
+							</Fragment>
+						</ModalProvider>
+					</ShopifyProvider>
+				</ParallaxProvider>
 			</HeaderProvider>
 		</ScrollListener>
 	)
