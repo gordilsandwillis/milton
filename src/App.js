@@ -9,6 +9,7 @@ import ShopifyProvider from 'src/contexts/ShopifyContext'
 import ModalProvider from 'src/contexts/ModalContext'
 import HeaderProvider from 'src/contexts/HeaderContext'
 import { ParallaxProvider } from 'react-scroll-parallax'
+import IntersectionObserverPolyfill from 'src/components/IntersectionObserverPolyfill'
 import './reset.css'
 
 const PageWrapper = styled.div`
@@ -19,26 +20,28 @@ const PageWrapper = styled.div`
 
 const Routes = ({ match, location }) => {
 	return (
-		<ScrollListener>
-			<HeaderProvider>
-				<ParallaxProvider>
-					<ShopifyProvider>
-						<ModalProvider>
-							<Fragment>
-								<Global
-									styles={css`${ globalStyles }`}
-								/>
-								<PageWrapper>
-									<Router>
-										<PageContent/>
-									</Router>
-								</PageWrapper>
-							</Fragment>
-						</ModalProvider>
-					</ShopifyProvider>
-				</ParallaxProvider>
-			</HeaderProvider>
-		</ScrollListener>
+		<IntersectionObserverPolyfill>
+			<ScrollListener>
+				<HeaderProvider>
+					<ParallaxProvider>
+						<ShopifyProvider>
+							<ModalProvider>
+								<Fragment>
+									<Global
+										styles={css`${ globalStyles }`}
+									/>
+									<PageWrapper>
+										<Router>
+											<PageContent/>
+										</Router>
+									</PageWrapper>
+								</Fragment>
+							</ModalProvider>
+						</ShopifyProvider>
+					</ParallaxProvider>
+				</HeaderProvider>
+			</ScrollListener>
+		</IntersectionObserverPolyfill>
 	)
 }
 
