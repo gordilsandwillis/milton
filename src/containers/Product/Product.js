@@ -235,7 +235,7 @@ class Product extends Component {
 													className="pin-it-button"
 													target="_blank"
 													onClick={(event) => { event.preventDefault(); window.open("http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + '|' + currentVariant.title, 'mywin', 'left=20,top=20,width=600,height=600,toolbar=1,resizable=0'); return false; }}
-													href={"http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + '|' + currentVariant.title}
+													href={"http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + ' | ' + currentVariant.title}
 												><FaPinterest size={24}/></PinItButton>
 												<ProductImage
 													image={{
