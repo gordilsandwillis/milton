@@ -75,7 +75,7 @@ stories.add(`Default`, () => (
 						error={input.error}
 						disabled={input.disabled}
 					/>
-					<figcaption className="small" style={{ margin: 0, position: 'absolute', top: '10px', left: '12px', color: colors.lightTextColor }}>{input.description}</figcaption>
+					<figcaption className="small" style={{ margin: 0, position: 'absolute', top: '10px', left: '12px', color: colors.lightTextColor }}>{input.descriptionHtml}</figcaption>
 				</div>
 			))}
 		</Grid>

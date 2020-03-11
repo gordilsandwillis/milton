@@ -12,9 +12,8 @@ import Furnishings from 'src/components/Furnishings'
 import Textiles from 'src/components/Textiles'
 import StackedImages from 'src/components/StackedImages'
 
-// import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
-import MatisseNextCollectionImage from 'src/assets/images/Ethridge-2002100158.jpg'
-import ReniNextCollectionImage from 'src/assets/images/Ethridge-2002100105.jpg'
+import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
+import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
 
 import LayerReni from 'src/assets/images/collage/Reni/painting/layer-1.png'
 import LayerReni2 from 'src/assets/images/collage/Reni/painting/layer-2.png'
@@ -113,7 +112,7 @@ class Collection extends Component {
 							theme="bgColor"
 							alignment="center"
 							headline={collection.title}
-							text={collection.description}
+							text={collection.descriptionHtml}
 							headlineSize="h2"
 						/>
 					</div>
@@ -124,7 +123,7 @@ class Collection extends Component {
 						theme="bgColor"
 						alignment="center"
 						headline={collection.title}
-						text={collection.description}
+						text={collection.descriptionHtml}
 						headlineSize="h2"
 					/>
 				)}
@@ -152,7 +151,7 @@ class Collection extends Component {
 					eyebrow="Next Collection"
 					headline={nextCollection.title}
 					headlineSize="h3"
-					text={nextCollection.description}
+					text={nextCollection.descriptionHtml}
 					image={{
 						fluid: {
 							aspectRatio: 2,

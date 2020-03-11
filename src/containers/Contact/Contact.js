@@ -2,9 +2,8 @@ import React, { Component, Fragment } from 'react';
 import Header from 'src/components/Header'
 import styled from '@emotion/styled'
 import Button from 'src/components/Button'
-// import CalloutText from 'src/components/CalloutText'
-import FiftyFifty from 'src/components/FiftyFifty'
-import ContactImage from 'src/assets/images/Ethridge-2002100163.jpg'
+import Section from 'src/components/Section'
+import Grid from 'src/components/Grid'
 import ContactForm from 'src/components/ContactForm'
 import { colors, typography, util } from 'src/styles'
 
@@ -104,28 +103,14 @@ class Contact extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header hasAtf={false}/>
-
-					<FiftyFifty
-						prevTheme="bgColor"
-						setTheme="bgColor"
-						index={0}
-						headline="Contact Us"
-						text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-						image={{
-							fluid: {
-								aspectRatio: 1,
-								src: ContactImage,
-								srcSet: '',
-								sizes: ''
-							}
-						}}
-						overlay={false}
-					>
-						<div>
-							<ContactForm />
-						</div>
-					</FiftyFifty>
-
+          
+          <Section>
+  					<Grid small="1 [12] 1" medium="3 [8] 3" large="4 [6] 4">
+  						<div>
+  							<ContactForm />
+  						</div>
+            </Grid>
+          </Section>
 
 				</div>
 			</Fragment>

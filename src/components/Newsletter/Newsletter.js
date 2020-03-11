@@ -4,7 +4,7 @@ import ATF from 'src/components/ATF'
 import MailchimpSignup from 'src/components/MailchimpSignup'
 import { colors, util } from 'src/styles'
 
-import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100158.jpg'
+import PlaceholderNewsletterImage from 'src/assets/images/matisse-stage.jpg'
 
 const NewsletterBlock = styled(ATF)`
 	p {

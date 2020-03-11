@@ -131,7 +131,7 @@ const ProductSpecifications = ({
 					large="[1] [1]"
 				>
 					<div>
-						<label>Other Colors</label>
+						<label>Colors</label>
 					</div>
 					<div>
 						<VariantLinks>

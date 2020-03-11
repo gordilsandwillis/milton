@@ -72,6 +72,9 @@ const SlideshowDots = styled.ul`
 
 const SlideshowDot = styled.div`
 	padding: 22px 12px;
+	${ mq.mediumAndBelow } {
+		padding: 22px 8px;
+	}
 	span {
 		display: block;
 		width: 8px;

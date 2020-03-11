@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import styled from '@emotion/styled'
-
+import { darken } from 'polished'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import { withModalContext } from 'src/contexts/ModalContext'
 
@@ -13,6 +13,7 @@ import ProductThumb from 'src/components/ProductThumb'
 import Slideshow from 'src/components/Slideshow'
 import Button from 'src/components/Button'
 import ProductSpecifications from 'src/components/ProductSpecifications'
+import { FaPinterest } from 'react-icons/fa'
 
 import { colors, util, mq } from 'src/styles'
 // import { Helmet } from "react-helmet";
@@ -40,6 +41,7 @@ const TextArea = styled.div`
 
 const ProductImage = styled(Image)`
 	background: ${ colors.bgColor };
+	z-index: 1;
 	img {
 		object-fit: contain;
 	}
@@ -94,6 +96,36 @@ const ProductSlideshow = styled(Slideshow)`
 
 const BottomButtons = styled(TextLockup)`
 	${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
+`
+
+const PinItButton = styled.a`
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: #fff;
+	padding: 12px;
+	z-index: 2;
+	transition: opacity .3s ease-in-out, color .3s ease-in-out, background .3s ease-in-out;
+	opacity: 0;
+	border-radius: 50%;
+	color: ${ colors.alert };
+	background: rgba(255, 255, 255, .95);
+	&:hover {
+		color: ${ darken(.1, colors.alert) };
+		background: white;
+	}
+	svg {
+		display: block;
+	}
+`
+
+const SlideWrap = styled.div`
+	position: relative;
+	&:hover {
+		.pin-it-button {
+			opacity: 1;
+		}
+	}
 `
 
 class Product extends Component {
@@ -164,6 +196,8 @@ class Product extends Component {
 			return false
 		}
 
+		const currentUrl = process.env.REACT_APP_HOST + "/product/" + currentProduct.handle + "/" + currentVariant.id
+
 		return (
 			<Fragment>
 				{/*<Helmet>
@@ -196,17 +230,25 @@ class Product extends Component {
 											medium="2 [10] 2"
 											key={currentVariant.id + '-image-' + index}
 										>
-											<ProductImage
-												image={{
-													fluid: {
-														aspectRatio: 1,
-														src: image.src,
-														srcSet: '',
-														sizes: ''
-													}
-												}}
-												alt={currentProduct.title | currentVariant.title}
-											/>
+											<SlideWrap>
+												<PinItButton
+													className="pin-it-button"
+													target="_blank"
+													onClick={(event) => { event.preventDefault(); window.open("http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + '|' + currentVariant.title, 'mywin', 'left=20,top=20,width=600,height=600,toolbar=1,resizable=0'); return false; }}
+													href={"http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + '|' + currentVariant.title}
+												><FaPinterest size={24}/></PinItButton>
+												<ProductImage
+													image={{
+														fluid: {
+															aspectRatio: 1,
+															src: image.src,
+															srcSet: '',
+															sizes: ''
+														}
+													}}
+													alt={currentProduct.title | currentVariant.title}
+												/>
+											</SlideWrap>
 										</Grid>
 									)
 								})}

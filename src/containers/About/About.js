@@ -7,7 +7,6 @@ import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
 import Newsletter from 'src/components/Newsletter'
 
-import PlaceholderAboutImage from 'src/assets/images/Ethridge-2002100163.jpg'
 import PlaceholderDesignerImage from 'src/assets/images/about-designer.png'
 import PlaceholderEthosImage from 'src/assets/images/about-ethos.png'
 
@@ -50,21 +49,11 @@ class About extends Component {
 					<Header hasAtf={false}/>
 					<CalloutText
 						prevTheme={false}
-						nextTheme={false}
+						nextTheme="bgColor"
 						theme="bgColor"
 						alignment="center"
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
 						headlineSize="h3"
-					/>
-					<ATF
-						image={{
-							fluid: {
-								aspectRatio: 2,
-								src: PlaceholderAboutImage,
-								srcSet: '',
-								sizes: ''
-							}
-						}}
 					/>
 					<FiftyFifty
 						key="designer"

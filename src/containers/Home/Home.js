@@ -10,17 +10,16 @@ import CalloutText from 'src/components/CalloutText'
 import CollectionSections from 'src/components/CollectionSections'
 import Newsletter from 'src/components/Newsletter'
 
-// import AtfImage from 'src/assets/images/Ethridge-2002100164.jpg'
-import AtfImage from 'src/assets/images/Ethridge-2002100114.jpg'
+import AtfImage from 'src/assets/images/home-atf.jpg'
 
 const BottomOverlay = styled.div`
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 30%;
+	height: 40%;
 	z-index: 1;
-	background: linear-gradient(to top, rgba(0,0,0,.2) 0%, rgba(0,0,0,0) 100%);
+	background: linear-gradient(to top, rgba(0,0,0,.3) 0%, rgba(0,0,0,0) 100%);
 `
 
 class Home extends Component {

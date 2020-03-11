@@ -22,6 +22,28 @@ const ProductPattern = styled.h6`
 
 const ThumbnailImage = styled(Image)`
 	background: ${ colors.lightGrey };
+	position: relative;
+	z-index: 1;
+`
+
+const ThumbnailHoverWrap = styled.div`
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+`
+
+const ThumbnailImageWrapper = styled.div`
+	position: relative;
+	&:hover {
+		.hover-image {
+			opacity: 1;
+		}
+	}
 `
 
 const ProductThumb = ({ product, variant, className }) => {
@@ -29,19 +51,38 @@ const ProductThumb = ({ product, variant, className }) => {
 		return false
 	}
 
+	let variantImages = product.images.filter( i => variant.title.includes( i.altText ) )
+	let lastImage = variantImages[variantImages.length - 1].src
+	let hoverImage = variantImages[1].src
+
 	return (
 		<Wrapper className={className} to={'/product/' + product.handle + '/' + variant.id}>
-			<ThumbnailImage
-				image={{
-					fluid: {
-						aspectRatio: 1,
-						src: variant.image.src,
-						srcSet:'',
-						sizes: ''
-					}
-				}}
-				alt={product.title}
-			/>
+			<ThumbnailImageWrapper>
+				<ThumbnailImage
+					image={{
+						fluid: {
+							aspectRatio: 1,
+							src: variant.image.src,
+							srcSet:'',
+							sizes: ''
+						}
+					}}
+					alt={product.title}
+				/>
+				<ThumbnailHoverWrap className="hover-image">
+					<Image
+						image={{
+							fluid: {
+								aspectRatio: 1,
+								src: hoverImage,
+								srcSet:'',
+								sizes: ''
+							}
+						}}
+					/>
+				</ThumbnailHoverWrap>
+			</ThumbnailImageWrapper>
+
 			<ProductPattern>{product.title}</ProductPattern>
 			<ProductTitle>{variant.title}</ProductTitle>
 		</Wrapper>

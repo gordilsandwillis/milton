@@ -52,6 +52,10 @@ export default `
     font-weight: 600;
   }
 
+  i, em {
+    font-style: italic;
+  }
+
   h1, h2, h3, h4, h5, h6, blockquote, p, ul, ol {
     font-weight: normal;
     margin: 0 0 0.5em;
