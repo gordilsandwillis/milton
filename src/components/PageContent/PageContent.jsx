@@ -5,7 +5,6 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { shopifyClient as client, collectionsQuery, productsQuery } from 'src/services/shopify'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
-
 import Home from 'src/containers/Home'
 import Collections from 'src/containers/Collections'
 import Collection from 'src/containers/Collection'
@@ -28,7 +27,7 @@ class PageContent extends Component {
 
     // Set collections
     client.graphQLClient.send(collectionsQuery).then(({model, data}) => {
-      console.log('collections:', model.collections)
+      // console.log('collections:', model.collections)
       this.props.shopifyContext.updateState('shopifyCollections', model.collections)
     });
 
@@ -50,7 +49,7 @@ class PageContent extends Component {
   }
 
   render () {
-    if (!this.props.shopifyContext.shopifyCollections) {
+    if (!this.props.shopifyContext.shopifyCollections || !this.props.shopifyContext.shopifyProducts) {
       return false
     }
 

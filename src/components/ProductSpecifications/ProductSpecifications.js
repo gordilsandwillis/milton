@@ -6,13 +6,26 @@ import Link from 'src/components/Link'
 import Image from 'src/components/GatsbyImage'
 import ConditionalRender from 'src/components/ConditionalRender'
 
-import { colors, animations, mq, util } from 'src/styles'
+import { colors, animations, typography, util } from 'src/styles'
 
 const InnerWrapper = styled.div`
-  ${ ({ index }) => index === 0 && `border-top: 1px solid ${ colors.hrColor };` }
-  border-bottom: 1px solid ${ colors.hrColor };
+  ${ ({ index }) => index === 0 ? `border-top: 1px solid ${ colors.hrColor };` : `` }
+  ${ ({ border }) => border !== false ? `border-bottom: 1px solid ${ colors.hrColor };` : `` }
   width: 100%;
   text-align: left;
+  padding: 5px 0 8px;
+  ul {
+  	padding: 0;
+  	list-style: none;
+  	margin: 0;
+  	li {
+  		${ typography.bodySmall }
+  	}
+  }
+  label {
+  	${ typography.h6 }
+  	line-height: 1em;
+  }
 `
 
 const VariantLink = styled(Link)`
@@ -51,15 +64,13 @@ const VariantLink = styled(Link)`
 
 const VariantLinks = styled.div`
 	display: flex;
-	margin-top: 30px;
+	margin: 10px 0 0;
+	justify-content: flex-start;
 	a {
 		margin-left: 20px;
 		&:first-child /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */ {
 			margin-left: 0;
 		}
-	}
-	${ mq.largeAndBelow } {
-		justify-content: center;
 	}
 `
 
@@ -83,14 +94,15 @@ const ProductSpecifications = ({
 	currentProduct,
 	currentVariant
 }) => (
-	<div style={{ margin: '25px 0' }}>
+	<div style={sections && variants.length > 1 ? { margin: '28px 0 0 0' } : {}}>
 		{sections.map( (section, index) => (
-			<ConditionalRender key={section} condition={specifications.some(({key}) => key.toLowerCase() === section)}>
-				<InnerWrapper index={index}>
+			specifications.some(({key}) => key.toLowerCase() === section) && (
+				<InnerWrapper index={index} key={section}>
 					<Grid
 						small="[1] [1]"
 						medium="[1] [1]"
 						large="[1] [1]"
+						vAlign="baseline"
 					>
 					<div>
 						<label>{section}</label>
@@ -109,20 +121,20 @@ const ProductSpecifications = ({
 					</div>
 					</Grid>
 				</InnerWrapper>
-			</ConditionalRender>
+			)
 		))}
 		<ConditionalRender condition={variants.length > 1}>
-			<InnerWrapper>
+			<InnerWrapper border={false}>
 				<Grid
 					small="[1] [1]"
 					medium="[1] [1]"
 					large="[1] [1]"
 				>
 					<div>
-						<label>Other Colors</label>
+						<label>Colors</label>
 					</div>
 					<div>
-							<VariantLinks>
+						<VariantLinks>
 							{variants.map((variant, index) => {
 								let active = false
 								if (variant.id === currentVariant.id) {

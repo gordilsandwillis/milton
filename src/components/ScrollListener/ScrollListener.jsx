@@ -6,11 +6,8 @@ import * as wndw from 'src/utils/wndw'
 const defaultValue = {
   scrolledToTop: true,
   scrolledToBottom: false,
-  pageHeight: 0,
-  pageWidth: 0,
   scrollY: 0,
   hasScrolled: false,
-  scrolledUp: false,
   doScroll: _.noop,
 }
 
@@ -23,24 +20,10 @@ class ScrollListener extends React.Component {
 
   componentDidMount () {
     this.observe()
-    this.resizeHandler()
-    window.addEventListener('resize', this.resizeHandler)
   }
 
   componentWillUnmount () {
     this.unobserve()
-    window.removeEventListener('resize', this.resizeHandler)
-  }
-
-  resizeHandler = () => {
-    const pageHeight = document.body.clientHeight
-    const pageWidth = document.body.clientWidth
-    if (this.state.pageHeight !== pageHeight) {
-      this.setState({ pageHeight: pageHeight })
-    }
-    if (this.state.pageWidth !== pageWidth) {
-      this.setState({ pageWidth: pageWidth })
-    }
   }
 
   _scrollHandler = () => {
@@ -49,8 +32,6 @@ class ScrollListener extends React.Component {
       wndw.scrollY()
     )
 
-    const { pageHeight } = this.state
-
     const delta = newScrollY - this.lastScrollY
     this.lastScrollY = newScrollY
 
@@ -58,35 +39,41 @@ class ScrollListener extends React.Component {
       return
     }
 
-    const scrolledUp = delta < 0
-
     if (delta === 0) {
       return
     }
 
-    const newState = {}
-    if (this.state.scrolledUp !== scrolledUp) {
-      newState.scrolledUp = scrolledUp
-    }
-
     if (!this.state.hasScrolled && this.lastScrollY > 0) {
-      newState.hasScrolled = true
+      if (!this.state.hasScrolled) {
+        this.setState({hasScrolled: true})
+      }
     }
 
     if (newScrollY === 0 && !this.state.scrolledToTop) {
-      newState.scrolledToTop = true
+      if (!this.state.scrolledToTop) {
+        this.setState({scrolledToTop: true})
+      }
     } else {
-      newState.scrolledToTop = false
+      if (this.state.scrolledToTop) {
+        this.setState({scrolledToTop: false})
+      }
     }
 
-    newState.scrolledToBottom = newScrollY >= pageHeight - window.innerHeight * 1.2
-    newState.scrollY = newScrollY
+    if (newScrollY >= document.body.clientHeight - window.innerHeight * 1.2) {
+      if (!this.state.scrolledToBottom) {
+        this.setState({scrolledToBottom: true})
+      }
+    } else {
+      if (this.state.scrolledToBottom) {
+        this.setState({scrolledToBottom: false})
+      }
+    }
 
-    this.setState(newState)
+    //this.setState({scrollY: newScrollY})
   }
 
-  // scrollHandler = _.throttle(this._scrollHandler, 100);
-  scrollHandler = this._scrollHandler;
+  scrollHandler = _.throttle(this._scrollHandler, 100);
+  // scrollHandler = this._scrollHandler;
 
   observe = () => {
     window.addEventListener('scroll', this.scrollHandler, passiveListener() ? { passive: true } : false)
@@ -125,25 +112,18 @@ class ScrollListener extends React.Component {
     const {
       scrolledToTop,
       scrolledToBottom,
-      scrollY,
-      scrolledUp,
       hasScrolled,
-      pageHeight,
-      pageWidth
+      scrollY,
     } = this.state
 
     const { children } = this.props
-
     return (
       <Provider
         value={{
           scrolledToTop,
           scrolledToBottom,
           scrollY,
-          scrolledUp,
           hasScrolled,
-          pageHeight,
-          pageWidth,
           doScroll: this.doScroll,
         }}
       >

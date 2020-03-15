@@ -7,32 +7,40 @@ import ConditionalRender from 'src/components/ConditionalRender'
 import TextLockup from 'src/components/TextLockup'
 import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
-import { colors, animations } from 'src/styles'
+import { colors, animations, mq } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
-	${ ({ media }) => media && `
+	${ ({ media }) => media ? `
 		background: ${ colors.black };
 		color: ${ colors.bgColor };
-	` }
-	${ ({ fullHeight, showArrow }) => fullHeight && showArrow && `
+	` : `` }
+	${ ({ fullHeight, showArrow }) => fullHeight && showArrow ? `
 		margin-bottom: -28px;
-	` }
+	` : `` }
 `
 
 const AlignmentContainer = styled.div`
 	display: flex;
 	align-items: ${ ({ vAlignment }) => vAlignment };
 	${ ({ fullHeight, winHeight, showArrow }) => fullHeight ? `
-		min-height: ${ winHeight + 'px' };
+		min-height: ${ winHeight };
 		padding-top: 7vw;
 		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
 	` : `
 		min-height: 56.25vw; // 16:9 Ratio
 		padding-top: 7vw;
-		padding-bottom: 7vw;
+		padding-bottom: 8vw;
+		${ mq.mediumAndBelow } {
+			min-height: 100vw;
+		}
+		${ mq.extraLargeAndUp } {
+			max-height: 50vw; // 2:1 Ratio
+			height: 70vh;
+			min-height: 0;
+		}
 	` }
 `
 
@@ -46,17 +54,16 @@ const Block = styled.div`
 	width: 100%;
 	position: relative;
 
-	${ ({ background }) => background && `
+	${ ({ background, fullHeight }) => background ? `
 		position: absolute;
 		height: 100%;
 		overflow: hidden;
 		z-index: 1;
-		bottom: ${ ({ fullHeight }) => fullHeight ? `60px` : `0` };
-	` }
+	` : `` }
 
-	${ ({ content, fullHeight }) => content && `
+	${ ({ content, fullHeight }) => content ? `
 		z-index: 3;
-	` }
+	` : `` }
 `
 
 const BgImage = styled(Image)`
@@ -104,7 +111,7 @@ const LeadDownPiece = styled.div`
 
 const Overlay = styled.div`
 	background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-	opacity: .4;
+	opacity: .3;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -124,7 +131,6 @@ const ImageOverlay = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: 2;
-	display: none;
 `
 
 const VideoContainer = styled.div`
@@ -161,9 +167,10 @@ class ATF extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			videoFailed: false
+			videoFailed: false,
 		}
 	}
+
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
 		if (md.os() === 'iOS' && prevProps.winHeight !== this.props.winHeight) {
@@ -205,8 +212,11 @@ class ATF extends Component {
 			nextTheme,
 			overlay,
 			children,
-			additions
+			additions,
+			className
 		} = this.props
+
+
 
 		const vAlignOptions = {
 			bottom: 'flex-end',
@@ -223,9 +233,16 @@ class ATF extends Component {
 
 		const verticalAligment = vAlignOptions[vAlignment]
 
+		const md = new MobileDetect(window.navigator.userAgent)
+
+		let windowHeight = '100vh'
+		if (md.os() === 'iOS') {
+			windowHeight = winHeight + 'px'
+		}
+
 		return (
-			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow}>
-				<Block background winHeight={winHeight} fullHeight={fullHeight}>
+			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow} className={className}>
+				<Block background winHeight={windowHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>
 							<VideoStyled
@@ -249,8 +266,8 @@ class ATF extends Component {
 					{index === 0 && overlay && (video || image) ? <Overlay /> : false}
 					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
-				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
-					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>
+				<Block content="true" winHeight={windowHeight} fullHeight={fullHeight}>
+					<AlignmentContainer vAlignment={verticalAligment} winHeight={windowHeight} fullHeight={fullHeight} showArrow={showArrow}>
 						<Content hAlignment={hAlignment}>
 							<Grid
 								small="1 [12] 1"
@@ -268,8 +285,8 @@ class ATF extends Component {
 										text={text}
 										textSize={textSize}
 										buttons={buttons}
+										additions={children && children}
 									/>
-									{children && children}
 								</ScrollEntrance>
 							</Grid>
 						</Content>

@@ -4,10 +4,26 @@ import CalloutText from 'src/components/CalloutText'
 import { LogoMark } from 'src/components/Logo'
 import CollectionSections from 'src/components/CollectionSections'
 import Furnishings from 'src/components/Furnishings'
+import { withShopifyContext } from 'src/contexts/ShopifyContext'
 // import { Helmet } from "react-helmet";
 
 class Collections extends Component {
+	state = {
+		products: false
+	}
+
+	componentDidMount () {
+		this.setState({ products: this.props.shopifyContext.shopifyProducts })
+	}
+
 	render() {
+		const { products } = this.state
+
+		if (!products) {
+			return false
+		}
+
+		const furnitureProducts = this.state.products.filter(({ productType }) => productType === 'Furniture')
 		return (
 			<Fragment>
 				{/*<Helmet>
@@ -30,8 +46,8 @@ class Collections extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header/>
-					<CollectionSections/>
-					<Furnishings />
+					<CollectionSections furnitureProducts={furnitureProducts}/>
+					<Furnishings products={furnitureProducts} prevTheme="bgColor" />
 					<CalloutText
 						prevTheme="bgColor"
 						nextTheme={false}
@@ -48,4 +64,4 @@ class Collections extends Component {
 	}
 }
 
-export default Collections;
+export default withShopifyContext(Collections);

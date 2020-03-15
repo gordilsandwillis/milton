@@ -33,6 +33,17 @@ const FooterLogoIcon = styled(LogoMark)`
 	margin-bottom: 20px;
 `
 
+const Divider = styled.div`
+	${ typography.h6 }
+	display: inline-block;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background: currentcolor;
+	vertical-align: top;
+	margin: .9em 1em 0;
+`
+
 class Footer extends Component {
 	render () {
 		return (
@@ -40,9 +51,14 @@ class Footer extends Component {
 				<Grid small="1 [12] 1">
 					<div>
 						<FooterLogoIcon />
-						<FooterItem><Link linkType="capsLink" external={true} to="mailto:info@miltontextiles.com">info@miltontextiles.com</Link></FooterItem>
+						<FooterItem><Link type="capsLink" external={true} to="mailto:info@miltontextiles.com">info@miltontextiles.com</Link></FooterItem>
+						<FooterItem>
+							<Link type="capsLink" external={true} to="https://instagram.com/">Instagram</Link>
+							<Divider/>
+							<Link type="capsLink" external={true} to="https://pinterest.com/">Pinterest</Link>
+						</FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
-						<FooterItem><Link linkType="capsLink" external={true} to="https://gordilsandwillis.com/">Site By</Link></FooterItem>
+						<FooterItem><Link type="capsLink" external={true} to="https://gordilsandwillis.com/">Site By G&W</Link></FooterItem>
 					</div>
 				</Grid>
 			</Wrapper>

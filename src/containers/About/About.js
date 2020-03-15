@@ -7,9 +7,10 @@ import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
 import Newsletter from 'src/components/Newsletter'
 
-import PlaceholderAboutImage from 'src/assets/images/Ethridge-2002100163.jpg'
 import PlaceholderDesignerImage from 'src/assets/images/about-designer.png'
 import PlaceholderEthosImage from 'src/assets/images/about-ethos.png'
+
+import { withModalContext } from 'src/contexts/ModalContext'
 
 const loremIpsum = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tubulum fuisse. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -17,6 +18,11 @@ Tubulum fuisse, qua illum Lorem. Lorem ipsum dolor sit amet, consectetur adipisc
 `
 
 class About extends Component {
+
+	handleInquireClick = (event) => {
+		const { modalContext } = this.props
+		modalContext.toggleModal({title: 'Contact Us', buttonLabel: 'Send'})
+	}
 
 	render() {
 		return (
@@ -49,20 +55,10 @@ class About extends Component {
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
 						headlineSize="h3"
 					/>
-					<ATF
-						image={{
-							fluid: {
-								aspectRatio: 2,
-								src: PlaceholderAboutImage,
-								srcSet: '',
-								sizes: ''
-							}
-						}}
-					/>
 					<FiftyFifty
 						key="designer"
-						prevTheme="bgColor"
-						nextTheme="white"
+						prevTheme={false}
+						nextTheme="bgColor"
 						theme="bgColor"
 						eyebrow="Head Designer & Founder"
 						headline="Vera Neykov"
@@ -111,7 +107,7 @@ class About extends Component {
 							{
 								linkType: 'button',
 								label: 'Contact',
-								to: '#',
+								onClick: this.handleInquireClick,
 								size: 'large'
 							}
 						]}
@@ -123,4 +119,4 @@ class About extends Component {
 	}
 }
 
-export default About;
+export default withModalContext(About);

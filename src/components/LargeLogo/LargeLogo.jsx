@@ -1,85 +1,113 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import Logo from 'src/components/Logo'
-import { useScrollPercentage } from 'react-scroll-percentage'
-import ScrollListener from 'src/components/ScrollListener'
+import { ScrollPercentage } from 'react-scroll-percentage'
 import withSizes from 'react-sizes'
+import { withHeaderContext } from 'src/contexts/HeaderContext'
+import { animations, colors, mq } from 'src/styles'
 
-import { typography, util } from 'src/styles'
-
-const numberMap = (num, outMin, outMax) => {
-	let offset = (num - 0) * (outMax - outMin) / (1 - 0) + outMin
-	if (!offset) {
-		return 0
-	} else {
-		if (offset >= outMin) {
-			return offset.toPrecision(6)
-		} else {
-			return outMin.toPrecision(6)
-		}
-		console.log(offset)
-	}
-}
-
-const calculateScale = (scroll) => {
-	let scale = scroll
-	if (scroll <= .1) {
-		scale = .1
-	} else if (scroll >= .95) {
-		scale = .95
-	}
-	return scale
-}
-
-const Wrapper = styled.div`
+const Scroller = styled.div`
 	position: absolute;
 	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 0;
+	z-index: 4;
+	pointer-events: none;
+`
+
+const Wrapper = styled.div`
+	pointer-events: none;
+	position: sticky;
+	bottom: 0;
 	z-index: 5;
-	flex-grow: 0;
-	flex-shrink: 0;
+	height: 0;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	top: calc(${ 35 + 20 }px + 2.2vw);
+	// transform-style: preserve-3d;
+	${ mq.extraLargeAndBelow } {
+		top: calc(${ 31 + 20 }px + 2.6vw);
+	}
+	${ mq.largerAndBelow } {
+		top: calc(${ 26 + 18 }px + 3.2vw);
+	}
+	${ mq.mediumAndBelow } {
+		top: calc(${ 22 + 20 }px + 6vw);
+	}
 	width: 100%;
-	background: rgba(0, 0, 0, .5);
 	text-align: center;
-	padding: 18px 0 2.2vw;
 	will-change: transform;
-	// transform: scale(${ ({ scroll }) => scroll > .1 ? scroll : .1 });
-	transform: scale(${ ({ scroll }) => calculateScale(scroll) });
-	${ ({ scroll }) => scroll >= .95 ? `
-		transition: transform .3s ease-in-out;
-	` : `` }
+	height: 0;
 `
 
 const StyledLogo = styled(Logo)`
-	top: 0;
-	left: 0;
 	max-width: 100%;
 	width: 100%;
 	transform-origin: center bottom;
-	// transform: scale(${ ({ scroll }) => calculateScale(scroll) });
+	width: 160px;
+	margin-bottom: 2.2vw;
+	${ mq.extraLargeAndBelow } {
+		width: 140px;
+		margin-bottom: 2.6vw;
+	}
+	${ mq.largerAndBelow } {
+		width: 120px;
+		margin-bottom: 3.2vw;
+	}
+	${ mq.mediumAndBelow } {
+		width: 100px;
+		margin-bottom: 6vw;
+	}
 	svg {
-		display: block;
-		color: red;
+		display: inline-block;
+		vertical-align: top;
+		transition: color ${ animations.mediumSpeed } ease-in-out;
+		color: ${ ({ scroll }) => scroll >= .1 ? colors.bgColor : colors.textColor };
+		transform-origin: center bottom;
+		transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/160) * scroll >= 1 ? ((winWidth * .95)/160) * scroll : 1 });
+		${ mq.extraLargeAndBelow } {
+			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/140) * scroll >= 1 ? ((winWidth * .95)/140) * scroll : 1 });
+		}
+		${ mq.largerAndBelow } {
+			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/120) * scroll >= 1 ? ((winWidth * .95)/120) * scroll : 1 });
+		}
+		${ mq.mediumAndBelow } {
+			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .87)/100) * scroll >= 1 ? ((winWidth * .87)/100) * scroll : 1 });
+		}
 	}
 `
 
-const LargeLogo = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd, winWidth, winHeight }) => {
-	const [ref, percentage] = useScrollPercentage({ threshold: 1 })
-	// const { winWidth, winHeight } = this.props
-	console.log(percentage)
+const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
+
+	const toggleHeader = headerContext.toggleHeader
+
 	return (
-		<Wrapper
-			ref={ref}
-			winWidth={winWidth}
-			scroll={1 - percentage.toPrecision(3)}
-		>
-			<StyledLogo scroll={1 - percentage.toPrecision(3)} winHeight={winHeight} winWidth={winWidth}/>
-		</Wrapper>
+		<ScrollPercentage threshold={1} onChange={ (percentage) => {
+			if (percentage > .9) {
+				toggleHeader(true)
+			} else {
+				toggleHeader(false)
+			}
+		} }>
+			{({ percentage, ref, entry }) => (
+				<Fragment>
+					<Scroller ref={ref}/>
+					<Wrapper>
+						<StyledLogo
+							winWidth={winWidth}
+							scroll={1 - percentage}
+						/>
+					</Wrapper>
+				</Fragment>
+			)}
+		</ScrollPercentage>
 	)
 }
 
 const sizesToProps = ({ width, height }) => ({
-	winWidth: width,
-	winHeight: height
+	winWidth: width
 })
 
-export default withSizes(sizesToProps)(LargeLogo)
+export default withHeaderContext(withSizes(sizesToProps)(LargeLogo))

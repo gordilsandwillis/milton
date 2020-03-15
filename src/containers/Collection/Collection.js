@@ -8,19 +8,57 @@ import Grid from 'src/components/Grid'
 import Section from 'src/components/Section'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import ProductThumb from 'src/components/ProductThumb'
-import Furnishings from 'src/components/Furnishings';
+import Furnishings from 'src/components/Furnishings'
+import Textiles from 'src/components/Textiles'
+import StackedImages from 'src/components/StackedImages'
 
-// import PlaceholderNewsletterImage from 'src/assets/images/Ethridge-2002100163.jpg'
-import NextCollectionImage from 'src/assets/images/Ethridge-2002100158.jpg'
+import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
+import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
+
+import LayerReni from 'src/assets/images/collage/Reni/painting/layer-1.png'
+import LayerReni2 from 'src/assets/images/collage/Reni/painting/layer-2.png'
+import LayerReni3 from 'src/assets/images/collage/Reni/painting/layer-3.png'
+import LayerReni4 from 'src/assets/images/collage/Reni/painting/layer-4.png'
+
+import LayerMatisse from 'src/assets/images/collage/Matisse/painting/layer-1.png'
+import LayerMatisse2 from 'src/assets/images/collage/Matisse/painting/layer-2.png'
+import LayerMatisse3 from 'src/assets/images/collage/Matisse/painting/layer-3.png'
+import LayerMatisse4 from 'src/assets/images/collage/Matisse/painting/layer-4.png'
+
+const Images = {
+	Reni: {
+		layer1: { src: LayerReni, width: 617, height: 674 },
+		layer2: { src: LayerReni2, width: 617, height: 674 },
+		layer3: { src: LayerReni3, width: 617, height: 674 },
+		layer4: { src: LayerReni4, width: 617, height: 674 },
+		nextCollectionImage: ReniNextCollectionImage
+	},
+	Matisse: {
+		layer1: { src: LayerMatisse, width: 617, height: 588 },
+		layer2: { src: LayerMatisse2, width: 617, height: 588 },
+		layer3: { src: LayerMatisse3, width: 617, height: 588 },
+		layer4: { src: LayerMatisse4, width: 617, height: 588 },
+		nextCollectionImage: MatisseNextCollectionImage
+	}
+}
 
 
 class Collection extends Component {
 	state = {
-		collections: this.props.shopifyContext.shopifyCollections
+		collections: false
+	}
+
+	componentDidMount () {
+		this.setState({ collections: this.props.shopifyContext.shopifyCollections })
 	}
 
 	render() {
 		const { collections } = this.state
+
+		if (!collections) {
+			return false
+		}
+		
 		const collectionHandle = this.props.match.params.id
 		const collection = collections.find(({handle}) => handle === collectionHandle)
 		const collectionIndex = collections.findIndex(({handle}) => handle === collectionHandle)
@@ -29,8 +67,8 @@ class Collection extends Component {
 		const collectionProducts = collection.products
 		const hasAtf = collection.image && collection.image.src
 
-
-		console.log('nextCollection', nextCollection)
+		const textileProducts = collectionProducts.filter(({ productType }) => productType === 'Textiles')
+		const furnitureProducts = collectionProducts.filter(({ productType }) => productType === 'Furniture')
 
 		return (
 			<Fragment>
@@ -53,82 +91,72 @@ class Collection extends Component {
 			    <meta name="twitter:image" content={shareImage} />
 		    </Helmet>*/}
 
-					<Header hasAtf={hasAtf}/>
+				<Header hasAtf={hasAtf}/>
 
-					{hasAtf ? (
-						<div>
-							<ATF
-								index={0}
-								image={{
-									fluid: {
-										aspectRatio: 2,
-										src: collection.image.src,
-										srcSet: '',
-										sizes: ''
-									}
-								}}
-								overlay={false}
-							/>
-							<CalloutText
-								nextTheme="bgColor"
-								theme="bgColor"
-								alignment="center"
-								headline={collection.title}
-								text={collection.description}
-								headlineSize="h2"
-							/>
-						</div>
-					) : (
+				{hasAtf ? (
+					<div>
+						<ATF
+							index={0}
+							image={{
+								fluid: {
+									aspectRatio: 2,
+									src: collection.image.src,
+									srcSet: '',
+									sizes: ''
+								}
+							}}
+							overlay={false}
+						/>
 						<CalloutText
-							prevTheme="bgColor"
 							nextTheme="bgColor"
 							theme="bgColor"
 							alignment="center"
 							headline={collection.title}
-							text={collection.description}
+							text={collection.descriptionHtml}
 							headlineSize="h2"
 						/>
-					)}
-
-					<Section
+					</div>
+				) : (
+					<CalloutText
 						prevTheme="bgColor"
-						setTheme="bgColor"
-						nextTheme="white"
-						padded={hasAtf ? true : 'bottom'}
-					>
-						<Grid
-							small="1 [12] 1"
-						>
+						nextTheme="bgColor"
+						theme="bgColor"
+						alignment="center"
+						headline={collection.title}
+						text={collection.descriptionHtml}
+						headlineSize="h2"
+					/>
+				)}
+
+				<Textiles products={textileProducts} hasAtf={hasAtf} />
+				
+				{furnitureProducts && furnitureProducts.length > 0 && (
+					<Section>
+						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
 							<div>
-								<Grid
-									small="[1] [1]"
-									medium="[1] [1] [1]"
-									large="[1] [1] [1] [1]"
-									larger="[1] [1] [1] [1] [1]"
-									colGap={['3.6vw', '24px', '30px']}
-									rowGap={['50px', '70px', '80px']}
-								>
-									{collectionProducts.map((product, index) => (
-										product.variants.map((variant, index) => (
-											<ProductThumb key={variant.id} product={product} variant={variant} />
-										))
-									))}
-								</Grid>
+								<StackedImages images={[
+									Images[collection.title].layer1,
+									Images[collection.title].layer2,
+									Images[collection.title].layer3,
+									Images[collection.title].layer4
+								]}/>
 							</div>
 						</Grid>
 					</Section>
+				)}
 
-				<Furnishings />
+				<Furnishings products={furnitureProducts} />
+
 				<ATF
 					eyebrow="Next Collection"
 					headline={nextCollection.title}
 					headlineSize="h3"
-					text={nextCollection.description}
+					text={nextCollection.descriptionHtml}
 					image={{
 						fluid: {
 							aspectRatio: 2,
 							// src: nextCollection.image.src,
-							src: NextCollectionImage,
+							src: Images[nextCollection.title].nextCollectionImage,
 							srcSet: '',
 							sizes: ''
 						}

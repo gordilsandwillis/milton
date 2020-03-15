@@ -1,49 +1,39 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { useScrollPercentage } from 'react-scroll-percentage'
-
-const parallaxOffset = (num, outMin, outMax) => {
-	// return (num - in_min) * (outMax - outMin) / (in_max - in_min) + outMin
-	let offset = (num - 0) * (outMax - outMin) / (1 - 0) + outMin
-	if (!offset) {
-		return 0
-	} else {
-		return offset
-	}
-}
+// import { useScrollPercentage } from 'react-scroll-percentage'
+import { ScrollPercentage } from 'react-scroll-percentage'
 
 const ParallaxStyle = styled.div`
 	display: inline-block;
 	vertical-align: top;
-	// ${ props => !props.disabled ? `
-	// 	transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0)
-	// 							rotate(${ parallaxOffset(props.scroll, props.rotateStart, props.rotateEnd) }deg)
-	// 							scale(${ parallaxOffset(props.scroll, props.scaleStart, props.scaleEnd) })` : `` };
 	${ props => !props.disabled ? `
-		// transform: 	translate3d(0, ${ parallaxOffset(props.scroll, props.posYStart, props.posYEnd) }${ props.scrollUnit }, 0);
 		transform: 	translate3d(0, ${ props.speed * props.scroll }%, 0);
 	` : `` };
 
 `
 
 const Parallax = ({ children, className, posYStart, posYEnd, scrollUnit, rotateStart, rotateEnd, scaleStart, scaleEnd, speed }) => {
-	const [ref, percentage] = useScrollPercentage({ threshold: 0 })
 	return (
-		<ParallaxStyle
-			ref={ref}
-			speed={speed}
-			scroll={percentage.toPrecision(3)}
-			className={className}
-			posYStart={posYStart}
-			posYEnd={posYEnd}
-			rotateStart={rotateStart}
-			rotateEnd={rotateEnd}
-			scaleStart={scaleStart}
-			scaleEnd={scaleEnd}
-			scrollUnit={scrollUnit}
-		>
-			{children}
-		</ParallaxStyle>
+		<ScrollPercentage threshold={0}>
+			{({ percentage, ref, entry }) => (
+				<ParallaxStyle
+					ref={ref}
+					speed={speed}
+					scroll={percentage.toPrecision(3)}
+					// scroll={1}
+					className={className}
+					posYStart={posYStart}
+					posYEnd={posYEnd}
+					rotateStart={rotateStart}
+					rotateEnd={rotateEnd}
+					scaleStart={scaleStart}
+					scaleEnd={scaleEnd}
+					scrollUnit={scrollUnit}
+				>
+					{children}
+				</ParallaxStyle>
+			)}
+		</ScrollPercentage>
 	)
 }
 

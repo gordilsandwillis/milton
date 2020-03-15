@@ -1,14 +1,86 @@
 import React, { Component, Fragment } from 'react';
 import Header from 'src/components/Header'
-// import ATF from 'src/components/ATF'
-// import CalloutText from 'src/components/CalloutText'
-// import FiftyFifty from 'src/components/FiftyFifty'
+import styled from '@emotion/styled'
+import Button from 'src/components/Button'
+import Section from 'src/components/Section'
+import Grid from 'src/components/Grid'
+import ContactForm from 'src/components/ContactForm'
+import { colors, typography, util } from 'src/styles'
 
 // import { Helmet } from "react-helmet";
 
+const SubmitButton = styled(Button)`
+	${ util.responsiveStyles('margin-top', 30, 20, 20, 16) }
+`
+
+const ErrorMessage = styled.p`
+  text-align: center;
+  color: ${ colors.alert };
+  ${ typography.bodySmall }
+  font-weight: 600;
+  max-width: 21em;
+  margin: 0 auto 8px;
+  ${ util.responsiveStyles('margin-top', 30, 20, 20, 16) }
+`
+
 class Contact extends Component {
+  constructor(props) {
+    super(props);
+    this.submitForm = this.submitForm.bind(this);
+    this.state = {
+      name: '',
+      company: '',
+      email: '',
+      phone: '',
+      message: ''
+    };
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    //const { email, name, phone, company } = this.state
+  }
+
+  submitForm(ev) {
+    ev.preventDefault();
+    const form = ev.target;
+    const data = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action);
+    xhr.setRequestHeader("Accept", "application/json")
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== XMLHttpRequest.DONE) return
+      if (xhr.status === 200) {
+        this.setState({ status: "SUCCESS" })
+        setTimeout(() => {
+          this.setState({
+            name: '',
+            company: '',
+            email: '',
+            phone: '',
+            message: ''
+          })
+          form.reset()
+        }, 1000)
+        setTimeout(() => {
+          this.props.modalContext.closeModal()
+        }, 500)
+      } else {
+        this.setState({ status: "ERROR" })
+      }
+    };
+    xhr.send(data);
+  }
+
+  handleInput = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
 	render() {
+		const { name, company, email, phone, message } = this.state
+
+		const valid = true
+
 		return (
 			<Fragment>
 				{/*<Helmet>
@@ -31,8 +103,15 @@ class Contact extends Component {
 		    </Helmet>*/}
 				<div>
 					<Header hasAtf={false}/>
+          
+          <Section>
+  					<Grid small="1 [12] 1" medium="3 [8] 3" large="4 [6] 4">
+  						<div>
+  							<ContactForm />
+  						</div>
+            </Grid>
+          </Section>
 
-					<h1>Contact Milton</h1>
 				</div>
 			</Fragment>
 		);

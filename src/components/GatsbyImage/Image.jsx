@@ -17,15 +17,10 @@ const StyledImage = styled(Img)`
 				}
 			` }
 		}
-		${ type === 'web' || type === 'mobile' ? `
-			box-shadow: 0 20px 36px rgba(0, 0, 0, .1);
-			border-radius: 3px;
-			overflow: hidden;
-		` : ` ` }
-		${ type === 'mobile' ? `
-			border-radius: 1.5vw;
-		` : ` ` }
 	` }
+	img {
+		transition: opacity 1s ease-in-out !important;
+	}
 `
 
 const ResponsiveImage = ({ image, small, medium, large, className, type }) => {

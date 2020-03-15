@@ -114,12 +114,14 @@ const TextLockup = ({
 		icon,
 		alignment,
 		headlineElement,
-		children
+		children,
+		transitionIn,
+		additions
 	}) => {
 	return (
 		<Wrapper className={className} alignment={alignment}>
 			<div>
-				<TextContainer alignment={alignment}>
+				<TextContainer alignment={alignment} transitionIn={transitionIn}>
 					<ConditionalRender condition={icon}>
 						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1.5em' }}>{icon}</div>
 					</ConditionalRender>
@@ -161,6 +163,7 @@ const TextLockup = ({
 											external={button.external || false}
 											target={button.target || ''}
 											size={button.size}
+											onClick={button.onClick}
 										>
 											{button.label}
 										</Button>
@@ -174,6 +177,7 @@ const TextLockup = ({
 											external={button.external || false}
 											target={button.target || ''}
 											type={button.linkType}
+											onClick={button.onClick}
 										>
 											{button.label}
 										</Link>
@@ -182,6 +186,7 @@ const TextLockup = ({
 							})}
 						</ButtonActions>
 					)}
+					{additions && additions}
 				</TextContainer>
 			</div>
 		</Wrapper>
@@ -191,7 +196,8 @@ const TextLockup = ({
 TextLockup.defaultProps = {
 	alignment: 'center',
 	headlineSize: 'h3',
-	textSize: 'body'
+	textSize: 'body',
+	transitionIn: true
 }
 
 export default TextLockup

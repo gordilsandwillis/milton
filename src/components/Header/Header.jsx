@@ -8,6 +8,7 @@ import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ScrollListener from 'src/components/ScrollListener'
 import { colors, animations, mq, util } from 'src/styles'
+import { withHeaderContext } from 'src/contexts/HeaderContext'
 
 const NavLinkStyle = (scrolled, active) => `
 	display: block;
@@ -92,7 +93,8 @@ const LogoCol = styled.div`
 	svg {
 		height: auto;
 		vertical-align: top;
-		display: ${ ({ homepage }) => homepage ? `none` : `inline-block` };
+		display: inline-block;
+		${ ({ homepage }) => homepage ? `opacity: 0; pointer-events: none;` : `` }
 		transition: color ${ animations.mediumSpeed } ease-in-out, max-width ${ animations.mediumSpeed } ease-in-out;
 		${ ({ scrolled, hasAtf, homepage }) => scrolled ? `
 			color: ${ colors.textColor };
@@ -162,15 +164,13 @@ const HeaderPlaceholder = styled.div`
 `
 
 class Header extends Component {
-	state = {
-		collapsed: false
-	}
 	render () {
 		const {
 			location,
 			hasAtf,
 			placeholder,
-			homepage
+			homepage,
+			headerContext
 		} = this.props
 
 		let pathname = '/'
@@ -178,13 +178,14 @@ class Header extends Component {
 			pathname = location.pathname
 		}
 
+
 		return (
 			<Fragment>
 				<ScrollListener.Consumer>
-		      {({ scrolledToTop, scrollY, pageHeight }) => {
+		      {({ scrolledToTop }) => {
 		      	let scrolled = !scrolledToTop
 		      	if (homepage) {
-		      		scrolled = !scrolledToTop && scrollY >= pageHeight - 200
+		      		scrolled = headerContext.collapsed
 		      	}
 		      	return (
 							<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
@@ -240,4 +241,4 @@ Header.defaultProps = {
 	placeholder: true
 }
 
-export default withRouter(Header)
+export default withHeaderContext(withRouter(Header))
