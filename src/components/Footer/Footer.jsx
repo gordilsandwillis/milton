@@ -53,9 +53,9 @@ class Footer extends Component {
 						<FooterLogoIcon />
 						<FooterItem><Link type="capsLink" external={true} to="mailto:info@miltontextiles.com">info@miltontextiles.com</Link></FooterItem>
 						<FooterItem>
-							<Link type="capsLink" external={true} to="https://instagram.com/">Instagram</Link>
+							<Link type="capsLink" external={true} to="https://instagram.com/miltontextiles">Instagram</Link>
 							<Divider/>
-							<Link type="capsLink" external={true} to="https://pinterest.com/">Pinterest</Link>
+							<Link type="capsLink" external={true} to="https://pinterest.com/miltontextiles">Pinterest</Link>
 						</FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
 						<FooterItem><Link type="capsLink" external={true} to="https://gordilsandwillis.com/">Site By G&W</Link></FooterItem>

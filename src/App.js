@@ -1,14 +1,18 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Global, css } from '@emotion/core'
+import { ParallaxProvider } from 'react-scroll-parallax'
 import styled from '@emotion/styled'
-import globalStyles from 'src/styles/globalStyles'
-import PageContent from 'src/components/PageContent'
-import ScrollListener from 'src/components/ScrollListener'
+import { Global, css } from '@emotion/core'
+
 import ShopifyProvider from 'src/contexts/ShopifyContext'
 import ModalProvider from 'src/contexts/ModalContext'
 import HeaderProvider from 'src/contexts/HeaderContext'
-import { ParallaxProvider } from 'react-scroll-parallax'
+
+import PageContent from 'src/components/PageContent'
+import ScrollListener from 'src/components/ScrollListener'
+
+import globalStyles from 'src/styles/globalStyles'
+
 import 'intersection-observer'
 import './reset.css'
 

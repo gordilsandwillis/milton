@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
 import UnderlinedInput from 'src/components/Input/UnderlinedInput'
 
@@ -90,15 +89,13 @@ class ContactForm extends Component {
 		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection } = this.props
 		const valid = name && company && email && phone && message
 
-		console.log(buttonLabel)
-
 		let buttonText = buttonLabel
 		if (status === 'SUCCESS') {
 			buttonText = 'Thank You'
 		}
 
 		return (
-			<form 
+			<form
         onSubmit={this.submitForm}
         action="https://formspree.io/xwkbldwy"
         method="POST"
