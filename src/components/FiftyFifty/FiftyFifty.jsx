@@ -22,7 +22,10 @@ const FiftyFifty = ({
 	additions,
 	alignment,
 	imageContent,
-	children
+	children,
+	vAlign,
+	gridSpacing,
+	textSize
 }) => {
 
 	let gridSetup = {
@@ -34,7 +37,25 @@ const FiftyFifty = ({
 		textGrid: '[1]'
 	}
 
-	if (imagePosition === 'right') {
+	if (gridSpacing === 'even' && imagePosition === 'right') {
+		gridSetup = {
+			small: '1 [12] 1',
+			medium: '2 [11] 2 [11] 2',
+			large: '2 [11] 2 [11] 2',
+			extraLarge: '2 [11] 2 [11] 2',
+			imagePosition: 'rtl',
+			textGrid: '[1]'
+		}
+	} else if (gridSpacing === 'even') {
+		gridSetup = {
+			small: '1 [12] 1',
+			medium: '2 [11] 2 [11] 2',
+			large: '2 [11] 2 [11] 2',
+			extraLarge: '2 [11] 2 [11] 2',
+			imagePosition: 'ltr',
+			textGrid: '[1]'
+		}
+	} else if (imagePosition === 'right') {
 		gridSetup = {
 			small: '1 [12] 1',
 			medium: '1 [6] 1 [5] 1',
@@ -76,7 +97,7 @@ const FiftyFifty = ({
 				extraLarge={gridSetup.extraLarge}
 				gridDirection={gridSetup.imagePosition}
 				rowGap="7vw"
-				vAlign="center"
+				vAlign={vAlign}
 			>	
 				<ScrollEntrance>
 					<ConditionalRender condition={image && !video && !imageContent}>
@@ -108,6 +129,7 @@ const FiftyFifty = ({
 						headlineSize={headlineSize}
 						alignment={alignment}
 						text={text}
+						textSize={textSize}
 						eyebrow={eyebrow}
 						buttons={buttons}
 						theme={theme}
@@ -123,7 +145,9 @@ FiftyFifty.defaultProps = {
 	imagePosition: 'left',
 	additions: false,
 	headlineSize: 'h3',
-	alignment: 'left'
+	text: 'body',
+	alignment: 'left',
+	vAlign: 'center'
 }
 
 export default FiftyFifty
