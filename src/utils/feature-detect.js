@@ -32,7 +32,7 @@ const passiveListener = () => {
     _supportsPassive = false
     try {
       let opts = Object.defineProperty({}, 'passive', {
-        get: function () {
+        get: () => {
           _supportsPassive = true
         }
       })

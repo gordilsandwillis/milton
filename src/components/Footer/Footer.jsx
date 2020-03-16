@@ -55,7 +55,7 @@ class Footer extends Component {
 						<FooterItem>
 							<Link type="capsLink" external={true} to="https://www.instagram.com/miltontexiles/">Instagram</Link>
 							<Divider/>
-							<Link type="capsLink" external={true} to="https://pinterest.com/">Pinterest</Link>
+							<Link type="capsLink" external={true} to="https://pinterest.com/miltontextiles">Pinterest</Link>
 						</FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
 						<FooterItem><Link type="capsLink" external={true} to="https://gordilsandwillis.com/">Site By G&W</Link></FooterItem>

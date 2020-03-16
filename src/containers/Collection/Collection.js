@@ -1,16 +1,16 @@
 import React, { Component, Fragment } from 'react';
-// import { Helmet } from "react-helmet";
+
+import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
 import Header from 'src/components/Header'
 import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
 import Grid from 'src/components/Grid'
 import Section from 'src/components/Section'
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
-import ProductThumb from 'src/components/ProductThumb'
 import Furnishings from 'src/components/Furnishings'
 import Textiles from 'src/components/Textiles'
 import StackedImages from 'src/components/StackedImages'
+import SEO from 'src/components/SEO'
 
 import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
 import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
@@ -58,7 +58,7 @@ class Collection extends Component {
 		if (!collections) {
 			return false
 		}
-		
+
 		const collectionHandle = this.props.match.params.id
 		const collection = collections.find(({handle}) => handle === collectionHandle)
 		const collectionIndex = collections.findIndex(({handle}) => handle === collectionHandle)
@@ -72,27 +72,8 @@ class Collection extends Component {
 
 		return (
 			<Fragment>
-				{/*<Helmet>
-	        <meta charSet="utf-8" />
-	        <title>{PageTitle + ' | ' + Tagline}</title>
-	        <meta property="og:locale" content="en_US" />
-			    <meta property="og:type" content="website" />
-			    <meta property="og:title" content={PageTitle + ' | ' + Tagline} />
-			    <meta property="og:description" content={PageDescription} />
-			    <meta property="og:url" content={URL} />
-			    <meta property="og:site_name" content={PageTitle} />
-			    <meta property="og:image" content={shareImage} />
-			    <meta property="og:image:secure_url" content={URL} />
-			    <meta property="og:image:width" content="1200" />
-			    <meta property="og:image:height" content="800" />
-			    <meta name="twitter:card" content="summary_large_image" />
-			    <meta name="twitter:description" content={PageDescription} />
-			    <meta name="twitter:title" content={PageTitle + ' | ' + Tagline} />
-			    <meta name="twitter:image" content={shareImage} />
-		    </Helmet>*/}
-
+				<SEO/>
 				<Header hasAtf={hasAtf}/>
-
 				{hasAtf ? (
 					<div>
 						<ATF
@@ -129,7 +110,7 @@ class Collection extends Component {
 				)}
 
 				<Textiles products={textileProducts} hasAtf={hasAtf} />
-				
+
 				{furnitureProducts && furnitureProducts.length > 0 && (
 					<Section>
 						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">

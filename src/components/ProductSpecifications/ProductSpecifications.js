@@ -1,12 +1,16 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { withRouter } from 'react-router'
 
 import Grid from 'src/components/Grid'
-import Link from 'src/components/Link'
 import Image from 'src/components/GatsbyImage'
 import ConditionalRender from 'src/components/ConditionalRender'
 
 import { colors, animations, typography, util } from 'src/styles'
+
+const OuterWrapper = styled.div`
+	${ util.responsiveStyles('margin-top', 0, 26, 24, 24) }
+`
 
 const InnerWrapper = styled.div`
   ${ ({ index }) => index === 0 ? `border-top: 1px solid ${ colors.hrColor };` : `` }
@@ -28,7 +32,7 @@ const InnerWrapper = styled.div`
   }
 `
 
-const VariantLink = styled(Link)`
+const VariantLink = styled.div`
 	width: 100px;
 	${ util.responsiveStyles('width', 60, 50, 40, 40) }
 	display: block;
@@ -66,7 +70,7 @@ const VariantLinks = styled.div`
 	display: flex;
 	margin: 10px 0 0;
 	justify-content: flex-start;
-	a {
+	div {
 		margin-left: 20px;
 		&:first-child /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */ {
 			margin-left: 0;
@@ -92,9 +96,10 @@ const ProductSpecifications = ({
 	specifications,
 	variants,
 	currentProduct,
-	currentVariant
+	currentVariant,
+	history
 }) => (
-	<div style={sections && variants.length > 1 ? { margin: '28px 0 0 0' } : {}}>
+	<OuterWrapper style={sections && variants.length > 1 ? { margin: '28px 0 0 0' } : {}}>
 		{sections.map( (section, index) => (
 			specifications.some(({key}) => key.toLowerCase() === section) && (
 				<InnerWrapper index={index} key={section}>
@@ -142,9 +147,11 @@ const ProductSpecifications = ({
 								}
 								return (
 									<VariantLink
-										to={'/product/' + currentProduct.handle + '/' + variant.id}
 										key={variant.id}
 										active={active}
+										onClick={(event) => {
+											history.replace('/product/' + currentProduct.handle + '/' + variant.id)
+										}}
 									>
 										<Image
 											image={{
@@ -165,9 +172,7 @@ const ProductSpecifications = ({
 				</Grid>
 			</InnerWrapper>
 		</ConditionalRender>
-	</div>
+	</OuterWrapper>
 )
 
-
-
-export default ProductSpecifications;
+export default withRouter(ProductSpecifications)

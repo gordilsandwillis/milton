@@ -3,6 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+async function loadPolyfills() {
+  if (typeof window.IntersectionObserver === 'undefined') {
+    await import('intersection-observer')
+  }
+}
+
+loadPolyfills();
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

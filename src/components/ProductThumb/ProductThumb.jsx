@@ -52,7 +52,6 @@ const ProductThumb = ({ product, variant, className }) => {
 	}
 
 	let variantImages = product.images.filter( i => variant.title.includes( i.altText ) )
-	let lastImage = variantImages[variantImages.length - 1].src
 	let hoverImage = variantImages[1].src
 
 	return (

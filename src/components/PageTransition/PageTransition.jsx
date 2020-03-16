@@ -112,11 +112,22 @@ class PageTransition extends React.PureComponent {
 
   static getDerivedStateFromProps (nextProps, prevState) {
     const { location } = nextProps
-    console.log(nextProps)
+
     if (location.pathname !== prevState.pathname) { // Use If you want NO transition on page load
       // if (nextProps.location.pathname !== prevState.pathname || !prevState.pathname) { // Use If you want to transition on page load
       // TODO: when going to another product, still transition the page
-      const productRouteChange = prevState.pathname ? (prevState.pathname && prevState.pathname.includes('product')) && (location.pathname && location.pathname.includes('product')) : true
+
+      const re = new RegExp(/product\/(.*)\//);
+
+      const prevPath =  prevState.pathname
+      const prevProduct = prevPath && prevPath.includes('product')
+      const prevProductId = prevProduct && re.exec(prevPath)[1]
+
+      const nextPath = location.pathname
+      const nextProduct = nextPath && nextPath.includes('product')
+      const nextProductId = nextProduct && re.exec(nextPath)[1]
+
+      const productRouteChange = prevState.pathname ? prevProduct && nextProduct && prevProductId && nextProductId && prevProductId === nextProductId : true
 
       return {
         overlay: prevState.pathname !== null && !productRouteChange, // prevState.pathname If you want NO transition on page load

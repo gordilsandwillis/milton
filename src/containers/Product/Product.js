@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import styled from '@emotion/styled'
-import { darken } from 'polished'
+import { FaPinterest } from 'react-icons/fa'
+
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 import { withModalContext } from 'src/contexts/ModalContext'
 
@@ -12,11 +13,10 @@ import Image from 'src/components/GatsbyImage'
 import ProductThumb from 'src/components/ProductThumb'
 import Slideshow from 'src/components/Slideshow'
 import Button from 'src/components/Button'
+import SEO from 'src/components/SEO'
 import ProductSpecifications from 'src/components/ProductSpecifications'
-import { FaPinterest } from 'react-icons/fa'
 
 import { colors, util, mq } from 'src/styles'
-// import { Helmet } from "react-helmet";
 
 const ImgArea = styled.div`
 	${ util.responsiveStyles('padding-top', 150, 135, 100, 90) }
@@ -102,17 +102,17 @@ const PinItButton = styled.a`
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background: #fff;
 	padding: 12px;
 	z-index: 2;
-	transition: opacity .3s ease-in-out, color .3s ease-in-out, background .3s ease-in-out;
+	transition: opacity .3s ease-in-out, transform .2s ease-in-out;
 	opacity: 0;
 	border-radius: 50%;
-	color: ${ colors.alert };
-	background: rgba(255, 255, 255, .95);
+	color: ${ colors.white };
+	background: transparent;
 	&:hover {
-		color: ${ darken(.1, colors.alert) };
-		background: white;
+		color: ${ colors.white };
+		background: transparent;
+		transform: scale(1.3);
 	}
 	svg {
 		display: block;
@@ -139,7 +139,6 @@ class Product extends Component {
 	}
 
 	handleInquireClick = (event) => {
-		console.log(this.props)
 		const { currentProduct, currentVariant, currentCollection } = this.state
 		const { modalContext } = this.props
 		modalContext.toggleModal({currentProduct, currentVariant, currentCollection, buttonLabel: 'Send Inquiry'})
@@ -169,7 +168,6 @@ class Product extends Component {
 			variantImages = [currentVariant.image]
 		}
 
-
 		this.setState({
 			loading: false,
 			currentProduct,
@@ -196,28 +194,9 @@ class Product extends Component {
 			return false
 		}
 
-		const currentUrl = process.env.REACT_APP_HOST + "/product/" + currentProduct.handle + "/" + currentVariant.id
-
 		return (
 			<Fragment>
-				{/*<Helmet>
-	        <meta charSet="utf-8" />
-	        <title>{PageTitle + ' | ' + Tagline}</title>
-	        <meta property="og:locale" content="en_US" />
-			    <meta property="og:type" content="website" />
-			    <meta property="og:title" content={PageTitle + ' | ' + Tagline} />
-			    <meta property="og:description" content={PageDescription} />
-			    <meta property="og:url" content={URL} />
-			    <meta property="og:site_name" content={PageTitle} />
-			    <meta property="og:image" content={shareImage} />
-			    <meta property="og:image:secure_url" content={URL} />
-			    <meta property="og:image:width" content="1200" />
-			    <meta property="og:image:height" content="800" />
-			    <meta name="twitter:card" content="summary_large_image" />
-			    <meta name="twitter:description" content={PageDescription} />
-			    <meta name="twitter:title" content={PageTitle + ' | ' + Tagline} />
-			    <meta name="twitter:image" content={shareImage} />
-		    </Helmet>*/}
+				<SEO />
 				<div>
 					<Header placeholder={false}/>
 					<Grid small="[1]" large="[7] [7]" vAlign="center">
@@ -234,8 +213,8 @@ class Product extends Component {
 												<PinItButton
 													className="pin-it-button"
 													target="_blank"
-													onClick={(event) => { event.preventDefault(); window.open("http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + '|' + currentVariant.title, 'mywin', 'left=20,top=20,width=600,height=600,toolbar=1,resizable=0'); return false; }}
-													href={"http://pinterest.com/pin/create/button/?url=" + currentUrl + "&media=" + image.src + '&description=' + currentProduct.title + ' | ' + currentVariant.title}
+													onClick={(event) => { event.preventDefault(); window.open("http://pinterest.com/pin/create/button/?url=" + window.location.href + "&media=" + image.src + '&description=' + currentProduct.title + '|' + currentVariant.title, 'mywin', 'left=20,top=20,width=600,height=600,toolbar=1,resizable=0'); return false; }}
+													href={"http://pinterest.com/pin/create/button/?url=" + window.location.href + "&media=" + image.src + '&description=' + currentProduct.title + ' | ' + currentVariant.title}
 												><FaPinterest size={24}/></PinItButton>
 												<ProductImage
 													image={{
@@ -302,7 +281,10 @@ class Product extends Component {
 					>
 						{moreProducts.map((product) => (
 							<div key={product.id}>
-								<ProductThumb product={product} variant={product.variants[0]}/>
+								<ProductThumb
+									product={product}
+									variant={product.variants[0]}
+								/>
 							</div>
 						))}
 					</Grid>
