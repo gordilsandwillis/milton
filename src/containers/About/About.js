@@ -26,7 +26,7 @@ class About extends Component {
 	render() {
 		return (
 			<Fragment>
-				<SEO />
+				<SEO title="About" />
 				<div>
 					<Header hasAtf={false}/>
 					<CalloutText

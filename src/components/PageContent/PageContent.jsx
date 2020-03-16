@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
-import { shopifyClient as client, collectionsQuery, productsQuery } from 'src/services/shopify'
+import { shopifyClient as client, collectionsQuery, productsQuery, shopQuery } from 'src/services/shopify'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
 import Home from 'src/containers/Home'
@@ -24,32 +24,21 @@ const Wrapper = styled.div`
 
 class PageContent extends Component {
   componentDidMount () {
-
-    // Set collections
     client.graphQLClient.send(collectionsQuery).then(({model, data}) => {
-      // console.log('collections:', model.collections)
       this.props.shopifyContext.updateState('shopifyCollections', model.collections)
     });
 
-    // Set products
     client.graphQLClient.send(productsQuery).then(({model, data}) => {
-      // console.log('products:', model.products)
       this.props.shopifyContext.updateState('shopifyProducts', model.products)
     });
 
-    // Old queries for testing
-    // client.collection.fetchAllWithProducts().then((collections) => {
-    //   console.log('collections:',collections)
-    // });
-
-    // client.product.fetchAll().then((products) => {
-    //   console.log('products:', products)
-    // });
-
+    client.graphQLClient.send(shopQuery).then(({model, data}) => {
+      this.props.shopifyContext.updateState('shop', model.shop)
+    });
   }
 
   render () {
-    if (!this.props.shopifyContext.shopifyCollections || !this.props.shopifyContext.shopifyProducts) {
+    if (!this.props.shopifyContext.shop || !this.props.shopifyContext.shopifyCollections || !this.props.shopifyContext.shopifyProducts) {
       return false
     }
 
@@ -72,21 +61,5 @@ class PageContent extends Component {
     )
   }
 }
-
-// const PageContent = ({ location }) => {
-//   return (
-//     <Wrapper>
-//       <PageTransition location={location}>
-//         <Switch location={location}>
-//           <Route exact path="/" render={(props) => (<Home {...props} />)} />
-//           <Route exact path="/collections" render={(props) => (<Collections {...props} />)} />
-//           <Route exact path="/collections/:id" render={(props) => (<Collection {...props} />)} />
-//           <Route exact path="/about" render={(props) => (<About {...props} />)} />
-//           <Route exact path="/contact" render={(props) => (<Contact {...props} />)} />
-//         </Switch>
-//       </PageTransition>
-//     </Wrapper>
-//   )
-// }
 
 export default withShopifyContext(withRouter(PageContent));

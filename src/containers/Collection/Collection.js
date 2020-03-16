@@ -70,9 +70,11 @@ class Collection extends Component {
 		const textileProducts = collectionProducts.filter(({ productType }) => productType === 'Textiles')
 		const furnitureProducts = collectionProducts.filter(({ productType }) => productType === 'Furniture')
 
+		const { title, description, image, descriptionHtml } = collection
+
 		return (
 			<Fragment>
-				<SEO/>
+				<SEO title={title} description={description} />
 				<Header hasAtf={hasAtf}/>
 				{hasAtf ? (
 					<div>
@@ -81,7 +83,7 @@ class Collection extends Component {
 							image={{
 								fluid: {
 									aspectRatio: 2,
-									src: collection.image.src,
+									src: image.src,
 									srcSet: '',
 									sizes: ''
 								}
@@ -92,8 +94,8 @@ class Collection extends Component {
 							nextTheme="bgColor"
 							theme="bgColor"
 							alignment="center"
-							headline={collection.title}
-							text={collection.descriptionHtml}
+							headline={title}
+							text={descriptionHtml}
 							headlineSize="h2"
 						/>
 					</div>
@@ -103,8 +105,8 @@ class Collection extends Component {
 						nextTheme="bgColor"
 						theme="bgColor"
 						alignment="center"
-						headline={collection.title}
-						text={collection.descriptionHtml}
+						headline={title}
+						text={descriptionHtml}
 						headlineSize="h2"
 					/>
 				)}
@@ -116,10 +118,10 @@ class Collection extends Component {
 						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
 							<div>
 								<StackedImages images={[
-									Images[collection.title].layer1,
-									Images[collection.title].layer2,
-									Images[collection.title].layer3,
-									Images[collection.title].layer4
+									Images[title].layer1,
+									Images[title].layer2,
+									Images[title].layer3,
+									Images[title].layer4
 								]}/>
 							</div>
 						</Grid>

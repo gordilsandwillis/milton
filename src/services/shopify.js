@@ -51,12 +51,14 @@ export const ProductFragment = (product) => {
   product.addConnection('variants', {args: {first: 10}}, ProductVariantFragment)
 }
 
-// export const DateFragment = (node) => {
-//   node.add('createdAt')
-//   node.add('updatedAt')
-//   node.add('publishedAt')
-// }
+export const ShopFragment = (shop) => {
+  shop.add('name')
+  shop.add('description')
+}
 
+export const shopQuery = shopifyClient.graphQLClient.query((root) => {
+  root.add('shop', ShopFragment)
+})
 
 export const collectionsQuery = shopifyClient.graphQLClient.query((root) => {
 	root.addConnection('collections', {args: {first: 10}}, CollectionFragment)

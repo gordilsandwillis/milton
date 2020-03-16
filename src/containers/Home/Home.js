@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
-// import { Helmet } from "react-helmet";
 
 import { LogoMark } from 'src/components/Logo'
 import LargeLogo from 'src/components/LargeLogo'
@@ -9,6 +8,7 @@ import ATF from 'src/components/ATF'
 import CalloutText from 'src/components/CalloutText'
 import CollectionSections from 'src/components/CollectionSections'
 import Newsletter from 'src/components/Newsletter'
+import SEO from 'src/components/SEO'
 
 import AtfImage from 'src/assets/images/home-atf.jpg'
 
@@ -28,27 +28,9 @@ class Home extends Component {
 	}
 
 	render() {
-		console.log('home render')
 		return (
 			<Fragment>
-				{/*<Helmet>
-	        <meta charSet="utf-8" />
-	        <title>{PageTitle + ' | ' + Tagline}</title>
-	        <meta property="og:locale" content="en_US" />
-			    <meta property="og:type" content="website" />
-			    <meta property="og:title" content={PageTitle + ' | ' + Tagline} />
-			    <meta property="og:description" content={PageDescription} />
-			    <meta property="og:url" content={URL} />
-			    <meta property="og:site_name" content={PageTitle} />
-			    <meta property="og:image" content={shareImage} />
-			    <meta property="og:image:secure_url" content={URL} />
-			    <meta property="og:image:width" content="1200" />
-			    <meta property="og:image:height" content="800" />
-			    <meta name="twitter:card" content="summary_large_image" />
-			    <meta name="twitter:description" content={PageDescription} />
-			    <meta name="twitter:title" content={PageTitle + ' | ' + Tagline} />
-			    <meta name="twitter:image" content={shareImage} />
-		    </Helmet>*/}
+				<SEO title="Home" />
 				<div>
 					<Header hasAtf={true} homepage={true} collapsed={this.state.collapseHeader} />
 					<ATF

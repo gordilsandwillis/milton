@@ -194,9 +194,11 @@ class Product extends Component {
 			return false
 		}
 
+		console.log(currentProduct)
+
 		return (
 			<Fragment>
-				<SEO />
+				<SEO title={`${currentVariant.title} ${currentProduct.title}`} description={currentProduct.description} />
 				<div>
 					<Header placeholder={false}/>
 					<Grid small="[1]" large="[7] [7]" vAlign="center">

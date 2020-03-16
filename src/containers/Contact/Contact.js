@@ -8,7 +8,7 @@ import SEO from "src/components/SEO"
 
 const Contact = () => (
 	<Fragment>
-		<SEO />
+		<SEO title="Contact" />
 		<div>
 			<Header hasAtf={false}/>
 			<Section>

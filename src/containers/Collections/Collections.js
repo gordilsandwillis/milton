@@ -28,7 +28,7 @@ class Collections extends Component {
 		const furnitureProducts = this.state.products.filter(({ productType }) => productType === 'Furniture')
 		return (
 			<Fragment>
-				<SEO />
+				<SEO title="Collections" />
 				<div>
 					<Header/>
 					<CollectionSections furnitureProducts={furnitureProducts}/>
