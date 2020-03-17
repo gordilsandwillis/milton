@@ -119,7 +119,7 @@ const LogoCol = styled.div`
 			${ mq.mediumAndBelow } {
 				max-width: 130px;
 			}
-			
+
 			${ !hasAtf ? `
 				color: ${ colors.textColor };
 			` : `
@@ -211,7 +211,7 @@ class Header extends Component {
 												<ResponsiveComponent
 													small={
 														<NavLinks type="capsLink" alignment="right">
-															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>Info</NavLink>
+															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
 														</NavLinks>
 													}
 													medium={
