@@ -56,7 +56,7 @@ class Home extends Component {
 						alignment="center"
 						headline="Art in Living, Living in Art."
 						headlineSize="h4"
-						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
+						buttons={[{ linkType: 'underlinedLink', label: 'Learn More', to: '/about' }]}
 						icon={<LogoMark/>}
 					/>
 					<CollectionSections/>

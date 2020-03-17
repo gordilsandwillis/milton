@@ -30,19 +30,18 @@ class About extends Component {
 						nextTheme="bgColor"
 						theme="bgColor"
 						alignment="center"
-						headline="Each collection originates with a carefully selected painting from the history of painting."
+						headline="Each collection originates with a carefully selected painting from the history of art."
 						headlineSize="h3"
 					/>
 					<FiftyFifty
 						key="ethos"
 						prevTheme="bgColor"
-						nextTheme="white"
+						nextTheme="bgColor"
 						theme="bgColor"
 						eyebrow="Ethos"
 						headline="Historic yet Timeless"
 						headlineSize="h3"
 						alignment="left"
-						vAlign="top"
 						image={{
 							fluid: {
 								aspectRatio: 1,
@@ -64,13 +63,12 @@ class About extends Component {
 					<FiftyFifty
 						key="values"
 						prevTheme="bgColor"
-						nextTheme="white"
+						nextTheme="bgColor"
 						theme="bgColor"
 						eyebrow="Values"
 						headline="Committed to ensuring quality and craft"
 						headlineSize="h3"
 						alignment="left"
-						vAlign="top"
 						image={{
 							fluid: {
 								aspectRatio: 1,
@@ -90,14 +88,13 @@ class About extends Component {
 					/>
 					<FiftyFifty
 						key="designer"
-						prevTheme={false}
-						nextTheme="bgColor"
+						prevTheme="bgColor"
+						nextTheme="white"
 						theme="bgColor"
 						eyebrow="About the Founder"
 						headline="Vera Neykov"
 						headlineSize="h3"
 						alignment="left"
-						vAlign="top"
 						textSize="bodySmall"
 						text={<div>
 							<p>Vera Neykov was born in Sofia, Bulgaria in 1986 and moved to Los Angeles, California in 1990. The daughter of artists, Vera grew up surrounded by creativity and was encouraged to explore, discover and learn about art and design.</p>
@@ -112,7 +109,7 @@ class About extends Component {
 								sizes: ''
 							}
 						}}
-						imagePosition="left"
+						imagePosition="right"
 					/>
 					<CalloutText
 						prevTheme={false}
@@ -120,7 +117,7 @@ class About extends Component {
 						theme="white"
 						alignment="center"
 						eyebrow="Get In Touch"
-						headline="We are always interested in collaborating with designers and companies on custom fabrics."
+						headline="We are always interested in collaborating with designers and companies on projects."
 						headlineSize="h3"
 						buttons={[
 							{

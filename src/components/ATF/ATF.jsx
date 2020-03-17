@@ -31,15 +31,17 @@ const AlignmentContainer = styled.div`
 		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
 	` : `
 		min-height: 56.25vw; // 16:9 Ratio
+		height: 60vh;
+		max-height: 56.25vw;
 		padding-top: 7vw;
 		padding-bottom: 8vw;
 		${ mq.mediumAndBelow } {
 			min-height: 100vw;
 		}
-		${ mq.extraLargeAndUp } {
+		${ mq.largerAndUp } {
 			max-height: 50vw; // 2:1 Ratio
 			height: 70vh;
-			min-height: 0;
+			min-height: 50vw;
 		}
 	` }
 `

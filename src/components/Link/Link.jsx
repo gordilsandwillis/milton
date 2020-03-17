@@ -9,7 +9,7 @@ const LinkStyles = (type, setTheme) => `
 	font-size: inherit;
 	text-decoration: none;
 	cursor: pointer;
-	${ type === 'textLink' || type === 'arrowLink' || type === 'capsLink' ? `
+	${ type === 'textLink' || type === 'arrowLink' || type === 'capsLink' || type === 'underlinedLink' ? `
 		position: relative;
 		display: inline-block;
 		line-height: 1.3em;
@@ -31,6 +31,20 @@ const LinkStyles = (type, setTheme) => `
 				transform-origin: left center;
 				transform: scaleX(1);
 			}
+		}
+	` : `` }
+	${ type === 'underlinedLink' ? `
+		${ typography.h6 }
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: calc(100% - 2px);
+			height: 1px;
+			background: ${ colors[setTheme] };
+			opacity: .2;
 		}
 	` : `` }
 	${ type === 'capsLink' ? `
