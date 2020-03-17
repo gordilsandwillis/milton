@@ -60,7 +60,7 @@ export const h2 = `
 `
 
 export const h3 = `
-	${ responsiveStyles('font-size', 50, 40, 32, 27) }
+	${ responsiveStyles('font-size', 46, 36, 32, 27) }
 	line-height: 1.5em;
 	font-family: ${ primaryFont };
 	font-weight: 300;

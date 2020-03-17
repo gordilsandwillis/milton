@@ -43,17 +43,18 @@ const TextContainer = styled(ScrollEntrance)`
 `
 
 const Eyebrow = styled.h6`
-	margin-bottom: .8em;
+	margin-bottom: 1em;
 	${ typography.eyebrow }
 `
 
 const Headline = styled.h3`
+	margin-top: 0;
 	${ ({ headlineSize }) => `
 		${ typography[headlineSize] }
 		${ headlineSize === 'h1' || headlineSize === 'h2' ? `
 			max-width: 16em;
 		` : `
-			max-width: 20em;
+			max-width: 21em;
 		` }
 	` }
 	${ ({ alignment }) => alignment === 'center' && `
@@ -73,10 +74,10 @@ const Text = styled.div`
 	p {
 		max-width: 32em;
 		margin-bottom: 0;
-		margin-top: 4em;
+		margin-top: 1.5em;
 		${ ({ textSize }) => typography[textSize] }
 		&:first-of-type {
-			margin-top: 0;
+			// margin-top: 0;
 		}
 		${ ({ alignment }) => alignment === 'center' && `
 			margin-left: auto;
@@ -143,9 +144,11 @@ const TextLockup = ({
 						<Text textSize={textSize} alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
 					}
 
-					{typeof text === 'string' &&
-						<Text textSize={textSize} alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
-					}
+					{typeof text === 'string' ? (
+						<Text textSize={textSize} alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}} /></Text>
+					) : (
+						<Text textSize={textSize} alignment={alignment}>{text}</Text>
+					)}
 
 					<ConditionalRender condition={children}>
 						{children || ''}
