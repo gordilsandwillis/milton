@@ -41,9 +41,9 @@ const NewsletterForm = styled(MailchimpSignup)`
 
 const Newsletter = () => (
 	<NewsletterBlock
-		headline="Stay Updated"
+		headline="Stay Up to Date"
 		headlineSize="h3"
-		text="Sign up to be the first to know about new collections, events, and sample sales."
+		text="Receive updates about new collections and furnishings."
 		textSize="bodyMedium"
 		overlay=".1"
 		image={{

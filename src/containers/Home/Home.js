@@ -54,8 +54,8 @@ class Home extends Component {
 						nextTheme="bgColor"
 						theme="bgColor"
 						alignment="center"
-						headline="Finely woven textiles inspired by the history and vibrance of fine art."
-						headlineSize="h3"
+						headline="Art in Living, Living in Art."
+						headlineSize="h4"
 						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
 						icon={<LogoMark/>}
 					/>

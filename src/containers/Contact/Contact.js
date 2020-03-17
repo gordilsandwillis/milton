@@ -14,6 +14,7 @@ const Contact = () => (
 			<Section>
 				<Grid small="1 [12] 1" medium="3 [8] 3" large="4 [6] 4">
 					<div>
+						<h6>We would love to hear from you and collaborate on any projects you may have.</h6>
 						<ContactForm />
 					</div>
 				</Grid>
