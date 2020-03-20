@@ -56,8 +56,8 @@ const DisabledButtonStyles = () => `
 	&[disabled],
 	&:disabled {
 		opacity: .4;
-		background: ${ colors.textColor };
-		color: ${ rgba(colors.bgColor, 0.6) };
+		// background: ${ colors.textColor };
+		// color: ${ rgba(colors.bgColor, 0.6) };
 		cursor: not-allowed;
 	}
 `

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/components/Button'
+import Grid from 'src/components/Grid'
 import UnderlinedInput from 'src/components/Input/UnderlinedInput'
+import { validateEmail } from 'src/utils/validations'
 
 import { colors, typography, util } from 'src/styles'
 
@@ -16,7 +18,7 @@ const ErrorMessage = styled.p`
 `
 
 const SubmitButton = styled(Button)`
-  min-width: 200px;
+  min-width: 150px;
   display: inline-block;
   vertical-align: top;
   ${ util.responsiveStyles('margin-top', 50, 45, 40, 20) }
@@ -87,7 +89,7 @@ class ContactForm extends Component {
 	render () {
 		const { status, name, company, phone, email, message } = this.state
 		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection } = this.props
-		const valid = name && email && message
+		const valid = name && email && validateEmail(email) && message
 
 		let buttonText = buttonLabel
 		if (status === 'SUCCESS') {
@@ -100,7 +102,7 @@ class ContactForm extends Component {
         action="https://formspree.io/xwkbldwy"
         method="POST"
       >
-
+        
         <UnderlinedInput
           hidden={true}
           onChange={this.handleInput}
@@ -155,23 +157,28 @@ class ContactForm extends Component {
           value={company}
           id="company"/>
 
-        <UnderlinedInput
-          onChange={this.handleInput}
-          size="small"
-          label="Email"
-          type="text"
-          name="email"
-          value={email}
-          id="email"/>
-
-        <UnderlinedInput
-          onChange={this.handleInput}
-          size="small"
-          label="Phone"
-          type="text"
-          name="phone"
-          value={phone}
-          id="phone"/>
+        <Grid small="[1]" medium="[1] [1]" colGap="30px">
+          <div>
+            <UnderlinedInput
+              onChange={this.handleInput}
+              size="small"
+              label="Email"
+              type="text"
+              name="email"
+              value={email}
+              id="email"/>
+          </div>
+          <div>
+            <UnderlinedInput
+              onChange={this.handleInput}
+              size="small"
+              label="Phone"
+              type="text"
+              name="phone"
+              value={phone}
+              id="phone"/>
+          </div>
+        </Grid>
 
         <UnderlinedInput
           onChange={this.handleInput}

@@ -10,7 +10,7 @@ import Button from 'src/components/Button'
 import ContactForm from 'src/components/ContactForm'
 import Grid from 'src/components/Grid'
 
-import { colors, util } from 'src/styles'
+import { colors, util, mq } from 'src/styles'
 
 Modal.setAppElement('#root')
 
@@ -42,7 +42,7 @@ const customStyles = {
 	content: {
 		position: 'relative',
 		background: colors.bgColor,
-		maxWidth: '100%',
+		maxWidth: '1000px',
 		width: '100%',
 		right: 'auto',
 		bottom: 'auto',
@@ -55,7 +55,7 @@ const customStyles = {
 		marginBottom: 'auto'
 	},
 	overlay: {
-		padding: '5%',
+		padding: '7%',
 		overflow: 'auto',
 		background: rgba(colors.lightGrey, .8),
 		zIndex: 600,
@@ -79,6 +79,20 @@ const InnerWrapper = styled.div`
 
 
 const Image = styled.div`
+	${ mq.largeAndUp } {
+		background: #ccc;
+		height: 100%;
+		position: relative;
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+	}
 `
 
 class InquireModal extends Component {
@@ -100,6 +114,7 @@ class InquireModal extends Component {
 				<Grid
 					small="[12]"
 					medium="[6] [6]"
+					vAlign="center"
 				>
 					{currentVariant && (
 						<Image>
