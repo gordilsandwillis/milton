@@ -18,26 +18,22 @@ import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
 import LayerReni from 'src/assets/images/collage/Reni/painting/layer-1.png'
 import LayerReni2 from 'src/assets/images/collage/Reni/painting/layer-2.png'
 import LayerReni3 from 'src/assets/images/collage/Reni/painting/layer-3.png'
-import LayerReni4 from 'src/assets/images/collage/Reni/painting/layer-4.png'
 
 import LayerMatisse from 'src/assets/images/collage/Matisse/painting/layer-1.png'
 import LayerMatisse2 from 'src/assets/images/collage/Matisse/painting/layer-2.png'
 import LayerMatisse3 from 'src/assets/images/collage/Matisse/painting/layer-3.png'
-import LayerMatisse4 from 'src/assets/images/collage/Matisse/painting/layer-4.png'
 
 const Images = {
 	Reni: {
 		layer1: { src: LayerReni, width: 617, height: 674 },
 		layer2: { src: LayerReni2, width: 617, height: 674 },
 		layer3: { src: LayerReni3, width: 617, height: 674 },
-		layer4: { src: LayerReni4, width: 617, height: 674 },
 		nextCollectionImage: ReniNextCollectionImage
 	},
 	Matisse: {
 		layer1: { src: LayerMatisse, width: 617, height: 588 },
 		layer2: { src: LayerMatisse2, width: 617, height: 588 },
 		layer3: { src: LayerMatisse3, width: 617, height: 588 },
-		layer4: { src: LayerMatisse4, width: 617, height: 588 },
 		nextCollectionImage: MatisseNextCollectionImage
 	}
 }
@@ -120,8 +116,7 @@ class Collection extends Component {
 								<StackedImages images={[
 									Images[title].layer1,
 									Images[title].layer2,
-									Images[title].layer3,
-									Images[title].layer4
+									Images[title].layer3
 								]}/>
 							</div>
 						</Grid>

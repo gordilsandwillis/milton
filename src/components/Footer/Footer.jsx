@@ -53,7 +53,7 @@ class Footer extends Component {
 						<FooterLogoIcon />
 						<FooterItem><Link type="capsLink" external={true} to="mailto:info@miltontextiles.com">info@miltontextiles.com</Link></FooterItem>
 						<FooterItem>
-							<Link type="capsLink" external={true} to="https://www.instagram.com/miltontexiles/">Instagram</Link>
+							<Link type="capsLink" external={true} to="https://www.instagram.com/miltontextiles/">Instagram</Link>
 							<Divider/>
 							<Link type="capsLink" external={true} to="https://pinterest.com/miltontextiles">Pinterest</Link>
 						</FooterItem>

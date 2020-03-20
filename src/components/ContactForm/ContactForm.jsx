@@ -87,7 +87,7 @@ class ContactForm extends Component {
 	render () {
 		const { status, name, company, phone, email, message } = this.state
 		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection } = this.props
-		const valid = name && company && email && phone && message
+		const valid = name && email && message
 
 		let buttonText = buttonLabel
 		if (status === 'SUCCESS') {

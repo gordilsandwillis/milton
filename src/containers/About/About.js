@@ -81,7 +81,7 @@ class About extends Component {
 						text={(
 							<div>
 								<p>Our textiles are proudly made at historic mills in the United States. Our products are sourced locally and created in collaboration with responsible domestic manufacturers.</p>
-								<p>Milton Textiles also specializes in restoring and upholstering select antique furniture, renewing well-crafted pieces that might otherwise be overlooked. We value small business owners and employ talented artisans to restore and upholstervintage furniture.</p>
+								<p>Milton Textiles also specializes in restoring and upholstering select antique furniture, renewing well-crafted pieces that might otherwise be overlooked. We value small business owners and employ talented artisans to restore and upholster vintage furniture.</p>
 							</div>
 						)}
 						imagePosition="left"
@@ -97,7 +97,7 @@ class About extends Component {
 						alignment="left"
 						textSize="bodySmall"
 						text={<div>
-							<p>Vera Neykov was born in Sofia, Bulgaria in 1986 and moved to Los Angeles, California in 1990. The daughter of artists, Vera grew up surrounded by creativity and was encouraged to explore, discover and learn about art and design.</p>
+							<p>Vera Neykov was born in Sofia, Bulgaria and at age four immigrated with her family to Los Angeles, California. The daughter of artists, Vera grew up surrounded by creativity and was encouraged to explore, discover and learn about art and design.</p>
 							<p>As a young girl she accompanied her mother, who was then an assistant couturiere, to fabric stores where she was instructed to touch each fabric and decide which she liked best. This early, hands-on education instilled in her a deep appreciation for high-quality textile design. Since then, she has devoted herself to understanding every step of its process and history.</p>
 							<p>Neykov studied Art History at Parsons School of Design. For the next 10 years she worked with galleries in Los Angeles and New York including Marlborough, L & M Arts and Rivington Arms. During this time she curated and helped produce exhibitions with artists and most recently worked as a studio manager for artist, Rob Pruitt.</p>
 						</div>}

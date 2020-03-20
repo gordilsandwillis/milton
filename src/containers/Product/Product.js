@@ -236,7 +236,7 @@ class Product extends Component {
 							</ProductSlideshow>
 						</ImgArea>
 						<TextArea>
-							<Grid small="1 [12] 1" medium="2 [10] 2" larger="1 [4] 2">
+							<Grid small="1 [12] 1" medium="2 [10] 2" extraLarge="1 [4] 2">
 								<div>
 									<ProductInfo
 										eyebrow={currentProduct.title + ' • ' + currentCollection.title}
