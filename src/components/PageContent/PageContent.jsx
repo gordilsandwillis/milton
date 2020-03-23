@@ -24,6 +24,7 @@ const Wrapper = styled.div`
 
 class PageContent extends Component {
   componentDidMount () {
+    console.log(" ╔╗╔╗╦ ╦ \n ║╦╠╦║║║ Designed & built by\n ║║║║║║║ https://gordilsandwillis.com\n ╚╝╚╝╚╩╝ ");
     client.graphQLClient.send(collectionsQuery).then(({model, data}) => {
       this.props.shopifyContext.updateState('shopifyCollections', model.collections)
     });

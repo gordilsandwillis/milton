@@ -21,7 +21,7 @@ const Icon = styled.span`
 `
 
 const MaterialIcon = ({ children, size }) => (
-	<Icon size={size}>{children}</Icon>
+	<Icon size={size || '18px'}>{children}</Icon>
 )
 
 export default MaterialIcon

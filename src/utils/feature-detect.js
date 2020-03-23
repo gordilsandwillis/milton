@@ -34,6 +34,7 @@ const passiveListener = () => {
       let opts = Object.defineProperty({}, 'passive', {
         get: () => {
           _supportsPassive = true
+          return false
         }
       })
       window.addEventListener('test', null, opts)

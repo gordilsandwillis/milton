@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
-import UnderlinedInput from 'src/components/Input/UnderlinedInput'
 import { validateEmail } from 'src/utils/validations'
 
-import { colors, typography, util } from 'src/styles'
+import { colors, util } from 'src/styles'
 
 const StyledForm = styled.form`
   position: relative;
@@ -27,10 +26,24 @@ const StyledInput = styled(Input)`
     background: transparent;
     border-color: ${ colors.bgColor };
     color: ${ colors.bgColor };
+    padding-right: 60px;
     &:hover,
     &:focus {
       background: transparent;
       border-color: ${ colors.bgColor };
+    }
+    &:-internal-autofill-selected,
+    &:-internal-autofill-selected:hover,
+    &:-internal-autofill-selected:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      background: transparent !important;
+      color: ${ colors.textColor } !important;
+      -webkit-text-fill-color: ${ colors.textColor } !important;
+      ~ label {
+        color: ${ colors.textColor } !important;
+      }
     }
   }
 `
@@ -38,8 +51,8 @@ const StyledInput = styled(Input)`
 const SubmitButton = styled(Button)`
   display: inline-block;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 6px;
+  right: 6px;
   z-index: 2;
 `
 
@@ -90,8 +103,7 @@ class NewsletterForm extends Component {
   }
 
 	render () {
-		const { status, name, company, phone, email, message } = this.state
-		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection } = this.props
+		const { status, email } = this.state
 		const valid = email && validateEmail(email)
 
 		let buttonText = 'arrow_forward'
@@ -121,9 +133,9 @@ class NewsletterForm extends Component {
           id="email"/>
 
         <SubmitButton
-          shape="square"
-          setTheme="transparent"
-          size="large"
+          shape="circle"
+          setTheme={!valid ? "transparent" : "textColor"}
+          size="small"
           type="submit"
           icon={buttonText}
           disabled={!valid}

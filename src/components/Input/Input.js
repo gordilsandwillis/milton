@@ -68,6 +68,12 @@ const setInputTheme = theme => {
 				background: ${ darken(0.05, themes[theme]['background']) };
 				border-color: ${ themes[theme]['accent'] };
 			}
+			&:-internal-autofill-selected,
+			&:-webkit-autofill {
+				background: ${ darken(0.05, themes[theme]['background']) } !important;
+				background-color: ${ darken(0.05, themes[theme]['background']) } !important;
+				color: ${ themes[theme]['color'] } !important;
+			}
 			::placeholder {
 				color: ${ rgba(themes[theme]['color'], 0.5) };
 			}

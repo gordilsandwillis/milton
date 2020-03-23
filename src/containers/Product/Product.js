@@ -198,7 +198,11 @@ class Product extends Component {
 
 		return (
 			<Fragment>
-				<SEO title={`${currentVariant.title} ${currentProduct.title}`} description={currentProduct.description} />
+				<SEO
+					title={`${currentVariant.title} ${currentProduct.title}`}
+					description={currentProduct.description}
+					shareImage={variantImages[0].src}
+				/>
 				<div>
 					<Header placeholder={false}/>
 					<Grid small="[1]" large="[7] [7]" vAlign="center">

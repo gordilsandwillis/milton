@@ -19,7 +19,11 @@ const SEO = ({
 		title={`${pageTitle} | ${siteTitle}`}
 		description={description}
 		keywords={keywords.join(`, `)}
-	/>)
+	>
+		<meta property="og:title" content={`${pageTitle} | ${siteTitle}`} />
+		<meta property="og:image" content={shareImage} />
+		<meta property="og:description" content={description} />
+	</Helmet>)
 }
 
 SEO.defaultProps = {

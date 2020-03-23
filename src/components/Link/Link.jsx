@@ -112,7 +112,6 @@ class Link extends Component {
 Link.defaultProps = {
 	to: '#',
 	external: false,
-	target: '',
 	type: 'none',
 	setTheme: 'currentcolor',
 	target: '_blank'
