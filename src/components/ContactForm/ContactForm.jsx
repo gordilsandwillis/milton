@@ -88,7 +88,7 @@ class ContactForm extends Component {
 
 	render () {
 		const { status, name, company, phone, email, message } = this.state
-		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection } = this.props
+		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection, subject } = this.props
 		const valid = name && email && validateEmail(email) && message
 
 		let buttonText = buttonLabel
@@ -102,6 +102,8 @@ class ContactForm extends Component {
         action="https://formspree.io/xwkbldwy"
         method="POST"
       >
+
+        {subject && <input type="hidden" name="_subject" value={subject} />}
         
         <UnderlinedInput
           hidden={true}

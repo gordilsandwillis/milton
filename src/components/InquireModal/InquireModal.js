@@ -37,32 +37,39 @@ const ModalHeader = styled.h4`
 	margin: 0;
 `
 
-const customStyles = {
-	background: 'red',
-	content: {
-		position: 'relative',
-		background: colors.bgColor,
-		maxWidth: '1000px',
-		width: '100%',
-		right: 'auto',
-		bottom: 'auto',
-		padding: 0,
-		top: 'auto',
-		left: 'auto',
-		borderRadius: '0',
-		border: '14px solid white',
-		marginTop: 'auto',
-		marginBottom: 'auto'
-	},
-	overlay: {
-		padding: '7%',
-		overflow: 'auto',
-		background: rgba(colors.lightGrey, .8),
-		zIndex: 600,
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
+const customStyles = (hasImage) => {
+	let maxWidth = '600px'
+	if (hasImage) {
+		maxWidth = '1000px'
+	}
+	const styles = {
+		background: 'red',
+		content: {
+			position: 'relative',
+			background: colors.bgColor,
+			maxWidth: maxWidth,
+			width: '100%',
+			right: 'auto',
+			bottom: 'auto',
+			padding: 0,
+			top: 'auto',
+			left: 'auto',
+			borderRadius: '0',
+			border: '14px solid white',
+			marginTop: 'auto',
+			marginBottom: 'auto'
+		},
+		overlay: {
+			padding: '7%',
+			overflow: 'auto',
+			background: rgba(colors.lightGrey, .8),
+			zIndex: 600,
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center'
+		},
+	}
+	return styles
 };
 
 const InnerWrapper = styled.div`
@@ -107,13 +114,13 @@ class InquireModal extends Component {
 
 		return (
 			<Modal
-				style={customStyles}
+				style={customStyles(currentVariant)}
 				isOpen={modalIsOpen}
 				closeTimeoutMS={500}
 			>
 				<Grid
 					small="[12]"
-					medium="[6] [6]"
+					medium={currentVariant ? "[6] [6]" : "[1]"}
 					vAlign="center"
 				>
 					{currentVariant && (
@@ -122,7 +129,9 @@ class InquireModal extends Component {
 						</Image>
 					)}
 					<InnerWrapper>
-						<ModalEyebrow>{`${currentCollection && currentCollection.title} • ${currentVariant && currentVariant.title}`}</ModalEyebrow>
+						{currentCollection && (
+							<ModalEyebrow>{`${currentCollection && currentCollection.title} • ${currentVariant && currentVariant.title}`}</ModalEyebrow>
+						)}
 						<ModalHeader>{title || 'Inquire'}</ModalHeader>
 							<ContactForm
 								buttonLabel={buttonText}
@@ -130,6 +139,7 @@ class InquireModal extends Component {
 								currentProduct={currentProduct}
 								currentCollection={currentCollection}
 								onSuccess={closeModal}
+								subject="Milton — Inquiry"
 							/>
 						<CloseButton onClick={closeModal} shape="circle" setTheme="transparent"><MdClose size={24}/></CloseButton>
 					</InnerWrapper>

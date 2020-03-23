@@ -106,7 +106,7 @@ class NewsletterForm extends Component {
         method="POST"
       >
 
-        <input type="hidden" name="_subject" value="Newsletter Signup" />
+        <input type="hidden" name="_subject" value="Milton — Newsletter Signup" />
 
         {/*<input type="hidden" name="_cc" value="matt@gordilsandwillis.com" />*/}
         

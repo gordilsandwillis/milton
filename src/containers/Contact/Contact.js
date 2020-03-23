@@ -19,7 +19,7 @@ const Contact = () => (
 							<p className="large" style={{ textAlign: 'center', maxWidth: '22em', marginLeft: 'auto', marginRight: 'auto'}}>We would love to hear from you and collaborate on any projects you may have.</p>
 						</div>
 						<div>
-							<ContactForm />
+							<ContactForm subject="Milton — Contact Page" />
 						</div>
 					</ScrollEntrance>
 				</Grid>
