@@ -8,10 +8,20 @@ const ThemeWrapper = styled.div`
 		background-color: ${ colors[setTheme] };
 	` }
 	${ ({ 'data-theme': setTheme }) =>
+		setTheme === 'midnight' ||
+		setTheme === 'copper' ||
+		setTheme === 'froly' ||
+		setTheme === 'umber' ||
+		setTheme === 'chambray' ||
+		setTheme === 'umber' ||
+		setTheme === 'mahogany' ||
+		setTheme === 'starryNight' ||
 		setTheme === 'mainColor' ||
 		setTheme === 'black' ||
 		setTheme === 'red' ||
 		setTheme === 'green' ||
+		setTheme === 'amulet' ||
+		setTheme === 'orange' ||
 		setTheme === 'alert' ? `
 		color: ${ colors.bgColor };
 		h1, h2, h3, h4, h5, h6 {

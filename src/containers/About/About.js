@@ -1,16 +1,25 @@
 import React, { Component, Fragment } from 'react';
 
+import { withModalContext } from 'src/contexts/ModalContext'
+
 import Header from 'src/components/Header'
 import SEO from 'src/components/SEO'
 import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
 import Newsletter from 'src/components/Newsletter'
+import StackedImages from 'src/components/StackedImages'
 
-import PlaceholderDesignerImage from 'src/assets/images/about-designer.png'
 import EthosImage from 'src/assets/images/about-ethos.jpg'
 import ValuesImage from 'src/assets/images/about-values.jpg'
+import DesignerImage from 'src/assets/images/collage/Designer/designer-layer-1.png'
+import DesignerImage2 from 'src/assets/images/collage/Designer/designer-layer-2.png'
+import DesignerImage3 from 'src/assets/images/collage/Designer/designer-layer-3.png'
 
-import { withModalContext } from 'src/contexts/ModalContext'
+const DesignerImages = [
+	{ src: DesignerImage, width: 463, height: 650 },
+	{ src: DesignerImage2, width: 463, height: 650 },
+	{ src: DesignerImage3, width: 463, height: 650 }
+]
 
 class About extends Component {
 
@@ -101,14 +110,15 @@ class About extends Component {
 							<p>As a young girl she accompanied her mother, who was then an assistant couturiere, to fabric stores where she was instructed to touch each fabric and decide which she liked best. This early, hands-on education instilled in her a deep appreciation for high-quality textile design. Since then, she has devoted herself to understanding every step of its process and history.</p>
 							<p>Neykov studied Art History at Parsons School of Design. For the next 10 years she worked with galleries in Los Angeles and New York including Marlborough, L & M Arts and Rivington Arms. During this time she curated and helped produce exhibitions with artists and most recently worked as a studio manager for artist, Rob Pruitt.</p>
 						</div>}
-						image={{
-							fluid: {
-								aspectRatio: 619/786,
-								src: PlaceholderDesignerImage,
-								srcSet: '',
-								sizes: ''
-							}
-						}}
+						// image={{
+						// 	fluid: {
+						// 		aspectRatio: 619/786,
+						// 		src: PlaceholderDesignerImage,
+						// 		srcSet: '',
+						// 		sizes: ''
+						// 	}
+						// }}
+						imageContent={<StackedImages images={DesignerImages}/>}
 						imagePosition="right"
 					/>
 					<CalloutText

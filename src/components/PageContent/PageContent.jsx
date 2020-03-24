@@ -55,7 +55,7 @@ class PageContent extends Component {
             <Route exact path="/about" render={(props) => (<About {...props} />)} />
             <Route exact path="/contact" render={(props) => (<Contact {...props} />)} />
           </Switch>
-          <Footer/>
+          <Footer location={location} />
           <InquireModal/>
         </PageTransition>
       </Wrapper>

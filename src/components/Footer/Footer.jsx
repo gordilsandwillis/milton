@@ -7,6 +7,9 @@ import Link from 'src/components/Link'
 
 import { typography, util } from 'src/styles'
 
+import { reniColors, matisseColors } from 'src/styles/colors'
+
+
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
 	z-index: 2;
@@ -45,9 +48,26 @@ const Divider = styled.div`
 `
 
 class Footer extends Component {
+
+	getTheme () {
+		const { pathname } = this.props.location
+		let themeOptions = ['grey']
+
+		if (pathname.includes('reni')) {
+			themeOptions = Object.keys(reniColors)
+		} else if (pathname.includes('matisse')) {
+			themeOptions = Object.keys(matisseColors)
+		} else {
+			themeOptions = Object.keys({...reniColors, ...matisseColors})
+		}
+
+		return  themeOptions[Math.floor(Math.random() * themeOptions.length)]
+	}
+
 	render () {
+
 		return (
-			<Wrapper setTheme="grey">
+			<Wrapper setTheme={this.getTheme()}>
 				<Grid small="1 [12] 1">
 					<div>
 						<FooterLogoIcon />
