@@ -194,8 +194,6 @@ class Product extends Component {
 			return false
 		}
 
-		console.log(currentProduct)
-
 		return (
 			<Fragment>
 				<SEO
