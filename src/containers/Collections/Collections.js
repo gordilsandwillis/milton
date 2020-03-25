@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import ReactGA from 'react-ga'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
 import Header from 'src/components/Header'
@@ -16,6 +16,11 @@ class Collections extends Component {
 
 	componentDidMount () {
 		this.setState({ products: this.props.shopifyContext.shopifyProducts })
+
+		if (process.env.NODE_ENV === 'production') {
+	    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}
 	}
 
 	render() {
@@ -40,7 +45,7 @@ class Collections extends Component {
 						alignment="center"
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
 						headlineSize="h3"
-						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
+						buttons={[{ linkType: 'underlinedLink', label: 'Learn More', to: '/about' }]}
 						icon={<LogoMark/>}
 					/>
 				</div>

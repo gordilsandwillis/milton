@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import styled from '@emotion/styled'
+import ReactGA from 'react-ga'
 import { FaPinterest } from 'react-icons/fa'
 
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
@@ -177,6 +178,11 @@ class Product extends Component {
 			moreProducts,
 			productSpecifications
 		})
+
+		if (process.env.NODE_ENV === 'production') {
+	    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}
 	}
 
 	render() {

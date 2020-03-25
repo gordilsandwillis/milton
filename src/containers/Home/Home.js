@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
+import ReactGA from 'react-ga'
 
 import { LogoMark } from 'src/components/Logo'
 import LargeLogo from 'src/components/LargeLogo'
@@ -26,6 +27,13 @@ class Home extends Component {
 	state = {
 		collapseHeader: false
 	}
+
+	componentDidMount () {
+		if (process.env.NODE_ENV === 'development') {
+	    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}
+  }
 
 	render() {
 		return (
