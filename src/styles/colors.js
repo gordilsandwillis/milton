@@ -13,33 +13,30 @@ export const grey = '#C7C7BA'
 
 // Reni Colors
 export const reniColors = {
-	tan: '#E6DDC4',
-	sage:  '#D3D9CE',
-	sea:'#B7C7C4',
-	lavender: '#9EA0AD',
-	rose: '#C5A6A1',
-	peach: '#FED9BC',
-	midnight: '#4A434B',
+	tan: '#E4DBBE',
+	lavender: '#9FA1AD',
 	copper: '#BF7832',
-	froly: '#F38373'
+	sea:'#B7C8C5',
+	froly: '#F48472',
+	midnight: '#4A434A',
+	rose: '#C5A7A1'
 }
 
-export const { tan, sage, sea, lavender, rose, peach, midnight, copper, froly}  = reniColors
+
+export const { tan, sea, lavender, rose, midnight, copper, froly}  = reniColors
 
 // Matisse Colors
 export const matisseColors = {
-	umber: '#504333',
-	chambray: '#3A4F85',
-	pink: '#D98B87',
-	amulet: '#8BAA7D',
-	mahogany: '#CD3C45',
-	ochre: '#DABC0F',
-	orange: '#E69436',
-	sand: '#C7C7BA'
+	umber: '#504232',
+	chambray: '#3B4E85',
+	pink: '#D98C87',
+	amulet: '#8CAB7D',
+	rasberry: '#CE3D44',
+	ochre: '#DCBD0E',
+	sand: '#C7C7BB'
 }
 
-export const { umber, chambray, pink, amulet, mahogany, ochre, orange, sand } = matisseColors
-
+export const { umber, chambray, pink, amulet, rasberry, ochre, sand } = matisseColors
 
 // Basic Colors
 export const transparent = 'transparent'
