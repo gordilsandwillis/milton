@@ -79,6 +79,7 @@ class Footer extends Component {
 						</FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
 						<FooterItem><Link type="capsLink" external={true} to="https://gordilsandwillis.com/">Site By G&W</Link></FooterItem>
+						<FooterItem>ALL RIGHTS RESERVED © {new Date().getFullYear()} MILTON TEXTILES</FooterItem>
 					</div>
 				</Grid>
 			</Wrapper>
