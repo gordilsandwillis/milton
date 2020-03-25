@@ -40,7 +40,7 @@ class Collections extends Component {
 						alignment="center"
 						headline="Finely woven textiles inspired by the history and vibrance of fine art."
 						headlineSize="h3"
-						buttons={[{ linkType: 'capsLink', label: 'Learn More', to: '/about' }]}
+						buttons={[{ linkType: 'underlinedLink', label: 'Learn More', to: '/about' }]}
 						icon={<LogoMark/>}
 					/>
 				</div>
