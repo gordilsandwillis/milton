@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import ReactGA from 'react-ga'
 import Header from 'src/components/Header'
 import Section from 'src/components/Section'
