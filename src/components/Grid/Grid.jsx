@@ -118,6 +118,7 @@ const StyledGrid = styled.div`
 		${ mq.largeAndUp } {
 			${ gridDefToCss(medium) }
 			column-gap: ${ gridGapToCss(colGap, 1) };
+			grid-column-gap: ${ gridGapToCss(colGap, 1) };
 			row-gap: ${ gridGapToCss(rowGap, 1) };
 		}
 	` }
@@ -126,6 +127,7 @@ const StyledGrid = styled.div`
 		${ mq.largerAndUp } {
 			${ gridDefToCss(large) }
 			column-gap: ${ gridGapToCss(colGap, 2) };
+			grid-column-gap: ${ gridGapToCss(colGap, 2) };
 			row-gap: ${ gridGapToCss(rowGap, 2) };
 		}
 	` }
@@ -134,6 +136,7 @@ const StyledGrid = styled.div`
 		${ mq.extraLargeAndUp } {
 			${ gridDefToCss(larger) }
 			column-gap: ${ gridGapToCss(colGap, 2) };
+			grid-column-gap: ${ gridGapToCss(colGap, 2) };
 			row-gap: ${ gridGapToCss(rowGap, 2) };
 		}
 	` }
@@ -142,11 +145,12 @@ const StyledGrid = styled.div`
 		${ mq.extraExtraLargeAndUp } {
 			${ gridDefToCss(extraLarge) }
 			column-gap: ${ gridGapToCss(colGap, 2) };
+			grid-column-gap: ${ gridGapToCss(colGap, 2) };
 			row-gap: ${ gridGapToCss(rowGap, 2) };
 		}
 	` }
 
-	
+
 
 	${ props => props.showOverlay && `
 		position: relative;

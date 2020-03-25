@@ -24,6 +24,10 @@ const SubmitButton = styled(Button)`
   ${ util.responsiveStyles('margin-top', 50, 45, 40, 20) }
 `
 
+const Form = styled.form`
+  width: 100%;
+`
+
 class ContactForm extends Component {
 	constructor(props) {
     super(props);
@@ -97,14 +101,14 @@ class ContactForm extends Component {
 		}
 
 		return (
-			<form
+			<Form
         onSubmit={this.submitForm}
         action="https://formspree.io/xwkbldwy"
         method="POST"
       >
 
         {subject && <input type="hidden" name="_subject" value={subject} />}
-        
+
         <UnderlinedInput
           hidden={true}
           onChange={this.handleInput}
@@ -195,7 +199,7 @@ class ContactForm extends Component {
 
         {status === 'ERROR' && (<ErrorMessage>Something went wrong. Please make sure all fields are filled out and try again.</ErrorMessage>)}
 
-      </form>
+      </Form>
 		)
 	}
 }
