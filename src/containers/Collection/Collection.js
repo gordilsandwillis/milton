@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import ReactGA from 'react-ga'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
 import Header from 'src/components/Header'
@@ -46,6 +46,10 @@ class Collection extends Component {
 
 	componentDidMount () {
 		this.setState({ collections: this.props.shopifyContext.shopifyCollections })
+		if (process.env.NODE_ENV === 'production') {
+	    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}
 	}
 
 	render() {

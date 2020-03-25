@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import ReactGA from 'react-ga'
 import { withModalContext } from 'src/contexts/ModalContext'
 
 import Header from 'src/components/Header'
@@ -27,6 +27,13 @@ class About extends Component {
 		const { modalContext } = this.props
 		modalContext.toggleModal({title: 'Contact Us', buttonLabel: 'Send'})
 	}
+
+	componentDidMount () {
+		if (process.env.NODE_ENV === 'production') {
+	    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}
+  }
 
 	render() {
 		return (
