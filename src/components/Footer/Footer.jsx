@@ -36,6 +36,12 @@ const FooterLogoIcon = styled(LogoMark)`
 	margin-bottom: 20px;
 `
 
+const FooterCopyright = styled(FooterItem)`
+	p {
+		${ typography.smallCaps }
+	}
+`
+
 const Divider = styled.div`
 	${ typography.h6 }
 	display: inline-block;
@@ -79,7 +85,7 @@ class Footer extends Component {
 						</FooterItem>
 						<FooterItem><p>Made in the USA</p></FooterItem>
 						<FooterItem><Link type="capsLink" external={true} to="https://gordilsandwillis.com/">Site By G&W</Link></FooterItem>
-						<FooterItem>ALL RIGHTS RESERVED © {new Date().getFullYear()} MILTON TEXTILES</FooterItem>
+						<FooterCopyright><p>ALL RIGHTS RESERVED © {new Date().getFullYear()} MILTON TEXTILES</p></FooterCopyright>
 					</div>
 				</Grid>
 			</Wrapper>
