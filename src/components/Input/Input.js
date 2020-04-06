@@ -40,9 +40,9 @@ const themes = {
 			background: colors.white
 		},
 		bgColor: {
-			color: colors.textColor,
+			color: colors.bgColor,
 			accent: colors.mainColor,
-			background: colors.bgColor
+			background: colors.textColor
 		},
 		transparent: {
 			color: colors.textColor,
@@ -50,9 +50,9 @@ const themes = {
 			background: colors.transparent
 		},
 		textColor: {
-			color: colors.bgColor,
+			color: colors.textColor,
 			accent: colors.lightGreen,
-			background: colors.textColor
+			background: colors.bgColor
 		}
 	}
 
@@ -101,7 +101,10 @@ const InputWrap = styled.div`
 	display: inline-block;
 	width: 100%;
 	${ typography.bodySmall }
-	${ ({ theme }) => setInputTheme(theme) }
+	${ ({ theme }) => {
+		console.log(setInputTheme(theme))
+		return setInputTheme(theme)
+	} }
 `
 
 const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
@@ -309,6 +312,8 @@ class Input extends Component {
 		} = this.props
 
 		const { focused, hasValue } = this.state
+
+		console.log(setTheme)
 
 		return (
 			<InputWrap className={className} theme={setTheme}>

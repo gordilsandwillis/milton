@@ -16,21 +16,21 @@ const StyledForm = styled.form`
 `
 
 const StyledInput = styled(Input)`
-  color: ${ colors.bgColor };
+  color: ${theme => theme !== 'transparent' ? colors[theme] : colors.bgColor };
   position: relative;
   z-index: 1;
   label {
-    color: ${ colors.bgColor };
+    color: ${theme => theme !== 'transparent' ? colors[theme] : colors.bgColor };
   }
   input.input {
     background: transparent;
-    border-color: ${ colors.bgColor };
-    color: ${ colors.bgColor };
+    border-color: ${theme => theme !== 'transparent' ? colors[theme] : colors.bgColor };
+    color: ${theme => theme !== 'transparent' ? colors[theme] : colors.bgColor };
     padding-right: 60px;
     &:hover,
     &:focus {
       background: transparent;
-      border-color: ${ colors.bgColor };
+      border-color: ${theme => theme !== 'transparent' ? colors[theme] : colors.bgColor };
     }
     &:-internal-autofill-selected,
     &:-internal-autofill-selected:hover,
@@ -39,10 +39,10 @@ const StyledInput = styled(Input)`
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
       background: transparent !important;
-      color: ${ colors.textColor } !important;
-      -webkit-text-fill-color: ${ colors.textColor } !important;
+      color: ${ theme => theme !== 'transparent' ? colors[theme] : colors.textColor } !important;
+      -webkit-text-fill-color: ${ theme => theme !== 'transparent' ? colors[theme] : colors.textColor } !important;
       ~ label {
-        color: ${ colors.textColor } !important;
+        color: ${ theme => theme !== 'transparent' ? colors[theme] : colors.textColor } !important;
       }
     }
   }
@@ -103,6 +103,7 @@ class NewsletterForm extends Component {
   }
 
 	render () {
+    const { theme } = this.props
 		const { status, email } = this.state
 		const valid = email && validateEmail(email)
 
@@ -117,33 +118,32 @@ class NewsletterForm extends Component {
         action="https://formspree.io/xwkbldwy"
         method="POST"
       >
-
         <input type="hidden" name="_subject" value="Milton — Newsletter Signup" />
-
-        {/*<input type="hidden" name="_cc" value="matt@gordilsandwillis.com" />*/}
-        
         <StyledInput
           onChange={this.handleInput}
-          setTheme="transparent"
+          setTheme={theme}
           size="large"
           label={status === 'SUCCESS' ? 'Thank you' : 'Enter email'}
           type="email"
           name="email"
           value={email}
-          id="email"/>
-
+          id="email"
+        />
         <SubmitButton
           shape="circle"
-          setTheme={!valid ? "transparent" : "textColor"}
+          setTheme={!valid ? theme : "textColor"}
           size="small"
           type="submit"
           icon={buttonText}
           disabled={!valid}
         />
-
       </StyledForm>
 		)
 	}
+}
+
+NewsletterForm.defaultProps = {
+  theme: 'transparent'
 }
 
 export default NewsletterForm

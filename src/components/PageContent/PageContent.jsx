@@ -5,16 +5,18 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { shopifyClient as client, collectionsQuery, productsQuery, shopQuery } from 'src/services/shopify'
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
-import Home from 'src/containers/Home'
-import Collections from 'src/containers/Collections'
-import Collection from 'src/containers/Collection'
-import About from 'src/containers/About'
-import Contact from 'src/containers/Contact'
-import Product from 'src/containers/Product'
+// import Home from 'src/containers/Home'
+// import Collections from 'src/containers/Collections'
+// import Collection from 'src/containers/Collection'
+// import About from 'src/containers/About'
+// import Contact from 'src/containers/Contact'
+// import Product from 'src/containers/Product'
 
-import PageTransition from 'src/components/PageTransition'
-import Footer from 'src/components/Footer'
-import InquireModal from 'src/components/InquireModal'
+// import PageTransition from 'src/components/PageTransition'
+// import Footer from 'src/components/Footer'
+// import InquireModal from 'src/components/InquireModal'
+
+import ComingSoon from 'src/containers/ComingSoon'
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -46,6 +48,8 @@ class PageContent extends Component {
     const { location } = this.props
     return (
       <Wrapper>
+        <ComingSoon />
+      {/*
         <PageTransition location={location}>
           <Switch location={location}>
             <Route exact path="/" render={(props) => (<Home {...props} />)} />
@@ -58,6 +62,7 @@ class PageContent extends Component {
           <Footer location={location} />
           <InquireModal/>
         </PageTransition>
+      */}
       </Wrapper>
     )
   }
