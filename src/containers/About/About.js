@@ -69,8 +69,7 @@ class About extends Component {
 						textSize="bodySmall"
 						text={(
 							<div>
-								<p>Milton Textiles was created with the idea of translating the spirit of art history and painting into contemporary and joyful color palettes, which are applied to a diverse collection of high-quality fabrics.</p>
-								<p>The collections of Milton Textiles are created to offer clients the option to choose one or all of the fabrics within each collection. The company’s unique bold colors and lively patterns when layered together create interior environments that are maximalist yet refined and exuberant yet comforting.</p>
+								<p>Milton Textiles was created with the idea of translating the spirit of art history and painting into contemporary and joyful color palettes, applied to a diverse collection of high-quality fabrics. Our fabrics are created to offer clients uniquely bold colors and lively patterns, giving the option to choose one or all fabrics from each collection. When layered together Milton Textiles create interior environments that are historic yet timeless, maximalist yet refined, exuberant yet comforting.</p>
 								<p>These signature fabrics are available for both residential and contract projects.</p>
 							</div>
 						)}
@@ -114,8 +113,8 @@ class About extends Component {
 						textSize="bodySmall"
 						text={<div>
 							<p>Vera Neykov was born in Sofia, Bulgaria and at age four immigrated with her family to Los Angeles, California. The daughter of artists, Vera grew up surrounded by creativity and was encouraged to explore, discover and learn about art and design.</p>
-							<p>As a young girl she accompanied her mother, who was then an assistant couturiere, to fabric stores where she was instructed to touch each fabric and decide which she liked best. This early, hands-on education instilled in her a deep appreciation for high-quality textile design. Since then, she has devoted herself to understanding every step of its process and history.</p>
-							<p>Neykov studied Art History at Parsons School of Design. For the next 10 years she worked with galleries in Los Angeles and New York including Marlborough, L & M Arts and Rivington Arms. During this time she curated and helped produce exhibitions with artists and most recently worked as a studio manager for artist, Rob Pruitt.</p>
+							<p>As a young girl she accompanied her mother, then an assistant couturière, to fabric stores where she was instructed to touch each fabric and decide which she liked best. This early, hands-on education instilled in her a deep appreciation for high-quality textile design.</p>
+							<p>Since then, she has devoted herself to understanding every step of its process and history. Neykov studied Art History at Parsons School of Design. For the next 10 years she worked with galleries in New York and Los Angeles including Marlborough, L & M Arts and Rivington Arms. Vera has curated and helped produce exhibitions with artists and most recently worked as a studio manager for artist Rob Pruitt.</p>
 						</div>}
 						// image={{
 						// 	fluid: {

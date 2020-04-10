@@ -23,17 +23,26 @@ import LayerMatisse from 'src/assets/images/collage/Matisse/painting/layer-1.png
 import LayerMatisse2 from 'src/assets/images/collage/Matisse/painting/layer-2.png'
 import LayerMatisse3 from 'src/assets/images/collage/Matisse/painting/layer-3.png'
 
+import ThumbnailReni from 'src/assets/images/collage/Reni/reni-layer-1.png'
+import ThumbnailReni2 from 'src/assets/images/collage/Reni/reni-layer-2.png'
+import ThumbnailReni3 from 'src/assets/images/collage/Reni/reni-layer-3.png'
+
+import ThumbnailMatisse from 'src/assets/images/collage/Matisse/matisse-layer-1.png'
+import ThumbnailMatisse2 from 'src/assets/images/collage/Matisse/matisse-layer-2.png'
+import ThumbnailMatisse3 from 'src/assets/images/collage/Matisse/matisse-layer-3.png'
+
+
 const Images = {
 	Reni: {
-		layer1: { src: LayerReni, width: 617, height: 674 },
-		layer2: { src: LayerReni2, width: 617, height: 674 },
-		layer3: { src: LayerReni3, width: 617, height: 674 },
+		layer1: { src: ThumbnailReni, width: 720, height: 619 },
+		layer2: { src: ThumbnailReni2, width: 720, height: 619 },
+		layer3: { src: ThumbnailReni3, width: 720, height: 619 },
 		nextCollectionImage: ReniNextCollectionImage
 	},
 	Matisse: {
-		layer1: { src: LayerMatisse, width: 617, height: 588 },
-		layer2: { src: LayerMatisse2, width: 617, height: 588 },
-		layer3: { src: LayerMatisse3, width: 617, height: 588 },
+		layer1: { src: ThumbnailMatisse, width: 720, height: 619 },
+		layer2: { src: ThumbnailMatisse2, width: 720, height: 619 },
+		layer3: { src: ThumbnailMatisse3, width: 720, height: 619 },
 		nextCollectionImage: MatisseNextCollectionImage
 	}
 }
