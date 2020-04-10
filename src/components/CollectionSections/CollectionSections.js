@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FiftyFifty from 'src/components/FiftyFifty'
 import StackedImages from 'src/components/StackedImages'
+import Link from 'src/components/Link'
 
 import LayerReni from 'src/assets/images/collage/Reni/painting/layer-1.png'
 import LayerReni2 from 'src/assets/images/collage/Reni/painting/layer-2.png'
@@ -58,11 +59,11 @@ class CollectionSections extends Component {
 						alignment="center"
 						text={collection.descriptionHtml}
 						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/' + collection.handle }]}
-						imageContent={<StackedImages images={[
+						imageContent={<Link to={'/collections/' + collection.handle}><StackedImages images={[
 							Images[collection.title].layer1,
 							Images[collection.title].layer2,
 							Images[collection.title].layer3
-						]}/>}
+						]}/></Link>}
 						imagePosition={index % 2 ? 'left' : 'right'}
 					/>
 				)
