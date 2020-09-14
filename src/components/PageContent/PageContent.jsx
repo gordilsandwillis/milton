@@ -15,6 +15,7 @@ import Product from 'src/containers/Product'
 import PageTransition from 'src/components/PageTransition'
 import Footer from 'src/components/Footer'
 import InquireModal from 'src/components/InquireModal'
+import FacebookPixel from 'src/components/FacebookPixel'
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -57,6 +58,7 @@ class PageContent extends Component {
           </Switch>
           <Footer location={location} />
           <InquireModal/>
+          <FacebookPixel location={location} />
         </PageTransition>
       </Wrapper>
     )
