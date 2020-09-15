@@ -125,6 +125,15 @@ class ContactForm extends Component {
 
         <UnderlinedInput
           hidden={true}
+          size="small"
+          type="text"
+          name="_replyto"
+          id="_replyto"
+          value={email}
+        />
+
+        <UnderlinedInput
+          hidden={true}
           onChange={this.handleInput}
           size="small"
           label="Collection"
