@@ -37,7 +37,8 @@ class ContactForm extends Component {
       product: '',
       collection: '',
       sku: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       company: '',
       email: '',
       phone: '',
@@ -66,7 +67,8 @@ class ContactForm extends Component {
             product: '',
             collection: '',
             sku: '',
-            name: '',
+            firstName: '',
+            lastName: '',
             company: '',
             email: '',
             phone: '',
@@ -91,9 +93,9 @@ class ContactForm extends Component {
   }
 
 	render () {
-		const { status, name, company, phone, email, message } = this.state
+		const { status, firstName, lastName, company, phone, email, message } = this.state
 		const { buttonLabel='Send' , currentVariant, currentProduct, currentCollection, subject } = this.props
-		const valid = name && email && validateEmail(email) && message
+		const valid = firstName && lastName && email && validateEmail(email) && message
 
 		let buttonText = buttonLabel
 		if (status === 'SUCCESS') {
@@ -145,14 +147,29 @@ class ContactForm extends Component {
           disabled={!(currentVariant && currentVariant.sku)}
         />
 
-        <UnderlinedInput
-          onChange={this.handleInput}
-          size="small"
-          label="Name"
-          type="text"
-          name="name"
-          value={name}
-          id="name"/>
+        <Grid small="[1]" medium="[1] [1]" colGap="30px">
+          <div>
+            <UnderlinedInput
+              onChange={this.handleInput}
+              size="small"
+              label="First Name"
+              type="text"
+              name="firstName"
+              value={firstName}
+              id="firstName"/>
+          </div>
+
+          <div>
+            <UnderlinedInput
+              onChange={this.handleInput}
+              size="small"
+              label="Last Name"
+              type="text"
+              name="lastName"
+              value={lastName}
+              id="lastName"/>
+          </div>
+        </Grid>
 
         <UnderlinedInput
           onChange={this.handleInput}
