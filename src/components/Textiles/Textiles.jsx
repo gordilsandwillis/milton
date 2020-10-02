@@ -88,7 +88,7 @@ const Textiles = ({ products, hasAtf }) => {
 						>
 							{products.map((product, index) => (
 								product.variants.map((variant, index) => (
-									variant.image && (
+									(variant.image && variant.availableForSale) &&  (
 										<div key={variant.id}>
 											<ProductThumb product={product} variant={variant} />
 										</div>

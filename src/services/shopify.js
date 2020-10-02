@@ -45,6 +45,7 @@ export const ProductFragment = (product) => {
   product.add('description')
   product.add('descriptionHtml')
   product.add('vendor')
+  product.add('availableForSale')
 
   product.addConnection('images', {args: {first: 50}}, ImageFrament)
   product.addConnection('metafields', {args: {first: 10, namespace: 'specifications'}}, MetafieldFragment)

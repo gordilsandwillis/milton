@@ -77,7 +77,7 @@ const Furnishings = ({ products, prevTheme = false }) => {
 							>
 								{products.map((product, index) => (
 									product.variants.map((variant, index) => (
-										variant.image && (
+										(variant.image && variant.availableForSale) && (
 											<div key={variant.id}>
 												<ProductThumb product={product} variant={variant} />
 											</div>

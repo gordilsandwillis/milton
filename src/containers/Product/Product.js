@@ -160,7 +160,8 @@ class Product extends Component {
 		const currentVariant = currentProduct.variants.find(variant => variant.id === variantId)
 		const currentCollection = collections.find( (({ products }) => products.some( product => product.id === currentProduct.id)))
 		let variantImages = currentProduct.images.filter( i => currentVariant.title.includes( i.altText ) )
-		const collectionProducts = currentCollection.products.filter( product => product.id !== currentProduct.id )
+		const collectionProducts = currentCollection.products.filter( product => product.id !== currentProduct.id && product.availableForSale)
+		
 		const moreProducts = collectionProducts.sort(function (a, b) { return 0.5 - Math.random() }).slice(0, 4)
 
 		const productSpecifications = currentProduct.metafields.filter( ({namespace}) => namespace === 'specifications')
@@ -168,6 +169,8 @@ class Product extends Component {
 		if (!variantImages || variantImages.length === 0) {
 			variantImages = [currentVariant.image]
 		}
+
+		console.log(collectionProducts)
 
 		this.setState({
 			loading: false,
