@@ -52,7 +52,7 @@ const ProductThumb = ({ product, variant, className }) => {
 	}
 
 	let variantImages = product.images.filter( i => variant.title.includes( i.altText ) )
-	let hoverImage = variantImages[1].src
+	let hoverImage = variantImages[1] && variantImages[1].src
 
 	return (
 		<Wrapper className={className} to={'/product/' + product.handle + '/' + variant.id}>
@@ -68,18 +68,20 @@ const ProductThumb = ({ product, variant, className }) => {
 					}}
 					alt={product.title}
 				/>
-				<ThumbnailHoverWrap className="hover-image">
-					<Image
-						image={{
-							fluid: {
-								aspectRatio: 1,
-								src: hoverImage,
-								srcSet:'',
-								sizes: ''
-							}
-						}}
-					/>
-				</ThumbnailHoverWrap>
+				{hoverImage && (
+					<ThumbnailHoverWrap className="hover-image">
+						<Image
+							image={{
+								fluid: {
+									aspectRatio: 1,
+									src: hoverImage,
+									srcSet:'',
+									sizes: ''
+								}
+							}}
+						/>
+					</ThumbnailHoverWrap>
+				)}
 			</ThumbnailImageWrapper>
 
 			<ProductPattern>{product.title}</ProductPattern>
