@@ -218,6 +218,7 @@ class Header extends Component {
 														<NavLinks alignment="right">
 															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/about" active={pathname === '/about'}>About</NavLink>
 															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/contact" active={pathname === '/contact'}>Contact</NavLink>
+															<NavLink type="capsLink" scrolled={scrolled} hasAtf={hasAtf} to="/showrooms" active={pathname === '/showrooms'}>Showrooms</NavLink>
 														</NavLinks>
 													}
 												/>

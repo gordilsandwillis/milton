@@ -11,6 +11,7 @@ import Collection from 'src/containers/Collection'
 import About from 'src/containers/About'
 import Contact from 'src/containers/Contact'
 import Product from 'src/containers/Product'
+import Showrooms from 'src/containers/Showrooms'
 
 import PageTransition from 'src/components/PageTransition'
 import Footer from 'src/components/Footer'
@@ -55,6 +56,7 @@ class PageContent extends Component {
             <Route exact path="/product/:product/:variant" component={(props) => (<Product {...props} />)} />
             <Route exact path="/about" render={(props) => (<About {...props} />)} />
             <Route exact path="/contact" render={(props) => (<Contact {...props} />)} />
+            <Route exact path="/showrooms" render={(props) => (<Showrooms {...props} />)} />
           </Switch>
           <Footer location={location} />
           <InquireModal/>
