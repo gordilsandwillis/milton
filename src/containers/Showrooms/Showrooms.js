@@ -82,8 +82,7 @@ const Showrooms = (props) => {
 										<p>Available at:</p>
 										<h6>Chairloom</h6>
 										<p>
-										Narberth, PA <br />
-										New York, New York 10003<br />
+										Narberth, Pennsylvania 19072<br />
 										<a href="mailto:chairloom@gmail.com">chairloom@gmail.com</a>
 										<br />
 										<a target="_blank" href="https://www.chairloom.com">www.chairloom.com</a>
