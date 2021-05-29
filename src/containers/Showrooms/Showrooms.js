@@ -44,9 +44,9 @@ const Showrooms = (props) => {
 										<p>
 										51 East 12th Street, 4th floor <br />
 										New York, New York 10003<br />
-										<a href="mailto:info@templestudiony.com">info@templestudiony.com</a>
+										<a href="mailto:hello@templestudiony.com">hello@templestudiony.com</a>
 										<br />
-										<a target="_blank" href="http://www.templestudiony.com">www.templestudiony.com</a>
+										<a rel="noopener noreferrer" target="_blank" href="http://www.templestudiony.com">www.templestudiony.com</a>
 										<br />
 										<a href="tel:+1-917-985-8151">917.985.8151</a>
 										</p>
@@ -59,7 +59,7 @@ const Showrooms = (props) => {
 										Southeast : AL, GA, MS, NC, KY, SC, TN, FL <br />
 										<a href="mailto:bforrister@thelotshowroom.com">bforrister@thelotshowroom.com </a>
 										<br />
-										<a target="_blank" href="http://www.thelotshowroom.com">www.thelotshowroom.com</a>
+										<a rel="noopener noreferrer" target="_blank" href="http://www.thelotshowroom.com">www.thelotshowroom.com</a>
 										<br />
 										<a href="tel:+1-828-361-3500">828.361.3500</a>
 										</p>
@@ -71,9 +71,9 @@ const Showrooms = (props) => {
 										<p>
 										1600 El Camino Real, Suite B<br />
 										San Carlos, California 94070<br />
-										<a href="mailto:info@evarscollective.com">info@evarscollective.com</a>
+										<a href="mailto:concierge@evarscollective.com">concierge@evarscollective.com</a>
 										<br />
-										<a target="_blank" href="https://www.evarscollective.com">www.evarscollective.com</a>
+										<a rel="noopener noreferrer" target="_blank" href="https://www.evarscollective.com">www.evarscollective.com</a>
 										</p>
 									</Address>
 								</div>
@@ -85,7 +85,7 @@ const Showrooms = (props) => {
 										Narberth, Pennsylvania 19072<br />
 										<a href="mailto:chairloom@gmail.com">chairloom@gmail.com</a>
 										<br />
-										<a target="_blank" href="https://www.chairloom.com">www.chairloom.com</a>
+										<a rel="noopener noreferrer" target="_blank" href="https://www.chairloom.com">www.chairloom.com</a>
 										<br />
 										<a href="tel:+1-914-484-5498">914.484.5498</a>
 										</p>
