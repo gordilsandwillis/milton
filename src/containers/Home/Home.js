@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react'
-import styled from '@emotion/styled'
-import ReactGA from 'react-ga'
+import React, { Component, Fragment } from "react";
+import styled from "@emotion/styled";
+import ReactGA from "react-ga";
 
-import { LogoMark } from 'src/components/Logo'
-import LargeLogo from 'src/components/LargeLogo'
-import Header from 'src/components/Header'
-import ATF from 'src/components/ATF'
-import CalloutText from 'src/components/CalloutText'
-import CollectionSections from 'src/components/CollectionSections'
-import Newsletter from 'src/components/Newsletter'
-import SEO from 'src/components/SEO'
+import { LogoMark } from "src/components/Logo";
+import LargeLogo from "src/components/LargeLogo";
+import Header from "src/components/Header";
+import ATF from "src/components/ATF";
+import CalloutText from "src/components/CalloutText";
+import CollectionSections from "src/components/CollectionSections";
+import Newsletter from "src/components/Newsletter";
+import SEO from "src/components/SEO";
 
-import AtfImage from 'src/assets/images/home-atf.jpg'
+import AtfImage from "src/assets/images/home-atf.jpg";
 
 const BottomOverlay = styled.div`
 	position: absolute;
@@ -20,27 +20,35 @@ const BottomOverlay = styled.div`
 	right: 0;
 	height: 40%;
 	z-index: 1;
-	background: linear-gradient(to top, rgba(0,0,0,.3) 0%, rgba(0,0,0,0) 100%);
-`
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.3) 0%,
+		rgba(0, 0, 0, 0) 100%
+	);
+`;
 
 class Home extends Component {
 	state = {
-		collapseHeader: false
-	}
+		collapseHeader: false,
+	};
 
-	componentDidMount () {
-		if (process.env.NODE_ENV === 'development') {
-	    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
+	componentDidMount() {
+		if (process.env.NODE_ENV === "production") {
+			ReactGA.initialize(process.env.REACT_APP_GA_TRACKING);
 			ReactGA.pageview(window.location.pathname + window.location.search);
 		}
-  }
+	}
 
 	render() {
 		return (
 			<Fragment>
 				<SEO title="Home" />
 				<div>
-					<Header hasAtf={true} homepage={true} collapsed={this.state.collapseHeader} />
+					<Header
+						hasAtf={true}
+						homepage={true}
+						collapsed={this.state.collapseHeader}
+					/>
 					<ATF
 						index={0}
 						fullHeight="true"
@@ -48,13 +56,13 @@ class Home extends Component {
 							fluid: {
 								aspectRatio: 2,
 								src: AtfImage,
-								srcSet:'',
-								sizes: ''
-							}
+								srcSet: "",
+								sizes: "",
+							},
 						}}
 						nextTheme="bgColor"
 						overlay="0"
-						additions={<BottomOverlay/>}
+						additions={<BottomOverlay />}
 					/>
 					<LargeLogo />
 					<CalloutText
@@ -64,11 +72,13 @@ class Home extends Component {
 						alignment="center"
 						headline="Art in Living, Living in Art."
 						headlineSize="h4"
-						buttons={[{ linkType: 'underlinedLink', label: 'Learn More', to: '/about' }]}
-						icon={<LogoMark/>}
+						buttons={[
+							{ linkType: "underlinedLink", label: "Learn More", to: "/about" },
+						]}
+						icon={<LogoMark />}
 					/>
-					<CollectionSections/>
-					<Newsletter/>
+					<CollectionSections />
+					<Newsletter />
 				</div>
 			</Fragment>
 		);
