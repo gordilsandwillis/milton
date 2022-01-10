@@ -33,6 +33,7 @@ export const ProductVariantFragment = (variant) => {
   variant.add('id')
   variant.add('title')
   variant.add('sku')
+  variant.add('price')
   variant.add('availableForSale')
   variant.add('image', ImageFrament)
 }

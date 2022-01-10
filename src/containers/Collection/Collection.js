@@ -15,14 +15,6 @@ import SEO from 'src/components/SEO'
 import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
 import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
 
-import LayerReni from 'src/assets/images/collage/Reni/painting/layer-1.png'
-import LayerReni2 from 'src/assets/images/collage/Reni/painting/layer-2.png'
-import LayerReni3 from 'src/assets/images/collage/Reni/painting/layer-3.png'
-
-import LayerMatisse from 'src/assets/images/collage/Matisse/painting/layer-1.png'
-import LayerMatisse2 from 'src/assets/images/collage/Matisse/painting/layer-2.png'
-import LayerMatisse3 from 'src/assets/images/collage/Matisse/painting/layer-3.png'
-
 import ThumbnailReni from 'src/assets/images/collage/Reni/reni-layer-1.png'
 import ThumbnailReni2 from 'src/assets/images/collage/Reni/reni-layer-2.png'
 import ThumbnailReni3 from 'src/assets/images/collage/Reni/reni-layer-3.png'

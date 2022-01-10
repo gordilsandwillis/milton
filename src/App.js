@@ -7,6 +7,7 @@ import { Global, css } from '@emotion/core'
 import ShopifyProvider from 'src/contexts/ShopifyContext'
 import ModalProvider from 'src/contexts/ModalContext'
 import HeaderProvider from 'src/contexts/HeaderContext'
+import CheckoutProvider from 'src/contexts/CheckoutContext'
 
 import PageContent from 'src/components/PageContent'
 import ScrollListener from 'src/components/ScrollListener'
@@ -25,24 +26,26 @@ const PageWrapper = styled.div`
 const Routes = ({ match, location }) => {
 	return (
 		<ScrollListener>
-			<HeaderProvider>
-				<ParallaxProvider>
-					<ShopifyProvider>
-						<ModalProvider>
-							<Fragment>
-								<Global
-									styles={css`${ globalStyles }`}
-								/>
-								<PageWrapper>
-									<Router>
-										<PageContent/>
-									</Router>
-								</PageWrapper>
-							</Fragment>
-						</ModalProvider>
-					</ShopifyProvider>
-				</ParallaxProvider>
-			</HeaderProvider>
+			<CheckoutProvider>
+				<HeaderProvider>
+					<ParallaxProvider>
+						<ShopifyProvider>
+							<ModalProvider>
+								<Fragment>
+									<Global
+										styles={css`${ globalStyles }`}
+									/>
+									<PageWrapper>
+										<Router>
+											<PageContent/>
+										</Router>
+									</PageWrapper>
+								</Fragment>
+							</ModalProvider>
+						</ShopifyProvider>
+					</ParallaxProvider>
+				</HeaderProvider>
+			</CheckoutProvider>
 		</ScrollListener>
 	)
 }
