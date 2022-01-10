@@ -160,13 +160,11 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 	const checkoutUrl = checkout?.webUrl
 	const ready = checkout?.ready
 
-	console.log('component', lineItems)
-
 	const subtotalPrice = checkout?.subtotalPrice
 	const currencyCode = checkout?.subtotalPriceV2?.currencyCode
 	const subtotal = currencyCode && currencyCode === 'USD' ? `$${subtotalPrice}` : `${subtotalPrice} ${currencyCode}`
 
-	const checkoutDisabled = loading || !checkout || !checkoutUrl || !(lineItems?.length > 0)
+	const checkoutDisabled = loading || !ready || !checkoutUrl || !(lineItems?.length > 0)
 	return (
 		<ShadedWrapper isOpen={cartOpen}>
 			<Overlay onClick={() => toggleCart(false)} isOpen={cartOpen} />

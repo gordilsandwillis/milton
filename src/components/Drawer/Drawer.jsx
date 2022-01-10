@@ -123,7 +123,7 @@ const Drawer = ({
 							</PanelHeader>
 							<PanelContent>{children}</PanelContent>
 						</Panel>
-						<Overlay transitionStatus={status} onClick={toggleDrawer} />
+						<Overlay transitionStatus={status} onClick={() => toggleDrawer(false)} />
 					</>
 				)}
 			</Transition>

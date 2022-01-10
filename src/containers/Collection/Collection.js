@@ -139,7 +139,7 @@ class Collection extends Component {
 						fluid: {
 							aspectRatio: 2,
 							// src: nextCollection.image.src,
-							src: Images[nextCollection.title].nextCollectionImage,
+							src: Images[nextCollection.title]?.nextCollectionImage,
 							srcSet: '',
 							sizes: ''
 						}

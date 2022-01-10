@@ -366,7 +366,7 @@ class Product extends Component {
 												size="large"
 												onClick={() => addLineItem({variantId : currentVariant.id})}
 											>
-												<span>Buy Memo</span>
+												<span>Buy {currentProduct.productType === 'Textiles' && 'Memo'}</span>
 												<Price>- ${currentVariant.price}</Price>
 											</BuyButton>
 
