@@ -45,6 +45,21 @@ const Images = {
 	}
 }
 
+const collectionsConfig = {
+	Matisse: {
+		published: true,
+	},
+	Reni: {
+		published: true
+	},
+	Rousseau: {
+		published: false
+	},
+	Hopper: {
+		published: false
+	}
+}
+
 
 
 class CollectionSections extends Component {
@@ -60,9 +75,10 @@ class CollectionSections extends Component {
 			return false
 		}
 
-		console.log(collections)
-
-		return collections.reverse().map((collection, index) => {
+		return collections
+			.filter(collection => collectionsConfig[collection.title]?.published)
+			.reverse()
+			.map((collection, index) => {
 			if (Images[collection.title]) {
 				return (
 					<FiftyFifty
