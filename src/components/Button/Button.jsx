@@ -31,20 +31,27 @@ const getState = (loading, error, success, disabled) => {
 }
 
 const setButtonTheme = theme => `
+
 	${ theme === 'default' ? `
 		background: ${ colors.textColor };
 	` : `
 		background: ${ colors[theme] };
 	` }
+
 	${ theme === 'white' || theme === 'bgColor' ? `
 		color: ${ colors.textColor };
 	` : `
 		color: ${ colors.bgColor };
 	` }
+
+
+	${ theme === 'transparentWhite'  && ` color: ${ colors.textColor };`}
+
+
 	&:hover {
 		background: ${ lighten(0.07, colors[theme]) };
 		border-color: ${ lighten(0.07, colors[theme]) };
-		${ theme === 'white' || theme === 'bgColor' ? `
+		${ theme === 'white' || theme === 'bgColor' || theme === 'transparentWhite' ? `
 			color: ${ colors.green };
 		` : `
 			color: ${ colors.bgColor };
@@ -123,6 +130,9 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	` : `` }
 
 	${ shape && shape.includes('circle') ? `border-radius: 50%;` : `` }
+
+	${ shape && shape.includes('block') ? `width: 100%;` : `` }
+
 
 `)
 

@@ -58,6 +58,12 @@ const StyledLinkElement = styled.a`
 	` }
 `
 
+const StyledTextElement = styled.span`
+	${ ({ type, theme }) => `
+		${ LinkStyles(type, theme) }
+	` }
+`
+
 const StyledLink = styled(RouterLink)`
 	${ ({ type, theme }) => `
 		${ LinkStyles(type, theme) }
@@ -73,9 +79,23 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, type, setTheme } = this.props
+		const { to, external, target, children, className, type, setTheme, onClick } = this.props
+		if (onClick) {
+			return (
+				<StyledTextElement
+					className={className}
+					type={type}
+					theme={setTheme}
+					onClick={onClick}
+				>
+					{children}
+					{type === 'arrowLink' && (
+						<ArrowIcon size={18}/>
+					)}
+				</StyledTextElement>
+			)
 
-		if (external) {
+		} else if (external) {
 			return (
 				<StyledLinkElement
 					className={className}

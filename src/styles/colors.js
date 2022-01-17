@@ -40,6 +40,7 @@ export const { umber, chambray, pink, amulet, rasberry, ochre, sand } = matisseC
 
 // Basic Colors
 export const transparent = 'transparent'
+export const transparentWhite = 'transparent'
 export const currentcolor = 'currentcolor'
 export const bgColor = offWhite
 export const mainColor = starryNight

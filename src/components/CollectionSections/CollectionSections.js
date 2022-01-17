@@ -11,12 +11,27 @@ import LayerMatisse from 'src/assets/images/collage/Matisse/painting/layer-1.png
 import LayerMatisse2 from 'src/assets/images/collage/Matisse/painting/layer-2.png'
 import LayerMatisse3 from 'src/assets/images/collage/Matisse/painting/layer-3.png'
 
+import LayerRousseau from 'src/assets/images/collage/Rousseau/painting/layer-1.png'
+import LayerRousseau2 from 'src/assets/images/collage/Rousseau/painting/layer-2.png'
+import LayerRousseau3 from 'src/assets/images/collage/Rousseau/painting/layer-3.png'
 
+import LayerHopper from 'src/assets/images/collage/Hopper/painting/layer-1.png'
+import LayerHopper2 from 'src/assets/images/collage/Hopper/painting/layer-2.png'
+import LayerHopper3 from 'src/assets/images/collage/Hopper/painting/layer-3.png'
 
 import { withShopifyContext } from 'src/contexts/ShopifyContext'
 
-
 const Images = {
+	Hopper: {
+		layer1: { src: LayerHopper, width: 617, height: 674 },
+		layer2: { src: LayerHopper2, width: 617, height: 674 },
+		layer3: { src: LayerHopper3, width: 617, height: 674 },
+	},
+	Rousseau: {
+		layer1: { src: LayerRousseau, width: 617, height: 674 },
+		layer2: { src: LayerRousseau2, width: 617, height: 674 },
+		layer3: { src: LayerRousseau3, width: 617, height: 674 },
+	},
 	Reni: {
 		layer1: { src: LayerReni, width: 617, height: 674 },
 		layer2: { src: LayerReni2, width: 617, height: 674 },
@@ -27,6 +42,21 @@ const Images = {
 		layer1: { src: LayerMatisse, width: 617, height: 588 },
 		layer2: { src: LayerMatisse2, width: 617, height: 588 },
 		layer3: { src: LayerMatisse3, width: 617, height: 588 },
+	}
+}
+
+const collectionsConfig = {
+	Matisse: {
+		published: true,
+	},
+	Reni: {
+		published: true
+	},
+	Rousseau: {
+		published: false
+	},
+	Hopper: {
+		published: false
 	}
 }
 
@@ -45,8 +75,11 @@ class CollectionSections extends Component {
 			return false
 		}
 
-		return collections.map((collection, index) => {
-			if (collection.products.length > 0) {
+		return collections
+			.filter(collection => collectionsConfig[collection.title]?.published)
+			.reverse()
+			.map((collection, index) => {
+			if (Images[collection.title]) {
 				return (
 					<FiftyFifty
 						key={collection.id}

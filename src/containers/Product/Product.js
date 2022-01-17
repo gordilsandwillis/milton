@@ -5,6 +5,7 @@ import { FaPinterest } from "react-icons/fa";
 
 import { withShopifyContext } from "src/contexts/ShopifyContext";
 import { withModalContext } from "src/contexts/ModalContext";
+import { withCheckoutContext } from 'src/contexts/CheckoutContext'
 
 import Header from "src/components/Header";
 import TextLockup from "src/components/TextLockup";
@@ -26,8 +27,33 @@ const ImgArea = styled.div`
 `;
 
 const InquireButton = styled(Button)`
-	${util.responsiveStyles("margin-top", 32, 26, 24, 24)}
+	${ mq.mediumAndBelow } {
+		min-width: auto;
+	}
 `;
+
+const BuyButton = styled(Button)`
+	${util.responsiveStyles("margin-left", 32, 26, 24, 24)}
+	${ mq.mediumAndBelow } {
+		min-width: auto;
+	}
+`;
+
+const Actions = styled.div`
+	display: flex;
+	${ mq.largeAndBelow } {
+		justify-content: center;
+		align-items: center;
+	}
+	${util.responsiveStyles("margin-top", 32, 26, 24, 24)}
+`
+
+const Price = styled.span`
+	padding-left: 0.4em;
+	${ mq.mediumAndBelow } {
+		display: none;
+	}
+`
 
 const SoldButton = styled(Button)`
 	background: ${colors.mainColorLighten};
@@ -198,8 +224,6 @@ class Product extends Component {
 			variantImages = [currentVariant.image];
 		}
 
-		console.log(collectionProducts);
-
 		this.setState({
 			loading: false,
 			currentProduct,
@@ -217,6 +241,8 @@ class Product extends Component {
 	}
 
 	render() {
+
+		const { checkoutContext: { addLineItem } } = this.props
 		const {
 			loading,
 			currentProduct,
@@ -231,7 +257,7 @@ class Product extends Component {
 			return false;
 		}
 
-		console.log(currentProduct.availableForSale);
+		console.log(currentProduct);
 
 		return (
 			<Fragment>
@@ -328,17 +354,29 @@ class Product extends Component {
 											false
 										)}
 										{currentProduct.availableForSale ? (
+											<Actions>
 											<InquireButton
 												onClick={this.handleInquireClick}
 												size="large"
 											>
 												Inquire
 											</InquireButton>
+											<BuyButton
+												setTheme="lavender"
+												size="large"
+												onClick={() => addLineItem({variantId : currentVariant.id})}
+											>
+												<span>Buy {currentProduct.productType === 'Textiles' && 'Memo'}</span>
+												<Price>- ${currentVariant.price}</Price>
+											</BuyButton>
+
+											</Actions>
 										) : (
 											<SoldButton disabled={true} size="large">
-												Sold
+												Sold Out
 											</SoldButton>
 										)}
+										<p>Free shipping</p>
 									</ProductInfo>
 								</div>
 							</Grid>
@@ -391,4 +429,4 @@ class Product extends Component {
 	}
 }
 
-export default withShopifyContext(withModalContext(Product));
+export default withCheckoutContext(withShopifyContext(withModalContext(Product)));
