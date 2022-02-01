@@ -376,7 +376,9 @@ class Product extends Component {
 												Sold Out
 											</SoldButton>
 										)}
-										<p>Free shipping</p>
+										{currentProduct.productType === 'Textiles' && (
+											<p>Free shipping</p>
+										)}
 									</ProductInfo>
 								</div>
 							</Grid>
