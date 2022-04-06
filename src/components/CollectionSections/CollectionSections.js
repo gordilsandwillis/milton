@@ -53,10 +53,10 @@ const collectionsConfig = {
 		published: true
 	},
 	Rousseau: {
-		published: false
+		published: true
 	},
 	Hopper: {
-		published: false
+		published: true
 	}
 }
 
@@ -74,6 +74,8 @@ class CollectionSections extends Component {
 		if (!collections) {
 			return false
 		}
+
+		console.log(collections)
 
 		return collections
 			.filter(collection => collectionsConfig[collection.title]?.published)

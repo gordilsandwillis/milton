@@ -15,6 +15,10 @@ import SEO from 'src/components/SEO'
 import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
 import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
 
+import HopperNextCollectionImage from 'src/assets/images/hopper-stage.jpg'
+import RousseauNextCollectionImage from 'src/assets/images/rousseau-stage.jpg'
+
+
 import ThumbnailReni from 'src/assets/images/collage/Reni/reni-layer-1.png'
 import ThumbnailReni2 from 'src/assets/images/collage/Reni/reni-layer-2.png'
 import ThumbnailReni3 from 'src/assets/images/collage/Reni/reni-layer-3.png'
@@ -22,6 +26,15 @@ import ThumbnailReni3 from 'src/assets/images/collage/Reni/reni-layer-3.png'
 import ThumbnailMatisse from 'src/assets/images/collage/Matisse/matisse-layer-1.png'
 import ThumbnailMatisse2 from 'src/assets/images/collage/Matisse/matisse-layer-2.png'
 import ThumbnailMatisse3 from 'src/assets/images/collage/Matisse/matisse-layer-3.png'
+
+import LayerRousseau from 'src/assets/images/collage/Rousseau/rousseau-layer-1.png'
+import LayerRousseau2 from 'src/assets/images/collage/Rousseau/rousseau-layer-2.png'
+import LayerRousseau3 from 'src/assets/images/collage/Rousseau/rousseau-layer-3.png'
+
+import LayerHopper from 'src/assets/images/collage/Hopper/hopper-layer-1.png'
+import LayerHopper2 from 'src/assets/images/collage/Hopper/hopper-layer-2.png'
+import LayerHopper3 from 'src/assets/images/collage/Hopper/hopper-layer-3.png'
+
 
 
 const Images = {
@@ -36,7 +49,19 @@ const Images = {
 		layer2: { src: ThumbnailMatisse2, width: 720, height: 619 },
 		layer3: { src: ThumbnailMatisse3, width: 720, height: 619 },
 		nextCollectionImage: MatisseNextCollectionImage
-	}
+	},
+	Hopper: {
+		layer1: { src: LayerHopper, width: 617, height: 674 },
+		layer2: { src: LayerHopper2, width: 617, height: 674 },
+		layer3: { src: LayerHopper3, width: 617, height: 674 },
+		nextCollectionImage: HopperNextCollectionImage
+	},
+	Rousseau: {
+		layer1: { src: LayerRousseau, width: 617, height: 674 },
+		layer2: { src: LayerRousseau2, width: 617, height: 674 },
+		layer3: { src: LayerRousseau3, width: 617, height: 674 },
+		nextCollectionImage: RousseauNextCollectionImage
+	},
 }
 
 
@@ -114,7 +139,6 @@ class Collection extends Component {
 
 				<Textiles products={textileProducts} hasAtf={hasAtf} />
 
-				{furnitureProducts && furnitureProducts.length > 0 && (
 					<Section>
 						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
 							<div>
@@ -126,7 +150,7 @@ class Collection extends Component {
 							</div>
 						</Grid>
 					</Section>
-				)}
+
 
 				<Furnishings products={furnitureProducts} />
 
