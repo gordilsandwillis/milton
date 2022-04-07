@@ -130,7 +130,8 @@ class NewsletterForm extends Component {
           type="email"
           name="email"
           value={email}
-          id="email"/>
+          id="email"
+        />
 
         <SubmitButton
           shape="circle"

@@ -305,7 +305,8 @@ class Input extends Component {
 			placeholder,
 			label,
 			spellcheck,
-			name
+			name,
+			id
 		} = this.props
 
 		const { focused, hasValue } = this.state
@@ -333,6 +334,7 @@ class Input extends Component {
 					label={label}
 					name={name}
 					spellCheck={spellcheck}
+					id={id}
 				/>
 				<ConditionalRender condition={label}>
 					<InputLabel
@@ -342,7 +344,7 @@ class Input extends Component {
 						error={error}
 						theme={setTheme}
 						value={value}
-						htmlFor={name}
+						htmlFor={id}
 						focused={focused}
 						className={placeholder || value || hasValue || focused ? 'focused' : 'unfocused' /* to select from styled component */}
 						placeholder={placeholder}

@@ -16,6 +16,10 @@ const Address = styled.address`
 	${util.responsiveStyles("margin-bottom", 91, 51, 33, 26)}
 `;
 
+const Title = styled.h6`
+
+`
+
 const Showrooms = (props) => {
 	return (
 		<Fragment>
@@ -44,7 +48,7 @@ const Showrooms = (props) => {
 						<ScrollEntrance>
 							<div>
 								<Address>
-									<h6>Temple Studio</h6>
+									<Title as="p">Temple Studio</Title>
 									<p>
 										51 East 12th Street, 4th floor <br />
 										New York, New York 10003
@@ -67,7 +71,7 @@ const Showrooms = (props) => {
 							</div>
 							<div>
 								<Address>
-									<h6>The Lot Showroom</h6>
+									<Title as="p">The Lot Showroom</Title>
 									<p>
 										Southeast : AL, GA, MS, NC, KY, SC, TN, FL <br />
 										<a href="mailto:bforrister@thelotshowroom.com">
@@ -88,7 +92,7 @@ const Showrooms = (props) => {
 							</div>
 							<div>
 								<Address>
-									<h6>Evars Collective</h6>
+									<Title as="p">Evars Collective</Title>
 									<p>
 										1600 El Camino Real, Suite B<br />
 										San Carlos, California 94070
@@ -111,7 +115,7 @@ const Showrooms = (props) => {
 							</div>
 							<div>
 								<Address>
-									<h6>Kilkenny Collections</h6>
+									<Title as="p">Kilkenny Collections</Title>
 									<p>
 										Pennsylvania, Delaware, and South New Jersey
 										<br />
@@ -138,7 +142,7 @@ const Showrooms = (props) => {
 							<div>
 								<Address>
 									<p>Available at:</p>
-									<h6>Chairloom</h6>
+									<Title as="p">Chairloom</Title>
 									<p>
 										Narberth, Pennsylvania 19072
 										<br />

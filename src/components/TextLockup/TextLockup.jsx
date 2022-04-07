@@ -127,7 +127,7 @@ const TextLockup = ({
 						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1.5em' }}>{icon}</div>
 					</ConditionalRender>
 					<ConditionalRender condition={eyebrow}>
-						<Eyebrow>{eyebrow}</Eyebrow>
+						<Eyebrow as="span">{eyebrow}</Eyebrow>
 					</ConditionalRender>
 
 					<ConditionalRender condition={headline}>

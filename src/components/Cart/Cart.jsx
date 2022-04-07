@@ -143,6 +143,10 @@ const CartSummary = styled.div`
 	padding: 1.5em 0 1.75em;
 `
 
+const CartTitle = styled.h6`
+
+`
+
 const Cart = ({ cartOpen, checkoutContext = {} }) => {
 	const {
 		loading,
@@ -189,7 +193,7 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 							<>
 								<CartSection setTheme="default" prevTheme="default" nextTheme="default" padTop>
 									<CartHeader>
-										<h6>Your Cart</h6>
+										<CartTitle as="span">Your Cart</CartTitle>
 										<CloseButton
 											onClick={() => toggleCart(false)}
 											shape="circle"
@@ -229,13 +233,13 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 							<>
 								<CartSection padTop padBottom={false}>
 									<CartHeader>
-										<h6>{' '}</h6>
+										<CartTitle as="span">{' '}</CartTitle>
 										<CloseButton
 											onClick={() => toggleCart(false)}
 											shape="circle"
 											size="small"
 											setTheme="white"
-											title="Close cart"
+											label="Close cart"
 											icon={<IoMdClose size={26} />}
 										/>
 									</CartHeader>
@@ -246,7 +250,7 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 											<h3 style={{ margin: '0 0 .6em 0', color: colors.lightTextColor }}>Your cart is empty</h3>
 										</div>
 										<div>
-											<Button onClick={() => toggleCart(false)}>Continue Exploring</Button>
+											<Button label="Continue Exploring" onClick={() => toggleCart(false)}>Continue Exploring</Button>
 										</div>
 									</ScrollEntrance>
 								</CartSection>

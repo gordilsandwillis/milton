@@ -275,7 +275,7 @@ const Header = ({
 									/>
 
 									<LogoCol scrolled={scrolled} hasAtf={hasAtf} homepage={homepage}>
-										<Link to="/">
+										<Link label="Home" to="/">
 											<Logo />
 										</Link>
 									</LogoCol>
@@ -289,6 +289,7 @@ const Header = ({
 																title="Toggle Cart"
 																size="small"
 																shape="square"
+																label="cart"
 																setTheme={hasAtf && !scrolled ? "transparent" : "transparentWhite"}
 															>
 																Cart
@@ -298,6 +299,7 @@ const Header = ({
 														)}
 														<MenuButton
 															shape="square"
+															label="navigation"
 															setTheme={hasAtf && !scrolled ? "transparent" : "transparentWhite"}
 															onClick={() => toggleDrawer(!drawerOpen)}
 														>

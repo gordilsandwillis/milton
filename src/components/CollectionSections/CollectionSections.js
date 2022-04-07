@@ -94,11 +94,14 @@ class CollectionSections extends Component {
 						alignment="center"
 						text={collection.descriptionHtml}
 						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/' + collection.handle }]}
-						imageContent={<Link to={'/collections/' + collection.handle}><StackedImages images={[
-							Images[collection.title].layer1,
-							Images[collection.title].layer2,
-							Images[collection.title].layer3
-						]}/></Link>}
+						imageContent={
+							<Link label={collection.title} to={'/collections/' + collection.handle}>
+								<StackedImages images={[
+									Images[collection.title].layer1,
+									Images[collection.title].layer2,
+									Images[collection.title].layer3
+								]}/>
+						</Link>}
 						imagePosition={index % 2 ? 'left' : 'right'}
 					/>
 				)

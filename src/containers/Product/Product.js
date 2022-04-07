@@ -282,6 +282,7 @@ class Product extends Component {
 												<PinItButton
 													className="pin-it-button"
 													target="_blank"
+													label="Pin on Pinterest"
 													onClick={(event) => {
 														event.preventDefault();
 														window.open(
