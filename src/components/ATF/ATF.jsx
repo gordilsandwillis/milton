@@ -165,6 +165,19 @@ const VideoStyled = styled(Video)`
 	}
 `
 
+const Mask = styled.div`
+
+	${ ({ mask }) => (mask && `
+		background: rgba(0,0,0,0.35);
+		padding: 2em 0;
+		${ mq.largerAndUp } {
+			margin: 0 130px;
+		}
+
+	`)}
+
+`;
+
 class ATF extends Component {
 	constructor (props) {
 		super(props)
@@ -213,11 +226,11 @@ class ATF extends Component {
 			theme,
 			nextTheme,
 			overlay,
+			mask,
 			children,
 			additions,
 			className
 		} = this.props
-
 
 
 		const vAlignOptions = {
@@ -265,7 +278,8 @@ class ATF extends Component {
 							large={large}
 						/>
 					) : false}
-					{index === 0 && overlay && (video || image) ? <Overlay /> : false}
+					{index === 0 && overlay
+						&& (video || image) ? <Overlay /> : false}
 					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
 				<Block content="true" winHeight={windowHeight} fullHeight={fullHeight}>
@@ -277,18 +291,20 @@ class ATF extends Component {
 								large={hAlignmentGrid[hAlignment]}
 							>
 								<ScrollEntrance>
-									<TextLockup
-										theme="bgColor"
-										eyebrow={eyebrow}
-										alignment={textAlignment}
-										headlineSize={headlineSize}
-										headlineElement="h1"
-										headline={headline}
-										text={text}
-										textSize={textSize}
-										buttons={buttons}
-										additions={children && children}
-									/>
+									<Mask mask={mask}>
+										<TextLockup
+											theme="bgColor"
+											eyebrow={eyebrow}
+											alignment={textAlignment}
+											headlineSize={headlineSize}
+											headlineElement="h1"
+											headline={headline}
+											text={text}
+											textSize={textSize}
+											buttons={buttons}
+											additions={children && children}
+										/>
+									</Mask>
 								</ScrollEntrance>
 							</Grid>
 						</Content>

@@ -55,7 +55,7 @@ const FurnishingsGrid = styled.div`
 	`}
 `;
 
-const Furnishings = ({ products, prevTheme = false }) => {
+const Furnishings = ({ products, prevTheme = false, hideTitle }) => {
 	if (!products || products.length < 1) {
 		return false;
 	}
@@ -63,11 +63,13 @@ const Furnishings = ({ products, prevTheme = false }) => {
 	return (
 		<div>
 			<ScrollEntrance>
-				<Section setTheme="bgColor" nextTheme="bgColor" prevTheme={prevTheme}>
-					<Grid small="1 [12] 1">
-						<h4 style={{ textAlign: "center" }}>Furniture</h4>
-					</Grid>
-				</Section>
+				{!hideTitle && (
+					<Section setTheme="bgColor" nextTheme="bgColor" prevTheme={prevTheme}>
+						<Grid small="1 [12] 1">
+							<h4 style={{ textAlign: "center" }}>Furniture</h4>
+						</Grid>
+					</Section>
+				)}
 				<Section prevTheme="bgColor" setTheme="bgColor" nextTheme={false}>
 					<Grid small="1 [12] 1">
 						<div>

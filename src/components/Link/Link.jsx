@@ -95,8 +95,6 @@ class Link extends Component {
 			console.warn('Link does not have an accessible name', children, label)
 		}
 
-		console.log('Link ->', children, label)
-
 		if (onClick) {
 			return (
 				<StyledTextElement

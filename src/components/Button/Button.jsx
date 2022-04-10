@@ -215,7 +215,6 @@ class Button extends Component {
 		if (!children && !label) {
 			console.warn('Button does not have an accessible name')
 		}
-		console.log('Button ->', children, label, title )
 
 		if (to) {
 			return (
