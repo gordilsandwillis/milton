@@ -84,7 +84,7 @@ const ProductThumb = ({ product, variant, className }) => {
 				)}
 			</ThumbnailImageWrapper>
 
-			<ProductPattern>{product.title}</ProductPattern>
+			<ProductPattern as="span">{product.title}</ProductPattern>
 			<ProductTitle>{variant.title}</ProductTitle>
 		</Wrapper>
 	)

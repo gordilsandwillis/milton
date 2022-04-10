@@ -113,7 +113,7 @@ const Drawer = ({
 							<PanelHeader>
 								<Button
 									className="close-button"
-									title="Close Drawer"
+									label="Close Drawer"
 									icon={<MaterialIcon size="24px">close</MaterialIcon>}
 									shape="circle"
 									onClick={() => toggleDrawer(false)}

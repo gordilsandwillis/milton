@@ -3,7 +3,6 @@ import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
 import ConditionalRender from 'src/components/ConditionalRender'
 import Image from 'src/components/GatsbyImage'
-import Video from 'src/components/Video'
 import TextLockup from 'src/components/TextLockup'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 
@@ -108,11 +107,7 @@ const FiftyFifty = ({
 							/>
 						</div>
 					</ConditionalRender>
-					<ConditionalRender condition={video && !imageContent}>
-						<div>
-							<Video url={video && video.file.url} playing={true} loop={true}/>
-						</div>
-					</ConditionalRender>
+
 					<ConditionalRender condition={imageContent}>
 						<div>
 							{imageContent}

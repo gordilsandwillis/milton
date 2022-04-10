@@ -79,7 +79,22 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, type, setTheme, onClick } = this.props
+		const {
+			to,
+			external,
+			target,
+			children,
+			className,
+			type,
+			setTheme,
+			onClick,
+			label
+		} = this.props
+
+		if (!children && !label) {
+			console.warn('Link does not have an accessible name', children, label)
+		}
+
 		if (onClick) {
 			return (
 				<StyledTextElement
@@ -87,6 +102,7 @@ class Link extends Component {
 					type={type}
 					theme={setTheme}
 					onClick={onClick}
+					aria-label={children && typeof children === 'string' ? children : label}
 				>
 					{children}
 					{type === 'arrowLink' && (
@@ -104,6 +120,7 @@ class Link extends Component {
 					theme={setTheme}
 					target={target}
 					rel="noopener noreferrer"
+					aria-label={children && typeof children === 'string' ? children : label}
 				>
 					{children}
 					{type === 'arrowLink' && (
@@ -118,6 +135,7 @@ class Link extends Component {
 					to={to}
 					type={type}
 					theme={setTheme}
+					aria-label={children && typeof children === 'string' ? children : label}
 				>
 					{children}
 					{type === 'arrowLink' && (

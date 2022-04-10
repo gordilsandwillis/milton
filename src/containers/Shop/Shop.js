@@ -28,7 +28,7 @@ const Shop = ({ shopifyContext }) => {
 				headline="Shop"
 				headlineSize="h2"
 			/>
-			<Furnishings products={furnitureProducts} />
+			<Furnishings products={furnitureProducts} hideTitle={true} />
     </div>
   )
 }

@@ -206,8 +206,15 @@ class Button extends Component {
 			setTheme,
 			className,
 			shape,
-			size
+			size,
+			children,
+			label,
+			title
 		} = this.props
+
+		if (!children && !label) {
+			console.warn('Button does not have an accessible name')
+		}
 
 		if (to) {
 			return (
@@ -226,6 +233,7 @@ class Button extends Component {
 					theme={setTheme}
 					shape={shape}
 					size={size}
+					aria-label={children && typeof children === 'string' ? children : label}
 				>
 					{this.renderButtonContent()}
 				</StyledButtonLink>
@@ -244,6 +252,7 @@ class Button extends Component {
 					theme={setTheme}
 					shape={shape}
 					size={size}
+					aria-label={children && typeof children === 'string' ? children : label}
 				>
 					{this.renderButtonContent()}
 				</StyledButtonElement>

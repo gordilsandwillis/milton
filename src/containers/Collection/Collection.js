@@ -15,6 +15,10 @@ import SEO from 'src/components/SEO'
 import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
 import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
 
+import HopperNextCollectionImage from 'src/assets/images/hopper-stage.jpg'
+import RousseauNextCollectionImage from 'src/assets/images/rousseau-stage.jpg'
+
+
 import ThumbnailReni from 'src/assets/images/collage/Reni/reni-layer-1.png'
 import ThumbnailReni2 from 'src/assets/images/collage/Reni/reni-layer-2.png'
 import ThumbnailReni3 from 'src/assets/images/collage/Reni/reni-layer-3.png'
@@ -23,22 +27,46 @@ import ThumbnailMatisse from 'src/assets/images/collage/Matisse/matisse-layer-1.
 import ThumbnailMatisse2 from 'src/assets/images/collage/Matisse/matisse-layer-2.png'
 import ThumbnailMatisse3 from 'src/assets/images/collage/Matisse/matisse-layer-3.png'
 
+import LayerRousseau from 'src/assets/images/collage/Rousseau/rousseau-layer-1.png'
+import LayerRousseau2 from 'src/assets/images/collage/Rousseau/rousseau-layer-2.png'
+import LayerRousseau3 from 'src/assets/images/collage/Rousseau/rousseau-layer-3.png'
+
+import LayerHopper from 'src/assets/images/collage/Hopper/hopper-layer-1.png'
+import LayerHopper2 from 'src/assets/images/collage/Hopper/hopper-layer-2.png'
+import LayerHopper3 from 'src/assets/images/collage/Hopper/hopper-layer-3.png'
+
+
 
 const Images = {
 	Reni: {
 		layer1: { src: ThumbnailReni, width: 720, height: 619 },
 		layer2: { src: ThumbnailReni2, width: 720, height: 619 },
 		layer3: { src: ThumbnailReni3, width: 720, height: 619 },
-		nextCollectionImage: ReniNextCollectionImage
+		nextCollectionImage: ReniNextCollectionImage,
+		nextCollectionMask: false,
 	},
 	Matisse: {
 		layer1: { src: ThumbnailMatisse, width: 720, height: 619 },
 		layer2: { src: ThumbnailMatisse2, width: 720, height: 619 },
 		layer3: { src: ThumbnailMatisse3, width: 720, height: 619 },
-		nextCollectionImage: MatisseNextCollectionImage
-	}
+		nextCollectionImage: MatisseNextCollectionImage,
+		nextCollectionMask: false,
+	},
+	Hopper: {
+		layer1: { src: LayerHopper, width: 720, height: 619 },
+		layer2: { src: LayerHopper2, width: 720, height: 619 },
+		layer3: { src: LayerHopper3, width: 720, height: 619 },
+		nextCollectionImage: HopperNextCollectionImage,
+		nextCollectionMask: true,
+	},
+	Rousseau: {
+		layer1: { src: LayerRousseau, width: 720, height: 619 },
+		layer2: { src: LayerRousseau2, width: 720, height: 619 },
+		layer3: { src: LayerRousseau3, width: 720, height: 619 },
+		nextCollectionImage: RousseauNextCollectionImage,
+		nextCollectionMask: true,
+	},
 }
-
 
 class Collection extends Component {
 	state = {
@@ -114,7 +142,6 @@ class Collection extends Component {
 
 				<Textiles products={textileProducts} hasAtf={hasAtf} />
 
-				{furnitureProducts && furnitureProducts.length > 0 && (
 					<Section>
 						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
 							<div>
@@ -126,7 +153,7 @@ class Collection extends Component {
 							</div>
 						</Grid>
 					</Section>
-				)}
+
 
 				<Furnishings products={furnitureProducts} />
 
@@ -134,6 +161,7 @@ class Collection extends Component {
 					eyebrow="Next Collection"
 					headline={nextCollection.title}
 					headlineSize="h3"
+					mask={Images[nextCollection.title]?.nextCollectionMask}
 					text={nextCollection.descriptionHtml}
 					image={{
 						fluid: {

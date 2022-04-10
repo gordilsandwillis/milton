@@ -13,7 +13,7 @@ import Textiles from 'src/components/Textiles'
 const TextilesPage = ({ shopifyContext }) => {
 
 	const { shopifyProducts } = shopifyContext
-	const textileProducts = shopifyProducts.filter(({ productType }) => productType === 'Textiles')
+	const textileProducts = shopifyProducts.filter(({ productType }) => productType === 'Textiles').reverse()
 
   return (
     <div>
