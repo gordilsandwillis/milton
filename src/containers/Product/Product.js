@@ -362,7 +362,7 @@ class Product extends Component {
 												>
 													Inquire
 												</InquireButton>
-												{(currentProduct.productType === 'Textiles')&& (
+												{currentProduct.productType === 'Textiles' && (
 													<BuyButton
 														setTheme="lavender"
 														size="large"
