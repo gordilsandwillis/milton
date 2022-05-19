@@ -356,21 +356,22 @@ class Product extends Component {
 										)}
 										{currentProduct.availableForSale ? (
 											<Actions>
-											<InquireButton
-												onClick={this.handleInquireClick}
-												size="large"
-											>
-												Inquire
-											</InquireButton>
-											<BuyButton
-												setTheme="lavender"
-												size="large"
-												onClick={() => addLineItem({variantId : currentVariant.id})}
-											>
-												<span>Buy {currentProduct.productType === 'Textiles' && 'Memo'}</span>
-												<Price>- ${currentVariant.price}</Price>
-											</BuyButton>
-
+												<InquireButton
+													onClick={this.handleInquireClick}
+													size="large"
+												>
+													Inquire
+												</InquireButton>
+												{(currentProduct.productType === 'Textiles')&& (
+													<BuyButton
+														setTheme="lavender"
+														size="large"
+														onClick={() => addLineItem({variantId : currentVariant.id})}
+													>
+														<span>Buy Memo</span>
+														<Price>- ${currentVariant.price}</Price>
+													</BuyButton>
+													)}
 											</Actions>
 										) : (
 											<SoldButton disabled={true} size="large">
