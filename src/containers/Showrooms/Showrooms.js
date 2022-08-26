@@ -44,7 +44,7 @@ const Showrooms = (props) => {
 							</p>
 						}
 					/>
-					<Grid small="[12]" medium="3 [8] 3" large="4 [6] 4">
+					<Grid small="[12]" medium="2 [4] 2 [4] 2" large="2 [4] 2 [4] 2">
 						<ScrollEntrance>
 							<div>
 								<Address>
@@ -160,6 +160,84 @@ const Showrooms = (props) => {
 									</p>
 								</Address>
 							</div>
+						</ScrollEntrance>
+						<ScrollEntrance>
+							<div>
+								<Address>
+									<Title as="p">Wells Abbott Showroom - Dallas</Title>
+									<p>
+										Dallas Design Center
+										<br />
+										1025 N Stemmons Fwy
+										<br />
+										Suite 749
+										<br />
+										Dallas, TX 75207
+										<br />
+										<a href="mailto:info@wellsabbott.com">info@wellsabbott.com</a>
+										<br />
+										<a
+											rel="noopener noreferrer"
+											target="_blank"
+											href="https://www.wellsabbott.com"
+										>
+											www.wellsabbott.com
+										</a>
+										<br />
+										<a href="tel:+1-214-239-8722">214.239.8722</a>
+									</p>
+								</Address>
+
+								<Address>
+									<Title as="p">Wells Abbott Showroom - Houston</Title>
+									<p>
+										Decorative Center of Houston
+										<br />
+										5120 Woodway Dr
+										<br />
+										Suite 3010
+										<br />
+										Houston, TX 77056
+										<br />
+										<a href="mailto:info@wellsabbott.com">info@wellsabbott.com</a>
+										<br />
+										<a
+											rel="noopener noreferrer"
+											target="_blank"
+											href="https://www.wellsabbott.com"
+										>
+											www.wellsabbott.com
+										</a>
+										<br />
+										<a href="tel:+1-214-526-8200">214.526.8200</a>
+									</p>
+								</Address>
+								<Address>
+									<Title as="p">Wells Abbott Showroom - Chicago</Title>
+									<p>
+										theMART
+										<br />
+										222 Merchandise Mart Plaza
+										<br />
+										Suite 6-142
+										<br />
+										Chicago, IL 60654
+										<br />
+										<a href="mailto:info@wellsabbott.com">info@wellsabbott.com</a>
+										<br />
+										<a
+											rel="noopener noreferrer"
+											target="_blank"
+											href="https://www.wellsabbott.com"
+										>
+											www.wellsabbott.com
+										</a>
+										<br />
+										<a href="tel:+1-312-809-5115">312.809.5115</a>
+									</p>
+								</Address>
+							</div>
+
 						</ScrollEntrance>
 					</Grid>
 				</Section>
