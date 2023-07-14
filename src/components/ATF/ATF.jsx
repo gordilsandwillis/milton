@@ -291,7 +291,7 @@ class ATF extends Component {
 								large={hAlignmentGrid[hAlignment]}
 							>
 								<ScrollEntrance>
-									<Mask mask={mask.toString()}>
+									<Mask mask={mask && mask.toString()}>
 										<TextLockup
 											theme="bgColor"
 											eyebrow={eyebrow}
