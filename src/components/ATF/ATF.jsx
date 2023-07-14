@@ -167,7 +167,7 @@ const VideoStyled = styled(Video)`
 
 const Mask = styled.div`
 
-	${ ({ mask }) => (mask && `
+	${ ({ mask }) => (mask === "true" && `
 		background: rgba(0,0,0,0.35);
 		padding: 2em 0;
 		${ mq.largerAndUp } {
@@ -291,7 +291,7 @@ class ATF extends Component {
 								large={hAlignmentGrid[hAlignment]}
 							>
 								<ScrollEntrance>
-									<Mask mask={mask}>
+									<Mask mask={mask.toString()}>
 										<TextLockup
 											theme="bgColor"
 											eyebrow={eyebrow}

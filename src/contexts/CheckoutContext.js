@@ -29,18 +29,18 @@ class CheckoutProvider extends React.Component {
 	toggleCart = (cartOpen) => this.setState({ cartOpen })
 
 	initializeCheckout = async () => {
-		let checkout;
-		const checkoutId = await this.getCheckoutId()
-		if (checkoutId) {
-			checkout = await this.getCheckout(checkoutId)
-		} else {
-			checkout = await this.createCheckout()
-		}
-		if (checkout?.completedAt || !checkout) {
-			checkout = await this.createCheckout()
-		}
-		set('shopify-checkout-id', checkout?.id)
-		this.setState({ checkout, loading: false })
+		// let checkout;
+		// const checkoutId = await this.getCheckoutId()
+		// if (checkoutId) {
+		// 	checkout = await this.getCheckout(checkoutId)
+		// } else {
+		// 	checkout = await this.createCheckout()
+		// }
+		// if (checkout?.completedAt || !checkout) {
+		// 	checkout = await this.createCheckout()
+		// }
+		// set('shopify-checkout-id', checkout?.id)
+		// this.setState({ checkout, loading: false })
 	}
 
 	createCheckout = async () => {
@@ -69,12 +69,8 @@ class CheckoutProvider extends React.Component {
 
 	updateLineItems = async ({ lineItems }) => {
 		const checkoutId = await this.getCheckoutId()
-		console.log('lineItems', lineItems)
-		console.log('checkoutId', checkoutId)
-		console.log(client)
 		const lineItemsUpdate = lineItems.map(({id, quantity}) => ({id, quantity}))
 		const checkout = await client.checkout.updateLineItems(checkoutId, lineItemsUpdate)
-		console.log(checkout)
 		if (checkout) this.setState({ checkout })
 	}
 
@@ -83,24 +79,14 @@ class CheckoutProvider extends React.Component {
 	}
 
 	addLineItem = async ({ variantId, quantity = 1, toggleCart = true }) => {
-		console.log('addLineItem')
 		this.setState({ loading: true })
 		if (toggleCart) this.toggleCart(true)
 		const lineItems = this.getLineItems()
-		console.log('lineItems', lineItems)
 		const lineItem = lineItems.find((lineItem) => lineItem.variant.id === variantId)
-		console.log(lineItem)
 		if (lineItem) {
-			console.log('lineItemIndex is greater than 0')
-
 			await this.updateQuantity({ id: lineItem.id, quantity: lineItem.quantity + 1 })
 		} else {
 			const checkoutId = await this.getCheckoutId()
-			console.log('adding line item')
-			console.log(variantId)
-			console.log(quantity)
-			console.log(checkoutId)
-
 			const checkout = await client.checkout.addLineItems(checkoutId, { variantId, quantity })
 			if (checkout) this.setState({ checkout })
 		}

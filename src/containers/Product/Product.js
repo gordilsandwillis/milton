@@ -188,6 +188,7 @@ class Product extends Component {
 			shopifyContext;
 
 		if (!products || !collections) {
+			console.log('no products or collections');
 			return null;
 		}
 
@@ -254,10 +255,11 @@ class Product extends Component {
 		} = this.state;
 
 		if (loading) {
+			console.log('still loading...')
 			return false;
 		}
 
-		console.log(currentProduct);
+		console.log('made it here');
 
 		return (
 			<Fragment>

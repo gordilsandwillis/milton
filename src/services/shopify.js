@@ -1,9 +1,14 @@
 import Client from 'shopify-buy/index.unoptimized.umd';
 
+// 2022-04
+
 export const shopifyClient = Client.buildClient({
   storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-  domain: 'milton-textiles.myshopify.com'
+  domain: 'milton-textiles.myshopify.com',
+  apiVersion: '2022-10'
 })
+
+console.log(shopifyClient)
 
 export const MetafieldFragment = (metafield) => {
   metafield.add('id')
@@ -33,7 +38,8 @@ export const ProductVariantFragment = (variant) => {
   variant.add('id')
   variant.add('title')
   variant.add('sku')
-  variant.add('price')
+  // TODO Fix this
+  // variant.add('price')
   variant.add('availableForSale')
   variant.add('image', ImageFrament)
 }
@@ -49,7 +55,8 @@ export const ProductFragment = (product) => {
   product.add('availableForSale')
 
   product.addConnection('images', {args: {first: 50}}, ImageFrament)
-  product.addConnection('metafields', {args: {first: 10, namespace: 'specifications'}}, MetafieldFragment)
+  // TODO Fix this
+  // product.addConnection('metafields', {args: {first: 10, namespace: 'specifications'}}, MetafieldFragment)
   product.addConnection('variants', {args: {first: 10}}, ProductVariantFragment)
 }
 
