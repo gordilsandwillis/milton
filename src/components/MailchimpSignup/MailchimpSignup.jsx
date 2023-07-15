@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Button from 'src/components/Button'
-import Input from 'src/components/Input'
-import MaterialIcon from 'src/components/MaterialIcon'
+import Button from 'components/Button'
+import Input from 'components/Input'
+import MaterialIcon from 'components/MaterialIcon'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
 
 const McUrl = '//gordilsandwillis.us18.list-manage.com/subscribe/post?u=59f368fb0e0e947c191b3b89d&amp;id=265fbc6b5b'

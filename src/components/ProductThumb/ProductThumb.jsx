@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Link from 'src/components/Link'
-import { typography, colors, util } from 'src/styles'
-import Image from 'src/components/GatsbyImage'
+import Link from 'components/Link'
+import { typography, colors, util } from 'styles'
+import Image from 'components/GatsbyImage'
 
 const Wrapper = styled(Link)`
 	cursor: pointer;

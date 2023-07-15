@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { shopifyClient } from 'src/services/shopify'
+import { shopifyClient } from 'services/shopify'
 
 export const ShopifyContext = React.createContext({ shopifyClient })
 

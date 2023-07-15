@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Section from 'src/components/Section'
-import TextLockup from 'src/components/TextLockup'
-import Grid from 'src/components/Grid'
+import Section from 'components/Section'
+import TextLockup from 'components/TextLockup'
+import Grid from 'components/Grid'
 
 const ContentWrapper = styled.div`
 	padding-bottom: 10px;

@@ -4,15 +4,15 @@ import { ParallaxProvider } from 'react-scroll-parallax'
 import styled from '@emotion/styled'
 import { Global, css } from '@emotion/core'
 
-import ShopifyProvider from 'src/contexts/ShopifyContext'
-import ModalProvider from 'src/contexts/ModalContext'
-import HeaderProvider from 'src/contexts/HeaderContext'
-import CheckoutProvider from 'src/contexts/CheckoutContext'
+import ShopifyProvider from 'contexts/ShopifyContext'
+import ModalProvider from 'contexts/ModalContext'
+import HeaderProvider from 'contexts/HeaderContext'
+import CheckoutProvider from 'contexts/CheckoutContext'
 
-import PageContent from 'src/components/PageContent'
-import ScrollListener from 'src/components/ScrollListener'
+import PageContent from 'components/PageContent'
+import ScrollListener from 'components/ScrollListener'
 
-import globalStyles from 'src/styles/globalStyles'
+import globalStyles from 'styles/globalStyles'
 
 import 'intersection-observer'
 import './reset.css'

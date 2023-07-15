@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import { withShopifyContext } from 'contexts/ShopifyContext'
 
-import SEO from "src/components/SEO"
-import Header from "src/components/Header"
+import SEO from "components/SEO"
+import Header from "components/Header"
 
-import CalloutText from 'src/components/CalloutText'
-import Furnishings from 'src/components/Furnishings'
+import CalloutText from 'components/CalloutText'
+import Furnishings from 'components/Furnishings'
 
 const Shop = ({ shopifyContext }) => {
 

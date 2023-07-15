@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { util } from 'src/styles'
+import { util } from 'styles'
 
 const Icon = styled.span`
 	font-family: 'Material Icons';

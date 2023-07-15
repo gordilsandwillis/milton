@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Grid from 'src/components/Grid'
-import Button from 'src/components/Button'
-import Link from 'src/components/Link'
-import ConditionalRender from 'src/components/ConditionalRender'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import ContentfulRichText from 'src/components/ContentfulRichText'
-import { typography, colors, mq } from 'src/styles'
+import Grid from 'components/Grid'
+import Button from 'components/Button'
+import Link from 'components/Link'
+import ConditionalRender from 'components/ConditionalRender'
+import ScrollEntrance from 'components/ScrollEntrance'
+import ContentfulRichText from 'components/ContentfulRichText'
+import { typography, colors, mq } from 'styles'
 import BalanceText from 'react-balance-text'
-import Section from 'src/components/Section'
+import Section from 'components/Section'
 
 const TextContainer = styled(ScrollEntrance)`
 	width: 100%;

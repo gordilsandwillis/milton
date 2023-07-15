@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import * as mq from 'src/styles/mediaQueries'
-import * as globals from 'src/styles/gridSettings'
+import * as mq from 'styles/mediaQueries'
+import * as globals from 'styles/gridSettings'
 
 const ContainerStyles = styled.div`
 	max-width: 2500px;

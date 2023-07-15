@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs'
 import ATF from './ATF'
-import * as mock from 'src/mock'
+import * as mock from 'mock'
 
 const placeholderHeadline = `the greatest website in the world`
 const placeholderTagline = `By Gordils & Willis Inc.`

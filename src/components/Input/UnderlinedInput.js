@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
-import Input from 'src/components/Input'
-import { colors, typography } from 'src/styles'
+import Input from 'components/Input'
+import { colors, typography } from 'styles'
 
 const StyledInput = styled(Input)`
   display: ${ ({ hidden }) => hidden ? 'none' : 'block' };

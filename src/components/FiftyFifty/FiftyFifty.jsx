@@ -1,10 +1,10 @@
 import React from 'react'
-import Section from 'src/components/Section'
-import Grid from 'src/components/Grid'
-import ConditionalRender from 'src/components/ConditionalRender'
-import Image from 'src/components/GatsbyImage'
-import TextLockup from 'src/components/TextLockup'
-import ScrollEntrance from 'src/components/ScrollEntrance'
+import Section from 'components/Section'
+import Grid from 'components/Grid'
+import ConditionalRender from 'components/ConditionalRender'
+import Image from 'components/GatsbyImage'
+import TextLockup from 'components/TextLockup'
+import ScrollEntrance from 'components/ScrollEntrance'
 
 const FiftyFifty = ({
 	theme,

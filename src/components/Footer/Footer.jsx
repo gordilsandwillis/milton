@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Grid from 'src/components/Grid'
-import { LogoMark } from 'src/components/Logo'
-import ThemeSelector from 'src/components/ThemeSelector'
-import Link from 'src/components/Link'
+import Grid from 'components/Grid'
+import { LogoMark } from 'components/Logo'
+import ThemeSelector from 'components/ThemeSelector'
+import Link from 'components/Link'
 
-import { typography, util } from 'src/styles'
+import { typography, util } from 'styles'
 
-import { reniColors, matisseColors } from 'src/styles/colors'
+import { reniColors, matisseColors } from 'styles/colors'
 
 
 const Wrapper = styled(ThemeSelector)`

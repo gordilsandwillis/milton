@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Video from './Video'
-import * as mock from 'src/mock'
+import * as mock from 'mock'
 
 const stories = storiesOf(`Components/Video`, module)
 stories.add(`Default`, () => (

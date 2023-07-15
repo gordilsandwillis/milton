@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
-import { shopifyClient as client } from 'src/services/shopify'
+import { shopifyClient as client } from 'services/shopify'
 
 //import { gql } from 'graphql-request'
 //import queryShopify from '../graphql/helpers/queryShopify'
 //import CHECKOUT_FRAGMENT from '../graphql/fragments/shopify/checkoutFragment'
-import { set, get } from 'src/utils/local-storage'
+import { set, get } from 'utils/local-storage'
 
 const CheckoutContext = React.createContext()
 

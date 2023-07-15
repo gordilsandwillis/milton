@@ -3,7 +3,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Grid from './Grid'
 import styled from '@emotion/styled'
-import { typography, colors } from 'src/styles'
+import { typography, colors } from 'styles'
 import { rgba } from 'polished'
 
 const Column = styled.div`

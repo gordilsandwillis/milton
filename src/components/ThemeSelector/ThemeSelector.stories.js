@@ -2,9 +2,9 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { storiesOf } from '@storybook/react'
 import ThemeSelector from './ThemeSelector'
-import Grid from 'src/components/Grid'
-import Button from 'src/components/Button'
-import { typography } from 'src/styles'
+import Grid from 'components/Grid'
+import Button from 'components/Button'
+import { typography } from 'styles'
 const qbf = 'The quick brown fox jumps over the lazy dog'
 const lorem = `lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`
 

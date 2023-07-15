@@ -3,9 +3,9 @@ import styled from '@emotion/styled'
 import Slider from 'react-slick'
 import { rgba, darken } from 'polished'
 
-import Button from 'src/components/Button'
+import Button from 'components/Button'
 
-import { colors, mediaQueries as mq, animations } from 'src/styles'
+import { colors, mediaQueries as mq, animations } from 'styles'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 
 // const StyledSlider = styled(Slider)`

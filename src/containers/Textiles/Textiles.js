@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactGA from 'react-ga'
 
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import { withShopifyContext } from 'contexts/ShopifyContext'
 
-import SEO from "src/components/SEO";
-import Header from "src/components/Header";
+import SEO from "components/SEO";
+import Header from "components/Header";
 
-import CalloutText from 'src/components/CalloutText'
-import Textiles from 'src/components/Textiles'
+import CalloutText from 'components/CalloutText'
+import Textiles from 'components/Textiles'
 
 
 const TextilesPage = ({ shopifyContext }) => {

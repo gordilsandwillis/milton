@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { colors, animations, typography } from 'src/styles'
+import { colors, animations, typography } from 'styles'
 import { MdArrowForward } from 'react-icons/md'
 
 import { Link as RouterLink } from 'react-router-dom'

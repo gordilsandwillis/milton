@@ -4,8 +4,8 @@ import _ from 'lodash'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
-import gridSettings from 'src/styles/gridSettings'
-import { mq, colors } from 'src/styles'
+import gridSettings from 'styles/gridSettings'
+import { mq, colors } from 'styles'
 
 import withSizes from 'react-sizes'
 

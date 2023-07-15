@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import ATF from 'src/components/ATF'
-import NewsletterForm from 'src/components/NewsletterForm'
+import ATF from 'components/ATF'
+import NewsletterForm from 'components/NewsletterForm'
 
-import PlaceholderNewsletterImage from 'src/assets/images/matisse-stage.jpg'
+import PlaceholderNewsletterImage from 'assets/images/matisse-stage.jpg'
 
 const NewsletterBlock = styled(ATF)`
 	p {

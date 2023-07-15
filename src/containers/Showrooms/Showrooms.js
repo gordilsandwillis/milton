@@ -2,15 +2,15 @@ import React, { Fragment } from "react";
 import ReactGA from "react-ga";
 import styled from "@emotion/styled";
 
-import Header from "src/components/Header";
-import Section from "src/components/Section";
-import ScrollEntrance from "src/components/ScrollEntrance";
-import Grid from "src/components/Grid";
-import CalloutText from "src/components/CalloutText";
+import Header from "components/Header";
+import Section from "components/Section";
+import ScrollEntrance from "components/ScrollEntrance";
+import Grid from "components/Grid";
+import CalloutText from "components/CalloutText";
 
-import SEO from "src/components/SEO";
+import SEO from "components/SEO";
 
-import { util } from "src/styles";
+import { util } from "styles";
 
 const Address = styled.address`
 	${util.responsiveStyles("margin-bottom", 91, 51, 33, 26)}

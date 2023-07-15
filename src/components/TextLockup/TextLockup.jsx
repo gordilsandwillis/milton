@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Button from 'src/components/Button'
-import Link from 'src/components/Link'
-import ConditionalRender from 'src/components/ConditionalRender'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import ContentfulRichText from 'src/components/ContentfulRichText'
+import Button from 'components/Button'
+import Link from 'components/Link'
+import ConditionalRender from 'components/ConditionalRender'
+import ScrollEntrance from 'components/ScrollEntrance'
+import ContentfulRichText from 'components/ContentfulRichText'
 import BalanceText from 'react-balance-text'
-import { typography, mq, util } from 'src/styles'
+import { typography, mq, util } from 'styles'
 
 const Wrapper = styled.div`
 	display: inline-block;

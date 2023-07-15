@@ -3,22 +3,22 @@ import styled from "@emotion/styled";
 import ReactGA from "react-ga";
 import { FaPinterest } from "react-icons/fa";
 
-import { withShopifyContext } from "src/contexts/ShopifyContext";
-import { withModalContext } from "src/contexts/ModalContext";
-import { withCheckoutContext } from 'src/contexts/CheckoutContext'
+import { withShopifyContext } from "contexts/ShopifyContext";
+import { withModalContext } from "contexts/ModalContext";
+import { withCheckoutContext } from 'contexts/CheckoutContext'
 
-import Header from "src/components/Header";
-import TextLockup from "src/components/TextLockup";
-import Grid from "src/components/Grid";
-import Section from "src/components/Section";
-import Image from "src/components/GatsbyImage";
-import ProductThumb from "src/components/ProductThumb";
-import Slideshow from "src/components/Slideshow";
-import Button from "src/components/Button";
-import SEO from "src/components/SEO";
-import ProductSpecifications from "src/components/ProductSpecifications";
+import Header from "components/Header";
+import TextLockup from "components/TextLockup";
+import Grid from "components/Grid";
+import Section from "components/Section";
+import Image from "components/GatsbyImage";
+import ProductThumb from "components/ProductThumb";
+import Slideshow from "components/Slideshow";
+import Button from "components/Button";
+import SEO from "components/SEO";
+import ProductSpecifications from "components/ProductSpecifications";
 
-import { colors, util, mq } from "src/styles";
+import { colors, util, mq } from "styles";
 
 const ImgArea = styled.div`
 	${util.responsiveStyles("padding-top", 150, 135, 100, 90)}

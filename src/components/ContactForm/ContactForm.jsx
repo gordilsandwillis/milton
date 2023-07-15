@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Button from 'src/components/Button'
-import Grid from 'src/components/Grid'
-import UnderlinedInput from 'src/components/Input/UnderlinedInput'
-import { validateEmail } from 'src/utils/validations'
+import Button from 'components/Button'
+import Grid from 'components/Grid'
+import UnderlinedInput from 'components/Input/UnderlinedInput'
+import { validateEmail } from 'utils/validations'
 
-import { colors, typography, util } from 'src/styles'
+import { colors, typography, util } from 'styles'
 
 const ErrorMessage = styled.p`
   text-align: center;

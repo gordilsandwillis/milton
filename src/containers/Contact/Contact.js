@@ -1,11 +1,11 @@
 import React, { Fragment, Component } from 'react';
 import ReactGA from 'react-ga'
-import Header from 'src/components/Header'
-import Section from 'src/components/Section'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import Grid from 'src/components/Grid'
-import ContactForm from 'src/components/ContactForm'
-import SEO from "src/components/SEO"
+import Header from 'components/Header'
+import Section from 'components/Section'
+import ScrollEntrance from 'components/ScrollEntrance'
+import Grid from 'components/Grid'
+import ContactForm from 'components/ContactForm'
+import SEO from "components/SEO"
 
 class Contact extends Component {
 	componentDidMount () {

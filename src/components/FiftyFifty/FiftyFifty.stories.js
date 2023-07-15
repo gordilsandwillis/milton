@@ -1,8 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import FiftyFifty from './FiftyFifty'
-import * as mock from 'src/mock'
-import * as mockCopy from 'src/mock/copy'
+import * as mock from 'mock'
+import * as mockCopy from 'mock/copy'
 import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs'
 
 const imgPositionOptions = {

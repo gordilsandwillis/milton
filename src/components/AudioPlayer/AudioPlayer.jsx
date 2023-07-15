@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import ReactAudioPlayer from 'react-audio-player'
-import { colors, typography, animations } from 'src/styles'
-import Button from 'src/components/Button'
+import { colors, typography, animations } from 'styles'
+import Button from 'components/Button'
 
 const AudioPlayerElement = styled(ReactAudioPlayer)`
 	margin-top: 100px;

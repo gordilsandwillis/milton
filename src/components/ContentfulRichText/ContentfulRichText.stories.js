@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import ContentfulRichText from './ContentfulRichText'
-import { contentfulRichText } from 'src/mock/copy'
+import { contentfulRichText } from 'mock/copy'
 
 const stories = storiesOf(`Components/ContentfulRichText`, module)
 stories.add(`Default`, () => (

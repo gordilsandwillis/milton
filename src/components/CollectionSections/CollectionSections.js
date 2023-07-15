@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import FiftyFifty from 'src/components/FiftyFifty'
-import StackedImages from 'src/components/StackedImages'
-import Link from 'src/components/Link'
+import FiftyFifty from 'components/FiftyFifty'
+import StackedImages from 'components/StackedImages'
+import Link from 'components/Link'
 
-import LayerReni from 'src/assets/images/collage/Reni/painting/layer-1.png'
-import LayerReni2 from 'src/assets/images/collage/Reni/painting/layer-2.png'
-import LayerReni3 from 'src/assets/images/collage/Reni/painting/layer-3.png'
+import LayerReni from 'assets/images/collage/Reni/painting/layer-1.png'
+import LayerReni2 from 'assets/images/collage/Reni/painting/layer-2.png'
+import LayerReni3 from 'assets/images/collage/Reni/painting/layer-3.png'
 
-import LayerMatisse from 'src/assets/images/collage/Matisse/painting/layer-1.png'
-import LayerMatisse2 from 'src/assets/images/collage/Matisse/painting/layer-2.png'
-import LayerMatisse3 from 'src/assets/images/collage/Matisse/painting/layer-3.png'
+import LayerMatisse from 'assets/images/collage/Matisse/painting/layer-1.png'
+import LayerMatisse2 from 'assets/images/collage/Matisse/painting/layer-2.png'
+import LayerMatisse3 from 'assets/images/collage/Matisse/painting/layer-3.png'
 
-import LayerRousseau from 'src/assets/images/collage/Rousseau/painting/layer-1.png'
-import LayerRousseau2 from 'src/assets/images/collage/Rousseau/painting/layer-2.png'
-import LayerRousseau3 from 'src/assets/images/collage/Rousseau/painting/layer-3.png'
+import LayerRousseau from 'assets/images/collage/Rousseau/painting/layer-1.png'
+import LayerRousseau2 from 'assets/images/collage/Rousseau/painting/layer-2.png'
+import LayerRousseau3 from 'assets/images/collage/Rousseau/painting/layer-3.png'
 
-import LayerHopper from 'src/assets/images/collage/Hopper/painting/layer-1.png'
-import LayerHopper2 from 'src/assets/images/collage/Hopper/painting/layer-2.png'
-import LayerHopper3 from 'src/assets/images/collage/Hopper/painting/layer-3.png'
+import LayerHopper from 'assets/images/collage/Hopper/painting/layer-1.png'
+import LayerHopper2 from 'assets/images/collage/Hopper/painting/layer-2.png'
+import LayerHopper3 from 'assets/images/collage/Hopper/painting/layer-3.png'
 
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import { withShopifyContext } from 'contexts/ShopifyContext'
 
 const Images = {
 	Hopper: {

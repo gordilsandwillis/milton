@@ -2,16 +2,16 @@ import React, { Component, Fragment } from "react";
 import styled from "@emotion/styled";
 import ReactGA from "react-ga";
 
-import { LogoMark } from "src/components/Logo";
-import LargeLogo from "src/components/LargeLogo";
-import Header from "src/components/Header";
-import ATF from "src/components/ATF";
-import CalloutText from "src/components/CalloutText";
-import CollectionSections from "src/components/CollectionSections";
-import Newsletter from "src/components/Newsletter";
-import SEO from "src/components/SEO";
+import { LogoMark } from "components/Logo";
+import LargeLogo from "components/LargeLogo";
+import Header from "components/Header";
+import ATF from "components/ATF";
+import CalloutText from "components/CalloutText";
+import CollectionSections from "components/CollectionSections";
+import Newsletter from "components/Newsletter";
+import SEO from "components/SEO";
 
-import AtfImage from "src/assets/images/home-atf.jpg";
+import AtfImage from "assets/images/home-atf.jpg";
 
 const BottomOverlay = styled.div`
 	position: absolute;

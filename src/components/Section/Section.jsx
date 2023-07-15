@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import ThemeSelector from 'src/components/ThemeSelector'
-import { util } from 'src/styles'
+import ThemeSelector from 'components/ThemeSelector'
+import { util } from 'styles'
 
 const SectionWrapper = styled(ThemeSelector)`
 	position: relative;

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
-import Logo from 'src/components/Logo'
+import Logo from 'components/Logo'
 import { ScrollPercentage } from 'react-scroll-percentage'
 import withSizes from 'react-sizes'
-import { withHeaderContext } from 'src/contexts/HeaderContext'
-import { animations, colors, mq } from 'src/styles'
+import { withHeaderContext } from 'contexts/HeaderContext'
+import { animations, colors, mq } from 'styles'
 
 const Scroller = styled.div`
 	position: absolute;

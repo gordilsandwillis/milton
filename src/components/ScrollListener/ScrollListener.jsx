@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
-import { passiveListener } from 'src/utils/feature-detect'
-import * as wndw from 'src/utils/wndw'
+import { passiveListener } from 'utils/feature-detect'
+import * as wndw from 'utils/wndw'
 
 const defaultValue = {
   scrolledToTop: true,

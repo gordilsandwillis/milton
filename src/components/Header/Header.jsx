@@ -2,19 +2,19 @@ import React, { useState, Fragment } from 'react'
 import { withRouter } from 'react-router-dom';
 import { rgba } from 'polished'
 import styled from '@emotion/styled'
-import Link from 'src/components/Link'
-import Logo from 'src/components/Logo'
-import Grid from 'src/components/Grid'
-import Button from 'src/components/Button'
-import ResponsiveComponent from 'src/components/ResponsiveComponent'
-import ScrollListener from 'src/components/ScrollListener'
-import Cart from 'src/components/Cart'
-import Drawer from 'src/components/Drawer'
+import Link from 'components/Link'
+import Logo from 'components/Logo'
+import Grid from 'components/Grid'
+import Button from 'components/Button'
+import ResponsiveComponent from 'components/ResponsiveComponent'
+import ScrollListener from 'components/ScrollListener'
+import Cart from 'components/Cart'
+import Drawer from 'components/Drawer'
 
-import { colors, animations, mq, util } from 'src/styles'
+import { colors, animations, mq, util } from 'styles'
 
-import { withHeaderContext } from 'src/contexts/HeaderContext'
-import { withCheckoutContext } from 'src/contexts/CheckoutContext'
+import { withHeaderContext } from 'contexts/HeaderContext'
+import { withCheckoutContext } from 'contexts/CheckoutContext'
 
 const NavLinkStyle = (scrolled, active) => `
 	display: block;

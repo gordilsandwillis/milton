@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { mq } from 'src/styles'
+import { mq } from 'styles'
 
 const StyledImage = styled.div`
 	

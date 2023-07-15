@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import withSizes from 'react-sizes'
-import { mediaQueries } from 'src/styles'
+import { mediaQueries } from 'styles'
 
 const widthToRenderer = (winWidth, small, medium, large) => {
 	if (large && winWidth > mediaQueries.largeBreakpoint) {

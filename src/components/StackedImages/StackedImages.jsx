@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { Parallax } from 'react-scroll-parallax'
 
-import Image from 'src/components/GatsbyImage'
+import Image from 'components/GatsbyImage'
 
 const Wrapper = styled.div`
 	position: relative;

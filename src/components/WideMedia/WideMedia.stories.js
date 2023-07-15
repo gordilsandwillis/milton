@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import WideMedia from './WideMedia'
-import * as mock from 'src/mock'
+import * as mock from 'mock'
 import { boolean } from '@storybook/addon-knobs'
 
 const stories = storiesOf(`Blocks/Wide Media`, module)

@@ -3,10 +3,10 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { MdAdd, MdRemove } from 'react-icons/md'
-import Button from 'src/components/Button'
-import TextLink from 'src/components/TextLink'
-import { toPrice } from 'src/utils/format'
-import { typography, colors, util } from 'src/styles'
+import Button from 'components/Button'
+import TextLink from 'components/TextLink'
+import { toPrice } from 'utils/format'
+import { typography, colors, util } from 'styles'
 
 const Wrapper = styled.div`
 	display: flex;

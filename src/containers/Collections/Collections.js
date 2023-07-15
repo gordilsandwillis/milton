@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import ReactGA from 'react-ga'
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import { withShopifyContext } from 'contexts/ShopifyContext'
 
-import Header from 'src/components/Header'
-import CalloutText from 'src/components/CalloutText'
-import { LogoMark } from 'src/components/Logo'
-import CollectionSections from 'src/components/CollectionSections'
-import Furnishings from 'src/components/Furnishings'
-import SEO from 'src/components/SEO'
+import Header from 'components/Header'
+import CalloutText from 'components/CalloutText'
+import { LogoMark } from 'components/Logo'
+import CollectionSections from 'components/CollectionSections'
+import Furnishings from 'components/Furnishings'
+import SEO from 'components/SEO'
 
 class Collections extends Component {
 	state = {

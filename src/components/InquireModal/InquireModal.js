@@ -4,13 +4,13 @@ import styled from '@emotion/styled'
 import { rgba } from 'polished'
 import { MdClose } from 'react-icons/md'
 
-import { withModalContext } from 'src/contexts/ModalContext'
+import { withModalContext } from 'contexts/ModalContext'
 
-import Button from 'src/components/Button'
-import ContactForm from 'src/components/ContactForm'
-import Grid from 'src/components/Grid'
+import Button from 'components/Button'
+import ContactForm from 'components/ContactForm'
+import Grid from 'components/Grid'
 
-import { colors, util, mq } from 'src/styles'
+import { colors, util, mq } from 'styles'
 
 Modal.setAppElement('#root')
 

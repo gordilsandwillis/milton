@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
 import { darken, rgba } from 'polished'
-import { colors, typography, animations, util } from 'src/styles'
-import ConditionalRender from 'src/components/ConditionalRender'
-import MaterialIcon from 'src/components/MaterialIcon'
+import { colors, typography, animations, util } from 'styles'
+import ConditionalRender from 'components/ConditionalRender'
+import MaterialIcon from 'components/MaterialIcon'
 
 const isEmoji = string => {
 	var ranges = [
@@ -51,7 +51,7 @@ const themes = {
 		},
 		textColor: {
 			color: colors.bgColor,
-			accent: colors.lightGreen,
+			accent: colors.lightTextColor,
 			background: colors.textColor
 		}
 	}

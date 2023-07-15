@@ -1,4 +1,4 @@
-import * as mq from 'src/styles/mediaQueries'
+import * as mq from 'styles/mediaQueries'
 
 export const linearInterpolation = (maxInput, minInput, maxWidth, minWidth) => {
   let slope = (maxInput - minInput) / (maxWidth - minWidth)

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors } from 'src/styles'
+import { colors } from 'styles'
 
 const ThemeWrapper = styled.div`
 	transition: background-color 1s ease-in-out, color 1s ease-in-out;

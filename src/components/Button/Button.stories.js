@@ -2,9 +2,9 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { storiesOf } from '@storybook/react'
 import Button from './Button'
-import Link from 'src/components/Link'
+import Link from 'components/Link'
 import { MdVolumeUp as TestIcon } from 'react-icons/md'
-import { typography } from 'src/styles'
+import { typography } from 'styles'
 
 const SpaceOut = styled.div`
 	margin: 1rem 0 4rem;

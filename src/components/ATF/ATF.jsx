@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Grid from 'src/components/Grid'
-import Image from 'src/components/GatsbyImage'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import ConditionalRender from 'src/components/ConditionalRender'
-import TextLockup from 'src/components/TextLockup'
-import ThemeSelector from 'src/components/ThemeSelector'
+import Grid from 'components/Grid'
+import Image from 'components/GatsbyImage'
+import ScrollEntrance from 'components/ScrollEntrance'
+import ConditionalRender from 'components/ConditionalRender'
+import TextLockup from 'components/TextLockup'
+import ThemeSelector from 'components/ThemeSelector'
 import withSizes from 'react-sizes'
-import { colors, animations, mq } from 'src/styles'
+import { colors, animations, mq } from 'styles'
 import MobileDetect from 'mobile-detect'
-import Video from 'src/components/Video'
+import Video from 'components/Video'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup, Transition } from 'react-transition-group'
-import { colors } from 'src/styles'
+import { colors } from 'styles'
 
 const timeout = 500
 const hang = 0

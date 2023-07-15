@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors, animations } from 'src/styles'
+import { colors, animations } from 'styles'
 import { MdAdd } from 'react-icons/md'
-import Button from 'src/components/Button'
+import Button from 'components/Button'
 
 const verticalPadding = 20
 

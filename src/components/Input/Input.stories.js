@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Grid from 'src/components/Grid'
-import { colors } from 'src/styles'
+import Grid from 'components/Grid'
+import { colors } from 'styles'
 import Input from './Input'
 
 const inputs = [

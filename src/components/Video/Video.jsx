@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { Transition } from 'react-transition-group'
-import { animations } from 'src/styles'
+import { animations } from 'styles'
 import ReactPlayer from 'react-player'
 
 import { MdPlayArrow } from 'react-icons/md'
 
-import Image from 'src/components/Image'
-import Button from 'src/components/Button'
+import Image from 'components/Image'
+import Button from 'components/Button'
 
 const Wrapper = styled.div`
 	${ ({ hasCoverImage }) => hasCoverImage && `

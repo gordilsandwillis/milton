@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Image from './Image'
-import * as mock from 'src/mock'
+import * as mock from 'mock'
 
 const stories = storiesOf(`Components/Image`, module)
 stories.add(`Default`, () => (

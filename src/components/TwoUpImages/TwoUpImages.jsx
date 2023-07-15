@@ -1,10 +1,10 @@
 import React from 'react'
-import Section from 'src/components/Section'
-import Grid from 'src/components/Grid'
-import Image from 'src/components/Image'
-import Caption from 'src/components/Caption'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import ConditionalRender from 'src/components/ConditionalRender'
+import Section from 'components/Section'
+import Grid from 'components/Grid'
+import Image from 'components/Image'
+import Caption from 'components/Caption'
+import ScrollEntrance from 'components/ScrollEntrance'
+import ConditionalRender from 'components/ConditionalRender'
 
 const TwoUpImages = ({
 	theme,

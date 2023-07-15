@@ -2,11 +2,11 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { withRouter } from 'react-router'
 
-import Grid from 'src/components/Grid'
-import Image from 'src/components/GatsbyImage'
-import ConditionalRender from 'src/components/ConditionalRender'
+import Grid from 'components/Grid'
+import Image from 'components/GatsbyImage'
+import ConditionalRender from 'components/ConditionalRender'
 
-import { colors, animations, typography, util } from 'src/styles'
+import { colors, animations, typography, util } from 'styles'
 
 const OuterWrapper = styled.div`
 	${ util.responsiveStyles('margin-top', 0, 26, 24, 24) }

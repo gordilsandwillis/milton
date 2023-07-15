@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled'
 
-import Section from 'src/components/Section'
-import Grid from 'src/components/Grid'
-import ProductThumb from 'src/components/ProductThumb'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import { mq } from 'src/styles'
+import Section from 'components/Section'
+import Grid from 'components/Grid'
+import ProductThumb from 'components/ProductThumb'
+import ScrollEntrance from 'components/ScrollEntrance'
+import { mq } from 'styles'
 
 const TextilesGrid = styled.div`
 	display: flex;

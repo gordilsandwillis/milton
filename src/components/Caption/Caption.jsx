@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { typography, colors } from 'src/styles'
+import { typography, colors } from 'styles'
 
 const Wrapper = styled.div`
 	padding-top: 1em;

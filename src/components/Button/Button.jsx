@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { lighten, rgba } from 'polished'
 
-import * as util from 'src/styles/util'
-import { colors, typography, animations } from 'src/styles'
-import MaterialIcon from 'src/components/MaterialIcon'
+import * as util from 'styles/util'
+import { colors, typography, animations } from 'styles'
+import MaterialIcon from 'components/MaterialIcon'
 
-import Link from 'src/components/Link'
+import Link from 'components/Link'
 
 const buttonSizes = {
 	tiny: '36px',

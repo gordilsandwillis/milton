@@ -1,39 +1,39 @@
 import React, { Component, Fragment } from 'react';
 import ReactGA from 'react-ga'
-import { withShopifyContext } from 'src/contexts/ShopifyContext'
+import { withShopifyContext } from 'contexts/ShopifyContext'
 
-import Header from 'src/components/Header'
-import ATF from 'src/components/ATF'
-import CalloutText from 'src/components/CalloutText'
-import Grid from 'src/components/Grid'
-import Section from 'src/components/Section'
-import Furnishings from 'src/components/Furnishings'
-import Textiles from 'src/components/Textiles'
-import StackedImages from 'src/components/StackedImages'
-import SEO from 'src/components/SEO'
+import Header from 'components/Header'
+import ATF from 'components/ATF'
+import CalloutText from 'components/CalloutText'
+import Grid from 'components/Grid'
+import Section from 'components/Section'
+import Furnishings from 'components/Furnishings'
+import Textiles from 'components/Textiles'
+import StackedImages from 'components/StackedImages'
+import SEO from 'components/SEO'
 
-import MatisseNextCollectionImage from 'src/assets/images/matisse-stage.jpg'
-import ReniNextCollectionImage from 'src/assets/images/reni-stage.jpg'
+import MatisseNextCollectionImage from 'assets/images/matisse-stage.jpg'
+import ReniNextCollectionImage from 'assets/images/reni-stage.jpg'
 
-import HopperNextCollectionImage from 'src/assets/images/hopper-stage.jpg'
-import RousseauNextCollectionImage from 'src/assets/images/rousseau-stage.jpg'
+import HopperNextCollectionImage from 'assets/images/hopper-stage.jpg'
+import RousseauNextCollectionImage from 'assets/images/rousseau-stage.jpg'
 
 
-import ThumbnailReni from 'src/assets/images/collage/Reni/reni-layer-1.png'
-import ThumbnailReni2 from 'src/assets/images/collage/Reni/reni-layer-2.png'
-import ThumbnailReni3 from 'src/assets/images/collage/Reni/reni-layer-3.png'
+import ThumbnailReni from 'assets/images/collage/Reni/reni-layer-1.png'
+import ThumbnailReni2 from 'assets/images/collage/Reni/reni-layer-2.png'
+import ThumbnailReni3 from 'assets/images/collage/Reni/reni-layer-3.png'
 
-import ThumbnailMatisse from 'src/assets/images/collage/Matisse/matisse-layer-1.png'
-import ThumbnailMatisse2 from 'src/assets/images/collage/Matisse/matisse-layer-2.png'
-import ThumbnailMatisse3 from 'src/assets/images/collage/Matisse/matisse-layer-3.png'
+import ThumbnailMatisse from 'assets/images/collage/Matisse/matisse-layer-1.png'
+import ThumbnailMatisse2 from 'assets/images/collage/Matisse/matisse-layer-2.png'
+import ThumbnailMatisse3 from 'assets/images/collage/Matisse/matisse-layer-3.png'
 
-import LayerRousseau from 'src/assets/images/collage/Rousseau/rousseau-layer-1.png'
-import LayerRousseau2 from 'src/assets/images/collage/Rousseau/rousseau-layer-2.png'
-import LayerRousseau3 from 'src/assets/images/collage/Rousseau/rousseau-layer-3.png'
+import LayerRousseau from 'assets/images/collage/Rousseau/rousseau-layer-1.png'
+import LayerRousseau2 from 'assets/images/collage/Rousseau/rousseau-layer-2.png'
+import LayerRousseau3 from 'assets/images/collage/Rousseau/rousseau-layer-3.png'
 
-import LayerHopper from 'src/assets/images/collage/Hopper/hopper-layer-1.png'
-import LayerHopper2 from 'src/assets/images/collage/Hopper/hopper-layer-2.png'
-import LayerHopper3 from 'src/assets/images/collage/Hopper/hopper-layer-3.png'
+import LayerHopper from 'assets/images/collage/Hopper/hopper-layer-1.png'
+import LayerHopper2 from 'assets/images/collage/Hopper/hopper-layer-2.png'
+import LayerHopper3 from 'assets/images/collage/Hopper/hopper-layer-3.png'
 
 
 

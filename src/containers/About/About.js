@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import ReactGA from 'react-ga'
-import { withModalContext } from 'src/contexts/ModalContext'
+import { withModalContext } from 'contexts/ModalContext'
 
-import Header from 'src/components/Header'
-import SEO from 'src/components/SEO'
-import CalloutText from 'src/components/CalloutText'
-import FiftyFifty from 'src/components/FiftyFifty'
-import Newsletter from 'src/components/Newsletter'
-import StackedImages from 'src/components/StackedImages'
+import Header from 'components/Header'
+import SEO from 'components/SEO'
+import CalloutText from 'components/CalloutText'
+import FiftyFifty from 'components/FiftyFifty'
+import Newsletter from 'components/Newsletter'
+import StackedImages from 'components/StackedImages'
 
-import EthosImage from 'src/assets/images/about-ethos.jpg'
-import ValuesImage from 'src/assets/images/about-values.jpg'
-import DesignerImage from 'src/assets/images/collage/Designer/designer-layer-1.png'
-import DesignerImage2 from 'src/assets/images/collage/Designer/designer-layer-2.png'
-import DesignerImage3 from 'src/assets/images/collage/Designer/designer-layer-3.png'
+import EthosImage from 'assets/images/about-ethos.jpg'
+import ValuesImage from 'assets/images/about-values.jpg'
+import DesignerImage from 'assets/images/collage/Designer/designer-layer-1.png'
+import DesignerImage2 from 'assets/images/collage/Designer/designer-layer-2.png'
+import DesignerImage3 from 'assets/images/collage/Designer/designer-layer-3.png'
 
 const DesignerImages = [
 	{ src: DesignerImage, width: 463, height: 650 },

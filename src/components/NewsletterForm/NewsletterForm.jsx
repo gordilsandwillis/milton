@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Button from 'src/components/Button'
-import Input from 'src/components/Input'
-import { validateEmail } from 'src/utils/validations'
+import Button from 'components/Button'
+import Input from 'components/Input'
+import { validateEmail } from 'utils/validations'
 
-import { colors, util } from 'src/styles'
+import { colors, util } from 'styles'
 
 const StyledForm = styled.form`
   position: relative;

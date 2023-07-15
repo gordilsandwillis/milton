@@ -5,15 +5,15 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { IoMdClose } from 'react-icons/io'
 
-import { colors, animations, mq, util, typography } from 'src/styles'
+import { colors, animations, mq, util, typography } from 'styles'
 
-import Grid from 'src/components/Grid'
-import Button from 'src/components/Button'
-import ScrollEntrance from 'src/components/ScrollEntrance'
+import Grid from 'components/Grid'
+import Button from 'components/Button'
+import ScrollEntrance from 'components/ScrollEntrance'
 
-import LineItem from 'src/components/LineItem'
+import LineItem from 'components/LineItem'
 
-import { withCheckoutContext } from 'src/contexts/CheckoutContext'
+import { withCheckoutContext } from 'contexts/CheckoutContext'
 
 const CartSection = styled.div`
 	${({ padBottom }) => padBottom !== false
