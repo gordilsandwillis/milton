@@ -55,7 +55,7 @@ const ProductThumb = ({ product, variant, className }) => {
 	let hoverImage = variantImages[1] && variantImages[1].src
 
 	return (
-		<Wrapper className={className} to={'/product/' + product.handle + '/' + variant.id}>
+		<Wrapper className={className} to={'/product/' + product.handle + '/' + btoa(variant.id)}>
 			<ThumbnailImageWrapper>
 				<ThumbnailImage
 					image={{

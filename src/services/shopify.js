@@ -5,10 +5,8 @@ import Client from 'shopify-buy/index.unoptimized.umd';
 export const shopifyClient = Client.buildClient({
   storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
   domain: 'milton-textiles.myshopify.com',
-  apiVersion: '2022-10'
+  apiVersion: '2023-07'
 })
-
-console.log(shopifyClient)
 
 export const MetafieldFragment = (metafield) => {
   metafield.add('id')
@@ -23,6 +21,10 @@ export const ImageFrament = (image) => {
   image.add('altText')
 }
 
+export const PriceFragment = (price) => {
+  price.add('amount')
+}
+
 export const CollectionFragment = (collection) => {
 	collection.add('id')
 	collection.add('handle')
@@ -31,15 +33,13 @@ export const CollectionFragment = (collection) => {
 	collection.add('title')
   collection.add('image', ImageFrament)
   collection.addConnection('products', {args: {first: 50}}, ProductFragment)
-  // collection.addConnection('metafields', {args: {first: 5, namespace: 'collection_metafield'}}, MetafieldFragment)
 }
 
 export const ProductVariantFragment = (variant) => {
   variant.add('id')
   variant.add('title')
   variant.add('sku')
-  // TODO Fix this
-  // variant.add('price')
+  variant.add('price', PriceFragment)
   variant.add('availableForSale')
   variant.add('image', ImageFrament)
 }
@@ -53,11 +53,17 @@ export const ProductFragment = (product) => {
   product.add('descriptionHtml')
   product.add('vendor')
   product.add('availableForSale')
-
   product.addConnection('images', {args: {first: 50}}, ImageFrament)
-  // TODO Fix this
-  // product.addConnection('metafields', {args: {first: 10, namespace: 'specifications'}}, MetafieldFragment)
   product.addConnection('variants', {args: {first: 10}}, ProductVariantFragment)
+  product.add('metafields', {
+    args: {identifiers: [
+      { namespace: 'specifications', key: 'width' },
+      { namespace: 'specifications', key: 'care' },
+      { namespace: 'specifications', key: 'content' },
+      { namespace: 'specifications', key: 'performance' }
+    ]}
+  }, MetafieldFragment)
+
 }
 
 export const ShopFragment = (shop) => {

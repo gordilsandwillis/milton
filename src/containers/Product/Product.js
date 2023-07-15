@@ -188,18 +188,19 @@ class Product extends Component {
 			shopifyContext;
 
 		if (!products || !collections) {
-			console.log('no products or collections');
 			return null;
 		}
 
 		const productHandle = match.params.product;
 		const variantId = match.params.variant;
-
 		const currentProduct = products.find(
 			(product) => product.handle === productHandle
 		);
 		const currentVariant = currentProduct.variants.find(
-			(variant) => variant.id === variantId
+			(variant) => {
+
+				return variant.id === atob(variantId)
+			}
 		);
 		const currentCollection = collections.find(({ products }) =>
 			products.some((product) => product.id === currentProduct.id)
@@ -242,7 +243,6 @@ class Product extends Component {
 	}
 
 	render() {
-
 		const { checkoutContext: { addLineItem } } = this.props
 		const {
 			loading,
@@ -255,11 +255,8 @@ class Product extends Component {
 		} = this.state;
 
 		if (loading) {
-			console.log('still loading...')
 			return false;
 		}
-
-		console.log('made it here');
 
 		return (
 			<Fragment>
@@ -364,6 +361,7 @@ class Product extends Component {
 												>
 													Inquire
 												</InquireButton>
+
 												{currentProduct.productType === 'Textiles' && (
 													<BuyButton
 														setTheme="lavender"
@@ -371,7 +369,7 @@ class Product extends Component {
 														onClick={() => addLineItem({variantId : currentVariant.id})}
 													>
 														<span>Buy Memo</span>
-														<Price>- ${currentVariant.price}</Price>
+														<Price>- ${currentVariant.price.amount}</Price>
 													</BuyButton>
 													)}
 											</Actions>
@@ -389,7 +387,6 @@ class Product extends Component {
 						</TextArea>
 					</Grid>
 				</div>
-
 				<Section setTheme="lightGrey" nextTheme="lightGrey">
 					<Grid small="1 [12] 1">
 						<h4 style={{ textAlign: "center" }}>

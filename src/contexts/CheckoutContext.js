@@ -29,18 +29,18 @@ class CheckoutProvider extends React.Component {
 	toggleCart = (cartOpen) => this.setState({ cartOpen })
 
 	initializeCheckout = async () => {
-		// let checkout;
-		// const checkoutId = await this.getCheckoutId()
-		// if (checkoutId) {
-		// 	checkout = await this.getCheckout(checkoutId)
-		// } else {
-		// 	checkout = await this.createCheckout()
-		// }
-		// if (checkout?.completedAt || !checkout) {
-		// 	checkout = await this.createCheckout()
-		// }
-		// set('shopify-checkout-id', checkout?.id)
-		// this.setState({ checkout, loading: false })
+		let checkout;
+		const checkoutId = await this.getCheckoutId()
+		if (checkoutId) {
+			checkout = await this.getCheckout(checkoutId)
+		} else {
+			checkout = await this.createCheckout()
+		}
+		if (checkout?.completedAt || !checkout) {
+			checkout = await this.createCheckout()
+		}
+		set('shopify-checkout-id', checkout?.id)
+		this.setState({ checkout, loading: false })
 	}
 
 	createCheckout = async () => {

@@ -43,7 +43,7 @@
     "react-slick": "^0.25.2",
     "react-svg-loader": "^3.0.3",
     "react-transition-group": "^4.3.0",
-    "shopify-buy": "^2.9.0",
+    "shopify-buy": "^2.20.0",
     "tickl": "^1.0.0"
   },
   "devDependencies": {

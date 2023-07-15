@@ -38,14 +38,12 @@ class PageContent extends Component {
     });
 
     client.graphQLClient.send(shopQuery).then(({model, data}) => {
-      this.props.shopifyContext.updateState('shop', data.shop)
+      this.props.shopifyContext.updateState('shop', model.shop)
     });
   }
 
   render () {
     if (!this.props.shopifyContext.shop || !this.props.shopifyContext.shopifyCollections || !this.props.shopifyContext.shopifyProducts) {
-      console.log('stuck here');
-      console.log(this.props);
       return false
     }
 
