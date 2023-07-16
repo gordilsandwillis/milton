@@ -1,13 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import WideMedia from './WideMedia'
-import * as mock from 'mock'
 import { boolean } from '@storybook/addon-knobs'
 
 const stories = storiesOf(`Blocks/Wide Media`, module)
 stories.add(`Default`, () => (
 	<WideMedia
-		image={{ image: mock.Placeholder169.fluid.src }}
+		image={}
 		caption="caption"
 		fullWidth={ boolean('Full Width', false) }
 	/>
