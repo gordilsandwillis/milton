@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import Logo from 'components/Logo'
-import { ScrollPercentage } from 'react-scroll-percentage'
+//import { ScrollPercentage } from 'react-scroll-percentage'
 import withSizes from 'react-sizes'
 import { withHeaderContext } from 'contexts/HeaderContext'
 import { animations, colors, mq } from 'styles'
@@ -81,29 +81,32 @@ const StyledLogo = styled(Logo)`
 
 const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
 
-	const toggleHeader = headerContext.toggleHeader
+	// const toggleHeader = headerContext.toggleHeader
 
 	return (
-		<ScrollPercentage threshold={1} onChange={ (percentage) => {
-			if (percentage > .9) {
-				toggleHeader(true)
-			} else {
-				toggleHeader(false)
-			}
-		} }>
-			{({ percentage, ref, entry }) => (
-				<Fragment>
-					<Scroller ref={ref}/>
-					<Wrapper>
-						<StyledLogo
-							winWidth={winWidth}
-							scroll={1 - percentage}
-						/>
-					</Wrapper>
-				</Fragment>
-			)}
-		</ScrollPercentage>
+		<Fragment>
+			<Scroller ref={ref}/>
+			<Wrapper>
+				<StyledLogo
+					winWidth={winWidth}
+					scroll={1 - percentage}
+				/>
+			</Wrapper>
+		</Fragment>
 	)
+
+	// return (
+	// 	<ScrollPercentage threshold={1} onChange={ (percentage) => {
+	// 		if (percentage > .9) {
+	// 			toggleHeader(true)
+	// 		} else {
+	// 			toggleHeader(false)
+	// 		}
+	// 	} }>
+	// 		{({ percentage, ref, entry }) => (
+	// 		)}
+	// 	</ScrollPercentage>
+	// )
 }
 
 const sizesToProps = ({ width, height }) => ({
