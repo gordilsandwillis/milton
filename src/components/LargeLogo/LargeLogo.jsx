@@ -64,18 +64,18 @@ const StyledLogo = styled(Logo)`
 		display: inline-block;
 		vertical-align: top;
 		transition: color ${ animations.mediumSpeed } ease-in-out;
-		color: ${ ({ scroll }) => scroll >= .1 ? colors.bgColor : colors.textColor };
+		//color: ${ ({ scroll }) => scroll >= .1 ? colors.bgColor : colors.textColor };
 		transform-origin: center bottom;
-		transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/160) * scroll >= 1 ? ((winWidth * .95)/160) * scroll : 1 });
-		${ mq.extraLargeAndBelow } {
-			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/140) * scroll >= 1 ? ((winWidth * .95)/140) * scroll : 1 });
-		}
-		${ mq.largerAndBelow } {
-			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/120) * scroll >= 1 ? ((winWidth * .95)/120) * scroll : 1 });
-		}
-		${ mq.mediumAndBelow } {
-			transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .87)/100) * scroll >= 1 ? ((winWidth * .87)/100) * scroll : 1 });
-		}
+		// transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/160) * scroll >= 1 ? ((winWidth * .95)/160) * scroll : 1 });
+		// ${ mq.extraLargeAndBelow } {
+		// 	transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/140) * scroll >= 1 ? ((winWidth * .95)/140) * scroll : 1 });
+		// }
+		// ${ mq.largerAndBelow } {
+		// 	transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/120) * scroll >= 1 ? ((winWidth * .95)/120) * scroll : 1 });
+		// }
+		// ${ mq.mediumAndBelow } {
+		// 	transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .87)/100) * scroll >= 1 ? ((winWidth * .87)/100) * scroll : 1 });
+		// }
 	}
 `
 
@@ -85,11 +85,10 @@ const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
 
 	return (
 		<Fragment>
-			<Scroller ref={ref}/>
+			<Scroller />
 			<Wrapper>
 				<StyledLogo
 					winWidth={winWidth}
-					scroll={1 - percentage}
 				/>
 			</Wrapper>
 		</Fragment>
