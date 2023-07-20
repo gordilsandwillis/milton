@@ -193,34 +193,46 @@ class Product extends Component {
 
 		const productHandle = match.params.product;
 		const variantId = match.params.variant;
+		console.log(variantId)
 		const currentProduct = products.find(
 			(product) => product.handle === productHandle
 		);
 		const currentVariant = currentProduct.variants.find(
 			(variant) => {
-
 				return variant.id === atob(variantId)
 			}
 		);
-		const currentCollection = collections.find(({ products }) =>
+
+		let currentCollection = false
+		currentCollection = collections.find(({ products }) =>
 			products.some((product) => product.id === currentProduct.id)
 		);
+
 		let variantImages = currentProduct.images.filter((i) =>
 			currentVariant.title.includes(i.altText)
 		);
-		const collectionProducts = currentCollection.products.filter(
-			(product) => product.id !== currentProduct.id
-		);
 
-		const moreProducts = collectionProducts
+		let collectionProducts = false
+		let moreProducts = false
+		if (currentCollection) {
+			collectionProducts = currentCollection.products.filter(
+				(product) => product.id !== currentProduct.id
+			);
+
+			moreProducts = collectionProducts
 			.sort(function (a, b) {
 				return 0.5 - Math.random();
 			})
 			.slice(0, 4);
+		}
 
-		const productSpecifications = currentProduct.metafields.filter(
-			({ namespace }) => namespace === "specifications"
-		);
+		let productSpecifications = false
+		console.log(currentProduct)
+		if (currentProduct?.metafields) {
+			productSpecifications = currentProduct?.metafields?.filter(
+				(field) => field?.namespace === "specifications"
+			);
+		}
 
 		if (!variantImages || variantImages.length === 0) {
 			variantImages = [currentVariant.image];
@@ -290,9 +302,9 @@ class Product extends Component {
 																"&media=" +
 																image.src +
 																"&description=" +
-																currentProduct.title +
+																currentProduct?.title +
 																"|" +
-																currentVariant.title,
+																currentVariant?.title,
 															"mywin",
 															"left=20,top=20,width=600,height=600,toolbar=1,resizable=0"
 														);
@@ -304,9 +316,9 @@ class Product extends Component {
 														"&media=" +
 														image.src +
 														"&description=" +
-														currentProduct.title +
+														currentProduct?.title +
 														" | " +
-														currentVariant.title
+														currentVariant?.title
 													}
 												>
 													<FaPinterest size={24} />
@@ -320,7 +332,7 @@ class Product extends Component {
 															sizes: "",
 														},
 													}}
-													alt={currentProduct.title | currentVariant.title}
+													alt={currentProduct?.title | currentVariant?.title}
 												/>
 											</SlideWrap>
 										</Grid>
@@ -333,9 +345,9 @@ class Product extends Component {
 								<div>
 									<ProductInfo
 										eyebrow={
-											currentProduct.title + " • " + currentCollection.title
+											currentProduct?.title + " • " + currentCollection?.title
 										}
-										headline={currentVariant.title}
+										headline={currentVariant?.title}
 										headlineSize="h4"
 										text={currentProduct.descriptionHtml}
 										textSize="body"
@@ -387,6 +399,7 @@ class Product extends Component {
 						</TextArea>
 					</Grid>
 				</div>
+				{/*
 				<Section setTheme="lightGrey" nextTheme="lightGrey">
 					<Grid small="1 [12] 1">
 						<h4 style={{ textAlign: "center" }}>
@@ -427,6 +440,7 @@ class Product extends Component {
 						/>
 					</Grid>
 				</Section>
+				*/}
 			</Fragment>
 		);
 	}

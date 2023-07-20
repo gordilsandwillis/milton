@@ -145,12 +145,13 @@ const ProductSpecifications = ({
 								if (variant.id === currentVariant.id) {
 									active = true
 								}
+								const variantId = btoa(variant.id)
 								return (
 									<VariantLink
-										key={variant.id}
+										key={variantId}
 										active={active}
 										onClick={(event) => {
-											history.replace('/product/' + currentProduct.handle + '/' + variant.id)
+											history.replace('/product/' + currentProduct.handle + '/' + variantId)
 										}}
 									>
 										<Image
