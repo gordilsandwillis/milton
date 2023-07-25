@@ -7,7 +7,6 @@ import ConditionalRender from 'components/ConditionalRender'
 import ScrollEntrance from 'components/ScrollEntrance'
 import ContentfulRichText from 'components/ContentfulRichText'
 import { typography, colors, mq } from 'styles'
-import BalanceText from 'react-balance-text'
 import Section from 'components/Section'
 
 const TextContainer = styled(ScrollEntrance)`
