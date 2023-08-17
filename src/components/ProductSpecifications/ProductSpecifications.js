@@ -91,6 +91,10 @@ const isArrayString = (string) => {
   return false
 }
 
+const removeUnderscore = string => {
+	return string.replace(/_/g, ' ')
+}
+
 const ProductSpecifications = ({
 	keys: sections,
 	specifications,
@@ -100,9 +104,11 @@ const ProductSpecifications = ({
 	history
 }) => (
 	<OuterWrapper style={sections && variants.length > 1 ? { margin: '28px 0 0 0' } : {}}>
+		{console.log(specifications)}
 		{sections.map( (section, index) => (
 			specifications.some(({key}) => key.toLowerCase() === section) && (
 				<InnerWrapper index={index} key={section}>
+					{console.log(section)}
 					<Grid
 						small="[1] [1]"
 						medium="[1] [1]"
@@ -110,7 +116,7 @@ const ProductSpecifications = ({
 						vAlign="baseline"
 					>
 					<div>
-						<label>{section}</label>
+						<label>{removeUnderscore(section)}</label>
 					</div>
 					<div>
 						<ul>

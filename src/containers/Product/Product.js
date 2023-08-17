@@ -356,7 +356,14 @@ class Product extends Component {
 									>
 										{productSpecifications ? (
 											<ProductSpecifications
-												keys={["width", "care", "content", "performance"]}
+												keys={[
+													"width",
+													"care",
+													"content",
+													"performance",
+													"horizontal_repeat",
+													"vertical_repeat"
+												]}
 												specifications={productSpecifications}
 												variants={currentProduct.variants}
 												currentProduct={currentProduct}

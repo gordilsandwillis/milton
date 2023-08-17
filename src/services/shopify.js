@@ -9,6 +9,7 @@ export const shopifyClient = Client.buildClient({
 })
 
 export const MetafieldFragment = (metafield) => {
+  console.log(metafield)
   metafield.add('id')
   metafield.add('namespace')
   metafield.add('key')
@@ -60,10 +61,11 @@ export const ProductFragment = (product) => {
       { namespace: 'specifications', key: 'width' },
       { namespace: 'specifications', key: 'care' },
       { namespace: 'specifications', key: 'content' },
-      { namespace: 'specifications', key: 'performance' }
+      { namespace: 'specifications', key: 'performance' },
+      { namespace: 'specifications', key: 'horizontal_repeat' },
+      { namespace: 'specifications', key: 'vertical_repeat' }
     ]}
   }, MetafieldFragment)
-
 }
 
 export const ShopFragment = (shop) => {
