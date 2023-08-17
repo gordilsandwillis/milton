@@ -270,6 +270,11 @@ class Product extends Component {
 			return false;
 		}
 
+		const USDollar = new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD'
+		})
+
 		return (
 			<Fragment>
 				<SEO
@@ -388,7 +393,7 @@ class Product extends Component {
 														onClick={() => addLineItem({variantId : currentVariant.id})}
 													>
 														<span>Buy Memo</span>
-														<Price>- ${currentVariant.price.amount}</Price>
+														<Price>- {USDollar.format(currentVariant?.price?.amount)}</Price>
 													</BuyButton>
 													)}
 											</Actions>
