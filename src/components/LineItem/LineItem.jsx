@@ -100,10 +100,13 @@ const LineItem = ({
 		},
 	} = item
 
-	console.log(item)
+	const USDollar = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD'
+	})
 
 	const { currencyCode } = priceV2
-	const priceString = currencyCode && currencyCode === 'USD' ? `$${price}` : `${price} ${currencyCode}`
+	const priceString = currencyCode && currencyCode === 'USD' ? `${USDollar.format(price?.amount)}` : `${price?.amount} ${currencyCode}`
 
 	return (
 		<Wrapper>

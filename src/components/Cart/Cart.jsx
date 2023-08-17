@@ -160,13 +160,18 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 		return null
 	}
 
+	const USDollar = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD'
+	})
+
 	const { lineItems } = checkout
 	const checkoutUrl = checkout?.webUrl
 	const ready = checkout?.ready
 
-	const subtotalPrice = checkout?.subtotalPrice
+	const subtotalPrice = checkout?.subtotalPrice?.amount
 	const currencyCode = checkout?.subtotalPriceV2?.currencyCode
-	const subtotal = currencyCode && currencyCode === 'USD' ? `$${subtotalPrice}` : `${subtotalPrice} ${currencyCode}`
+	const subtotal = currencyCode && currencyCode === 'USD' ? `${USDollar.format(subtotalPrice)}` : `${subtotalPrice} ${currencyCode}`
 
 	const checkoutDisabled = loading || !ready || !checkoutUrl || !(lineItems?.length > 0)
 	return (
