@@ -97,7 +97,7 @@ class Collection extends Component {
 		const hasAtf = collection.image && collection.image.src
 
 		const textileProducts = collectionProducts.filter(({ productType }) => productType === 'Textiles')
-		const furnitureProducts = collectionProducts.filter(({ productType }) => productType === 'Furniture')
+		const furnitureProducts = collectionProducts.filter(({ productType }) => productType !== 'Textiles')
 
 		const { title, description, image, descriptionHtml } = collection
 
@@ -140,8 +140,11 @@ class Collection extends Component {
 					/>
 				)}
 
-				<Textiles products={textileProducts} hasAtf={hasAtf} />
+				{textileProducts?.length > 0 && (
+					<Textiles products={textileProducts} hasAtf={hasAtf} />
+				)}
 
+				{Images[title] && (
 					<Section>
 						<Grid small="2 [10] 2" medium="4 [6] 4" larger="9 [10] 9" extraLarge="5 [4] 5">
 							<div>
@@ -153,9 +156,9 @@ class Collection extends Component {
 							</div>
 						</Grid>
 					</Section>
+				)}
 
-
-				<Furnishings products={furnitureProducts} />
+				<Furnishings products={furnitureProducts} hideTitle={textileProducts?.length < 1} />
 
 				<ATF
 					eyebrow="Next Collection"

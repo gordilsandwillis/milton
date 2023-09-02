@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import { withRouter } from 'react-router-dom';
 import { rgba } from 'polished'
+import { withShopifyContext } from 'contexts/ShopifyContext'
 import styled from '@emotion/styled'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
@@ -9,22 +10,107 @@ import Button from 'components/Button'
 import ResponsiveComponent from 'components/ResponsiveComponent'
 import ScrollListener from 'components/ScrollListener'
 import Cart from 'components/Cart'
+import { MdKeyboardArrowDown } from 'react-icons/md'
 import Drawer from 'components/Drawer'
 
-import { colors, animations, mq, util } from 'styles'
+import { colors, animations, mq, util, typography } from 'styles'
 
 import { withHeaderContext } from 'contexts/HeaderContext'
 import { withCheckoutContext } from 'contexts/CheckoutContext'
 
 const NavLinkStyle = (scrolled, active) => `
-	display: block;
+	appearance: none;
+	border: none;
+	outline: none;
+	padding: 0;
+	font-size: inherit;
+	font-family: inherit;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	position: relative;
-	${ util.responsiveStyles('margin-right', 40, 32, 20, 12) }
-	${ active && `
+	column-gap: 2px;
+	${ active ? `
 		&:after {
 			transform: none;
 		}
-	` }
+	` : `` }
+	${ mq.largeAndBelow } {
+		&:after {
+			background: transparent;
+		}
+	}
+	&:hover {
+		${ mq.largeAndBelow } {
+			&:after {
+				background: transparent;
+			}
+		}
+		.sublinks {
+			opacity: 1;
+			transform: none;
+			visibility: visible;
+		}
+		.mobile-sublinks {
+			grid-template-rows: 1fr;
+			> div {
+				visibility: visible;
+			}
+		}
+	}
+	.label {
+		display: flex;
+		align-items: center;
+	}
+`
+
+const Sublinks = styled.ul`
+	list-style: none;
+	padding: 1em 1em 1em 1em;
+	background: #fff;
+	position: absolute;
+	top: calc(100% + 26px - 1em);
+	left: -1em;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-10px);
+	color: ${ colors.textColor };
+	transition: opacity ${ animations.mediumSpeed } ease-in-out,
+							visibility ${ animations.mediumSpeed } ease-in-out,
+							transform ${ animations.mediumSpeed } ease-in-out;
+	box-shadow: 0 2px 0px ${ rgba(colors.textColor, .03) };
+	&:before {
+		display: block;
+		position: absolute;
+		content: '';
+		bottom: 100%;
+		width: 100%;
+		left: 0;
+		height: 26px;
+	}
+	${ typography.h6 }
+`
+
+const MobileSublinks = styled.div`
+	display: grid;
+	grid-template-rows: 0fr;
+	contain: paint;
+	transition: grid-template-rows .4s ease-in-out;
+	> div {
+		min-height: 0;
+		transition: visibility .4s ease-in-out,
+								opacity .4s ease-in-out;
+		visibility: hidden;
+	}
+	ul {
+		padding: 0;
+		list-style: none;
+		margin: 0;
+		a {
+			display: block;
+			padding: .5em 0;
+		}
+	}
 `
 
 const NavLink = styled(Link)`
@@ -151,6 +237,7 @@ const NavLinks = styled.div`
 	align-items: center;
 	display: flex;
 	width: 100%;
+	${ util.responsiveStyles('column-gap', 40, 32, 20, 12) }
 	justify-content: ${ ({ alignment }) => alignment === 'right' ? 'flex-end' : 'flex-start' };
 	&:last-child {
 		margin-right: 0;
@@ -175,10 +262,7 @@ const DrawerNavLinks = styled(NavLinks)`
 	height: 100%;
   justify-content: center;
 	${util.responsiveStyles('padding-bottom', 60, 50, 46, 24)}
-
-  a {
-		${ util.responsiveStyles('margin-bottom', 40, 32, 20, 12) }
-  }
+	${ util.responsiveStyles('row-gap', 40, 32, 20, 12) }
 `
 
 const HeaderPlaceholder = styled.div`
@@ -197,6 +281,7 @@ const MenuButton = styled(Button)`
 	width: auto;
 	white-space: nowrap;
 	height: 25px;
+	margin-right: -14px;
 `
 
 const Header = ({
@@ -205,7 +290,8 @@ const Header = ({
 	placeholder,
 	homepage,
 	headerContext,
-	checkoutContext
+	checkoutContext,
+	shopifyContext
 }) => {
 
 	let pathname = '/'
@@ -218,6 +304,30 @@ const Header = ({
 	const { cartOpen, toggleCart, getLineItems } = checkoutContext
 
 	const lineItems = getLineItems()
+
+	const collections = shopifyContext?.shopifyCollections || []
+
+	console.log(collections)
+
+	let dropdownCollections = collections.filter(collection => collection?.products?.length > 0)
+
+	dropdownCollections.forEach(collection => {
+		console.log('collection')
+		const collectionMetafields = {}
+		collection.metafields.forEach(metafield => {
+			console.log('metafield',metafield)
+			if (metafield?.key) {
+				console.log(metafield.key)
+				collectionMetafields[metafield?.key] = metafield.value
+			}
+		})
+
+		collection.data = collectionMetafields
+	})
+
+	dropdownCollections = dropdownCollections.filter(collection => collection?.data?.show_in_shop_menu === 'true')
+
+	console.log(dropdownCollections)
 
 	return (
 		<Fragment>
@@ -233,7 +343,7 @@ const Header = ({
 								<HeaderContent
 									small="1 [6] [6] 1"
 									medium="10 [8] [9] 1"
-									large="1 [9] [8] [9] 1"
+									large="1 [11] [4] [11] 1"
 									vAlign="center"
 								>
 
@@ -260,15 +370,38 @@ const Header = ({
 													>
 														Textiles
 													</NavLink>
-													<NavLink
-														type="capsLink"
-														scrolled={scrolled}
-														hasAtf={hasAtf}
-														to="/shop"
-														active={pathname === '/shop'}
-													>
-														Shop
-													</NavLink>
+													{dropdownCollections.length > 0 ? (
+														<NavLink
+															type="capsLink"
+															scrolled={scrolled}
+															hasAtf={hasAtf}
+															onClick={() => {}}
+														>
+															<div className="label">Shop <MdKeyboardArrowDown size={18}/></div>
+															<Sublinks className='sublinks'>
+																{dropdownCollections.map(dropdownLink => {
+																	console.log(dropdownLink)
+																	return (
+																		<li>
+																			<NavLink type="capsLink" to={'/collections/' + dropdownLink.handle}>
+																				{dropdownLink.title}
+																			</NavLink>
+																		</li>
+																	)
+																})}
+															</Sublinks>
+														</NavLink>
+													) : (
+														<NavLink
+															type="capsLink"
+															scrolled={scrolled}
+															hasAtf={hasAtf}
+															to="/shop"
+															active={pathname === '/shop'}
+														>
+															Shop
+														</NavLink>
+													)}
 												</NavLinks>
 											</div>
 										}
@@ -384,15 +517,42 @@ const Header = ({
 						>
 							Textiles
 						</NavLink>
-						<NavLink
-							type="capsLink"
-
-							hasAtf={hasAtf}
-							to="/shop"
-							active={pathname === '/shop'}
-						>
-							Shop
-						</NavLink>
+						{dropdownCollections.length > 0 ? (
+							<NavLink
+								type="capsLink"
+								hasAtf={hasAtf}
+								onClick={() => {}}
+							>
+								<div className="label">
+									Shop <MdKeyboardArrowDown size={18}/>
+								</div>
+								<MobileSublinks className='mobile-sublinks'>
+									<div>
+										<ul>
+											{dropdownCollections.map(dropdownLink => {
+												console.log(dropdownLink)
+												return (
+													<li>
+														<NavLink type="capsLink" to={'/collections/' + dropdownLink.handle}>
+															{dropdownLink.title}
+														</NavLink>
+													</li>
+												)
+											})}
+										</ul>
+									</div>
+								</MobileSublinks>
+							</NavLink>
+						) : (
+							<NavLink
+								type="capsLink"
+								hasAtf={hasAtf}
+								to="/shop"
+								active={pathname === '/shop'}
+							>
+								Shop
+							</NavLink>
+						)}
 						<NavLink
 							type="capsLink"
 							hasAtf={hasAtf}
@@ -448,4 +608,4 @@ Header.defaultProps = {
 	placeholder: true
 }
 
-export default withCheckoutContext(withHeaderContext(withRouter(Header)))
+export default withCheckoutContext(withHeaderContext(withRouter(withShopifyContext(Header))))

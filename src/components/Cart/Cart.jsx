@@ -106,12 +106,11 @@ const GridFullHeight = styled(Grid)`
 
 const CloseButton = styled(Button)`
 	cursor: pointer;
-	${util.responsiveStyles('padding-top', 27, 17, 15, 15)}
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
 	min-width: unset;
-	${util.responsiveStyles('margin-right', -17, -15, -12, -12)}
+	margin-right: -15px;
 	.icon {
 		margin-left: 0;
 		margin: auto;

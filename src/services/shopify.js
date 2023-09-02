@@ -9,7 +9,6 @@ export const shopifyClient = Client.buildClient({
 })
 
 export const MetafieldFragment = (metafield) => {
-  console.log(metafield)
   metafield.add('id')
   metafield.add('namespace')
   metafield.add('key')
@@ -34,6 +33,11 @@ export const CollectionFragment = (collection) => {
 	collection.add('title')
   collection.add('image', ImageFrament)
   collection.addConnection('products', {args: {first: 50}}, ProductFragment)
+  collection.add('metafields', {
+    args: {identifiers: [
+      { namespace: 'navigation', key: 'show_in_shop_menu' }
+    ]}
+  }, MetafieldFragment)
 }
 
 export const ProductVariantFragment = (variant) => {
