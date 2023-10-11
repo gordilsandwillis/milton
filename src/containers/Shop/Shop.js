@@ -10,8 +10,8 @@ import Furnishings from 'components/Furnishings'
 
 const Shop = ({ shopifyContext }) => {
 
-	const { shopifyProducts } = shopifyContext
-	const furnitureProducts = shopifyProducts.filter(({ productType }) => productType === 'Furniture')
+	const { shopifyCollections } = shopifyContext
+	const allProducts = shopifyCollections.filter(collection => collection.title === 'Shop')[0].products
 
   return (
     <div>
@@ -28,7 +28,7 @@ const Shop = ({ shopifyContext }) => {
 				headline="Shop"
 				headlineSize="h2"
 			/>
-			<Furnishings products={furnitureProducts} hideTitle={true} />
+			<Furnishings products={allProducts} hideTitle={true} />
     </div>
   )
 }
