@@ -165,6 +165,18 @@ const VideoStyled = styled(Video)`
 	}
 `
 
+const GradientOverlay = styled.div`
+	background: linear-gradient(180deg, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
+	opacity: .4;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 60px;
+	height: 20%;
+`
+
 const Mask = styled.div`
 
 	${ ({ mask }) => (mask === "true" && `
@@ -229,7 +241,8 @@ class ATF extends Component {
 			mask,
 			children,
 			additions,
-			className
+			className,
+			isFirstSection
 		} = this.props
 
 
@@ -257,6 +270,7 @@ class ATF extends Component {
 
 		return (
 			<Wrapper setTheme={theme} media={image || video} fullHeight={fullHeight} showArrow={showArrow} className={className}>
+				{isFirstSection && <GradientOverlay/>}
 				<Block background winHeight={windowHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>

@@ -307,17 +307,12 @@ const Header = ({
 
 	const collections = shopifyContext?.shopifyCollections || []
 
-	console.log(collections)
-
 	let dropdownCollections = collections.filter(collection => collection?.products?.length > 0)
 
 	dropdownCollections.forEach(collection => {
-		console.log('collection')
 		const collectionMetafields = {}
 		collection.metafields.forEach(metafield => {
-			console.log('metafield',metafield)
 			if (metafield?.key) {
-				console.log(metafield.key)
 				collectionMetafields[metafield?.key] = metafield.value
 			}
 		})
@@ -327,7 +322,6 @@ const Header = ({
 
 	dropdownCollections = dropdownCollections.filter(collection => collection?.data?.show_in_shop_menu === 'true')
 
-	console.log(dropdownCollections)
 
 	return (
 		<Fragment>

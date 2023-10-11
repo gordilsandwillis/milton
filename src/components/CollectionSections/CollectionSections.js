@@ -19,9 +19,22 @@ import LayerHopper from 'assets/images/collage/Hopper/painting/layer-1.png'
 import LayerHopper2 from 'assets/images/collage/Hopper/painting/layer-2.png'
 import LayerHopper3 from 'assets/images/collage/Hopper/painting/layer-3.png'
 
+import LayerRavenna from 'assets/images/collage/Ravenna/layer-1.png'
+import LayerRavenna2 from 'assets/images/collage/Ravenna/layer-2.png'
+import LayerRavenna3 from 'assets/images/collage/Ravenna/layer-3.png'
+
 import { withShopifyContext } from 'contexts/ShopifyContext'
 
 const Images = {
+	Ravenna: {
+		published: false,
+		title: 'Ravenna',
+		description: 'Desc',
+		link: '/product/ravenna/Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC80MDI1NTk2ODc3MjE3NA==',
+		layer1: { src: LayerRavenna, width: 617, height: 674 },
+		layer2: { src: LayerRavenna2, width: 617, height: 674 },
+		layer3: { src: LayerRavenna3, width: 617, height: 674 },
+	},
 	Hopper: {
 		layer1: { src: LayerHopper, width: 617, height: 674 },
 		layer2: { src: LayerHopper2, width: 617, height: 674 },
@@ -46,6 +59,9 @@ const Images = {
 }
 
 const collectionsConfig = {
+	Ravenna: {
+		published: true,
+	},
 	Matisse: {
 		published: true,
 	},
@@ -75,39 +91,69 @@ class CollectionSections extends Component {
 			return false
 		}
 
-		console.log(collections)
-
-		return collections
-			.filter(collection => collectionsConfig[collection.title]?.published)
-			.reverse()
-			.map((collection, index) => {
-			if (Images[collection.title]) {
-				return (
+		return (
+			<>
+				{Images['Ravenna'].published && (
 					<FiftyFifty
-						key={collection.id}
-						prevTheme="bgColor"
-						nextTheme={furnitureProducts ? "bgColor" : "white"}
+						prevTheme={false}
+						nextTheme={"bgColor"}
 						theme="bgColor"
-						eyebrow="Collection"
-						headline={collection.title}
+						eyebrow="New Fabric"
+						headline={Images['Ravenna'].title}
 						headlineSize="h2"
 						alignment="center"
-						text={collection.descriptionHtml}
-						buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/' + collection.handle }]}
+						text={Images['Ravenna'].description}
+						buttons={[{ linkType: 'button', label: 'Shop Now', to: Images['Ravenna'].link }]}
 						imageContent={
-							<Link label={collection.title} to={'/collections/' + collection.handle}>
+							<Link label={Images['Ravenna'].title} to={Images['Ravenna'].link}>
 								<StackedImages images={[
-									Images[collection.title].layer1,
-									Images[collection.title].layer2,
-									Images[collection.title].layer3
+									Images['Ravenna'].layer1,
+									Images['Ravenna'].layer2,
+									Images['Ravenna'].layer3
 								]}/>
 						</Link>}
-						imagePosition={index % 2 ? 'left' : 'right'}
+						imagePosition={'right'}
 					/>
-				)
-			}
-			return null;
-		})
+				)}
+				{collections
+					.filter(collection => collectionsConfig[collection.title]?.published)
+					.reverse()
+					.map((collection, index) => {
+						console.log(collection)
+					if (Images[collection.title]) {
+						const hasFirstItem = Images['Ravenna'].published
+						let chooseSide = index % 2 ? 'left' : 'right'
+						if (hasFirstItem) {
+							chooseSide = index % 2 ? 'right' : 'left'
+						}
+						return (
+							<FiftyFifty
+								key={collection.id}
+								prevTheme="bgColor"
+								nextTheme={furnitureProducts ? "bgColor" : "white"}
+								theme="bgColor"
+								eyebrow="Collection"
+								headline={collection.title}
+								headlineSize="h2"
+								alignment="center"
+								text={collection.descriptionHtml}
+								buttons={[{ linkType: 'button', label: 'Explore Collection', to: '/collections/' + collection.handle }]}
+								imageContent={
+									<Link label={collection.title} to={'/collections/' + collection.handle}>
+										<StackedImages images={[
+											Images[collection.title].layer1,
+											Images[collection.title].layer2,
+											Images[collection.title].layer3
+										]}/>
+								</Link>}
+								imagePosition={chooseSide}
+							/>
+						)
+					}
+					return null;
+				})}
+			</>
+		)
 
 	}
 }

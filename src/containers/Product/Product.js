@@ -350,9 +350,13 @@ class Product extends Component {
 								<div>
 									<ProductInfo
 										eyebrow={
-											currentProduct?.title + " • " + currentCollection?.title
+											currentVariant?.title !== 'Default Title' ? (
+												currentProduct?.title
+											) : (
+												currentCollection?.title
+											)
 										}
-										headline={currentVariant?.title}
+										headline={currentVariant?.title !== 'Default Title' ? currentVariant?.title : currentProduct?.title}
 										headlineSize="h4"
 										text={currentProduct.descriptionHtml}
 										textSize="body"

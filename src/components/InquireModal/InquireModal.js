@@ -107,8 +107,9 @@ class InquireModal extends Component {
 	render() {
 		const { modalContext } = this.props
 		const { modalIsOpen, closeModal, modalData } = modalContext
-		const { title, buttonLabel } = modalData
-		const { currentProduct, currentVariant, currentCollection } = modalData
+		const { title, buttonLabel, currentProduct, currentVariant, currentCollection } = modalData
+
+		console.log(modalContext)
 
 		let buttonText = buttonLabel
 
@@ -129,9 +130,13 @@ class InquireModal extends Component {
 						</Image>
 					)}
 					<InnerWrapper>
-						{currentCollection && (
-							<ModalEyebrow>{`${currentCollection && currentCollection.title} • ${currentVariant && currentVariant.title}`}</ModalEyebrow>
-						)}
+						<>
+							{currentVariant?.title !== 'Default Title' ? (
+								<ModalEyebrow>{currentVariant?.title} • {currentProduct?.title}</ModalEyebrow>
+							) : (
+								<ModalEyebrow>{currentProduct?.title}</ModalEyebrow>
+							)}
+						</>
 						<ModalHeader>{title || 'Inquire'}</ModalHeader>
 							<ContactForm
 								buttonLabel={buttonText}

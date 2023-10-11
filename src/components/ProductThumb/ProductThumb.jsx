@@ -16,7 +16,6 @@ const ProductTitle = styled.p`
 
 const ProductPattern = styled.h6`
 	${ typography.smallCaps }
-	${ util.responsiveStyles('margin-top', 30, 20, 16, 16) }
 	margin-bottom: 4px;
 `
 
@@ -39,6 +38,7 @@ const ThumbnailHoverWrap = styled.div`
 
 const ThumbnailImageWrapper = styled.div`
 	position: relative;
+	${ util.responsiveStyles('margin-bottom', 24, 20, 16, 16) }
 	&:hover {
 		.hover-image {
 			opacity: 1;
@@ -84,8 +84,14 @@ const ProductThumb = ({ product, variant, className }) => {
 				)}
 			</ThumbnailImageWrapper>
 
-			<ProductPattern as="span">{product.title}</ProductPattern>
-			<ProductTitle>{variant.title}</ProductTitle>
+			{variant.title !== 'Default Title' ? (
+				<>
+					<ProductPattern as="span">{product.title}</ProductPattern>
+					<ProductTitle>{variant.title}</ProductTitle>
+				</>
+			) : (
+				<ProductTitle>{product.title}</ProductTitle>
+			)}
 		</Wrapper>
 	)
 }

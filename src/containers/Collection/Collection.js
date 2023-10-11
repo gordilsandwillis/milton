@@ -109,6 +109,7 @@ class Collection extends Component {
 					<div>
 						<ATF
 							index={0}
+							isFirstSection={true}
 							image={{
 								fluid: {
 									aspectRatio: 2,

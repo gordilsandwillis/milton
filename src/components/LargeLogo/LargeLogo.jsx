@@ -120,8 +120,6 @@ const FixedLogo = styled.div`
 const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
 
 	const [scroll, setScroll] = useState(0)
-	console.log(headerContext)
-	console.log(CSS_VARS, STYLE)
 	const toggleHeader = headerContext.toggleHeader
 
 	const headerInvertLevel = .95
@@ -154,14 +152,12 @@ const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
 							// }
 						} else {
 							// if (headerContext.collapsed) {
-								console.log('less')
 								toggleHeader(false)
 							// }
 						}
-						console.log("onProgress", progress, page, index);
 					}}
 					onEnd={() => {
-						console.log("onEnd");
+						// console.log("onEnd");
 					}}
 				>
 					<LogoWrapper scroll={scrollValue}>
