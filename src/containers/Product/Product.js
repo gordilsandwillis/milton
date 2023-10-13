@@ -33,7 +33,6 @@ const InquireButton = styled(Button)`
 `;
 
 const BuyButton = styled(Button)`
-	${util.responsiveStyles("margin-left", 32, 26, 24, 24)}
 	${ mq.mediumAndBelow } {
 		min-width: auto;
 	}
@@ -41,6 +40,7 @@ const BuyButton = styled(Button)`
 
 const Actions = styled.div`
 	display: flex;
+	${util.responsiveStyles("column-gap", 20, 20, 18, 16)}
 	${ mq.largeAndBelow } {
 		justify-content: center;
 		align-items: center;
@@ -208,9 +208,13 @@ class Product extends Component {
 			products.some((product) => product.id === currentProduct.id)
 		);
 
-		let variantImages = currentProduct.images.filter((i) =>
-			currentVariant.title.includes(i.altText)
-		);
+		let variantImages = currentProduct.images.filter((i) => {
+			if (currentProduct.variants.length > 1) {
+				return currentVariant.title.includes(i.altText)
+			} else {
+				return currentProduct.images
+			}
+		});
 
 		let collectionProducts = false
 		let moreProducts = false
@@ -227,10 +231,15 @@ class Product extends Component {
 		}
 
 		let productSpecifications = false
+		let productSettings = false
+		
 		console.log(currentProduct)
 		if (currentProduct?.metafields) {
 			productSpecifications = currentProduct?.metafields?.filter(
 				(field) => field?.namespace === "specifications"
+			);
+			productSettings = currentProduct?.metafields?.filter(
+				(field) => field?.namespace === "settings"
 			);
 		}
 
@@ -246,6 +255,7 @@ class Product extends Component {
 			variantImages,
 			moreProducts,
 			productSpecifications,
+			productSettings
 		});
 
 		if (process.env.NODE_ENV === "production") {
@@ -264,6 +274,7 @@ class Product extends Component {
 			variantImages,
 			moreProducts,
 			productSpecifications,
+			productSettings
 		} = this.state;
 
 		if (loading) {
@@ -274,6 +285,12 @@ class Product extends Component {
 			style: 'currency',
 			currency: 'USD'
 		})
+
+		let purchasableField = productSettings?.filter(setting => setting.key === 'purchasable')
+		let purchasable = false
+		if (purchasableField && purchasableField.length > 0) {
+			purchasable = purchasableField[0].value === 'true'
+		}
 
 		return (
 			<Fragment>
@@ -383,12 +400,22 @@ class Product extends Component {
 										)}
 										{currentProduct.availableForSale ? (
 											<Actions>
-												<InquireButton
-													onClick={this.handleInquireClick}
-													size="large"
-												>
-													Inquire
-												</InquireButton>
+												{purchasable ? (
+													<BuyButton
+														size="large"
+														onClick={() => addLineItem({variantId : currentVariant.id})}
+													>
+														<span>Add to Cart</span>
+														<Price>• {USDollar.format(currentVariant?.price?.amount)}</Price>
+													</BuyButton>
+												) : (
+													<InquireButton
+														onClick={this.handleInquireClick}
+														size="large"
+													>
+														Inquire
+													</InquireButton>
+												)}
 
 												{currentProduct.productType === 'Textiles' && (
 													<BuyButton
@@ -397,9 +424,9 @@ class Product extends Component {
 														onClick={() => addLineItem({variantId : currentVariant.id})}
 													>
 														<span>Buy Memo</span>
-														<Price>- {USDollar.format(currentVariant?.price?.amount)}</Price>
+														<Price>• {USDollar.format(currentVariant?.price?.amount)}</Price>
 													</BuyButton>
-													)}
+												)}
 											</Actions>
 										) : (
 											<SoldButton disabled={true} size="large">

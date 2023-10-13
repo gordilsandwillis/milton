@@ -10,7 +10,7 @@ import { typography, colors, util } from 'styles'
 
 const Wrapper = styled.div`
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	margin: 14px 0;
 `
 
@@ -39,7 +39,10 @@ const InfoCol = styled.div`
 
 const InfoWrapper = styled.div`
 	flex-grow: 1;
-
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 `
 
 const Title = styled.div`
@@ -62,6 +65,7 @@ const Price = styled.span`
 const QtyInput = styled.div`
 	display: flex;
 	align-items: center;
+	margin-left: -.6em;
 	> div {
 		width: 2.25em;
 		${typography.smallCaps}
@@ -73,7 +77,7 @@ const QtyInput = styled.div`
 const ItemActions = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
 	padding-top: 6px;
 	margin-top: -1em;
 `
@@ -116,7 +120,9 @@ const LineItem = ({
 					<Title>
 						<div>
 						<h6>{title}</h6>
-						<SubTitle>{variantTitle}</SubTitle>
+						{variantTitle !== 'Default Title' && (
+							<SubTitle>{variantTitle}</SubTitle>
+						)}
 						</div>
 						<Price>{priceString}</Price>
 					</Title>
