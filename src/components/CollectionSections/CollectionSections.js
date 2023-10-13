@@ -27,9 +27,9 @@ import { withShopifyContext } from 'contexts/ShopifyContext'
 
 const Images = {
 	Ravenna: {
-		published: false,
+		published: true,
 		title: 'Ravenna',
-		description: 'Desc',
+		description: 'Ravenna is our first print fabric; a vibrant and luscious floral that will transport you to the whimsical design of 1940’s Italy, with a touch of glamour from the Hollywood Regency era all wrapped up with a punch.',
 		link: '/product/ravenna/Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC80MDI1NTk2ODc3MjE3NA==',
 		layer1: { src: LayerRavenna, width: 617, height: 674 },
 		layer2: { src: LayerRavenna2, width: 617, height: 674 },
