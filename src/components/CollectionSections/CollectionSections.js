@@ -103,7 +103,7 @@ class CollectionSections extends Component {
 						headlineSize="h2"
 						alignment="center"
 						text={Images['Ravenna'].description}
-						buttons={[{ linkType: 'button', label: 'Shop Now', to: Images['Ravenna'].link }]}
+						buttons={[{ linkType: 'button', label: 'Explore', to: Images['Ravenna'].link }]}
 						imageContent={
 							<Link label={Images['Ravenna'].title} to={Images['Ravenna'].link}>
 								<StackedImages images={[
