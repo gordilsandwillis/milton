@@ -1,12 +1,10 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import Logo from 'components/Logo'
-import Stickyroll from '@stickyroll/react/stickyroll'
-import { CSS_VARS, STYLE } from '@stickyroll/react/constants'
+import { ScrollPercentage } from 'react-scroll-percentage/dist'
 import withSizes from 'react-sizes'
 import { withHeaderContext } from 'contexts/HeaderContext'
 import { animations, colors, mq } from 'styles'
-import { set } from 'utils/local-storage'
 
 const Scroller = styled.div`
 	position: absolute;
@@ -19,36 +17,29 @@ const Scroller = styled.div`
 `
 
 const Wrapper = styled.div`
-	--scrollValue: ${ ({ scroll }) => scroll };
 	pointer-events: none;
-	position: absolute;
+	position: sticky;
 	bottom: 0;
-	z-index: 6;
+	z-index: 5;
 	height: 0;
-	width: 100%;
-	height: 100%;
-	top: 0;
-`
-
-const LogoWrapper = styled.div`
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
-	height: var(--100vh, 100vh);
-	padding: 20px 0;
-	will-change: transform;
-	transform: translate3d(0, calc((-100% + ${ 31 + 20 }px + 20px + 2.6vw) * (1 - var(--scrollValue))), 0);
+	top: calc(${ 35 + 20 }px + 2.2vw);
+	// transform-style: preserve-3d;
 	${ mq.extraLargeAndBelow } {
-		padding: 20px 0;
+		top: calc(${ 31 + 20 }px + 2.6vw);
 	}
 	${ mq.largerAndBelow } {
-		padding: 18px 0;
-		// transform: translate3d(0, calc((-100% + ${ 31 + 18 }px + 18px + 3.2vw) * (1 - var(--scrollValue))), 0);
+		top: calc(${ 26 + 18 }px + 3.2vw);
 	}
 	${ mq.mediumAndBelow } {
-		padding: 18px 0;
-		// transform: translate3d(0, calc((-100% + ${ 31 + 18 }px + 18px + 6vw) * (1 - var(--scrollValue))), 0);
+		top: calc(${ 22 + 20 }px + 6vw);
 	}
+	width: 100%;
+	text-align: center;
+	will-change: transform;
+	height: 0;
 `
 
 const StyledLogo = styled(Logo)`
@@ -57,11 +48,6 @@ const StyledLogo = styled(Logo)`
 	transform-origin: center bottom;
 	width: 160px;
 	margin-bottom: 2.2vw;
-	display: block;
-	will-change: transform;
-	${ ({ hidden }) => hidden ? `
-		opacity: 0;
-	` : `` }
 	${ mq.extraLargeAndBelow } {
 		width: 140px;
 		margin-bottom: 2.6vw;
@@ -78,7 +64,7 @@ const StyledLogo = styled(Logo)`
 		display: inline-block;
 		vertical-align: top;
 		transition: color ${ animations.mediumSpeed } ease-in-out;
-		color: ${ ({ scroll }) => scroll > 0 ? colors.bgColor : colors.textColor };
+		color: ${ ({ scroll }) => scroll >= .1 ? colors.bgColor : colors.textColor };
 		transform-origin: center bottom;
 		transform: scale(${ ({ scroll, winWidth }) => ((winWidth * .95)/160) * scroll >= 1 ? ((winWidth * .95)/160) * scroll : 1 });
 		${ mq.extraLargeAndBelow } {
@@ -93,108 +79,30 @@ const StyledLogo = styled(Logo)`
 	}
 `
 
-const FixedLogo = styled.div`
-	padding: 20px 0;
-	${ mq.extraLargeAndBelow } {
-		padding: 20px 0;
-	}
-	${ mq.largerAndBelow } {
-		padding: 18px 0;
-	}
-	${ mq.mediumAndBelow } {
-		padding: 18px 0;
-	}
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 10;
-	display: flex;
-	justify-content: center;
-	pointer-events: none;
-	> div {
-		margin: 0;
-	}
-`
-
 const LargeLogo = ({ className, winWidth, winHeight, headerContext }) => {
-
-	const [scroll, setScroll] = useState(0)
 	const toggleHeader = headerContext.toggleHeader
 
-	const headerInvertLevel = .95
-
-	const scrollValue = headerInvertLevel - scroll >= 1 ? 1 : headerInvertLevel - scroll
-
 	return (
-		<>
-			<FixedLogo>
-				<StyledLogo
-					winWidth={winWidth}
-					scroll={.9 - 1}
-					hidden={scroll <= headerInvertLevel}
-				/>
-			</FixedLogo>
-			<Wrapper scroll={scrollValue}>
-				<Stickyroll
-					pages={1}
-					onStart={() => {
-						console.log("onStart");
-					}}
-					onPage={(page, index) => {
-						console.log("onPage", page, index);
-					}}
-					onProgress={(progress, page, index) => {
-						setScroll(progress)
-						if (progress > headerInvertLevel) {
-							// if (!headerContext.collapsed) {
-								toggleHeader(true)
-							// }
-						} else {
-							// if (headerContext.collapsed) {
-								toggleHeader(false)
-							// }
-						}
-					}}
-					onEnd={() => {
-						// console.log("onEnd");
-					}}
-				>
-					<LogoWrapper scroll={scrollValue}>
+		<ScrollPercentage threshold={1} onChange={ (percentage) => {
+			if (percentage > .9) {
+				toggleHeader(true)
+			} else {
+				toggleHeader(false)
+			}
+		} }>
+			{({ percentage, ref, entry }) => (
+				<Fragment>
+					<Scroller ref={ref}/>
+					<Wrapper>
 						<StyledLogo
 							winWidth={winWidth}
-							scroll={scrollValue}
-							hidden={scroll > headerInvertLevel}
+							scroll={1 - percentage}
 						/>
-					</LogoWrapper>
-				</Stickyroll>
-			</Wrapper>
-		</>
+					</Wrapper>
+				</Fragment>
+			)}
+		</ScrollPercentage>
 	)
-	
-	// return (
-	// 	<Fragment>
-	// 		<Scroller />
-	// 		<Wrapper>
-	// 			<StyledLogo
-	// 				winWidth={winWidth}
-	// 			/>
-	// 		</Wrapper>
-	// 	</Fragment>
-	// )
-
-	// return (
-	// 	<ScrollPercentage threshold={1} onChange={ (percentage) => {
-	// 		if (percentage > .9) {
-	// 			toggleHeader(true)
-	// 		} else {
-	// 			toggleHeader(false)
-	// 		}
-	// 	} }>
-	// 		{({ percentage, ref, entry }) => (
-	// 		)}
-	// 	</ScrollPercentage>
-	// )
 }
 
 const sizesToProps = ({ width, height }) => ({

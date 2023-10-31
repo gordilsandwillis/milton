@@ -44,7 +44,6 @@ class Home extends Component {
 			<Fragment>
 				<SEO title="Home" />
 				<div>
-					<LargeLogo />
 					<Header
 						hasAtf={true}
 						homepage={true}
@@ -65,6 +64,7 @@ class Home extends Component {
 						overlay="0"
 						additions={<BottomOverlay />}
 					/>
+					<LargeLogo />
 					<CalloutText
 						prevTheme={false}
 						nextTheme="bgColor"
