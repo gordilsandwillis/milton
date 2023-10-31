@@ -193,7 +193,6 @@ class Product extends Component {
 
 		const productHandle = match.params.product;
 		const variantId = match.params.variant;
-		console.log(variantId)
 		const currentProduct = products.find(
 			(product) => product.handle === productHandle
 		);
@@ -233,7 +232,6 @@ class Product extends Component {
 		let productSpecifications = false
 		let productSettings = false
 		
-		console.log(currentProduct)
 		if (currentProduct?.metafields) {
 			productSpecifications = currentProduct?.metafields?.filter(
 				(field) => field?.namespace === "specifications"

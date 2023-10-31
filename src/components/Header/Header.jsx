@@ -374,7 +374,6 @@ const Header = ({
 															<div className="label">Shop <MdKeyboardArrowDown size={18}/></div>
 															<Sublinks className='sublinks'>
 																{dropdownCollections.map(dropdownLink => {
-																	console.log(dropdownLink)
 																	return (
 																		<li>
 																			<NavLink type="capsLink" to={'/collections/' + dropdownLink.handle}>
@@ -524,7 +523,6 @@ const Header = ({
 									<div>
 										<ul>
 											{dropdownCollections.map(dropdownLink => {
-												console.log(dropdownLink)
 												return (
 													<li>
 														<NavLink type="capsLink" to={'/collections/' + dropdownLink.handle}>

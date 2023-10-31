@@ -109,8 +109,6 @@ class InquireModal extends Component {
 		const { modalIsOpen, closeModal, modalData } = modalContext
 		const { title, buttonLabel, currentProduct, currentVariant, currentCollection } = modalData
 
-		console.log(modalContext)
-
 		let buttonText = buttonLabel
 
 		return (

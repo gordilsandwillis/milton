@@ -6,8 +6,6 @@ import * as util from './util'
 import * as globals from './globals'
 import * as gridSettings from './gridSettings'
 
-console.log(colors);
-
 export {
 	colors,
 	typography,
