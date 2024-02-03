@@ -119,7 +119,6 @@ class CollectionSections extends Component {
 					.filter(collection => collectionsConfig[collection.title]?.published)
 					.reverse()
 					.map((collection, index) => {
-						console.log(collection)
 					if (Images[collection.title]) {
 						const hasFirstItem = Images['Ravenna'].published
 						let chooseSide = index % 2 ? 'left' : 'right'

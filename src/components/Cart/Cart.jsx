@@ -172,7 +172,9 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 	const currencyCode = checkout?.subtotalPriceV2?.currencyCode
 	const subtotal = currencyCode && currencyCode === 'USD' ? `${USDollar.format(subtotalPrice)}` : `${subtotalPrice} ${currencyCode}`
 
-	const checkoutDisabled = loading || !ready || !checkoutUrl || !(lineItems?.length > 0)
+	// const checkoutDisabled = loading || !ready || !checkoutUrl || !(lineItems?.length > 0)
+	const checkoutDisabled = loading || !checkoutUrl || !(lineItems?.length > 0)
+
 	return (
 		<ShadedWrapper isOpen={cartOpen}>
 			<Overlay onClick={() => toggleCart(false)} isOpen={cartOpen} />
