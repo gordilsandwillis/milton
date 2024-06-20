@@ -5,7 +5,7 @@ import Client from 'shopify-buy/index.unoptimized.umd';
 export const shopifyClient = Client.buildClient({
   storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
   domain: 'milton-textiles.myshopify.com',
-  apiVersion: '2023-07'
+  apiVersion: '2023-10'
 })
 
 export const MetafieldFragment = (metafield) => {
