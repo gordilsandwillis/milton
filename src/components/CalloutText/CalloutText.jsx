@@ -14,6 +14,7 @@ const CalloutText = ({
 	prevTheme,
 	nextTheme,
 	headlineSize,
+	headlineElement = 'h3',
 	eyebrow,
 	headline,
 	text,
@@ -36,6 +37,7 @@ const CalloutText = ({
 						eyebrow={eyebrow}
 						headline={headline}
 						headlineSize={headlineSize}
+						headlineElement={headlineElement}
 						text={text}
 						icon={icon}
 						buttons={buttons}
