@@ -71,16 +71,12 @@ const showrooms = [
 		]
 	},
 	{
-		title: 'Evars Collective',
-		address: '1600 El Camino Real',
-		address2: 'Suite B',
-		city: 'San Carlos',
-		state: 'CA',
-		zip: '94070',
+		title: 'Owen Design Lines',
+		text: 'Territory: VA, DC, MD',
+		address: 'Washington, DC',
 		links: [
-			{ text: 'concierge@evarscollective.com', to: 'mailto:concierge@evarscollective.com' },
-			{ text: 'www.evarscollective.com', to: 'https://www.evarscollective.com', external: true, target: '_blank' },
-			{ text: '650.585.2330', to: 'tel:16505852330' }
+			{ text: 'owendesignlines@gmail.com', to: 'mailto:owendesignlines@gmail.com' },
+			{ text: 'www.owendesignlines.com', to: 'https://www.owendesignlines.com', external: true, target: '_blank' }
 		]
 	},
 	{
