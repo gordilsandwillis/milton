@@ -79,20 +79,20 @@ const showrooms = [
 			{ text: 'www.owendesignlines.com', to: 'https://www.owendesignlines.com', external: true, target: '_blank' }
 		]
 	},
-	{
-		title: 'Kilkenny Collections',
-		text: 'Pennsylvania, Delaware, and South New Jersey',
-		address: '24 Louella Court',
-		address2: 'Suite 240',
-		city: 'Wayne',
-		state: 'PA',
-		zip: '19087',
-		links: [
-			{ text: 'kristen@kilkennycollections.com', to: 'mailto:kristen@kilkennycollections.com' },
-			{ text: 'www.kilkennycollections.com', to: 'https://www.kilkennycollections.com', external: true, target: '_blank' },
-			{ text: '484.581.7946', to: 'tel:14845817946' }
-		]
-	},
+	// {
+	// 	title: 'Kilkenny Collections',
+	// 	text: 'Pennsylvania, Delaware, and South New Jersey',
+	// 	address: '24 Louella Court',
+	// 	address2: 'Suite 240',
+	// 	city: 'Wayne',
+	// 	state: 'PA',
+	// 	zip: '19087',
+	// 	links: [
+	// 		{ text: 'kristen@kilkennycollections.com', to: 'mailto:kristen@kilkennycollections.com' },
+	// 		{ text: 'www.kilkennycollections.com', to: 'https://www.kilkennycollections.com', external: true, target: '_blank' },
+	// 		{ text: '484.581.7946', to: 'tel:14845817946' }
+	// 	]
+	// },
 	{
 		eyebrow: 'Available at:',
 		title: 'Chairloom',

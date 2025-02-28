@@ -17,7 +17,7 @@ import ReniNextCollectionImage from 'assets/images/reni-stage.jpg'
 
 import HopperNextCollectionImage from 'assets/images/hopper-stage.jpg'
 import RousseauNextCollectionImage from 'assets/images/rousseau-stage.jpg'
-
+import KeesNextCollectionImage from 'assets/images/kees-close-up.jpg'
 
 import ThumbnailReni from 'assets/images/collage/Reni/reni-layer-1.png'
 import ThumbnailReni2 from 'assets/images/collage/Reni/reni-layer-2.png'
@@ -35,9 +35,18 @@ import LayerHopper from 'assets/images/collage/Hopper/hopper-layer-1.png'
 import LayerHopper2 from 'assets/images/collage/Hopper/hopper-layer-2.png'
 import LayerHopper3 from 'assets/images/collage/Hopper/hopper-layer-3.png'
 
-
+import LayerKees from 'assets/images/collage/Kees/layer-1.png'
+import LayerKees2 from 'assets/images/collage/Kees/layer-2.png'
+import LayerKees3 from 'assets/images/collage/Kees/layer-3.png'
 
 const Images = {
+	Kees: {
+		layer1: { src: LayerKees, width: 720, height: 619 },
+		layer2: { src: LayerKees2, width: 720, height: 619 },
+		layer3: { src: LayerKees3, width: 720, height: 619 },
+		nextCollectionImage: KeesNextCollectionImage,
+		nextCollectionMask: false,
+	},
 	Reni: {
 		layer1: { src: ThumbnailReni, width: 720, height: 619 },
 		layer2: { src: ThumbnailReni2, width: 720, height: 619 },
