@@ -41,9 +41,9 @@ import LayerKees3 from 'assets/images/collage/Kees/layer-3.png'
 
 const Images = {
 	Kees: {
-		layer1: { src: LayerKees, width: 720, height: 619 },
-		layer2: { src: LayerKees2, width: 720, height: 619 },
-		layer3: { src: LayerKees3, width: 720, height: 619 },
+		layer1: { src: LayerKees, width: 1200, height: 1200 },
+		layer2: { src: LayerKees3, width: 1200, height: 1200 },
+		layer3: { src: LayerKees2, width: 1200, height: 1200 },
 		nextCollectionImage: KeesNextCollectionImage,
 		nextCollectionMask: false,
 	},
