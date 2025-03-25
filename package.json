@@ -10,6 +10,7 @@
     "@contentful/rich-text-types": "^13.4.0",
     "@emotion/core": "^10.3.1",
     "@emotion/styled": "^10.3.0",
+    "@shopify/storefront-api-client": "^1.0.6",
     "@stickyroll/react": "^2.0.3",
     "@testing-library/jest-dom": "^4.2.4",
     "babel-plugin-emotion": "^10.2.2",

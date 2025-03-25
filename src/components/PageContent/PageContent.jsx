@@ -29,20 +29,26 @@ const Wrapper = styled.div`
 class PageContent extends Component {
   componentDidMount () {
     console.log(" ╔╗╔╗╦ ╦ \n ║╦╠╦║║║ Designed & built by\n ║║║║║║║ https://gordilsandwillis.com\n ╚╝╚╝╚╩╝ ");
-    client.graphQLClient.send(collectionsQuery).then(({model, data, ...rest}) => {
-      this.props.shopifyContext.updateState('shopifyCollections', model.collections)
-    });
+    client.request(collectionsQuery)
+      .then(res => {
+        this.props.shopifyContext.updateState('shopifyCollections', res?.data?.collections?.edges)
+      })
 
-    client.graphQLClient.send(productsQuery).then(({model, data, ...rest}) => {
-      this.props.shopifyContext.updateState('shopifyProducts', model.products)
-    });
+    client.request(productsQuery)
+      .then(res => {
+        this.props.shopifyContext.updateState('shopifyProducts', res?.data?.products?.edges)
+      })
 
-    client.graphQLClient.send(shopQuery).then(({model, data}) => {
-      this.props.shopifyContext.updateState('shop', model.shop)
-    });
+    client.request(shopQuery)
+      .then(res => {
+        this.props.shopifyContext.updateState('shop', res?.data?.shop)
+      })
   }
 
   render () {
+
+    console.log(this.props)
+
     if (!this.props.shopifyContext.shop || !this.props.shopifyContext.shopifyCollections || !this.props.shopifyContext.shopifyProducts) {
       return false
     }
