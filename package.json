@@ -37,7 +37,7 @@
     "react-sizes": "^2.0.0",
     "react-slick": "^0.25.2",
     "react-transition-group": "^4.4.5",
-    "shopify-buy": "^2.20.0",
+    "shopify-buy": "^3.0.2",
     "web-vitals": "^2.1.4",
     "webpack": "^5.88.1"
   },

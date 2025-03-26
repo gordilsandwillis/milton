@@ -104,8 +104,7 @@ class CollectionSections extends Component {
 		if (!collections) {
 			return false
 		}
-
-		console.log(collections.map(c => c.title))
+		
 		const filteredCollections = collections.filter(collection => collectionsConfig[collection.title]?.published)
 
 		return (

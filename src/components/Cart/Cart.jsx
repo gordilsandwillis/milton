@@ -153,6 +153,7 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 		updateQuantity,
 		removeLineItem,
 		toggleCart,
+		checkoutUrl,
 	} = checkoutContext
 
 	if (!checkout) {
@@ -165,7 +166,7 @@ const Cart = ({ cartOpen, checkoutContext = {} }) => {
 	})
 
 	const { lineItems } = checkout
-	const checkoutUrl = checkout?.webUrl
+	// const checkoutUrl = checkout?.webUrl
 	const ready = checkout?.ready
 
 	const subtotalPrice = checkout?.subtotalPrice?.amount
