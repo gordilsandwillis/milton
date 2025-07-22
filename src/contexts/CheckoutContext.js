@@ -55,59 +55,28 @@ class CheckoutProvider extends React.Component {
 		return await checkout.create()
 	}
 
-	//////
 	getCheckoutUrl = async () => {
-		const lineItems = this.state.checkout.lineItems.map((line) => ({
-      variantId: line.variant.id,
-      quantity: line.quantity,
-    }))
+		const cartItems = this.state.checkout.lineItems.map((line) => ({
+			variantId: line.variant.id,
+			quantity: line.quantity,
+		}))
 
-		const storefrontAccessToken = process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN; // Replace this
-		const shopifyDomain = "milton-textiles.myshopify.com"; // Replace this
-	
-		const query = `
-			mutation checkoutCreate($lineItems: [CheckoutLineItemInput!]!) {
-				checkoutCreate(input: { lineItems: $lineItems }) {
-					checkout {
-						webUrl
-					}
-					userErrors {
-						field
-						message
-					}
-				}
-			}
-		`;
-	
-		const variables = { lineItems };
-	
-		try {
-			const response = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"X-Shopify-Storefront-Access-Token": storefrontAccessToken,
-				},
-				body: JSON.stringify({ query, variables }),
-			});
-	
-			const result = await response.json();
-			
-			if (result.errors) {
-				console.error("GraphQL Errors:", result.errors);
-				return null;
-			}
-	
-			const checkoutUrl = result.data.checkoutCreate.checkout.webUrl;
-			console.log('GOT checkout url: ', checkoutUrl)
-			this.setState({ checkoutUrl: checkoutUrl })
-			return checkoutUrl;
-		} catch (error) {
-			console.error("Error creating checkout:", error);
-			return null;
-		}
-	}
-	//////
+    const checkout = await client.checkout.create()
+
+		const lineItemsToAdd = cartItems.map(item => ({
+			variantId: item.variantId,
+			quantity: item.quantity,
+			customAttributes: item.customAttributes || [],
+			...(item.sellingPlanId && { sellingPlanId: item.sellingPlanId })
+		}))
+
+		const updatedCheckout = await client.checkout.addLineItems(checkout.id, cartItems)
+
+		console.log(updatedCheckout)
+		this.setState({ checkoutUrl: updatedCheckout.webUrl })
+
+		return updatedCheckout.webUrl
+  }
 
 	getCheckout = async (checkoutId) => {
 		const { checkout } = client;
