@@ -148,15 +148,15 @@ const showrooms = [
 		]
 	},
 	{
-		title: 'Eye on Design and Antiques',
-		text: 'International',
-		address: '12 Church Street',
-		city: 'Tetbury GL8 8JG',
-		state: 'United Kingdom',
+		title: 'Pacific Northwest: WA, OR, MT, ID, WY',
+		text: 'by appointment',
+		address: 'Paul Broderick',
+		city: 'Seattle',
+		state: 'WA',
 		links: [
-			{ text: 'hello@eyeondesignandantiques.com', to: 'mailto:hello@eyeondesignandantiques.com' },
-			{ text: 'www.eyeondesignandantiques.com', to: 'https://www.eyeondesignandantiques.com', external: true, target: '_blank' },
-			{ text: '44.0.1666.846403', to: 'tel:4401666846403' }
+			{ text: 'paul@paulbroderick.com', to: 'mailto:paul@paulbroderick.com' },
+			{ text: 'www.paulbroderick.com', to: 'https://www.paulbroderick.com', external: true, target: '_blank' },
+			{ text: '206.999.4633', to: 'tel:12069994633' }
 		]
 	}
 ]
