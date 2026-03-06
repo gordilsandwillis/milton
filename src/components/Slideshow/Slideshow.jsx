@@ -77,10 +77,10 @@ const SlideshowDot = styled.div`
 	}
 	span {
 		display: block;
-		width: 8px;
-		height: 8px;
+		width: 6px;
+		height: 6px;
 		background: currentcolor;
-		border-radius: 50%;
+		transform: rotate(45deg);
 	}
 `
 

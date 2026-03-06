@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactGA from 'react-ga'
 
 import { withShopifyContext } from 'contexts/ShopifyContext'
 
@@ -11,9 +10,9 @@ import Textiles from 'components/Textiles'
 
 
 const TextilesPage = ({ shopifyContext }) => {
-
-	const { shopifyProducts } = shopifyContext
-	const textileProducts = shopifyProducts.filter(({ productType }) => productType === 'Textiles').reverse()
+	const { shopifyCollections } = shopifyContext
+	const textileCollection = shopifyCollections.filter(({ handle }) => handle === 'textiles')[0]
+	const textileProducts = textileCollection.products
 
   return (
     <div>

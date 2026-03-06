@@ -16,6 +16,7 @@ const ProductTitle = styled.p`
 
 const ProductPattern = styled.h6`
 	${ typography.smallCaps }
+	display: block;
 	margin-bottom: 4px;
 `
 

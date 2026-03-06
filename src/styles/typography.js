@@ -9,7 +9,7 @@ export const primaryFont = `Domaine Sans, -apple-system, serif`
 export const secondaryFont = `Domaine Narrow, -apple-system, serif`
 
 export const bodyLarge = `
-	${ responsiveStyles('font-size', 22, 20, 19, 18) }
+	${ responsiveStyles('font-size', 20, 20, 19, 18) }
 	line-height: 1.6em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
@@ -17,7 +17,7 @@ export const bodyLarge = `
 	font-weight: normal;
 `
 export const bodyMedium = `
-	${ responsiveStyles('font-size', 20, 18, 17, 16) }
+	${ responsiveStyles('font-size', 18, 18, 17, 16) }
 	line-height: 1.75em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
@@ -25,15 +25,15 @@ export const bodyMedium = `
 	font-weight: normal;
 `
 export const body = `
-	${ responsiveStyles('font-size', 18, 15, 14, 14) }
-	line-height: 1.75em;
+	${ responsiveStyles('font-size', 14, 14, 14, 14) }
+	line-height: 1.65em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
 	font-weight: normal;
 `
 export const bodySmall = `
-	${ responsiveStyles('font-size', 16, 14, 14, 14) }
+	${ responsiveStyles('font-size', 14, 14, 14, 14) }
 	line-height: 1.75em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
@@ -42,7 +42,7 @@ export const bodySmall = `
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 70, 66, 54, 48) }
+	${ responsiveStyles('font-size', 66, 66, 54, 48) }
 	line-height: 1.333em;
 	font-family: ${ primaryFont };
 	font-weight: 300;
@@ -51,7 +51,7 @@ export const h1 = `
 `
 
 export const h2 = `
-	${ responsiveStyles('font-size', 72, 66, 58, 52) }
+	${ responsiveStyles('font-size', 68, 66, 58, 52) }
 	line-height: 1.2em;
 	font-family: ${ secondaryFont };
 	font-weight: 300;
@@ -60,7 +60,7 @@ export const h2 = `
 `
 
 export const h3 = `
-	${ responsiveStyles('font-size', 46, 36, 32, 27) }
+	${ responsiveStyles('font-size', 38, 36, 32, 27) }
 	line-height: 1.5em;
 	font-family: ${ primaryFont };
 	font-weight: 300;
@@ -69,7 +69,7 @@ export const h3 = `
 `
 
 export const h4 = `
-	${ responsiveStyles('font-size', 32, 26, 23, 20) }
+	${ responsiveStyles('font-size', 28, 26, 23, 20) }
 	line-height: 1.6em;
 	font-family: ${ primaryFont };
 	font-weight: normal;
@@ -78,7 +78,7 @@ export const h4 = `
 `
 
 export const h5 = `
-	${ responsiveStyles('font-size', 24, 20, 19, 18) }
+	${ responsiveStyles('font-size', 22, 20, 19, 18) }
 	font-family: ${ primaryFont };
 	font-weight: 600;
 	line-height: 1.5em;
@@ -86,7 +86,7 @@ export const h5 = `
 	text-transform: none;
 `
 export const h6 = `
-	${ responsiveStyles('font-size', 14, 12, 12, 12) }
+	${ responsiveStyles('font-size', 12, 12, 12, 12) }
 	font-family: ${ primaryFont };
 	font-weight: 600;
 	line-height: 1.6em;
@@ -96,7 +96,7 @@ export const h6 = `
 
 export const blockquote = `
 	${ h3 }
-	${ responsiveStyles('font-size', 32, 26, 23, 20) }
+	${ responsiveStyles('font-size', 28, 26, 23, 20) }
 `
 
 export const eyebrow = `
@@ -110,7 +110,7 @@ export const buttonStyle = `
 
 export const smallCaps = `
 	${ h6 }
-	${ responsiveStyles('font-size', 12, 11, 10, 10) }
+	${ responsiveStyles('font-size', 11, 11, 10, 10) }
 	line-height: 1em;
 `
 

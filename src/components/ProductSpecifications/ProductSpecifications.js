@@ -24,6 +24,7 @@ const InnerWrapper = styled.div`
   	margin: 0;
   	li {
   		${ typography.bodySmall }
+			text-wrap: balance;
   	}
   }
   label {
@@ -110,7 +111,7 @@ const ProductSpecifications = ({
 					<Grid
 						small="[1] [1]"
 						medium="[1] [1]"
-						large="[1] [1]"
+						extraLarge="[2] [3]"
 						vAlign="baseline"
 					>
 					<div>
@@ -137,7 +138,7 @@ const ProductSpecifications = ({
 				<Grid
 					small="[1] [1]"
 					medium="[1] [1]"
-					large="[1] [1]"
+					extraLarge="[2] [3]"
 				>
 					<div>
 						<label>Colors</label>

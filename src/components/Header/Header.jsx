@@ -350,19 +350,19 @@ const Header = ({
 														type="capsLink"
 														scrolled={scrolled}
 														hasAtf={hasAtf}
-														to="/collections"
-														active={pathname === '/collections'}
+														to="/textiles"
+														active={pathname === '/textiles'}
 													>
-														Collections
+														Textiles
 													</NavLink>
 													<NavLink
 														type="capsLink"
 														scrolled={scrolled}
 														hasAtf={hasAtf}
-														to="/textiles"
-														active={pathname === '/textiles'}
+														to="/collections"
+														active={pathname === '/collections'}
 													>
-														Textiles
+														Collections
 													</NavLink>
 													{dropdownCollections.length > 0 ? (
 														<NavLink
@@ -492,103 +492,101 @@ const Header = ({
 			<Cart cartOpen={cartOpen} toggleCart={toggleCart} />
 			<Drawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer}>
 				<DrawerNavLinks alignment="center">
+					<NavLink
+						type="capsLink"
+						hasAtf={hasAtf}
+						to="/textiles"
+						active={pathname === '/textiles'}
+					>
+						Textiles
+					</NavLink>
+					<NavLink
+						type="capsLink"
+						hasAtf={hasAtf}
+						to="/collections"
+						active={pathname === '/collections'}
+					>
+						Collections
+					</NavLink>
+					{dropdownCollections.length > 0 ? (
 						<NavLink
 							type="capsLink"
-
 							hasAtf={hasAtf}
-							to="/collections"
-							active={pathname === '/collections'}
+							onClick={() => {}}
 						>
-							Collections
-						</NavLink>
-						<NavLink
-							type="capsLink"
-
-							hasAtf={hasAtf}
-							to="/textiles"
-							active={pathname === '/textiles'}
-						>
-							Textiles
-						</NavLink>
-						{dropdownCollections.length > 0 ? (
-							<NavLink
-								type="capsLink"
-								hasAtf={hasAtf}
-								onClick={() => {}}
-							>
-								<div className="label">
-									Shop <MdKeyboardArrowDown size={18}/>
+							<div className="label">
+								Shop <MdKeyboardArrowDown size={18}/>
+							</div>
+							<MobileSublinks className='mobile-sublinks'>
+								<div>
+									<ul>
+										{dropdownCollections.map(dropdownLink => {
+											return (
+												<li>
+													<NavLink type="capsLink" to={'/collections/' + dropdownLink.handle}>
+														{dropdownLink.title}
+													</NavLink>
+												</li>
+											)
+										})}
+									</ul>
 								</div>
-								<MobileSublinks className='mobile-sublinks'>
-									<div>
-										<ul>
-											{dropdownCollections.map(dropdownLink => {
-												return (
-													<li>
-														<NavLink type="capsLink" to={'/collections/' + dropdownLink.handle}>
-															{dropdownLink.title}
-														</NavLink>
-													</li>
-												)
-											})}
-										</ul>
-									</div>
-								</MobileSublinks>
-							</NavLink>
-						) : (
-							<NavLink
-								type="capsLink"
-								hasAtf={hasAtf}
-								to="/shop"
-								active={pathname === '/shop'}
-							>
-								Shop
-							</NavLink>
-						)}
+							</MobileSublinks>
+						</NavLink>
+					) : (
 						<NavLink
 							type="capsLink"
 							hasAtf={hasAtf}
-							to="/about"
-							active={pathname === '/about'}
+							to="/shop"
+							active={pathname === '/shop'}
 						>
-							About
+							Shop
 						</NavLink>
-						<NavLink
-							type="capsLink"
+					)}
+					<NavLink
+						type="capsLink"
+						hasAtf={hasAtf}
+						to="/about"
+						active={pathname === '/about'}
+					>
+						About
+					</NavLink>
+					<NavLink
+						type="capsLink"
 
-							hasAtf={hasAtf}
-							to="/contact"
-							active={pathname === '/contact'}
-						>
-							Contact
-						</NavLink>
-						<NavLink
-							type="capsLink"
+						hasAtf={hasAtf}
+						to="/contact"
+						active={pathname === '/contact'}
+					>
+						Contact
+					</NavLink>
+					<NavLink
+						type="capsLink"
 
-							hasAtf={hasAtf}
-							to="/showrooms"
-							active={pathname === '/showrooms'}
-						>
-							Showrooms
-						</NavLink>
-						<NavLink
-							type="capsLink"
-							as="button"
+						hasAtf={hasAtf}
+						to="/showrooms"
+						active={pathname === '/showrooms'}
+					>
+						Showrooms
+					</NavLink>
+					<NavLink
+						type="capsLink"
+						as="button"
 
-							hasAtf={hasAtf}
-							onClick={() => {
-								toggleDrawer(!drawerOpen)
-								toggleCart(!cartOpen)
-							}}
-							title="Toggle Cart"
-							size="small"
-							setTheme="transparent"
-						>
-							Cart
-							{' '}
-							{lineItems && lineItems.length > 0 && `(${lineItems.length})`}
-						</NavLink>
-					</DrawerNavLinks>
+						hasAtf={hasAtf}
+						onClick={() => {
+							toggleDrawer(!drawerOpen)
+							toggleCart(!cartOpen)
+						}}
+						title="Toggle Cart"
+						size="small"
+						setTheme="transparent"
+					>
+						Cart
+						{' '}
+						{lineItems && lineItems.length > 0 && `(${lineItems.length})`}
+					</NavLink>
+				</DrawerNavLinks>
 			</Drawer>
 		</Fragment>
 	)

@@ -12,7 +12,7 @@ import Newsletter from "components/Newsletter";
 import SEO from "components/SEO";
 
 // import AtfImage from "assets/images/home-atf.jpg";
-import AtfImage from "assets/images/homepage-intro/Milton-1374.jpg";
+import AtfImage from "assets/images/homepage-intro/Milton-1151.jpg";
 
 const BottomOverlay = styled.div`
 	position: absolute;

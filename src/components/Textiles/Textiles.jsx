@@ -80,10 +80,10 @@ const Textiles = ({ products, hasAtf }) => {
 			padded={hasAtf ? true : 'bottom'}
     >
     	<ScrollEntrance>
-	    	<Grid small="1 [12] 1">
+	    	<Grid small="1 [12] 1" large="1 [22] 1">
 	    		<div>
 						<TextilesGrid
-							colGap={['3.6vw', '24px', '30px']}
+							colGap={['3vw', '20px', '20px']}
 							rowGap={['50px', '70px', '80px']}
 						>
 							{products.map((product, index) => (

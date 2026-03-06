@@ -72,7 +72,7 @@ const Headline = styled.h3`
 
 const Text = styled.div`
 	p {
-		max-width: 32em;
+		max-width: 36em;
 		margin-bottom: 0;
 		margin-top: 1.5em;
 		${ ({ textSize }) => typography[textSize] }
