@@ -89,11 +89,13 @@ const CollectionCarousel = ({
 							}
 						]}
 					>
-						{products.map((product, index) => (
-							<div key={product.id}>
-								<ProductThumb product={product} variant={product?.variants[0]} />
-							</div>
-						))}
+						{products.flatMap((product) =>
+							product.variants.map((variant) => (
+								<div key={`${product.id}-${variant.id}`}>
+									<ProductThumb product={product} variant={variant} />
+								</div>
+							))
+						)}
 					</SlideshowEl>
 				</SlideshowWrapper>
 			</OutterWrapper>
