@@ -27,28 +27,31 @@ const Slide = styled.div`
 
 const NextPrevButton = styled(Button)`
 	cursor: pointer;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
 	margin: 0;
 	border: none;
 	background: transparent;
+	${ ({ arrowsUnder, position }) => !arrowsUnder ? `
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		${ position === 'left' ? `
+			left: 20px;
+		` : `
+			right: 20px;
+		`}
+	` : ``}
 	&:hover {
 		color: ${ colors.textColor };
 		background: transparent;
 	}
 	color: ${ rgba(colors.textColor, .35) };
-	${ ({ position }) => position === 'left' ? `
-		left: 20px;
-	` : `
-		right: 20px;
-	`}
 	${ mq.largeAndBelow } {
-		display: none;
+		// display: none;
 	}
 `
 
 const SlideshowDots = styled.ul`
+	min-width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -101,20 +104,28 @@ class Slideshow extends Component {
 		const {
 			children,
 			className,
-			fade = false
+			fade = false,
+			slidesToShow = 1,
+			autoplay = false,
+			responsive = [],
+			dots = true,
+			arrowsUnder = false
 		} = this.props
 
 		const slideshowSettings = {
-			dots: true,
+			dots: dots,
 			arrows: false,
 			infinite: true,
 			speed: 750,
 			fade: fade,
-			autoplay: false,
+			autoplay: autoplay,
 			autoplaySpeed: 4500,
 			pauseOnHover: true,
 			centerPadding: 50,
+			centerMode: false,
 			adaptiveHeight: true,
+			slidesToShow: slidesToShow || 1,
+			responsive: responsive,
 			appendDots: dots => <SlideshowDots>{dots}</SlideshowDots>,
 	    customPaging: i => (
 	      <SlideshowDot><span/></SlideshowDot>
@@ -135,10 +146,10 @@ class Slideshow extends Component {
 					)}
 				</SlideshowWrapper>
 				{children.length > 1 && (
-					<Fragment>
-						<NextPrevButton shape="circle" className="prev-button" setTheme="bgColor" size="small" onClick={this.goToPrevSlide} position="left"><MdKeyboardArrowLeft size={32}/></NextPrevButton>
-						<NextPrevButton shape="circle" className="next-button" setTheme="bgColor" size="small" onClick={this.goToNextSlide} position="right"><MdKeyboardArrowRight size={32}/></NextPrevButton>
-					</Fragment>
+					<div style={arrowsUnder ? { width: '100%', display: 'flex', justifyContent: 'center', paddingTop: '40px' } : {}}>
+						<NextPrevButton arrowsUnder={arrowsUnder} shape="circle" className="prev-button" setTheme="bgColor" size="small" onClick={this.goToPrevSlide} position="left"><MdKeyboardArrowLeft size={32}/></NextPrevButton>
+						<NextPrevButton arrowsUnder={arrowsUnder} shape="circle" className="next-button" setTheme="bgColor" size="small" onClick={this.goToNextSlide} position="right"><MdKeyboardArrowRight size={32}/></NextPrevButton>
+					</div>
 				)}
 			</div>
 		)

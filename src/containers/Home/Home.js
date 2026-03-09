@@ -10,6 +10,7 @@ import CalloutText from "components/CalloutText";
 import CollectionSections from "components/CollectionSections";
 import Newsletter from "components/Newsletter";
 import SEO from "components/SEO";
+import CollectionCarousel from "components/CollectionCarousel";
 
 // import AtfImage from "assets/images/home-atf.jpg";
 import AtfImage from "assets/images/homepage-intro/Milton-1151.jpg";
@@ -77,6 +78,9 @@ class Home extends Component {
 							{ linkType: "underlinedLink", label: "Learn More", to: "/about" },
 						]}
 						icon={<LogoMark />}
+					/>
+					<CollectionCarousel
+						collectionHandle="homepage"
 					/>
 					<CollectionSections />
 					<Newsletter />
